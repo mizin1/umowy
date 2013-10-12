@@ -1,0 +1,13 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>$pageTool.title</title>
+	#foreach($styleLink in $pageTool.styleLinks)
+		<link rel="stylesheet" type="text/css" href="$styleLink.href" />
+	#end
+</head>
+<body>
+$!embeddedPlaceholder
+</body>
+</html>
+$viewEnclosureTool.top()

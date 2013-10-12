@@ -1,0 +1,3 @@
+$pageTool.setTitle("Hello word")
+<h1>System obsługi umów zleceń</h1>
+$!embeddedPlaceholder

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna"
+		table="jednostka_organizacyjna" lazy="true">
+		<id name="Nazwa" type="java.lang.String">
+			<column name="nazwa" sql-type="varchar" />
+		</id>
+		<many-to-one name="TypJednostki"
+			class="pl.waw.mizinski.umowy.model.TypJednostki">
+			<column name="typ_jednostki" />
+		</many-to-one>
+		<many-to-one name="JednostkaNadrzedna"
+			class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna">
+			<column name="jednostka_nadrzedna" />
+		</many-to-one>
+		<many-to-one name="Reprezentant"
+			class="pl.waw.mizinski.umowy.model.Reprezentant">
+			<column name="reprezentant" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>
