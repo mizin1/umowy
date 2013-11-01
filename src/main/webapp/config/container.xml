@@ -2,6 +2,9 @@
 <container>
 
 	<component class="pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao" />
+	<component class="pl.waw.mizinski.umowy.dao.ZadanieDao" />
+	<component class="pl.waw.mizinski.umowy.dao.PanstwoDao" />
+	<component class="pl.waw.mizinski.umowy.dao.StatusPracownikaDao" />
 
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">

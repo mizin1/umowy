@@ -105,6 +105,23 @@ CREATE TABLE URZAD_SKARBOWY
 )
 ;
 
+CREATE TABLE SKLADKA 
+(
+	nazwa	VARCHAR(50) NOT NULL,
+	PRIMARY KEY(nazwa)
+)
+;
+
+CREATE TABLE SKLADKA_PRACOWNIKA
+(
+	status_pracownika	VARCHAR(50) NOT NULL,
+	nazwa_skladki	VARCHAR(50) NOT NULL,
+	PRIMARY KEY(status_pracownika, nazwa_skladki),
+	FOREIGN KEY(status_pracownika) REFERENCES STATUS_PRACOWNIKA(nazwa),
+	FOREIGN KEY(nazwa_skladki) REFERENCES SKLADKA(nazwa)
+)
+;
+
 CREATE TABLE STATUS_PRACOWNIKA
 (
 	nazwa	VARCHAR(50) NOT NULL,
@@ -112,9 +129,6 @@ CREATE TABLE STATUS_PRACOWNIKA
 	PRIMARY KEY(nazwa)
 )
 ;
-
---tabelka z informacja jakie podatki musi dany status odprowadzać
-
 
 
 CREATE TABLE PRACOWNIK
@@ -138,6 +152,7 @@ CREATE TABLE PRACOWNIK
 	PRIMARY KEY(id),
 	FOREIGN KEY(obywatelstwo) REFERENCES PANSTWO(kod),
 	FOREIGN KEY(urzad_skarbowy) REFERENCES URZAD_SKARBOWY(nazwa),
+	FOREIGN KEY(status) REFERENCES STATUS_PRACOWNIKA(nazwa),
 	CHECK (plec IN ('K', 'M')),
 	CHECK (typ_dok_tozsamosci IN ('dowod_osobisty', 'paszport'))
 )

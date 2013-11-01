@@ -1,6 +1,8 @@
 package pl.waw.mizinski.umowy.model;
 
-public class JednostkaOrganizacyjna {
+import java.io.Serializable;
+
+public class JednostkaOrganizacyjna implements Serializable{
 	
 	private String nazwa;
 	private TypJednostki typJednostki;

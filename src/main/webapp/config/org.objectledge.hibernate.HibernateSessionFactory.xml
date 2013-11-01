@@ -30,5 +30,11 @@
 		<mapping class="pl.waw.mizinski.umowy.model.TypJednostki"/>
 		<mapping class="pl.waw.mizinski.umowy.model.Reprezentant"/>
 		<mapping class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna"/>
+		<mapping class="pl.waw.mizinski.umowy.model.TypZadania"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Zadanie"/>
+		<mapping class="pl.waw.mizinski.umowy.model.UrzadSkarbowy"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Panstwo"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Skladka"/>
+		<mapping class="pl.waw.mizinski.umowy.model.StatusPracownika"/>
     </session-factory>
 </hibernate-configuration>

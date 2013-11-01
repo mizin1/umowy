@@ -5,10 +5,10 @@
 
 	<class name="pl.waw.mizinski.umowy.model.Reprezentant" table="reprezentant"
 		lazy="true">
-		<id name="Nazwa" type="java.lang.String">
+		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
-		<property name="Biernik" type="java.lang.String">
+		<property name="biernik" type="java.lang.String">
 			<column name="biernik" sql-type="varchar" />
 		</property>
 	</class>
