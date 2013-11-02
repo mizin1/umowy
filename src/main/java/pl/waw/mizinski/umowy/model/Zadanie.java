@@ -8,12 +8,11 @@ public class Zadanie {
 	private Long id;
 	private String nazwa;
 	private TypZadania typZadania;
-	private JednostkaOrganizacyjna jednostaOrganizacyjna;
 	private String opis;
 	private BigDecimal budzet;
 	private Date dataRozpoczecia;
 	private Date dataZakonczenia;
-	private boolean rozliczone;
+	private Boolean rozliczone;
 
 	public Long getId() {
 		return id;
@@ -40,11 +39,7 @@ public class Zadanie {
 	}
 
 	public JednostkaOrganizacyjna getJednostaOrganizacyjna() {
-		return jednostaOrganizacyjna;
-	}
-
-	public void setJednostaOrganizacyjna(JednostkaOrganizacyjna jednostaOrganizacyjna) {
-		this.jednostaOrganizacyjna = jednostaOrganizacyjna;
+		return typZadania.getJednostaOrganizacyjna();
 	}
 
 	public String getOpis() {
@@ -85,5 +80,10 @@ public class Zadanie {
 
 	public void setRozliczone(boolean rozliczone) {
 		this.rozliczone = rozliczone;
+	}
+	
+	@Override
+	public String toString() {
+		return nazwa + " typu " + typZadania;
 	}
 }

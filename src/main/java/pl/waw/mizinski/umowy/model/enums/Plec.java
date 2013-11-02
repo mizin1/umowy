@@ -1,13 +1,25 @@
 package pl.waw.mizinski.umowy.model.enums;
 
 public enum Plec {
+	K("Kobieta"),
+	M("Mężczyzna");
 	
-	KOBIETA("K"), MEZCZYZNA("M");
+	private String nazwa;
 	
-	private String kod;
-
-	private Plec(String kod) {
-		this.kod = kod;
+	private Plec(String nazwa){
+		this.nazwa = nazwa;
 	}
 	
+	public String getNazwa() {
+		return nazwa;
+	}
+	
+	public static Plec fromNazwa(String nazwa) {
+		for (Plec plec : Plec.values()) {
+			if (plec.getNazwa().equals(nazwa)){
+				return plec;
+			}
+		}
+		return null;
+	}
 }

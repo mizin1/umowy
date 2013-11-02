@@ -2,3 +2,17 @@
 <br/>
 Jednostka to 
 $jednostka.toString()
+<br/>
+Zadanie to $zadanie.toString()
+<br/>
+Wykona je $jednostka.getReprezentant().getNazwa();
+<br/>
+A my zyjemy w $panstwo
+<br/>
+i mamy status $status
+<br/>
+a na nasze pensje pracuje $pracownik
+<br/>
+a i tak wszystko zabierze $urzadSkarbowy
+<br/>
+tak że nic nie zostanie pod adresem $adres

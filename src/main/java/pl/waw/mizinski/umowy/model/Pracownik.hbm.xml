@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.Pracownik" table="pracownik"
+		lazy="true">
+		<id name="id" type="java.lang.Long">
+			<column name="id" sql-type="int4" />
+		</id>
+		<property name="nazwisko" type="java.lang.String">
+			<column name="nazwisko" sql-type="varchar" />
+		</property>
+		<property name="pierwszeImie" type="java.lang.String">
+			<column name="pierwsze_imie" sql-type="varchar" />
+		</property>
+		<property name="imionaPozostale" type="java.lang.String">
+			<column name="imiona_pozostale" sql-type="varchar" />
+		</property>
+		<property name="plec" column="plec">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">pl.waw.mizinski.umowy.model.enums.Plec</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="dataUrodzenia" type="java.sql.Date">
+			<column name="data_urodzenia" sql-type="date" />
+		</property>
+		<property name="miejsceUrodzenia" type="java.lang.String">
+			<column name="miejsce_urodzenia" sql-type="varchar" />
+		</property>
+		<many-to-one name="obywatelstwo" class="pl.waw.mizinski.umowy.model.Panstwo">
+			<column name="obywatelstwo" />
+		</many-to-one>
+		<many-to-one name="urzadSkarbowy" class="pl.waw.mizinski.umowy.model.UrzadSkarbowy">
+			<column name="urzad_skarbowy" />
+		</many-to-one>
+		<property name="pesel" type="java.math.BigDecimal">
+			<column name="pesel" sql-type="big_decimal" />
+		</property>
+		<property name="nip" type="java.math.BigDecimal">
+			<column name="nip" sql-type="big_decimal" />
+		</property>
+		<property name="nrDokumentuTozsamosci" type="java.lang.String">
+			<column name="nr_dok_tozsamosci" sql-type="varchar" />
+		</property>
+		<property name="typDokumentuTozsamosci" column="typ_dok_tozsamosci">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="nrKonta" type="java.lang.String">
+			<column name="nr_konta" sql-type="varchar" />
+		</property>
+		<many-to-one name="status" class="pl.waw.mizinski.umowy.model.StatusPracownika">
+			<column name="status" />
+		</many-to-one>
+		<property name="dobrowolneUbezpieczenieChorobowe" type="java.lang.Boolean">
+			<column name="dobrowolne_ub_chorobowe" sql-type="boolean" />
+		</property>
+	</class>
+</hibernate-mapping>

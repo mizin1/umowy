@@ -30,4 +30,8 @@ public class Panstwo {
 		this.obywatelstwo = obywatelstwo;
 	}
 
+	@Override
+	public String toString() {
+		return nazwa;
+	}
 }

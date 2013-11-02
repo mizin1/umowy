@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.TypZadania" table="typ_zadania"
+		lazy="true">
+		<composite-id name="typZadaniaPK" class="pl.waw.mizinski.umowy.model.TypZadaniaPK">
+			<key-property name="nazwa" type="java.lang.String">
+				<column name="nazwa" />
+			</key-property>
+            <key-many-to-one name="jednostkaOrganizacyjna" class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna">
+				<column name="jednostka_organizacyjna" />
+			</key-many-to-one>
+		</composite-id>
+	</class>
+</hibernate-mapping>

@@ -14,7 +14,7 @@ public class Pracownik {
 	private String imionaPozostale;
 	private Plec plec;
 	private Date dataUrodzenia;
-	private String miejsceUrodznia;
+	private String miejsceUrodzenia;
 	private Panstwo obywatelstwo;
 	private UrzadSkarbowy urzadSkarbowy;
 	private BigDecimal pesel;
@@ -60,11 +60,11 @@ public class Pracownik {
 	public Plec getPlec() {
 		return plec;
 	}
-
+	
 	public void setPlec(Plec plec) {
 		this.plec = plec;
 	}
-
+	
 	public Date getDataUrodzenia() {
 		return dataUrodzenia;
 	}
@@ -73,12 +73,12 @@ public class Pracownik {
 		this.dataUrodzenia = dataUrodzenia;
 	}
 
-	public String getMiejsceUrodznia() {
-		return miejsceUrodznia;
+	public String getMiejsceUrodzenia() {
+		return miejsceUrodzenia;
 	}
 
-	public void setMiejsceUrodznia(String miejsceUrodznia) {
-		this.miejsceUrodznia = miejsceUrodznia;
+	public void setMiejsceUrodzenia(String miejsceUrodzenia) {
+		this.miejsceUrodzenia = miejsceUrodzenia;
 	}
 
 	public Panstwo getObywatelstwo() {
@@ -153,4 +153,8 @@ public class Pracownik {
 		this.dobrowolneUbezpieczenieChorobowe = dobrowolneUbezpieczenieChorobowe;
 	}
 
+	@Override
+	public String toString() {
+		return nazwisko + " " + pierwszeImie;
+	}
 }

@@ -3,14 +3,10 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="pl.waw.mizinski.umowy.model.TypJednostki" table="typ_jednostki"
+	<class name="pl.waw.mizinski.umowy.model.UrzadSkarbowy" table="urzad_skarbowy"
 		lazy="true">
 		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
-		<many-to-one name="typNadrzedny"
-			class="pl.waw.mizinski.umowy.model.TypJednostki">
-			<column name="typ_nadrzedny" sql-type="varchar"/>
-		</many-to-one>
 	</class>
 </hibernate-mapping>

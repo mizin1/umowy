@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.Zadanie" table="zadanie"
+		lazy="true">
+		<id name="id" type="java.lang.Long">
+			<column name="id" sql-type="int4" />
+		</id>
+		<property name="nazwa" type="java.lang.String">
+			<column name="nazwa" sql-type="varchar" />
+		</property>
+		<many-to-one name="typZadania" class="pl.waw.mizinski.umowy.model.TypZadania">
+			<column name="typ_zadania" />
+			<column name="jednostka_organizacyjna" />
+		</many-to-one>
+		<property name="opis" type="java.lang.String">
+			<column name="opis" sql-type="varchar" />
+		</property>
+		<property name="budzet" type="java.math.BigDecimal">
+			<column name="budzet" sql-type="big_decimal" precision="10" scale="2"/>
+		</property>
+		<property name="dataRozpoczecia" type="java.util.Date">
+			<column name="data_rozpoczecia" sql-type="date"/>
+		</property>
+		<property name="dataZakonczenia" type="java.util.Date">
+			<column name="data_zakonczenia" sql-type="date"/>
+		</property>
+		<property name="rozliczone" type="java.lang.Boolean">
+			<column name="rozliczone" sql-type="boolean"/>
+		</property>
+	</class>
+</hibernate-mapping>

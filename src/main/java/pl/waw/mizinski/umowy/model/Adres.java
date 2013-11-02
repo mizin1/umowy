@@ -1,8 +1,11 @@
 package pl.waw.mizinski.umowy.model;
 
+import pl.waw.mizinski.umowy.model.enums.TypAdresu;
+
 public class Adres {
 	
 	private Long id;
+	private TypAdresu typAdresu;
 	private Pracownik pracownik;
 	private UrzadSkarbowy urzadSkarbowy;
 	private String miejscowosc;
@@ -21,6 +24,14 @@ public class Adres {
 		this.id = id;
 	}
 
+	public TypAdresu getTypAdresu() {
+		return typAdresu;
+	}
+	
+	public void setTypAdresu(TypAdresu typAdresu) {
+		this.typAdresu = typAdresu;
+	}
+	
 	public Pracownik getPracownik() {
 		return pracownik;
 	}
@@ -93,4 +104,19 @@ public class Adres {
 		this.panstwo = panstwo;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(typAdresu == TypAdresu.urzedu_skarbowego ? urzadSkarbowy : pracownik).append(", ")
+			.append(miejscowosc).append(" ");
+		if (ulica != null) {
+			stringBuilder.append(ulica).append(" ");
+		}
+		stringBuilder.append(nrDomu);
+		if (nrMieszkania != null) {
+			stringBuilder.append(" m. ").append(nrMieszkania);
+		}
+		stringBuilder.append(", ").append(kodPocztowy).append(" ").append(poczta);
+		return stringBuilder.toString();
+	}
 }

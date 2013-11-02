@@ -1,6 +1,10 @@
 package pl.waw.mizinski.umowy.model;
 
-public class JednostkaOrganizacyjna {
+import java.io.Serializable;
+
+public class JednostkaOrganizacyjna implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String nazwa;
 	private TypJednostki typJednostki;

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.Adres" table="adres"
+		lazy="true">
+		<id name="id" type="java.lang.Long">
+			<column name="id" sql-type="int4" />
+		</id>
+		<property name="typAdresu" column="typ_adresu">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">pl.waw.mizinski.umowy.model.enums.TypAdresu</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<many-to-one name="pracownik" class="pl.waw.mizinski.umowy.model.Pracownik">
+			<column name="pracownik" sql-type="int4"/>
+		</many-to-one>
+		<many-to-one name="urzadSkarbowy" class="pl.waw.mizinski.umowy.model.UrzadSkarbowy">
+			<column name="urzad_skarbowy" />
+		</many-to-one>
+		<property name="miejscowosc" type="java.lang.String">
+			<column name="miejscowosc" sql-type="varchar" />
+		</property>
+		<property name="ulica" type="java.lang.String">
+			<column name="ulica" sql-type="varchar" />
+		</property>
+		<property name="nrDomu" type="java.lang.Integer">
+			<column name="nr_domu" sql-type="int4" />
+		</property>
+		<property name="nrMieszkania" type="java.lang.Integer">
+			<column name="nr_mieszkania" sql-type="int4" />
+		</property>
+		<property name="kodPocztowy" type="java.lang.String">
+			<column name="kod_pocztowy" sql-type="varchar" />
+		</property>
+		<property name="poczta" type="java.lang.String">
+			<column name="poczta" sql-type="varchar" />
+		</property>
+		<many-to-one name="panstwo" class="pl.waw.mizinski.umowy.model.Panstwo">
+			<column name="panstwo" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

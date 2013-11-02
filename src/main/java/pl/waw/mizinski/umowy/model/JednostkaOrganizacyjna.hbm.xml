@@ -8,15 +8,15 @@
 		<id name="Nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
-		<many-to-one name="TypJednostki"
+		<many-to-one name="typJednostki"
 			class="pl.waw.mizinski.umowy.model.TypJednostki">
 			<column name="typ_jednostki" />
 		</many-to-one>
-		<many-to-one name="JednostkaNadrzedna"
+		<many-to-one name="jednostkaNadrzedna"
 			class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna">
 			<column name="jednostka_nadrzedna" />
 		</many-to-one>
-		<many-to-one name="Reprezentant"
+		<many-to-one name="reprezentant"
 			class="pl.waw.mizinski.umowy.model.Reprezentant">
 			<column name="reprezentant" />
 		</many-to-one>
