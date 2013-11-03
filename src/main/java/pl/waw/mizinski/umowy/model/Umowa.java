@@ -96,5 +96,8 @@ public class Umowa {
 		this.wykonywanaUZleceniodawcy = wykonywanaUZleceniodawcy;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "umowa nr " + nrUmowy;
+	}
 }

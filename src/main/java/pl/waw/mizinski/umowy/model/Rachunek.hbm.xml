@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.Rachunek" table="rachunek"
+		lazy="true">
+		<composite-id name="rachunekPK" class="pl.waw.mizinski.umowy.model.RachunekPK">
+			<key-many-to-one name="umowa" class="pl.waw.mizinski.umowy.model.Umowa">
+				<column name="nr_umowy" />
+			</key-many-to-one>
+			<key-property name="nrRachunku" type="java.lang.Integer">
+				<column name="nr_rachunku" />
+			</key-property>
+		</composite-id>
+		<property name="kwota" type="java.math.BigDecimal">
+			<column name="kwota" sql-type="big_decimal" />
+		</property>
+		<property name="dataWystawienia" type="java.sql.Date">
+			<column name="data_wystawienia" sql-type="date" />
+		</property>
+	</class>
+</hibernate-mapping>

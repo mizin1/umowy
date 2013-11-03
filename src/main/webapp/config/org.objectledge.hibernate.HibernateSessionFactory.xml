@@ -38,5 +38,10 @@
 		<mapping class="pl.waw.mizinski.umowy.model.StatusPracownika"/>
 		<mapping class="pl.waw.mizinski.umowy.model.Pracownik"/>
 		<mapping class="pl.waw.mizinski.umowy.model.Adres"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Platnosc"/>
+		<mapping class="pl.waw.mizinski.umowy.model.TypUmowy"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Umowa"/>
+		<mapping class="pl.waw.mizinski.umowy.model.Rachunek"/>
+
     </session-factory>
 </hibernate-configuration>

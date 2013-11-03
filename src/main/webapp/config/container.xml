@@ -8,6 +8,10 @@
 	<component class="pl.waw.mizinski.umowy.dao.PracownikDao" />
 	<component class="pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao" />
 	<component class="pl.waw.mizinski.umowy.dao.AdresDao" />
+	<component class="pl.waw.mizinski.umowy.dao.TypUmowyDao" />
+	<component class="pl.waw.mizinski.umowy.dao.PlatnoscDao" />
+	<component class="pl.waw.mizinski.umowy.dao.UmowaDao" />
+	<component class="pl.waw.mizinski.umowy.dao.RachunekDao" />
 
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">

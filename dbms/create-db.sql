@@ -204,6 +204,7 @@ CREATE TABLE UMOWA
 	platnosc VARCHAR(50) NOT NULL,
 	data_zawarcia	DATE NOT NULL,
 	data_rozpoczecia	DATE NOT NULL,
+	data_zakonczenia	DATE NOT NULL,
 	wynagrodzenie	DECIMAL(10,2),
 	wykonywana_u_zleceniodawcy	BOOLEAN,
 	PRIMARY KEY(nr_umowy),
@@ -219,7 +220,7 @@ CREATE TABLE RACHUNEK
 	nr_umowy 	VARCHAR(50) NOT NULL,
 	nr_rachunku	INTEGER NOT NULL,
 	kwota	DECIMAL(10,2) NOT NULL,
-	data_wytawienia	DATE NOT NULL,
+	data_wystawienia	DATE NOT NULL,
 	PRIMARY KEY(nr_rachunku, nr_umowy),
 	FOREIGN KEY(nr_umowy) REFERENCES UMOWA(nr_umowy)
 )

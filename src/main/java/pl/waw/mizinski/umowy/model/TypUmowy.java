@@ -12,4 +12,8 @@ public class TypUmowy {
 		this.nazwa = nazwa;
 	}
 	
+	@Override
+	public String toString() {
+		return nazwa;
+	}
 }

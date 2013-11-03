@@ -30,4 +30,8 @@ public class Platnosc {
 		this.miesiace = miesiace;
 	}
 	
+	@Override
+	public String toString() {
+		return nazwa;
+	}
 }
