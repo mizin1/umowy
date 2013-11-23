@@ -50,6 +50,11 @@
 			<version>snapshot-20847-20120905-1.8.3</version>
 			<type>war</type>
 		</dependency>
+	 <dependency>
+	    <groupId>net.sf.json-lib</groupId>
+	    <artifactId>json-lib</artifactId>
+	    <version>2.2.1-jdk15</version>
+	  </dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate</artifactId>
@@ -130,4 +135,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

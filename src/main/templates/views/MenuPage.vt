@@ -1,26 +1,11 @@
 $pageTool.addStyleLink('../dojo/dojo/resources/dojo.css')##
 $pageTool.addStyleLink('../dojo/dijit/themes/soria/soria.css')##
 
-##$pageTool.addScriptLink('script/ScriptLoader.js')
-##$pageTool.addScriptLink('script/BrowserUtil.js')
-##$pageTool.addScriptLink('../dojo/dojo/dojo.js')
-
-##<link rel="stylesheet" type="text/css" href="/umowy/content/../dojo/dojo/resources/dojo.css" />
-##<link rel="stylesheet" type="text/css" href="/umowy/content/../dojo/dijit/themes/soria/soria.css" />
-
-##<script type="text/javascript" src="/umowy/content/script/ScriptLoader.js" charset="UTF-8"> </script>
-
-##<script type="text/javascript" src="/umowy/content/script/BrowserUtil.js" charset="UTF-8"> </script>
-
-
-##<script type="text/javascript" src="/tutorial/content/../dojo/dojo/dojo.js"  charset="UTF-8"></script>
-
-
 ## menu creation
-##<div id="secure-menu"></div>
+<div id="secure-menu"></div>
 ## TODO jak dopracujesz kontekst security zrob menu
 ##$component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
 
-##<h2>flaszka na sniadanie dzisiaj bedzie</h2>	##mokc Menu
+<h2>flaszka na sniadanie dzisiaj bedzie</h2>	##mokc Menu
 $!embeddedPlaceholder
 
