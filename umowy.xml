@@ -1,0 +1,6 @@
+<Context
+  docBase="/home/mizin/workspace/umowy/target/umowy.war"
+  path="/umowy" 
+  reloadable="true" >
+  <Parameter name="ledge.root" value="/home/mizin/workspace/umowy/target/war/work"/>
+</Context>

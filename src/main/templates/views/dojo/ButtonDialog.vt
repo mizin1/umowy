@@ -1,0 +1,20 @@
+$pageTool.insertTitlePrefix(' - dojo nutton dialog')
+$viewEnclosureTool.override('MenuPage')
+
+<script type="text/javascript">
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+</script>	
+
+<button id="options" dojoType="dijit.form.Button" iconClass="mailIconOptions">
+	Options	
+	<script type="dojo/method" event="onClick">
+		dijit.byId('optionsDialog').show();
+	</script>
+</button>
+
+				
+<div dojoType="dijit.Dialog" id="optionsDialog" title="Options:">
+	warszawa
+</div>		
+		

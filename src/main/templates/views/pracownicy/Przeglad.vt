@@ -1,0 +1,112 @@
+$pageTool.insertTitlePrefix(' - przeglad')##
+
+$pageTool.addStyleLink('../dojo/dojo/resources/dojo.css')##
+$pageTool.addStyleLink('../dojo/dijit/themes/soria/soria.css')##
+$pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
+
+$pageTool.addScriptLink('../dojo/dojo/dojo.js')
+
+<script type="text/javascript">
+	dojo.registerModulePath("org.objectledge", "../../content/script/org/objectledge");
+
+	dojo.require("dojo.parser");
+	dojo.require("org.objectledge.widget.SorTable");
+	dojo.require("dijit.Dialog");
+</script>
+
+<style type="text/css">
+table.general {
+  border-collapse: collapse;
+  border: 1px black solid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
+}
+
+table.general th {
+  background-color: #DDEEAA;
+  padding: 2px;
+  border: 1px solid black;
+}
+
+table.general th.sorted {
+  background-color: #CCDD00;
+}
+
+table.general th.sorted_reverse {
+  background-color: #EEFFBB;
+}
+
+table.general td {
+  padding: 1px 2px 1px 2px;
+  border: 1px solid black;
+}
+
+table.general td img {
+  border: 0px;
+  margin: 0px;
+  vertical-align: middle;
+}
+
+table.general td textarea {
+	width: 98%;
+}
+
+table.general td input.intake-textline {
+	width: 98%;
+}
+
+table.general tr.noborder td {
+  border: 0px none;	
+}
+
+</style>
+
+<h2 align="center">Sorted table example</h2>
+	
+
+
+$pageTool.addStyleLink('style/skins/default/table-grey.css')
+<table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
+	style="margin: 2em auto;"> 
+    <!-- 
+      Here we have function which generates a key for sorting. This
+      implementation simple takes hostname.
+    -->
+    <script type="dojo/method" event="hostName" args="str">
+    	var matcher = str.match(/^https{0,1}:\/\/(.+)$/);
+    	return matcher[1];
+    </script>	
+    <!--
+      Here is the function which compares two columns using 
+      thier own way of comparision. In this case, the last part
+      of e-mail adress is taken into account.
+    -->
+    <script type="dojo/method" event="compare_email" args="array1, array2">
+    	var matcher1 = array1[0].match(/^.+@(.+)$/);
+    	var matcher2 = array2[0].match(/^.+@(.+)$/);
+    	if (matcher1[1]==matcher2[1]) return 0;
+    	if (matcher1[1]<matcher2[1]) return -1;
+    	return 1;
+    </script>
+    <thead> 
+    <tr> 
+        <th class="sortable">Last Name</th> 
+        <th class="sortable">First Name</th> 
+        <th>x</th> 
+    </tr> 
+    </thead> 
+    <tbody> 
+		#foreach ($pracownik in $pracownicy)
+			 <tr> 
+                <td>$pracownik.imie</td>
+                <td>$pracownik.nazwisko</td>
+				<td/>
+			 </tr> 
+		#end
+    </tbody> 
+</table> 
+
+<div dojoType="dijit.Dialog" id="szczegoly" title="Szczegolowe Dane PRacownija">
+	sialalalallalala ssij pale ssij
+</div>

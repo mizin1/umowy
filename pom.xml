@@ -16,27 +16,50 @@
 			<groupId>org.objectledge</groupId>
 			<artifactId>ledge-web</artifactId>
 			<version>SNAPSHOT</version>
+			<classifier>classes</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.objectledge</groupId>
+			<artifactId>ledge-web</artifactId>
+			<version>SNAPSHOT</version>
+			<type>war</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.objectledge</groupId>
+			<artifactId>ledge-contrib</artifactId>
+			<version>SNAPSHOT</version>
+			<classifier>classes</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.objectledge</groupId>
+			<artifactId>ledge-contrib</artifactId>
+			<version>SNAPSHOT</version>
+			<type>war</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.objectledge</groupId>
+			<artifactId>ledge-security</artifactId>
+			<classifier>classes</classifier>
+			<version>SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>dojo</groupId>
+			<artifactId>dojo</artifactId>
+			<version>snapshot-20847-20120905-1.8.3</version>
+			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate</artifactId>
 			<version>3.2.6.ga</version>
 		</dependency>
-		 <dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
 			<version>3.2.1.ga</version>
 		</dependency>
-		 <!--  <dependency>
-      <groupId>org.objectledge</groupId>
-      <artifactId>ledge-components</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.objectledge</groupId>
-      <artifactId>ledge-container</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency> -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -68,6 +91,41 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<dependentWarExcludes>WEB-INF/web.xml,META-INF/MANIFEST.MF</dependentWarExcludes>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<includeEmptyDirs>true</includeEmptyDirs>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+					<dependentWarIncludes>content/**,dojo*/**</dependentWarIncludes>
+					<overlays>
+						<overlay>
+							<groupId>org.objectledge</groupId>
+							<artifactId>ledge-web</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>org.objectledge</groupId>
+							<artifactId>ledge-contrib</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>dojo</groupId>
+							<artifactId>dojo</artifactId>
+						</overlay>
+					</overlays>
 				</configuration>
 			</plugin>
 		</plugins>

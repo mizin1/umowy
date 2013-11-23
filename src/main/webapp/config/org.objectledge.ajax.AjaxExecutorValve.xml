@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <ajax>
+   <!-- additional headers can be specified here
+   <headers>
+     <header name="" value=""/>
+   </headers>
+   -->
+   
+   <!-- known services declaration -->
+   <services>
+
+   	 <service name="ExampleService">
+       <method name="count">
+         <src class="pl.waw.mizinski.umowy.ajax.ExampleService" 
+             method="count">
+   	     </src>
+         <policy ssl="false" auth="false"/>
+   	   </method>
+   	    <method name="getPracownik">
+         <src class="pl.waw.mizinski.umowy.ajax.ExampleService" 
+             method="getPracownik">
+              <param name="imie" type="String"/>
+   	     </src>
+         <policy ssl="false" auth="false"/>
+   	   </method>
+     </service>
+   </services>
+ </ajax>

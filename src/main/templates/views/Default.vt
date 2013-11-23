@@ -1,13 +1,37 @@
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>$pageTool.title</title>
-	#foreach($styleLink in $pageTool.styleLinks)
-		<link rel="stylesheet" type="text/css" href="$styleLink.href" />
-	#end
-</head>
-<body>
-$!embeddedPlaceholder
-</body>
-</html>
 $viewEnclosureTool.top()
+$pageTool.insertTitlePrefix("System obługi umów cywilno-prawnych")
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title>$pageTool.title</title>
+		#foreach($styleLink in $pageTool.styleLinks)
+			<link rel="stylesheet" type="text/css" href="$styleLink.href" />
+		#end
+		#foreach($scriptLink in $pageTool.scriptLinks)
+			<script type="text/javascript" src="$scriptLink.src"##
+ 			#if($scriptLink.charset) charset="$scriptLink.charset"#end></script>
+		#end
+	
+        #set($jslink = $link.sessionless())
+        <script type="text/javascript" src="$jslink.content('script/ScriptLoader.js')"##
+         charset="UTF-8"> </script>
+        <script type="text/javascript">
+        <!--
+        var scriptLoader = new ScriptLoader('$jslink.content('script/')');
+        // -->
+        </script>
+        <script type="text/javascript" src="$jslink.content('script/BrowserUtil.js')"##
+         charset="UTF-8"> </script>
+        ## DOJO need this configuration section
+        <script type="text/javascript">
+            djConfig= {isDebug: false, parseOnLoad: true, defaultTestTheme: 'soria', locale: "pl" };
+        </script>
+		<script type="text/javascript" src="$jslink.content('../dojo/dojo/dojo.js')"##
+         charset="UTF-8"> </script>
+	</head>
+	<body class="soria">
+		$!embeddedPlaceholder
+	</body>
+</html>
+
