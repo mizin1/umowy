@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- copied from SecurityManagerImpl -->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <start>
+    <element name="config" xmlns="http://relaxng.org/ns/structure/1.0">
+      <interleave> 
+        <optional>
+          <element name="globalGroupName">
+            <attribute name="name"/>
+            <text/>
+          </element>
+        </optional>
+ 		<optional>
+          <element name="anonymousName">
+            <text/>
+          </element>
+        </optional>
+		<optional>
+          <element name="superuserName">
+            <text/>
+          </element>
+        </optional>
+      </interleave>
+    </element>    
+  </start>
+</grammar>
+

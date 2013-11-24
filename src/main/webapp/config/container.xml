@@ -139,6 +139,7 @@
 		<parameter class-key="org.jcontainer.dna.Logger" />
 		<sequence>
 			<parameter class-key="org.objectledge.web.ContentTypeInitializerValve" />
+			<parameter class-key="org.objectledge.security.SecurityAuthenticationValve"/>
 			<parameter class-key="org.objectledge.hibernate.HibernateSessionValve" />
 			<parameter class-key="org.objectledge.ajax.AjaxExecutorValve" />
 		</sequence>
@@ -186,6 +187,9 @@
 	</component>
 	
 <!-- moje proby z security -->
+
+ <component class="org.objectledge.security.SecurityAuthenticationValve"/>
+
 <component class ="pl.waw.mizinski.umowy.security.PersonGroupRecognizer"/>
 
 <component class-key="org.objectledge.security.ResourceRecognizerManager"
@@ -198,7 +202,7 @@
 
  <!--   security components -->
   <container key="securityContainer"/>
-  <component class-key="org.objectledge.security.SecurityManager"
+<!--   <component class-key="org.objectledge.security.SecurityManager"
            class="org.objectledge.security.SecurityManagerImpl">
     <parameter key="securityContainer"/>
     <parameter/> 
@@ -212,6 +216,23 @@
     <sequence>
     </sequence>
   </component>
+ --> 
+ <!-- Narazie pracujemy na mocku -->
+   <component class-key="org.objectledge.security.SecurityManager"
+           class="pl.waw.mizinski.umowy.security.MockSecurityManager">
+    <parameter key="securityContainer"/>
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <parameter/> 
+    <sequence>
+    </sequence>
+  </component>
+ 
   <component class-key="org.objectledge.security.PasswordVerifier" 
   		class="org.objectledge.security.PasswordVerifierImpl"/>
   <component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
