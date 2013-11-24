@@ -1,5 +1,3 @@
-$pageTool.addStyleLink('../dojo/dojo/resources/dojo.css')##
-$pageTool.addStyleLink('../dojo/dijit/themes/soria/soria.css')##
 
 ## menu creation
 <div id="secure-menu"></div>

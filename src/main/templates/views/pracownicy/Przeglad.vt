@@ -13,7 +13,7 @@ $pageTool.addScriptLink('../dojo/dojo/dojo.js')
 	dojo.require("org.objectledge.widget.SorTable");
 	dojo.require("dijit.Dialog");
 </script>
-
+<!--
 <style type="text/css">
 table.general {
   border-collapse: collapse;
@@ -61,7 +61,7 @@ table.general tr.noborder td {
 }
 
 </style>
-
+-->
 <h2 align="center">Sorted table example</h2>
 	
 

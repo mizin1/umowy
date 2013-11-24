@@ -1,0 +1,25 @@
+
+<h2 align="center"> Wprowadź dane nowego pracownika</h2>
+
+<div align="center">
+    <form method="post" action="$link.view('pracownicy.DodawaniePracownika').action('pracownicy.DodajPracownika')">
+        <table  width="500px" class="border">	
+    	<tr><th colspan="2">Person edit form</th></tr>
+        <tr>
+    		<th>Nazwisko:</th>
+            <th>
+    			<input type="text" name="nazwisko"/>
+    		</th>
+    	</tr>
+    	<tr>
+    		<td>Pierwsze imie</td>
+    		<td>
+    			<input type="text" name="pierwszeImie"/>
+    		</td>
+    	</tr>
+    	<tr>
+    		<th colspan="2"><input type="submit" value="submit"/></th>
+    	</tr>
+    	</table>
+    </form>
+</div>

@@ -1,0 +1,11 @@
+/*Solid border table*/
+table.border {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+table.border td, table.border th {
+	border: 1px solid black;
+	padding: 0.5em;
+}
