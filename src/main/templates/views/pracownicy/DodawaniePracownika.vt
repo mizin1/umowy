@@ -1,25 +1,92 @@
 
+<script type="text/javascript">
+	dojo.require("dojo.parser");
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.DateTextBox");
+	dojo.require("dijit.form.Form");
+	dojo.require("dijit.form.Button");
+	dojo.require("dijit.form.Select");
+	dojo.require("dijit.form.TextBox");
+</script>
+
 <h2 align="center"> Wprowadź dane nowego pracownika</h2>
 
 <div align="center">
-    <form method="post" action="$link.view('pracownicy.DodawaniePracownika').action('pracownicy.DodajPracownika')">
-        <table  width="500px" class="border">	
-    	<tr><th colspan="2">Person edit form</th></tr>
+    <form id="dodawaniePracownika" dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.DodawaniePracownika').action('pracownicy.DodajPracownika')">
+        <table  width="500px" class="border">
         <tr>
-    		<th>Nazwisko:</th>
-            <th>
-    			<input type="text" name="nazwisko"/>
-    		</th>
+    		<td>Nazwisko</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="nazwisko"/>
+    		</td>
     	</tr>
     	<tr>
     		<td>Pierwsze imie</td>
     		<td>
-    			<input type="text" name="pierwszeImie"/>
+    			<input type="text" dojoType="dijit.form.TextBox" name="pierwszeImie"/>
     		</td>
     	</tr>
-    	<tr>
-    		<th colspan="2"><input type="submit" value="submit"/></th>
+		<tr>
+    		<td>Imiona pozostale</td>
+    		<td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale"/>
+    		</td>
     	</tr>
+		<tr>
+    		<td>Plec</td>
+    		<td>
+    			<select name="plec" dojoType="dijit.form.Select">
+					<option value="M">Mezczyzna</option>
+					<option value="K">Kobieta</option>
+				</select>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Data urodzenia</td>
+    		<td>
+    			 <input name="dataUrodzenia" type="text" dojoType="dijit.form.DateTextBox" trim="true">
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Miejsce urodzenia</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="miejsceUrodzenia"/>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Obywatelstwo</td>
+            <td>
+    			<select name="obywatelstwo" dojoType="dijit.form.Select">
+					#foreach ($panstwo in $panstwa)
+						<option value="$panstwo.kod">$panstwo.obywatelstwo</option>
+					#end
+				</select>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Urzad skarbowy</td>
+            <td>
+    			<input id="urzadSkarbowy" type="text" dojoType="dijit.form.TextBox" name="urzadSkarbowy" disabled>
+				<button dojoType="dijit.form.Button">
+                	Wybierz
+                	<script type="dojo/method" event="onClick">
+                		alert('dupa');
+						dojo.byId('urzadSkarbowy').value = 'Urzad skarbowy w Grojcu';
+                	</script>
+                </button>
+    		</td>
+    	</tr>
+		
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Dodaj</button>
+				</div>
+			</th>
+		</tr>
     	</table>
     </form>
 </div>
+	
+

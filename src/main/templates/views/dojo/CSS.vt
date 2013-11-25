@@ -1,0 +1,96 @@
+$pageTool.insertTitlePrefix(' - select Css')
+$pageTool.addStyleLink('../dojo/dijit/themes/claro/claro.css')##
+$pageTool.addStyleLink('../dojo/dijit/themes/nihilo/nihilo.css')##
+$pageTool.addStyleLink('../dojo/dijit/themes/soria/soria.css')##
+$pageTool.addStyleLink('../dojo/dijit/themes/tundra/tundra.css')##
+$viewEnclosureTool.override('MenuPage')
+
+
+<script type="text/javascript">
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+</script>	
+
+<button dojoType="dijit.form.Button" class="soria">
+	Soria	
+	<script type="dojo/method" event="onClick">
+		dijit.byId('soria').show();
+	</script>
+</button>
+
+<div class="soria">			
+<div dojoType="dijit.Dialog" id="soria" title="CSS:" class="soria">
+	soria
+	<input type="text"  disabled/>
+	<br />
+	<input type="text" />
+	<br />
+	<input name="date_key" type="text"
+      dojoType="dijit.form.DateTextBox" constraints="{datePattern:'dd.MM.yyyy'}" 
+      promptMessage="Proper syntax is dd.MM.yyyy" trim="true" value="09.05.2009" maxlength="10"  required="true">
+	<br />
+    <input type="submit" value="OK">
+</div>		
+</div>
+<button dojoType="dijit.form.Button" class="claro">
+	claro	
+	<script type="dojo/method" event="onClick">
+		dijit.byId('claro').show();
+	</script>
+</button>
+
+				
+<div dojoType="dijit.Dialog" id="claro" title="CSS:" class="claro">
+	claro
+	<input type="text"  disabled/>
+	<br />
+	<input type="text" />
+	<br />
+	<input name="date_key" type="text"
+      dojoType="dijit.form.DateTextBox" constraints="{datePattern:'dd.MM.yyyy'}" 
+      promptMessage="Proper syntax is dd.MM.yyyy" trim="true" value="09.05.2009" maxlength="10"  required="true">
+	<br />
+    <input type="submit" value="OK">
+</div>	
+
+<button dojoType="dijit.form.Button" class="nihilo">
+	Nihilo	
+	<script type="dojo/method" event="onClick">
+		dijit.byId('nihilo').show();
+	</script>
+</button>
+
+				
+<div dojoType="dijit.Dialog" id="nihilo" title="CSS:" class="nihilo">
+	nihilo
+	<input type="text"  disabled/>
+	<br />
+	<input type="text" />
+	<br />
+	<input name="date_key" type="text"
+      dojoType="dijit.form.DateTextBox" constraints="{datePattern:'dd.MM.yyyy'}" 
+      promptMessage="Proper syntax is dd.MM.yyyy" trim="true" value="09.05.2009" maxlength="10"  required="true">
+	<br />
+    <input type="submit" value="OK">
+</div>		
+		
+<button dojoType="dijit.form.Button" class="tundra">
+	tundra	
+	<script type="dojo/method" event="onClick">
+		dijit.byId('tundra').show();
+	</script>
+</button>
+
+				
+<div dojoType="dijit.Dialog" id="tundra" title="CSS:" class="tundra">
+	tundra
+	<input type="text"  disabled/>
+	<br />
+	<input type="text" />
+	<br />
+	<input name="date_key" type="text"
+      dojoType="dijit.form.DateTextBox" constraints="{datePattern:'dd.MM.yyyy'}" 
+      promptMessage="Proper syntax is dd.MM.yyyy" trim="true" value="09.05.2009" maxlength="10"  required="true">
+	<br />
+    <input type="submit" value="OK">
+</div>	

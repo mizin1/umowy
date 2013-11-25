@@ -2,7 +2,7 @@ $viewEnclosureTool.top()
 $pageTool.insertTitlePrefix("System obługi umów cywilno-prawnych")
 $pageTool.addStyleLink('../dojo/dojo/resources/dojo.css')##
 $pageTool.addStyleLink('../dojo/dijit/themes/tundra/tundra.css')##
-$pageTool.addStyleLink('../style/style.css')##
+$pageTool.addStyleLink('style/style.css')##
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>

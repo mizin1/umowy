@@ -42,7 +42,7 @@ public class DodajPracownika implements Valve {
 		String pierwszeImie = parameters.get("pierwszeImie");
 		String imionaPozostale = parameters.get("imionaPozostale");
 		Plec plec = Plec.valueOf(parameters.get("plec"));
-		Date dataUrodzenia = new Date(Date.parse(parameters.get("dataUrodzenia")));
+//		Date dataUrodzenia = new Date(Date.parse(parameters.get("dataUrodzenia")));
 		String miejsceUrodzenia = parameters.get("miejsceUrodzenia");
 		Panstwo obywatelstwo = panstwoDao.getById(parameters.get("obywatelstwo"));
 		UrzadSkarbowy urzadSkarbowy = urzadSkarbowyDao.getById(parameters.get("urzadSkarbowy"));
@@ -59,7 +59,7 @@ public class DodajPracownika implements Valve {
 		pracownik.setPierwszeImie(pierwszeImie);
 		pracownik.setImionaPozostale(imionaPozostale);
 		pracownik.setPlec(plec);
-		pracownik.setDataUrodzenia(dataUrodzenia);
+//		pracownik.setDataUrodzenia(dataUrodzenia);
 		pracownik.setMiejsceUrodzenia(miejsceUrodzenia);
 		pracownik.setObywatelstwo(obywatelstwo);
 		pracownik.setUrzadSkarbowy(urzadSkarbowy);
