@@ -8,9 +8,11 @@
 	dojo.require("dijit.form.Button");
 	dojo.require("dijit.form.Select");
 	dojo.require("dijit.form.TextBox");
+	dojo.require("dijit.form.RadioButton");
+	dojo.require("dijit.form.CheckBox");
 </script>
 
-<h2 align="center"> Wprowadź dane nowego pracownika</h2>
+<h2 align="center">Wprowadź dane nowego pracownika</h2>
 
 <div align="center">
     <form id="dodawaniePracownika" dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.DodawaniePracownika').action('pracownicy.DodajPracownika')">
@@ -45,7 +47,7 @@
 		<tr>
     		<td>Data urodzenia</td>
     		<td>
-    			 <input name="dataUrodzenia" type="text" dojoType="dijit.form.DateTextBox" trim="true">
+    			 <input name="dataUrodzenia" type="date" dojoType="dijit.form.DateTextBox" trim="true">
     		</td>
     	</tr>
 		<tr>
@@ -67,16 +69,75 @@
 		<tr>
     		<td>Urzad skarbowy</td>
             <td>
-    			<input id="urzadSkarbowy" type="text" dojoType="dijit.form.TextBox" name="urzadSkarbowy" disabled>
+    			<input id="urzadSkarbowy" type="text" dojoType="dijit.form.TextBox" name="urzadSkarbowy" >
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
-                		alert('dupa');
+                		alert('mocked');
 						dojo.byId('urzadSkarbowy').value = 'Urzad skarbowy w Grojcu';
                 	</script>
                 </button>
     		</td>
     	</tr>
+		<tr>
+    		<td>Pesel</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="pesel"/>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Nip</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="nip"/>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Numer dokumentu tozsamosci</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="nrDokumentuTozsamosci"/>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Typ dokumentu tozsamosci</td>
+            <td>
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="typDokumentuTozsamosci" value="dowod_osobisty" checked/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="typDokumentuTozsamosci" value="paszport"/> <label for="paszport">Paszport</label> <br />
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Numer konta</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="nrKonta"/>
+    		</td>
+    	</tr>
+		<tr>
+    		<td>Status</td>
+            <td>
+    			<input id="status" type="text" dojoType="dijit.form.TextBox" name="status">
+				<button dojoType="dijit.form.Button">
+                	Wybierz
+                	<script type="dojo/method" event="onClick">
+                		alert('mocked');
+						dojo.byId('status').value = 'student';
+                	</script>
+                </button>
+    		</td>
+    	</tr>
+		<!--<tr>
+    		<td>Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</td>
+            <td>
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="true" name="dobrowolneUbezpieczenieChorobowe" value="true" checked/>  <label for="true">Tak</label><br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="false" name="dobrowolneUbezpieczenieChorobowe" value="false"/><label for="false">Nie</label>
+    		</td>
+		</tr>-->
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<input type="checkbox" dojoType="dijit.form.CheckBox" name="dobrowolneUbezpieczenieChorobowe2" value="true" >
+						<label for="dobrowolneUbezpieczenieChorobowe2">Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</label>
+				</div>
+			</th>
+		</tr>
 		
 		<tr>
 			<th colspan="2">

@@ -13,55 +13,7 @@ $pageTool.addScriptLink('../dojo/dojo/dojo.js')
 	dojo.require("org.objectledge.widget.SorTable");
 	dojo.require("dijit.Dialog");
 </script>
-<!--
-<style type="text/css">
-table.general {
-  border-collapse: collapse;
-  border: 1px black solid;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5em;
-}
 
-table.general th {
-  background-color: #DDEEAA;
-  padding: 2px;
-  border: 1px solid black;
-}
-
-table.general th.sorted {
-  background-color: #CCDD00;
-}
-
-table.general th.sorted_reverse {
-  background-color: #EEFFBB;
-}
-
-table.general td {
-  padding: 1px 2px 1px 2px;
-  border: 1px solid black;
-}
-
-table.general td img {
-  border: 0px;
-  margin: 0px;
-  vertical-align: middle;
-}
-
-table.general td textarea {
-	width: 98%;
-}
-
-table.general td input.intake-textline {
-	width: 98%;
-}
-
-table.general tr.noborder td {
-  border: 0px none;	
-}
-
-</style>
--->
 <h2 align="center">Sorted table example</h2>
 	
 
@@ -98,9 +50,9 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
     </thead> 
     <tbody> 
 		#foreach ($pracownik in $pracownicy)
-			 <tr> 
+			 <tr onclick="alert('mocked')"> 
+				<td>$pracownik.nazwisko</td>
                 <td>$pracownik.imie</td>
-                <td>$pracownik.nazwisko</td>
 				<td/>
 			 </tr> 
 		#end

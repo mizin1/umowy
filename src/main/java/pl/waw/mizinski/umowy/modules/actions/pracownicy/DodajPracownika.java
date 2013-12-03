@@ -3,7 +3,10 @@ package pl.waw.mizinski.umowy.modules.actions.pracownicy;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.objectledge.context.Context;
+import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
@@ -18,9 +21,10 @@ import pl.waw.mizinski.umowy.model.StatusPracownika;
 import pl.waw.mizinski.umowy.model.UrzadSkarbowy;
 import pl.waw.mizinski.umowy.model.enums.Plec;
 import pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci;
+import pl.waw.mizinski.umowy.util.Utils;
 
 public class DodajPracownika implements Valve {
-
+	
 	private final PracownikDao pracownikDao;
 	private final PanstwoDao panstwoDao;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
@@ -34,7 +38,6 @@ public class DodajPracownika implements Valve {
 		this.statusPracownikaDao = statusPracownikaDao;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void process(Context context) throws ProcessingException {
 		RequestParameters parameters = RequestParameters.getRequestParameters(context);
@@ -42,7 +45,8 @@ public class DodajPracownika implements Valve {
 		String pierwszeImie = parameters.get("pierwszeImie");
 		String imionaPozostale = parameters.get("imionaPozostale");
 		Plec plec = Plec.valueOf(parameters.get("plec"));
-//		Date dataUrodzenia = new Date(Date.parse(parameters.get("dataUrodzenia")));
+		String dataUrodzeniaParam = parameters.get("dataUrodzenia");
+		Date dataUrodzenia = Utils.toDate(dataUrodzeniaParam);
 		String miejsceUrodzenia = parameters.get("miejsceUrodzenia");
 		Panstwo obywatelstwo = panstwoDao.getById(parameters.get("obywatelstwo"));
 		UrzadSkarbowy urzadSkarbowy = urzadSkarbowyDao.getById(parameters.get("urzadSkarbowy"));
@@ -53,13 +57,13 @@ public class DodajPracownika implements Valve {
 				.get("typDokumentuTozsamosci"));
 		String nrKonta = parameters.get("nrKonta");
 		StatusPracownika status = statusPracownikaDao.getById(parameters.get("status"));
-		Boolean dobrowolneUbezpieczenieChorobowe = parameters.getBoolean("dobrowolneUbezpieczenieChorobowe");
+		Boolean dobrowolneUbezpieczenieChorobowe = parameters.getBoolean("dobrowolneUbezpieczenieChorobowe", false);
 		Pracownik pracownik = new Pracownik();
 		pracownik.setNazwisko(nazwisko);
 		pracownik.setPierwszeImie(pierwszeImie);
 		pracownik.setImionaPozostale(imionaPozostale);
 		pracownik.setPlec(plec);
-//		pracownik.setDataUrodzenia(dataUrodzenia);
+		pracownik.setDataUrodzenia(dataUrodzenia);
 		pracownik.setMiejsceUrodzenia(miejsceUrodzenia);
 		pracownik.setObywatelstwo(obywatelstwo);
 		pracownik.setUrzadSkarbowy(urzadSkarbowy);
@@ -70,15 +74,34 @@ public class DodajPracownika implements Valve {
 		pracownik.setNrKonta(nrKonta);
 		pracownik.setStatus(status);
 		pracownik.setDobrowolneUbezpieczenieChorobowe(dobrowolneUbezpieczenieChorobowe);
-		pracownikDao.add(pracownik);
+		dodajPracownika(pracownik, context);
+	}
+
+	private void dodajPracownika(Pracownik pracownik, Context context) throws ProcessingException {
+		  final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			pracownikDao.add(pracownik);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			throw new ProcessingException(e);
+		}
 	}
 
 	private BigDecimal toBigDecimal(String stringValue) {
-		if (stringValue == null) {
+		if (stringValue == null || stringValue.isEmpty()) {
 			return null;
 		}
-		Double doubleValue = Double.valueOf(stringValue);
-		return BigDecimal.valueOf(doubleValue);
+		try {
+			Double doubleValue = Double.valueOf(stringValue);
+			return BigDecimal.valueOf(doubleValue);
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 
 }

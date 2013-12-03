@@ -1,0 +1,18 @@
+package pl.waw.mizinski.umowy.util;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+public class Utils {
+	
+	public static Date toDate(String date) {
+		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			return dateFormat.parse(date);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+}
