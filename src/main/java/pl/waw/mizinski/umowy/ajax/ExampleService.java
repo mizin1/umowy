@@ -13,7 +13,7 @@ public class ExampleService {
 	public PracownikImieNazwiskoPOJO getPracownik(String imie) {
 		PracownikImieNazwiskoPOJO pojo = new PracownikImieNazwiskoPOJO();
 		pojo.setImie(imie);
-		pojo.setNazwisko(imie + "oswki");
+		pojo.setNazwisko(imie + "owski");
 		return pojo;
 	}
 }

@@ -24,7 +24,7 @@ import pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci;
 import pl.waw.mizinski.umowy.util.Utils;
 
 public class DodajPracownika implements Valve {
-	
+
 	private final PracownikDao pracownikDao;
 	private final PanstwoDao panstwoDao;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
@@ -78,7 +78,7 @@ public class DodajPracownika implements Valve {
 	}
 
 	private void dodajPracownika(Pracownik pracownik, Context context) throws ProcessingException {
-		  final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
+		final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();

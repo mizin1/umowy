@@ -35,8 +35,13 @@
 	<component class="org.objectledge.web.mvc.MVCResultsValve" />
 	<component class="org.objectledge.web.mvc.MVCInitializerValve" />
 	<component class="org.objectledge.parameters.RequestParametersLoaderValve" />
-
 	<component class="org.objectledge.web.mvc.builders.ViewEnclosureManager" />
+
+
+	<component class-key="org.objectledge.i18n.I18n" class="org.objectledge.i18n.xml.XMLI18n" />
+	<component class="org.objectledge.i18n.LocaleLoaderValve" />
+	<!-- <component class="org.objectledge.i18n.EncodingLoaderValve"/> -->
+	<component class="org.objectledge.i18n.UTF8EncodingLoaderValve" />
 
 	<component class="org.objectledge.web.mvc.security.SecurityHelper" />
 	<component class="org.objectledge.web.mvc.finders.NameSequenceFactory" />
@@ -99,10 +104,10 @@
 		<sequence>
 		</sequence>
 	</component>
-	
-	<!-- AJAX services -->
- 	<component class="pl.waw.mizinski.umowy.ajax.ExampleService"/> 
 
+	<!-- AJAX services -->
+	<component class="pl.waw.mizinski.umowy.ajax.ExampleService" />
+	<component class="pl.waw.mizinski.umowy.ajax.UrzadSkarbowyService" />
 
 
 	<!-- // pipeline //////////////////////////////////////////////////////////////////////// -->
@@ -112,6 +117,9 @@
 		<parameter class-key="org.jcontainer.dna.Logger" />
 		<sequence>
 			<parameter class-key="org.objectledge.web.ContentTypeInitializerValve" />
+
+			<parameter class-key="org.objectledge.i18n.UTF8EncodingLoaderValve" />
+
 			<parameter class-key="org.objectledge.parameters.RequestParametersLoaderValve" />
 			<parameter class-key="org.objectledge.web.mvc.MVCInitializerValve" />
 			<parameter class-key="org.objectledge.templating.TemplatingContextLoaderValve" />
@@ -139,7 +147,9 @@
 		<parameter class-key="org.jcontainer.dna.Logger" />
 		<sequence>
 			<parameter class-key="org.objectledge.web.ContentTypeInitializerValve" />
-			<parameter class-key="org.objectledge.security.SecurityAuthenticationValve"/>
+			<parameter class-key="org.objectledge.security.SecurityAuthenticationValve" />
+			<parameter class-key="org.objectledge.i18n.LocaleLoaderValve" />
+			<parameter class-key="org.objectledge.i18n.UTF8EncodingLoaderValve" />
 			<parameter class-key="org.objectledge.hibernate.HibernateSessionValve" />
 			<parameter class-key="org.objectledge.ajax.AjaxExecutorValve" />
 		</sequence>
@@ -153,18 +163,11 @@
 
 	<!-- // dispatchers ///////////////////////////////////////////////////////////////////// -->
 
-	<!-- <component class="org.objectledge.web.dispatcher.PipelineHttpDispatcher"
-		key="main">
-		<parameter key="http-ErrorHandlingPipeline" />
-		<parameter />
-	</component>
+	<!-- <component class="org.objectledge.web.dispatcher.PipelineHttpDispatcher" 
+		key="main"> <parameter key="http-ErrorHandlingPipeline" /> <parameter /> 
+		</component> <component class-key="org.objectledge.web.HttpDispatcher" class="org.objectledge.web.dispatcher.PipelineHttpDispatcher"> 
+		<parameter key="http-ErrorHandlingPipeline" /> <parameter /> </component> -->
 
-	<component class-key="org.objectledge.web.HttpDispatcher"
-		class="org.objectledge.web.dispatcher.PipelineHttpDispatcher">
-		<parameter key="http-ErrorHandlingPipeline" />
-		<parameter />
-	</component> -->
-	
 	<component key="http-request"
 		class="org.objectledge.web.dispatcher.PipelineHttpDispatcher">
 		<parameter key="http-ErrorHandlingPipeline" />
@@ -185,86 +188,78 @@
 			<parameter key="http-request" />
 		</sequence>
 	</component>
-	
-<!-- moje proby z security -->
 
- <component class="org.objectledge.security.SecurityAuthenticationValve"/>
+	<!-- moje proby z security -->
 
-<component class ="pl.waw.mizinski.umowy.security.PersonGroupRecognizer"/>
+	<component class="org.objectledge.security.SecurityAuthenticationValve" />
 
-<component class-key="org.objectledge.security.ResourceRecognizerManager"
-           class="org.objectledge.security.ResourceRecognizerManagerImpl">
-    <parameter/>
-    <sequence>
-    	<parameter class-key="pl.waw.mizinski.umowy.security.PersonGroupRecognizer"/>
-    </sequence>
-  </component>
+	<component class="pl.waw.mizinski.umowy.security.PersonGroupRecognizer" />
 
- <!--   security components -->
-  <container key="securityContainer"/>
-<!--   <component class-key="org.objectledge.security.SecurityManager"
-           class="org.objectledge.security.SecurityManagerImpl">
-    <parameter key="securityContainer"/>
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <sequence>
-    </sequence>
-  </component>
- --> 
- <!-- Narazie pracujemy na mocku -->
-   <component class-key="org.objectledge.security.SecurityManager"
-           class="pl.waw.mizinski.umowy.security.MockSecurityManager">
-    <parameter key="securityContainer"/>
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <parameter/> 
-    <sequence>
-    </sequence>
-  </component>
- 
-  <component class-key="org.objectledge.security.PasswordVerifier" 
-  		class="org.objectledge.security.PasswordVerifierImpl"/>
-  <component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
-  		class="org.objectledge.security.SecurityTokenModificationPolicyImpl"/>
-  <component class="org.objectledge.security.object.hibernate.HibernateDataBackend"/>
-  <component class="pl.waw.mizinski.umowy.security.DummyGroupNamingPolicy"/>
-  <component class="org.objectledge.web.mvc.security.AclSecurityHelper"/>
-  <component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingHelper"/>
-  
-  <component class="org.objectledge.web.mvc.security.SecurityPolicySystem"/>
-  <component class="org.objectledge.security.menu.SecureMenuSystem"/>
-  <component class="org.objectledge.ajax.service.SecurityCheckingService"/>
-  
-  <!-- content extractors -->
-  <component key="org.objectledge.filesystem.ContentExtractorContent" 
-  		class="org.objectledge.filesystem.ContentExtractor"/>
- <!--  becouse /locale direcoty is present in war, all locale dirs in jars should be extracted to be accessible -->
-  <component key="org.objectledge.filesystem.ContentExtractorLocale" 
-  		class="org.objectledge.filesystem.ContentExtractor"/>
-  <component key="org.objectledge.filesystem.ContentExtractorDojo" 
-  		class="org.objectledge.filesystem.ContentExtractor"/>
+	<component class-key="org.objectledge.security.ResourceRecognizerManager"
+		class="org.objectledge.security.ResourceRecognizerManagerImpl">
+		<parameter />
+		<sequence>
+			<parameter class-key="pl.waw.mizinski.umowy.security.PersonGroupRecognizer" />
+		</sequence>
+	</component>
 
- <!--  // valve utils ///////////////////////////////////////////////////////////////// -->
+	<!-- security components -->
+	<container key="securityContainer" />
+	<!-- <component class-key="org.objectledge.security.SecurityManager" class="org.objectledge.security.SecurityManagerImpl"> 
+		<parameter key="securityContainer"/> <parameter/> <parameter/> <parameter/> 
+		<parameter/> <parameter/> <parameter/> <parameter/> <parameter/> <sequence> 
+		</sequence> </component> -->
+	<!-- Narazie pracujemy na mocku -->
+	<component class-key="org.objectledge.security.SecurityManager"
+		class="pl.waw.mizinski.umowy.security.MockSecurityManager">
+		<parameter key="securityContainer" />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<sequence>
+		</sequence>
+	</component>
 
-  <component class="org.objectledge.encodings.HTMLEntityEncoder"/>
-  <component class="org.objectledge.upload.FileDownload"/>
-  <component class="org.objectledge.upload.FileUpload"/>    
+	<component class-key="org.objectledge.security.PasswordVerifier"
+		class="org.objectledge.security.PasswordVerifierImpl" />
+	<component class-key="org.objectledge.security.SecurityTokenModificationPolicy"
+		class="org.objectledge.security.SecurityTokenModificationPolicyImpl" />
+	<component
+		class="org.objectledge.security.object.hibernate.HibernateDataBackend" />
+	<component class="pl.waw.mizinski.umowy.security.DummyGroupNamingPolicy" />
+	<component class="org.objectledge.web.mvc.security.AclSecurityHelper" />
+	<component
+		class="org.objectledge.web.mvc.security.SecurityPolicyCheckingHelper" />
 
-  <component class="org.objectledge.authentication.NamingPolicy"/>
-  <component class="org.objectledge.authentication.LoginVerifier"/>
-  <component class="org.objectledge.authentication.PasswordGenerator"/>
-  <component class="org.objectledge.authentication.PasswordDigester">
-    <parameter value="MD5"/>
-  </component>
+	<component class="org.objectledge.web.mvc.security.SecurityPolicySystem" />
+	<component class="org.objectledge.security.menu.SecureMenuSystem" />
+	<component class="org.objectledge.ajax.service.SecurityCheckingService" />
+
+	<!-- content extractors -->
+	<component key="org.objectledge.filesystem.ContentExtractorContent"
+		class="org.objectledge.filesystem.ContentExtractor" />
+	<!-- becouse /locale direcoty is present in war, all locale dirs in jars 
+		should be extracted to be accessible -->
+	<component key="org.objectledge.filesystem.ContentExtractorLocale"
+		class="org.objectledge.filesystem.ContentExtractor" />
+	<component key="org.objectledge.filesystem.ContentExtractorDojo"
+		class="org.objectledge.filesystem.ContentExtractor" />
+
+	<!-- // valve utils ///////////////////////////////////////////////////////////////// -->
+
+	<component class="org.objectledge.encodings.HTMLEntityEncoder" />
+	<component class="org.objectledge.upload.FileDownload" />
+	<component class="org.objectledge.upload.FileUpload" />
+
+	<component class="org.objectledge.authentication.NamingPolicy" />
+	<component class="org.objectledge.authentication.LoginVerifier" />
+	<component class="org.objectledge.authentication.PasswordGenerator" />
+	<component class="org.objectledge.authentication.PasswordDigester">
+		<parameter value="MD5" />
+	</component>
 </container>

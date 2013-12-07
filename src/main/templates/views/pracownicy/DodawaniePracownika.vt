@@ -1,5 +1,7 @@
 
 <script type="text/javascript">
+	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
+	
 	dojo.require("dojo.parser");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
@@ -7,9 +9,60 @@
 	dojo.require("dijit.form.Form");
 	dojo.require("dijit.form.Button");
 	dojo.require("dijit.form.Select");
+	dojo.require("dijit.form.MultiSelect");
 	dojo.require("dijit.form.TextBox");
 	dojo.require("dijit.form.RadioButton");
 	dojo.require("dijit.form.CheckBox");
+	dojo.require("dijit.form.ValidationTextBox");
+
+	dojo.require("org.objectledge.ajax.AjaxRequest");
+    dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
+	
+	function onXFail(response) {
+		alert('Nie udalo sie dodac Urzedu skarbowego');
+	}
+	
+	var dodajUrzadSkarbowyOptions = {
+		url: "$link.view('AJAX')", 
+		paramNames: ["nazwa", "miejscowosc", "ulica", "nrDomu", "nrMieszkania", "kodPocztowy", "poczta", "kodPanstwa"], 
+		serviceName: "UrzadSkarbowyService", 
+		methodName: "dodajUrzadSkarbowy",
+		onFail: onXFail
+	};
+
+	var dodajUrzadSkarbowy = null;
+	
+	dojo.addOnLoad(function() {
+		dodajUrzadSkarbowy = new org.objectledge.ajax.AjaxRequest(dodajUrzadSkarbowyOptions);
+		
+    });
+	
+	function dodajUrzadSkarbowyRequest() {
+		var nazwa = dojo.byId('usNazwa').value;
+		var miejscowosc = dojo.byId('usMiejscowosc').value;
+		var ulica = dojo.byId('usUlica').value;
+		var nrDomu = dojo.byId('usNrDomu').value;
+		var nrMieszkania = dojo.byId('usNrMieszkania').value;
+		var kodPocztowy = dojo.byId('usKodPocztowy').value;
+		var poczta = dojo.byId('usPoczta').value;
+		var kodPanstwa = dijit.byId('usPanstwo').value;
+		dodajUrzadSkarbowy.sendRequest([nazwa, miejscowosc, ulica, nrDomu, nrMieszkania, kodPocztowy, poczta, kodPanstwa], dodajUrzadSkarbowyResponse);
+	}
+	
+	function dodajUrzadSkarbowyResponse(response) {
+		dojo.byId('urzadSkarbowy').value = dojo.byId('usNazwa').value;
+		dijit.byId('dodajUrzadSkarbowy').hide();
+	}
+	
+	function wprowadzAdresKorespondencyjny() {
+		if (dijit.byId('adresKorespondencyjny').checked) { 
+			document.getElementById('aaa').style.display = 'table-row';
+		} else {
+			document.getElementById('aaa').style.display = 'none';
+		}
+	}
+	
+	
 </script>
 
 <h2 align="center">Wprowadź dane nowego pracownika</h2>
@@ -20,40 +73,52 @@
         <tr>
     		<td>Nazwisko</td>
             <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="nazwisko"/>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nazwisko" required trim/>
     		</td>
     	</tr>
-    	<tr>
+    	<tr >
     		<td>Pierwsze imie</td>
     		<td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="pierwszeImie"/>
-    		</td>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="pierwszeImie" required trim/>
+			</td>
     	</tr>
 		<tr>
     		<td>Imiona pozostale</td>
     		<td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale"/>
+    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale" trim/>
+    		</td>
+    	</tr>
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresKorespondencyjny" name="adresKorespondencyjny" value="true" onchange="wprowadzAdresKorespondencyjny();">
+					<label for="adresKorespondencyjny">Dodaj adres korespondencyjny</label>
+				</div>
+			</th>
+		</tr>
+		<tr id="aaa"  style="display:none" >
+    		<td>cos fajnego</td>
+    		<td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="cosFajnego" trim/>
     		</td>
     	</tr>
 		<tr>
     		<td>Plec</td>
-    		<td>
-    			<select name="plec" dojoType="dijit.form.Select">
-					<option value="M">Mezczyzna</option>
-					<option value="K">Kobieta</option>
-				</select>
+            <td>
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="plec" value="K" checked/> <label for="K">Kobieta</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="plec" value="M"/> <label for="M">Mężczyzna</label> <br />
     		</td>
     	</tr>
 		<tr>
     		<td>Data urodzenia</td>
     		<td>
-    			 <input name="dataUrodzenia" type="date" dojoType="dijit.form.DateTextBox" trim="true">
+    			 <input name="dataUrodzenia" type="date" dojoType="dijit.form.DateTextBox" trim required />
     		</td>
     	</tr>
 		<tr>
     		<td>Miejsce urodzenia</td>
             <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="miejsceUrodzenia"/>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="miejsceUrodzenia" required trim/>
     		</td>
     	</tr>
 		<tr>
@@ -61,7 +126,12 @@
             <td>
     			<select name="obywatelstwo" dojoType="dijit.form.Select">
 					#foreach ($panstwo in $panstwa)
-						<option value="$panstwo.kod">$panstwo.obywatelstwo</option>
+						#if ($panstwo.kod == "PL")
+							<option value="$panstwo.kod" selected>$panstwo.obywatelstwo</option>
+						#else
+							<option value="$panstwo.kod">$panstwo.obywatelstwo</option>
+						#end
+						
 					#end
 				</select>
     		</td>
@@ -69,12 +139,11 @@
 		<tr>
     		<td>Urzad skarbowy</td>
             <td>
-    			<input id="urzadSkarbowy" type="text" dojoType="dijit.form.TextBox" name="urzadSkarbowy" >
+    			<input id="urzadSkarbowy" type="text" name="urzadSkarbowy" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
-                		alert('mocked');
-						dojo.byId('urzadSkarbowy').value = 'Urzad skarbowy w Grojcu';
+                		dijit.byId('wybierzUrzadSkarbowy').show();
                 	</script>
                 </button>
     		</td>
@@ -82,19 +151,19 @@
 		<tr>
     		<td>Pesel</td>
             <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="pesel"/>
+    			<input type="text" dojoType="dijit.form.TextBox" name="pesel" />
     		</td>
     	</tr>
 		<tr>
     		<td>Nip</td>
             <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="nip"/>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nip"/>
     		</td>
     	</tr>
 		<tr>
     		<td>Numer dokumentu tozsamosci</td>
             <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="nrDokumentuTozsamosci"/>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nrDokumentuTozsamosci" required="true"/>
     		</td>
     	</tr>
 		<tr>
@@ -113,7 +182,7 @@
 		<tr>
     		<td>Status</td>
             <td>
-    			<input id="status" type="text" dojoType="dijit.form.TextBox" name="status">
+				<input id="status" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
@@ -123,18 +192,11 @@
                 </button>
     		</td>
     	</tr>
-		<!--<tr>
-    		<td>Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</td>
-            <td>
-    			<input type="radio" dojoType="dijit.form.RadioButton" id="true" name="dobrowolneUbezpieczenieChorobowe" value="true" checked/>  <label for="true">Tak</label><br />
-				<input type="radio" dojoType="dijit.form.RadioButton" id="false" name="dobrowolneUbezpieczenieChorobowe" value="false"/><label for="false">Nie</label>
-    		</td>
-		</tr>-->
 		<tr>
 			<th colspan="2">
 				<div align="center">
-					<input type="checkbox" dojoType="dijit.form.CheckBox" name="dobrowolneUbezpieczenieChorobowe2" value="true" >
-						<label for="dobrowolneUbezpieczenieChorobowe2">Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</label>
+					<input type="checkbox" dojoType="dijit.form.CheckBox" name="dobrowolneUbezpieczenieChorobowe" value="true" />
+					<label for="dobrowolneUbezpieczenieChorobowe">Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</label>
 				</div>
 			</th>
 		</tr>
@@ -149,5 +211,104 @@
     	</table>
     </form>
 </div>
-	
+
+<div dojoType="dijit.Dialog" id="wybierzUrzadSkarbowy" title="Urząd skarbowy">
+	<h3 align="center">Wybierz urząd z listy lub dodaj nowy</h3>
+	<br/>
+		<select id="listaUrzedow" dojoType="dijit.form.MultiSelect" class="multi" >
+			#foreach ($urzadSkarbowy in $urzedySkarobowe)
+				<option>
+					$urzadSkarbowy.nazwa
+				</option>
+			#end
+		</select>
+	<br/>
+	<div align="center">
+		<button dojoType="dijit.form.Button">
+			Wybierz
+			<script type="dojo/method" event="onClick">
+                dojo.byId('urzadSkarbowy').value = dojo.byId('listaUrzedow').value;
+				dijit.byId('wybierzUrzadSkarbowy').hide();
+            </script>
+		</button>
+		<button dojoType="dijit.form.Button">
+			Dodaj Nowy
+			<script type="dojo/method" event="onClick">
+				dijit.byId('wybierzUrzadSkarbowy').hide();
+                dijit.byId('dodajUrzadSkarbowy').show();
+            </script>
+		</button>
+	</div>
+</div>	
+<div dojoType="dijit.Dialog" id="dodajUrzadSkarbowy" title="Dodaj urząd skarbowy">
+    <h3 align="center">	Wprowadź dane urzędu skarbowego</h3>
+	<br/>
+	<table width="400px" class="border">
+		<tr>
+			<td>Nazwa</td>
+			<td>
+				<input id="usNazwa" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Miejscowość</td>
+			<td>
+				<input id="usMiejscowosc" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Ulica</td>
+			<td>
+				<input id="usUlica" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Numer Domu</td>
+			<td>
+				<input id="usNrDomu" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Numer mieszkania</td>
+			<td>
+				<input id="usNrMieszkania" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Kod pocztowy</td>
+			<td>
+				<input id="usKodPocztowy" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Poczta</td>
+			<td>
+				<input id="usPoczta" type="text" dojoType="dijit.form.TextBox"/>
+			</td>
+		</tr>
+		<tr>
+    		<td>Panstwo</td>
+            <td>
+    			<select id="usPanstwo" dojoType="dijit.form.Select">
+					#foreach ($panstwo in $panstwa)
+						#if ($panstwo.kod == "PL")
+							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
+						#else
+							<option value="$panstwo.kod">$panstwo.nazwa</option>
+						#end
+					#end
+				</select>
+    		</td>
+    	</tr>
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<button dojoType="dijit.form.Button" onclick="dodajUrzadSkarbowyRequest()">
+						Dodaj
+					</button>
+				</div>
+			</th>
+		</tr>
+   </table>
+</div>
 

@@ -1,4 +1,3 @@
-/*Solid border table*/
 table.border {
 	margin-left: auto;
 	margin-right: auto;
@@ -8,4 +7,9 @@ table.border {
 table.border td, table.border th {
 	border: 1px solid LightGray;
 	padding: 0.5em;
+}
+
+select.multi {
+	width: 300px;
+	size: 10;
 }

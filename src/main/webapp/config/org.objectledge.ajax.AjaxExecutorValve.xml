@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <ajax>
-   <!-- additional headers can be specified here
-   <headers>
-     <header name="" value=""/>
-   </headers>
-   -->
-   
-   <!-- known services declaration -->
-   <services>
+<ajax>
+	<!-- additional headers can be specified here <headers> <header name="" 
+		value=""/> </headers> -->
 
-   	 <service name="ExampleService">
-       <method name="count">
-         <src class="pl.waw.mizinski.umowy.ajax.ExampleService" 
-             method="count">
-   	     </src>
-         <policy ssl="false" auth="false"/>
-   	   </method>
-   	    <method name="getPracownik">
-         <src class="pl.waw.mizinski.umowy.ajax.ExampleService" 
-             method="getPracownik">
-              <param name="imie" type="String"/>
-   	     </src>
-         <policy ssl="false" auth="false"/>
-   	   </method>
-     </service>
-   </services>
- </ajax>
+	<!-- known services declaration -->
+	<services>
+
+		<service name="ExampleService">
+			<method name="count">
+				<src class="pl.waw.mizinski.umowy.ajax.ExampleService" method="count">
+				</src>
+				<policy ssl="false" auth="false" />
+			</method>
+			<method name="getPracownik">
+				<src class="pl.waw.mizinski.umowy.ajax.ExampleService" method="getPracownik">
+					<param name="imie" type="String" />
+				</src>
+				<policy ssl="false" auth="false" />
+			</method>
+		</service>
+
+		<service name="UrzadSkarbowyService">
+			<method name="dodajUrzadSkarbowy">
+				<src class="pl.waw.mizinski.umowy.ajax.UrzadSkarbowyService"
+					method="dodajUrzadSkarbowy">
+					<param name="nazwa" type="String" />
+					<param name="miejscowosc" type="String" />
+					<param name="ulica" type="String" />
+					<param name="nrDomu" type="Integer" />
+					<param name="nrMieszkania" type="Integer" />
+					<param name="kodPocztowy" type="String" />
+					<param name="poczta" type="String" />
+					<param name="kodPanstwa" type="String" />
+				</src>
+				<policy ssl="false" auth="false" />
+			</method>
+		</service>
+	</services>
+</ajax>

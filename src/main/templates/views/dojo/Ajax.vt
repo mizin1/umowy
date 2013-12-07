@@ -9,17 +9,8 @@
 	dojo.require("dijit.dijit-all");
 	dojo.require("org.objectledge.ajax.AjaxRequest");
     dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
-    dojo.require("dijit.form.FilteringSelect");
-	dojo.require("dojox.timing");
-	dojo.require("dojo.date.locale");
-	dojo.require("dojo.date.stamp");
-	dojo.require("dojo._base.fx");
-	dojo.require("dojo.parser");
-	
-	function defaultOnLoad(response, ioArgs, request) {
-		alert("witam");
-	}
-	
+   
+
 	function defaultOnFail(response) {
 		alert("Coś poszło nie tak!");
 	}
@@ -29,26 +20,44 @@
 		paramNames: [], 
 		serviceName: "ExampleService", 
 		methodName: "count",
-		onLoad: defaultOnLoad,
 		onFail: defaultOnFail
 	};
 	
 	var counter = null;
 	
-	 dojo.addOnLoad(function() {
+	dojo.addOnLoad(function() {
 		counter = new org.objectledge.ajax.AjaxRequest(counterOptions);
-		
-		dojo.parser.parse("filtering-select");
     });
 	
-	/**Calculation request function.*/
 	function countRequest() {
 		counter.sendRequest([], countResponse);
 	}
 	
-	/**Calculation responce function.*/
 	function countResponse(response) {
 		dojo.byId('counter').value = response.returnedValue;
+	}
+	
+	var getPracownikOptions = {
+		url: "$link.view('AJAX')", 
+		paramNames: ["imie"], 
+		serviceName: "ExampleService", 
+		methodName: "getPracownik",
+		onFail: defaultOnFail
+	}
+	
+	var getPracownik = null;
+	
+	dojo.addOnLoad(function() {
+		getPracownik = new org.objectledge.ajax.AjaxRequest(getPracownikOptions);
+    });
+	
+	function getPracownikRequest() {
+		var imie = dojo.byId('imie').value
+		getPracownik.sendRequest([imie], getPracownikResponse);
+	}
+	
+	function getPracownikResponse(response) {
+		dojo.byId('nazwisko').value = response.returnedValue.nazwisko;
 	}
 
 </script>
@@ -58,3 +67,8 @@
 	Licz!
 </button>
 <input type="text" id="counter" disabled/>
+<br/>
+<input type="text" id="imie"/><input type="text" id="nazwisko" disables/>
+<button dojoType="dijit.form.Button" onClick="getPracownikRequest()">
+	getPracownik!
+</button>

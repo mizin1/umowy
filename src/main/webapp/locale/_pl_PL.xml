@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+  <prefix name="Yes"><value>Tak</value></prefix>
+  <prefix name="No"><value>Nie</value></prefix>
+</strings>
