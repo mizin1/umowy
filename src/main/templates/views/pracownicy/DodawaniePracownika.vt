@@ -53,12 +53,15 @@
 		dojo.byId('urzadSkarbowy').value = dojo.byId('usNazwa').value;
 		dijit.byId('dodajUrzadSkarbowy').hide();
 	}
-	
 	function wprowadzAdresKorespondencyjny() {
 		if (dijit.byId('adresKorespondencyjny').checked) { 
-			document.getElementById('aaa').style.display = 'table-row';
+			#foreach( $tr in ['ak1', 'ak2', 'ak3', 'ak4', 'ak5', 'ak6', 'ak7'] )
+				document.getElementById('$tr').style.display = 'table-row';
+			#end
 		} else {
-			document.getElementById('aaa').style.display = 'none';
+			#foreach( $tr in ['ak1', 'ak2', 'ak3', 'ak4', 'ak5', 'ak6', 'ak7'] )
+				document.getElementById('$tr').style.display = 'none';
+			#end
 		}
 	}
 	
@@ -88,6 +91,74 @@
     			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale" trim/>
     		</td>
     	</tr>
+		<td>Nazwisko</td>
+            <td>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nazwisko" required trim/>
+    		</td>
+    	</tr>
+    	<tr >
+    		<td>Pierwsze imie</td>
+    		<td>
+    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="pierwszeImie" required trim/>
+			</td>
+    	</tr>
+		<tr>
+    		<td>Imiona pozostale</td>
+    		<td>
+    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale" trim/>
+    		</td>
+    	</tr>
+		<tr>
+			<td>Miejscowość</td>
+			<td>
+				<input name="miejscowosc" type="text" dojoType="dijit.form.ValidationTextBox" required trim/>
+			</td>
+		</tr>
+		<tr>
+			<td>Ulica</td>
+			<td>
+				<input id="ulica" name="ulica" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr>
+			<td>Numer Domu</td>
+			<td>
+				<input name="nrDomu"  type="text" dojoType="dijit.form.NumberTextBox" required trim/>
+			</td>
+		</tr>
+		<tr>
+			<td>Numer mieszkania</td>
+			<td>
+				<input name="nrMieszkania" type="text" dojoType="dijit.form.NumberTextBox"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Kod pocztowy</td>
+			<td>
+				<input name="kodPocztowy" type="text" dojoType="dijit.form.ValidationTextBox" required trim/>
+			</td>
+		</tr>
+		<tr>
+			<td>Poczta</td>
+			<td>
+				<input type="text" name="poczta" dojoType="dijit.form.ValidationTextBox" required trim/>
+			</td>
+		</tr>
+		<tr>
+    		<td>Panstwo</td>
+            <td>
+    			<select name="panstwo" dojoType="dijit.form.Select">
+					#foreach ($panstwo in $panstwa)
+						#if ($panstwo.kod == "PL")
+							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
+						#else
+							<option value="$panstwo.kod">$panstwo.nazwa</option>
+						#end
+					#end
+				</select>
+    		</td>
+    	</tr>
+		
 		<tr>
 			<th colspan="2">
 				<div align="center">
@@ -96,12 +167,59 @@
 				</div>
 			</th>
 		</tr>
-		<tr id="aaa"  style="display:none" >
-    		<td>cos fajnego</td>
-    		<td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="cosFajnego" trim/>
+
+		<tr id="ak1"  style="display:none" >
+			<td>Miejscowość</td>
+			<td>
+				<input name="akMiejscowosc" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr id="ak2"  style="display:none" >
+			<td>Ulica</td>
+			<td>
+				<input name="akUlica" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr id="ak3"  style="display:none" >
+			<td>Numer Domu</td>
+			<td>
+				<input name="akNrDomu"  type="text" dojoType="dijit.form.NumberTextBox" trim/>
+			</td>
+		</tr>
+		<tr id="ak4"  style="display:none" >
+			<td>Numer mieszkania</td>
+			<td>
+				<input name="akNrMieszkania" type="text" dojoType="dijit.form.NumberTextBox"/>
+			</td>
+		</tr>
+		<tr id="ak5"  style="display:none" >
+			<td>Kod pocztowy</td>
+			<td>
+				<input name="akKodPocztowy" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr id="ak6"  style="display:none" >
+			<td>Poczta</td>
+			<td>
+				<input name="akPoczta" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr id="ak7"  style="display:none" >
+    		<td>Panstwo</td>
+            <td>
+    			<select name="akPanstwo" dojoType="dijit.form.Select">
+					#foreach ($panstwo in $panstwa)
+						#if ($panstwo.kod == "PL")
+							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
+						#else
+							<option value="$panstwo.kod">$panstwo.nazwa</option>
+						#end
+					#end
+				</select>
     		</td>
     	</tr>
+		
+		
 		<tr>
     		<td>Plec</td>
             <td>
