@@ -15,4 +15,12 @@ public class Utils {
 			return null;
 		}
 	}
+	
+	public static String trim(String string) {
+		if (string == null || string.isEmpty()) {
+			return null;
+		} else {
+			return string.trim();
+		}
+	}
 }

@@ -71,27 +71,10 @@
 <h2 align="center">Wprowadź dane nowego pracownika</h2>
 
 <div align="center">
-    <form id="dodawaniePracownika" dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.DodawaniePracownika').action('pracownicy.DodajPracownika')">
+    <form id="dodawaniePracownika" dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.Przeglad').action('pracownicy.AddPracownik')">
         <table  width="500px" class="border">
         <tr>
     		<td>Nazwisko</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nazwisko" required trim/>
-    		</td>
-    	</tr>
-    	<tr >
-    		<td>Pierwsze imie</td>
-    		<td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="pierwszeImie" required trim/>
-			</td>
-    	</tr>
-		<tr>
-    		<td>Imiona pozostale</td>
-    		<td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale" trim/>
-    		</td>
-    	</tr>
-		<td>Nazwisko</td>
             <td>
     			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nazwisko" required trim/>
     		</td>
@@ -300,12 +283,13 @@
 		<tr>
     		<td>Status</td>
             <td>
-				<input id="status" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
+				<input id="status" name="status" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
                 		alert('mocked');
 						dojo.byId('status').value = 'student';
+						dojo.byId('status').validate(false);
                 	</script>
                 </button>
     		</td>
