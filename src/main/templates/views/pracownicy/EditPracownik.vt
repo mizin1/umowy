@@ -53,6 +53,7 @@
 		dojo.byId('urzadSkarbowy').value = dojo.byId('usNazwa').value;
 		dijit.byId('dodajUrzadSkarbowy').hide();
 	}
+	
 	function wprowadzAdresKorespondencyjny() {
 		if (dijit.byId('adresKorespondencyjny').checked) { 
 			#foreach( $tr in ['ak1', 'ak2', 'ak3', 'ak4', 'ak5', 'ak6', 'ak7'] )
@@ -65,182 +66,72 @@
 		}
 	}
 	
+	dojo.addOnLoad(wprowadzAdresKorespondencyjny);
 	
 </script>
+
+#set($pracownikGroup = $intake.PracownikIntake.Default)
 
 <h2 align="center">Wprowadź dane nowego pracownika</h2>
 
 <div align="center">
-    <form id="dodawaniePracownika" dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.Przeglad').action('pracownicy.AddPracownik')">
-        <table  width="500px" class="border">
-        <tr>
-    		<td>Nazwisko</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nazwisko" required trim/>
-    		</td>
-    	</tr>
-    	<tr >
-    		<td>Pierwsze imie</td>
-    		<td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="pierwszeImie" required trim/>
-			</td>
-    	</tr>
-		<tr>
-    		<td>Imiona pozostale</td>
-    		<td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="imionaPozostale" trim/>
-    		</td>
-    	</tr>
-		<tr>
-			<td>Miejscowość</td>
-			<td>
-				<input name="miejscowosc" type="text" dojoType="dijit.form.ValidationTextBox" required trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Ulica</td>
-			<td>
-				<input id="ulica" name="ulica" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Numer Domu</td>
-			<td>
-				<input name="nrDomu"  type="text" dojoType="dijit.form.NumberTextBox" required trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Numer mieszkania</td>
-			<td>
-				<input name="nrMieszkania" type="text" dojoType="dijit.form.NumberTextBox"/>
-			</td>
-		</tr>
-		<tr>
-			<td>Kod pocztowy</td>
-			<td>
-				<input name="kodPocztowy" type="text" dojoType="dijit.form.ValidationTextBox" required trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Poczta</td>
-			<td>
-				<input type="text" name="poczta" dojoType="dijit.form.ValidationTextBox" required trim/>
-			</td>
-		</tr>
-		<tr>
-    		<td>Panstwo</td>
-            <td>
-    			<select name="panstwo" dojoType="dijit.form.Select">
-					#foreach ($panstwo in $panstwa)
-						#if ($panstwo.kod == "PL")
-							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
-						#else
-							<option value="$panstwo.kod">$panstwo.nazwa</option>
-						#end
-					#end
-				</select>
-    		</td>
-    	</tr>
-		
+    <form  dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.PrzegladPracownikow').action('pracownicy.EditPracownik')">
+        <input type="hidden" name="$pracownikGroup.Id.Key" value="$!pracownikGroup.Id.Value">
+		<table  width="500px" class="border">
+		#tr_edit_textline($pracownikGroup.Nazwisko)
+		#tr_edit_textline($pracownikGroup.PierwszeImie)
+		#tr_edit_textline($pracownikGroup.ImionaPozostale)
+		#tr_edit_textline($pracownikGroup.Miejscowosc)
+    	#tr_edit_textline($pracownikGroup.Ulica)
+		#tr_edit_textline($pracownikGroup.NrDomu)
+		#tr_edit_textline($pracownikGroup.NrMieszkania)
+		#tr_edit_textline($pracownikGroup.KodPocztowy)
+		#tr_edit_textline($pracownikGroup.Poczta)
+		#@tr_select($pracownikGroup.Panstwo)
+			#foreach ($panstwo in $panstwa)
+				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.nazwa) 
+			#end	
+		#end
 		<tr>
 			<th colspan="2">
 				<div align="center">
-					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresKorespondencyjny" name="adresKorespondencyjny" value="true" onchange="wprowadzAdresKorespondencyjny();">
+					#set( $field = $pracownikGroup.AdresKorespondencyjny)
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresKorespondencyjny" name="$field.Key" value="$!_field" onchange="wprowadzAdresKorespondencyjny();">
 					<label for="adresKorespondencyjny">Dodaj adres korespondencyjny</label>
 				</div>
 			</th>
 		</tr>
-
-		<tr id="ak1"  style="display:none" >
-			<td>Miejscowość</td>
-			<td>
-				<input name="akMiejscowosc" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr id="ak2"  style="display:none" >
-			<td>Ulica</td>
-			<td>
-				<input name="akUlica" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr id="ak3"  style="display:none" >
-			<td>Numer Domu</td>
-			<td>
-				<input name="akNrDomu"  type="text" dojoType="dijit.form.NumberTextBox" trim/>
-			</td>
-		</tr>
-		<tr id="ak4"  style="display:none" >
-			<td>Numer mieszkania</td>
-			<td>
-				<input name="akNrMieszkania" type="text" dojoType="dijit.form.NumberTextBox"/>
-			</td>
-		</tr>
-		<tr id="ak5"  style="display:none" >
-			<td>Kod pocztowy</td>
-			<td>
-				<input name="akKodPocztowy" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr id="ak6"  style="display:none" >
-			<td>Poczta</td>
-			<td>
-				<input name="akPoczta" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr id="ak7"  style="display:none" >
-    		<td>Panstwo</td>
-            <td>
-    			<select name="akPanstwo" dojoType="dijit.form.Select">
-					#foreach ($panstwo in $panstwa)
-						#if ($panstwo.kod == "PL")
-							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
-						#else
-							<option value="$panstwo.kod">$panstwo.nazwa</option>
-						#end
-					#end
-				</select>
-    		</td>
-    	</tr>
-		
-		
+		#tr_edit_textline_with_id($pracownikGroup.AKMiejscowosc "ak1")
+    	#tr_edit_textline_with_id($pracownikGroup.AKUlica "ak2")
+		#tr_edit_textline_with_id($pracownikGroup.AKNrDomu "ak3")
+		#tr_edit_textline_with_id($pracownikGroup.AKNrMieszkania "ak4")
+		#tr_edit_textline_with_id($pracownikGroup.AKKodPocztowy "ak5")
+		#tr_edit_textline_with_id($pracownikGroup.AKPoczta "ak6")
+		#@tr_select_with_id($pracownikGroup.AKPanstwo "ak7")
+			#foreach ($panstwo in $panstwa)
+				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.nazwa) 
+			#end	
+		#end
+		#set($field = $pracownikGroup.Plec)
 		<tr>
     		<td>Plec</td>
             <td>
-    			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="plec" value="K" checked/> <label for="K">Kobieta</label> <br />
-				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="plec" value="M"/> <label for="M">Mężczyzna</label> <br />
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="$field.Key" value="K" checked/> <label for="K">Kobieta</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="$field.Key" value="M"/> <label for="M">Mężczyzna</label> <br />
     		</td>
     	</tr>
-		<tr>
-    		<td>Data urodzenia</td>
-    		<td>
-    			 <input name="dataUrodzenia" type="date" dojoType="dijit.form.DateTextBox" trim required />
-    		</td>
-    	</tr>
-		<tr>
-    		<td>Miejsce urodzenia</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="miejsceUrodzenia" required trim/>
-    		</td>
-    	</tr>
-		<tr>
-    		<td>Obywatelstwo</td>
-            <td>
-    			<select name="obywatelstwo" dojoType="dijit.form.Select">
-					#foreach ($panstwo in $panstwa)
-						#if ($panstwo.kod == "PL")
-							<option value="$panstwo.kod" selected>$panstwo.obywatelstwo</option>
-						#else
-							<option value="$panstwo.kod">$panstwo.obywatelstwo</option>
-						#end
-						
-					#end
-				</select>
-    		</td>
-    	</tr>
+		#tr_edit_date($pracownikGroup.DataUrodzenia)
+		#tr_edit_textline($pracownikGroup.MiejsceUrodzenia)
+		#@tr_select($pracownikGroup.Obywatelstwo)
+			#foreach ($panstwo in $panstwa)
+				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.obywatelstwo) 
+			#end	
+		#end
+		#set($field = $pracownikGroup.UrzadSkarbowy)
 		<tr>
     		<td>Urzad skarbowy</td>
             <td>
-    			<input id="urzadSkarbowy" type="text" name="urzadSkarbowy" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
+    			<input id="urzadSkarbowy" type="text" name="$field.Key" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
@@ -249,41 +140,23 @@
                 </button>
     		</td>
     	</tr>
-		<tr>
-    		<td>Pesel</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="pesel" />
-    		</td>
-    	</tr>
-		<tr>
-    		<td>Nip</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nip"/>
-    		</td>
-    	</tr>
-		<tr>
-    		<td>Numer dokumentu tozsamosci</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.ValidationTextBox" name="nrDokumentuTozsamosci" required="true"/>
-    		</td>
-    	</tr>
+		#tr_edit_textline($pracownikGroup.Pesel)
+		#tr_edit_textline($pracownikGroup.Nip)
+		#tr_edit_textline($pracownikGroup.NrDokumentuTozsamosci)
+		#set($field = $pracownikGroup.TypDokumentuTozsamosci)
 		<tr>
     		<td>Typ dokumentu tozsamosci</td>
-            <td>
-    			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="typDokumentuTozsamosci" value="dowod_osobisty" checked/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
-				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="typDokumentuTozsamosci" value="paszport"/> <label for="paszport">Paszport</label> <br />
+			<td>
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="$field.Key" value="dowod_osobisty" checked/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="$field.Key" value="paszport"/> <label for="paszport">Paszport</label> <br />
     		</td>
     	</tr>
-		<tr>
-    		<td>Numer konta</td>
-            <td>
-    			<input type="text" dojoType="dijit.form.TextBox" name="nrKonta"/>
-    		</td>
-    	</tr>
+		#tr_edit_textline($pracownikGroup.NrKonta)
+		#set($field = $pracownikGroup.Status)
 		<tr>
     		<td>Status</td>
             <td>
-				<input id="status" name="status" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
+				<input id="status" name="$field.Key" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
@@ -310,6 +183,7 @@
 			</th>
 		</tr>
     	</table>
+		$intake.declareGroups()	
     </form>
 </div>
 

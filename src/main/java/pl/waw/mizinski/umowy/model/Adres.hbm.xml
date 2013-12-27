@@ -7,7 +7,7 @@
 		lazy="true">
 		<id name="id" type="java.lang.Long">
 			<column name="id" sql-type="int4" />
-			<generator class="increment" />
+			<generator class="identity" />
 		</id>
 		<property name="typAdresu" column="typ_adresu">
 			<type name="org.hibernate.type.EnumType">
@@ -27,11 +27,11 @@
 		<property name="ulica" type="java.lang.String">
 			<column name="ulica" sql-type="varchar" />
 		</property>
-		<property name="nrDomu" type="java.lang.Integer">
-			<column name="nr_domu" sql-type="int4" />
+		<property name="nrDomu" type="java.lang.String">
+			<column name="nr_domu" sql-type="varchar" />
 		</property>
-		<property name="nrMieszkania" type="java.lang.Integer">
-			<column name="nr_mieszkania" sql-type="int4" />
+		<property name="nrMieszkania" type="java.lang.String">
+			<column name="nr_mieszkania" sql-type="varchar" />
 		</property>
 		<property name="kodPocztowy" type="java.lang.String">
 			<column name="kod_pocztowy" sql-type="varchar" />

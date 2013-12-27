@@ -36,7 +36,7 @@ public class UrzadSkarbowyService {
 	}
 
 	public void dodajUrzadSkarbowy(final String nazwa, final String miejscowosc, final String ulica,
-			final Integer nrDomu, final Integer nrMieszkania, final String kodPocztowy, final String poczta,
+			final String nrDomu, final String nrMieszkania, final String kodPocztowy, final String poczta,
 			final String kodPanstwa) throws ProcessingException {
 		UrzadSkarbowy urzadSkarbowy = new UrzadSkarbowy();
 		urzadSkarbowy.setNazwa(nazwa);

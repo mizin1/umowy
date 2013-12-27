@@ -14,11 +14,11 @@ import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.model.Pracownik;
 import pl.waw.mizinski.umowy.pojo.PracownikImieNazwiskoPOJO;
 
-public class Przeglad extends AbstractBuilder {
+public class PrzegladPracownikow extends AbstractBuilder {
 
 	private final PracownikDao pracownikDao;
 	
-	public Przeglad(Context context, PracownikDao pracownikDao) {
+	public PrzegladPracownikow(Context context, PracownikDao pracownikDao) {
 		super(context);
 		this.pracownikDao = pracownikDao;
 	}
@@ -27,17 +27,17 @@ public class Przeglad extends AbstractBuilder {
 	public String build(Template template, String embeddedBuildResults) throws BuildException, ProcessingException {
 		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		List<Pracownik> pracownicy = pracownikDao.getAll();
-		List<PracownikImieNazwiskoPOJO> pojos = createPOJOs(pracownicy);
-		templatingContext.put("pracownicy", pojos);
+//		List<PracownikImieNazwiskoPOJO> pojos = createPOJOs(pracownicy);
+		templatingContext.put("pracownicy", pracownicy);
 		return super.build(template, embeddedBuildResults);
 	}
 
-	private List<PracownikImieNazwiskoPOJO> createPOJOs(List<Pracownik> pracownicy) {
-		List<PracownikImieNazwiskoPOJO> ret = new LinkedList<>();
-		for(Pracownik pracownik : pracownicy) {
-			PracownikImieNazwiskoPOJO pojo = new PracownikImieNazwiskoPOJO(pracownik);
-			ret.add(pojo);
-		}
-		return ret;
-	}
+//	private List<PracownikImieNazwiskoPOJO> createPOJOs(List<Pracownik> pracownicy) {
+//		List<PracownikImieNazwiskoPOJO> ret = new LinkedList<>();
+//		for(Pracownik pracownik : pracownicy) {
+//			PracownikImieNazwiskoPOJO pojo = new PracownikImieNazwiskoPOJO(pracownik);
+//			ret.add(pojo);
+//		}
+//		return ret;
+//	}
 }

@@ -62,5 +62,12 @@
 		<property name="dobrowolneUbezpieczenieChorobowe" type="java.lang.Boolean">
 			<column name="dobrowolne_ub_chorobowe" sql-type="boolean" />
 		</property>
+
+		<bag name="adresy" table="adres" cascade="all" inverse="true" >
+         	<key>
+                <column name="pracownik" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.Adres" />
+        </bag>
 	</class>
 </hibernate-mapping>

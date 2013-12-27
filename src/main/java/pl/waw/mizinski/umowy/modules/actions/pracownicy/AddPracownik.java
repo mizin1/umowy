@@ -90,8 +90,8 @@ public class AddPracownik implements Valve {
 		adres.setPracownik(pracownik);
 		adres.setMiejscowosc(miejscowosc);
 		adres.setUlica(ulica);
-		adres.setNrDomu(nrDomu);
-		adres.setNrMieszkania(nrMieszkania);
+//		adres.setNrDomu(nrDomu);
+//		adres.setNrMieszkania(nrMieszkania);
 		adres.setKodPocztowy(kodPocztowy);
 		adres.setPoczta(poczta);
 		adres.setPanstwo(panstwo);
@@ -111,8 +111,8 @@ public class AddPracownik implements Valve {
 		adres.setPracownik(pracownik);
 		adres.setMiejscowosc(miejscowosc);
 		adres.setUlica(ulica);
-		adres.setNrDomu(nrDomu);
-		adres.setNrMieszkania(nrMieszkania);
+//		adres.setNrDomu(nrDomu);
+//		adres.setNrMieszkania(nrMieszkania);
 		adres.setKodPocztowy(kodPocztowy);
 		adres.setPoczta(poczta);
 		adres.setPanstwo(panstwo);

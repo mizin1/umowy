@@ -27,8 +27,8 @@
 					<param name="nazwa" type="String" />
 					<param name="miejscowosc" type="String" />
 					<param name="ulica" type="String" />
-					<param name="nrDomu" type="Integer" />
-					<param name="nrMieszkania" type="Integer" />
+					<param name="nrDomu" type="String" />
+					<param name="nrMieszkania" type="String" />
 					<param name="kodPocztowy" type="String" />
 					<param name="poczta" type="String" />
 					<param name="kodPanstwa" type="String" />

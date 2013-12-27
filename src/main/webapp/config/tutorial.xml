@@ -1,6 +1,0 @@
-<Context
-  docBase="/home/mizin/ledge2/ledge-tutorial-webapp/target/ledge-tutorial-webapp-SNAPSHOT.war"
-  path="/tutorial" 
-  reloadable="true" >
-  <Parameter name="ledge.root" value="/home/mizin/ledge2/ledge-tutorial-webapp/target/ledge-tutorial-webapp-SNAPSHOT"/>
-</Context>

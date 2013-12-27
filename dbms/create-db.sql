@@ -164,10 +164,10 @@ CREATE TABLE ADRES
 	typ_adresu	VARCHAR(50),
 	pracownik	INTEGER,
 	urzad_skarbowy	VARCHAR(50),
-	miejscowowsc	VARCHAR(50) NOT NULL,
+	miejscowosc	VARCHAR(50) NOT NULL,
 	ulica	VARCHAR(50),
-	nr_domu	INTEGER NOT NULL,
-	nr_mieszkania	INTEGER,
+	nr_domu	VARCHAR(6) NOT NULL,
+	nr_mieszkania	VARCHAR(6),
 	kod_pocztowy	VARCHAR(10) NOT NULL,
 	poczta	VARCHAR(50) NOT NULL,
 	panstwo	VARCHAR(2) NOT NULL,
@@ -175,7 +175,7 @@ CREATE TABLE ADRES
 	FOREIGN KEY(panstwo) REFERENCES PANSTWO(kod),
 	FOREIGN KEY(pracownik) REFERENCES PRACOWNIK(id),
 	FOREIGN KEY(urzad_skarbowy) REFERENCES URZAD_SKARBOWY(nazwa),
-	CHECK (typ_adresu in ('w_celach_pdatkowych', 'korespondencyjny', 'urzedu_skarbowego'))
+	CHECK (typ_adresu in ('w_celach_podatkowych', 'korespondencyjny', 'urzedu_skarbowego'))
 )
 ;
 

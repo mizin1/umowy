@@ -2,6 +2,7 @@ package pl.waw.mizinski.umowy.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import pl.waw.mizinski.umowy.model.enums.Plec;
 import pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci;
@@ -24,6 +25,7 @@ public class Pracownik {
 	private String nrKonta;
 	private StatusPracownika status;
 	private Boolean dobrowolneUbezpieczenieChorobowe;
+	private List<Adres> adresy;
 
 	public Long getId() {
 		return id;
@@ -153,8 +155,42 @@ public class Pracownik {
 		this.dobrowolneUbezpieczenieChorobowe = dobrowolneUbezpieczenieChorobowe;
 	}
 
+	public List<Adres> getAdresy() {
+		return adresy;
+	}
+	
+	public void setAdresy(List<Adres> adresy) {
+		this.adresy = adresy;
+	}
+	
 	@Override
 	public String toString() {
 		return nazwisko + " " + pierwszeImie;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pracownik other = (Pracownik) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
 }

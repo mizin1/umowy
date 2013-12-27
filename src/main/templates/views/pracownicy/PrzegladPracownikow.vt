@@ -1,7 +1,8 @@
 $pageTool.insertTitlePrefix(' - przeglad')##
 
-$pageTool.addStyleLink('../dojo/dojo/resources/dojo.css')##
-$pageTool.addStyleLink('../dojo/dijit/themes/soria/soria.css')##
+$pageTool.addStyleLink('../dojox/grid/resources/Grid.css')##
+$pageTool.addStyleLink('../dojox/grid/resources/soriaGrid.css')##
+
 $pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
 
 $pageTool.addScriptLink('../dojo/dojo/dojo.js')
@@ -11,14 +12,18 @@ $pageTool.addScriptLink('../dojo/dojo/dojo.js')
 
 	dojo.require("dojo.parser");
 	dojo.require("org.objectledge.widget.SorTable");
-	dojo.require("dijit.Dialog");
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dojox.grid.DataGrid");
+	
 </script>
 
-<h2 align="center">Sorted table example</h2>
-	
-
+<h2 align="center">Pracownicy</h2>
 
 $pageTool.addStyleLink('style/skins/default/table-grey.css')
+
+
+
 <table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
 	style="margin: 2em auto;"> 
     <!-- 
@@ -43,22 +48,23 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
     </script>
     <thead> 
     <tr> 
-        <th class="sortable">Last Name</th> 
-        <th class="sortable">First Name</th> 
-        <th>x</th> 
+        <th class="sortable">Nazwisko</th> 
+        <th class="sortable">Imię</th> 
+        <th></th>
     </tr> 
     </thead> 
     <tbody> 
 		#foreach ($pracownik in $pracownicy)
-			 <tr onclick="alert('mocked')"> 
+			 <tr> 
 				<td>$pracownik.nazwisko</td>
-                <td>$pracownik.imie</td>
-				<td/>
+                <td>$pracownik.pierwszeImie</td>
+                <td>
+					<a href="umowy.Welcome">Szczegóły</a>
+					<a href="$link.view('pracownicy.EditPracownik').set('id', $pracownik.id)">Edytuj</a>
+					<a href="$link.action('pracownicy.DeletePracownik').set('id', $pracownik.id)">Usuń</a>
+				</td>
 			 </tr> 
 		#end
     </tbody> 
 </table> 
 
-<div dojoType="dijit.Dialog" id="szczegoly" title="Szczegolowe Dane PRacownija">
-	sialalalallalala ssij pale ssij
-</div>

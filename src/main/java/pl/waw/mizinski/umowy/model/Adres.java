@@ -10,8 +10,8 @@ public class Adres {
 	private UrzadSkarbowy urzadSkarbowy;
 	private String miejscowosc;
 	private String ulica;
-	private Integer nrDomu;
-	private Integer nrMieszkania;
+	private String nrDomu;
+	private String nrMieszkania;
 	private String kodPocztowy;
 	private String poczta;
 	private Panstwo panstwo; 
@@ -64,19 +64,19 @@ public class Adres {
 		this.ulica = ulica;
 	}
 
-	public Integer getNrDomu() {
+	public String getNrDomu() {
 		return nrDomu;
 	}
 
-	public void setNrDomu(Integer nrDomu) {
+	public void setNrDomu(String nrDomu) {
 		this.nrDomu = nrDomu;
 	}
 
-	public Integer getNrMieszkania() {
+	public String getNrMieszkania() {
 		return nrMieszkania;
 	}
 
-	public void setNrMieszkania(Integer nrMieszkania) {
+	public void setNrMieszkania(String nrMieszkania) {
 		this.nrMieszkania = nrMieszkania;
 	}
 

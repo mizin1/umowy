@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<input-data basePackage="pl.waw.mizinski.umowy.">
+
+<!-- 
+Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,String,StringKey,boolean,char,double,float,int,long,short,byte,Enum
+ -->
+
+
+<!-- 
+<group name="AttributeValue" key="attv" 
+            mapToObject="om.AttributeValue">
+    <field name="Value" key="val" type="String">
+        <rule name="maxLength" value="255">Value length cannot be &gt; 255</rule>
+        <required-message>This module requires data for this 
+                          attribute.
+        </required-message>
+    </field>
+    <field name="Url" key="url" type="String" mapToProperty="Value">
+        <rule name="maxLength" value="255">Url length cannot be &gt; 255</rule>
+        <rule name="mask" value="^$|http.+">Please enter an url starting with "http"</rule>
+        <required-message>This module requires a valid url.</required-message>
+    </field>
+    <field name="OptionId" key="optionid" type="NumberKey">
+        <rule name="mask" value="^$|[0-9]+">Please select a valid choice</rule>
+        <required-message>This module requires that you select an option 
+                          for this attribute.
+        </required-message>
+    </field>
+</group>
+
+-->
+
+<group name="PracownikIntake" key="pracownikIntake" mapToObject="intake.PracownikIntake">
+	<field name="Id" key="id" type="long" />
+	<field name="Nazwisko" key="nazwisko" type="String" displayName="Nazwisko">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="PierwszeImie" key="pierwszeImie" type="String"
+		displayName="Pierwsze imię">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="ImionaPozostale" key="imionaPozostale" type="String"
+		displayName="Imiona pozostałe" />
+	<field name="Plec" key="plec" type="Enum" displayName="Pierwsze imię">
+		<rule name="format" value="pl.waw.mizinski.umowy.model.enums.Plec"/>
+	</field>
+	<field name="DataUrodzenia" key="dataUrodzenia" type="DateString" displayName="Data urodzenia">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="format" value="dd-MM-yyyy">Proszę podać datę w formacie dd-MM-yyyy</rule>
+	</field>
+	<field name="MiejsceUrodzenia" key="miejsceUrodznia" type="String" displayName="Miejsce urodzenia">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Obywatelstwo" key="obywatelstwo" type="String" displayName="Obywatelstwo">
+		<rule name="required" value="true"/>
+	</field>
+	<field name="UrzadSkarbowy" key="urzadSkarbowy" type="String" displayName="Urzad dkarbowy">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Pesel" key="pesel" type="BigDecimal" displayName="Pesel">
+		<rule name="mask" value="[0-9]{11}">Niepoprawby forma numeru pesel</rule>
+	</field>
+	<field name="Nip" key="nip" type="BigDecimal" displayName="nip">
+		<rule name="mask" value="[0-9]{10}">Niepoprawny forma numeru NIP</rule>
+	</field>
+	<field name="NrDokumentuTozsamosci" key="nrDokumentuTozsamosci" type="String" displayName="Numer Dokumentu toższamości">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="TypDokumentuTozsamosci" key="typDokumentuTozsamosci" type="Enum" displayName="Typ Dokumentu Tożsamości">
+		<rule name="format" value="pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci"/>
+	</field>
+	<field name="NrKonta" key="nrKonta" type="String" displayName="Numer Konta"/>
+	<field name="Status" key="status" type="String" displayName="status">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="DobrowolneUbezpieczenieChorobowe" key="dobrowolneUbezpieczenieChorobowe" type="boolean" />
+	<field name="Miejscowosc" key="miejscowosc" type="String" displayName="Miejscowość">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Ulica" key="ulica" type="String" displayName="Ulica"/>
+	<field name="NrDomu" key="nrDomu" type="String" displayName="Numer domu">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="NrMieszkania" key="nrMieszkania" type="String" displayName="Numer mieszkania"/>
+	<field name="KodPocztowy" key="kodPocztowy" type="String" displayName="Kod Pocztowy">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="mask" value="\d{2}\-\d{3}">Niepoprawny format kodu pocztowego</rule>
+	</field>
+	<field name="Poczta" key="poczta" type="String" displayName="Poczta">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Panstwo" key="panstwo" type="String" displayName="Państwo">
+		<rule name="required" value="true"/>
+	</field>
+	<field name="AdresKorespondencyjny" key="adresKorespondencyjny" type="boolean" displayName="Dodaj adres korespondencyjny" />
+	<field name="AKMiejscowosc" key="akMiejscowosc" type="String" displayName="Miejscowość" mapToProperty="akMiejscowosc" />
+	<field name="AKUlica" key="akUlica" type="String" displayName="Ulica" mapToProperty="akUlica" />
+	<field name="AKNrDomu" key="akNrDomu" type="String" displayName="Numer domu" mapToProperty="akNrDomu" />
+	<field name="AKNrMieszkania" key="akNrMieszkania" type="String" displayName="Numer mieszkania" mapToProperty="akNrMieszkania" />
+	<field name="AKKodPocztowy" key="akKodPocztowy" type="String" displayName="Kod Pocztowy" mapToProperty="akKodPocztowy" >
+		<rule name="mask" value="(^$)|(\d{2}\-\d{3})">Niepoprawny format kodu pocztowego</rule>
+	</field>
+	<field name="AKPoczta" key="akPoczta" type="String" displayName="Poczta" mapToProperty="akPoczta" />
+	<field name="AKPanstwo" key="akPanstwo" type="String" displayName="Państwo" mapToProperty="akPanstwo" />
+</group>
+
+<!-- example: -->
+<group name="Osoba" key="osoba">
+	<field name="Nazwisko" key="nazwisko" type="String" displayName="nazwisko">
+        <rule name="required" value="true">person.name.required</rule>   
+    </field>
+</group>
+<!--  
+<group name="Login" key="login">
+    <field name="Username" key="u" type="String">
+        <rule name="minLength" value="1">Please enter an email address</rule>
+        <rule name="mask" value=".+@.+\..+">Please enter a valid email address</rule>
+    </field> 
+    <field name="Password" key="p" type="String">
+        <rule name="minLength" value="1">Please enter a password</rule>
+    </field>
+	<field name="LoginService" key="loginservice" type="Enum">
+ 		<rule name="format" value="org.objectledge.Login$Service">The value should be of enum value.</rule>
+	</field>	
+</group>
+
+<group name="Person" key="person" mapToObject="or.Person">
+	<field name="PersonId" key="personid" type="long"/>
+	<field name="Name" key="name" type="String" displayName="First name">
+		<rule name="maxLength" value="50">person.name.size50_exided</rule>
+        <rule name="required" value="true">person.name.required</rule>
+		<rule name="mask" value="[^ ]+">person.name.no_space</rule>        
+		<rule name="mask" value="[^,]+">person.name.no_comma</rule>        
+    </field>
+	<field name="Surname" key="surname" type="String" displayName="Last name">
+		<rule name="maxLength" value="50">person.surname.size50_exided</rule>
+        <rule name="required" value="true">person.surname.required</rule>
+    </field>
+	<field name="Sex" key="sex" type="char">
+        <rule name="mask" value="^$|M|F">person.plec.invalid_format</rule>
+    </field>
+    <field name="Telephone" key="telephone" type="String" displayName="Telephone number">
+  		<rule name="maxLength" value="20">person.telephone.size20_exided</rule>
+		<rule name="mask" value="^$|\+{0,1}[ 0-9]{10,19}">person.telephone.invalid_format</rule>  		
+    </field>
+ 	<field name="BirthDate" key="birthdate" type="DateString" displayName="Date of Birh">
+ 		<rule name="format" value="dd.MM.yyyy">person.birth.date.invalid_format</rule>
+        <rule name="required" value="true">person.birth.date.required</rule>
+ 	</field>
+	<field name="Email" key="email" type="String" displayName="e-m@il">
+        <rule name="mask" value="^$|^[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[a-z]{2}|com|org|net|gov|biz|info|name|aero|biz|info|jobs|museum)$">person.email.invalid_format</rule>
+        <rule name="maxLength" value="50">person.email.size50_exided</rule>
+    </field>
+	<field name="Student" key="student" type="boolean" displayName="Is student?"/>
+	<field name="Priority" key="priority" type="short" displayName="Importance">
+        <rule name="maxValue" value="100">person.priority.maxvalue100_exided</rule>
+        <rule name="minValue" value="0">person.priority.minvalue0_exided</rule>
+        <rule name="invalidNumber" value="">person.priority.invalid_format</rule>
+    </field>
+</group>
+-->
+</input-data>

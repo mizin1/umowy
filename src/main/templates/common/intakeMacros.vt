@@ -1,0 +1,89 @@
+#macro (exapleMacro)
+	<h1>This is example macro</h1>
+#end
+
+#macro (label $_field)
+$_field.DisplayName
+#end
+
+#macro (td_label $_field)
+<td>#label($_field)</td>
+#end
+
+#macro (intake_message $_field)
+#if(!$_field.isValid())<div class="intake-message">$_field.Message</div>#end
+#end
+
+#macro(edit_textline $_field)
+#intake_message($_field)
+<input name="$_field.Key" value="$!_field" type="text" trim 
+dojoType="dijit.form.ValidationTextBox" />##if($_field.isRequired()) required #end>
+#end
+
+#macro (td_edit_textline $_field)
+<td>#edit_textline($_field)</td>
+#end
+
+
+#macro (tr_edit_textline $_field)
+<tr>
+	#td_label($_field)
+	#td_edit_textline($_field)
+</tr>
+#end
+
+#macro (tr_edit_textline_with_id $_field $_id)
+<tr id="$_id">
+	#td_label($_field)
+	#td_edit_textline($_field)
+</tr>
+#end
+
+
+#macro ( select $_field )
+#intake_message($_field)
+<select name="$_field.Key" dojoType="dijit.form.Select">
+	$!bodyContent			
+</select>
+#end
+
+#macro (option $_field $value $name )
+#if($value == $_field) <option value="$value" selected>$name</option>
+#else <option value="$value">$name</option>#end
+#end
+
+#macro (td_select $_field)
+<td>#select($_field)</td>
+#end
+
+#macro (tr_select $_field)
+<tr>
+#td_label($_field)
+#td_select($_field)
+</tr>
+#end
+
+#macro (tr_select_with_id $_field, $_id)
+<tr id="$_id">
+#td_label($_field)
+#td_select($_field)
+</tr>
+#end
+
+#macro(edit_date $_field)
+#intake_message($_field)
+<input name="$_field.Key" value="$!_field" type="text" trim 
+dojoType="dijit.form.DateTextBox" #if($_field.isRequired()) required #end>
+#end
+
+#macro (td_edit_date $_field)
+<td>#edit_date($_field)</td>
+#end
+
+
+#macro (tr_edit_date $_field)
+<tr>
+	#td_label($_field)
+	#td_edit_date($_field)
+</tr>
+#end

@@ -13,3 +13,7 @@ select.multi {
 	width: 300px;
 	size: 10;
 }
+
+div.intake-message {
+	color: red;
+}

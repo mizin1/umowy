@@ -42,10 +42,18 @@ public class AbstractDao<K extends Serializable, E> {
 		session().persist(entity);
 	}
 
+	public K save(E entity) {
+		return (K) session().save(entity);
+	}
+	
+	public void saveOrUpdate(E entity) {
+		session().saveOrUpdate(entity);
+	}
+	
 	public E merge(E entity) {
 		return (E) session().merge(entity);
 	}
-
+	
 	public void remove(E entity) {
 		session().delete(entity);
 	}
