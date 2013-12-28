@@ -11,7 +11,7 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 	dojo.require("dijit.dijit-all");
 </script>
 
-<h2 align="center">Pracownicy</h2>
+<h2 align="center">Umowy</h2>
 
 
 
@@ -20,8 +20,8 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 		<input type="text" name="filter" trim="true" dojoType="dijit.form.ValidationTextBox" required/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
-	<form action="$link.view('pracownicy.EditPracownik')" style=" display: inline-block;">
-        <button dojoType="dijit.form.Button" type="submit" >Dodaj nowego pracownika</button>
+	<form action="$link.view('umowy.EditUmowa')" style="display: inline-block;">
+        <button dojoType="dijit.form.Button" type="submit" >Dodaj nową umowę</button>
     </form>
 </div>
 <table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
@@ -48,20 +48,41 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
     </script>
     <thead> 
     <tr> 
-        <th class="sortable">Nazwisko</th> 
-        <th class="sortable">Imię</th> 
+        <th class="sortable">Numer umowy</th> 
+        <th class="sortable">Typ umowy</th>
+		<th class="sortable">Pracownik</th>
+		<th class="sortable">Jednostka organizacyjna</th>
+		<th class="sortable">Zadanie</th>
+		<th class="sortable">Płatność</th>
+		<th class="sortable">Wynagrodzenie</th>
+		<th class="sortable">Data zawarcia</th>
+		<th class="sortable">Data rozpoczęcia</th>
+		<th class="sortable">Data zakończenia</th>
+		<th>Wykonywana u zleceniodawcy</th>
+        <th>Rachunki</th>
         <th></th>
     </tr> 
     </thead> 
     <tbody> 
-		#foreach ($pracownik in $pracownicy)
+		#foreach ($umowa in $umowy)
 			 <tr> 
-				<td>$pracownik.nazwisko</td>
-                <td>$pracownik.pierwszeImie</td>
+				<td>$umowa.nrUmowy</td>
+				<td>$umowa.typUmowy.nazwa</td>
+				<td>$umowa.pracownik.nazwisko</td>
+				<td>Jednostka organizacyjna</td>
+				<td>$umowa.zadanie.nazwa</td>
+				<td>$umowa.platnosc.nazwa</td>
+				<td>$umowa.wynagrodzenie</td>
+				<td>$umowa.dataZawarcia</td>
+				<td>$umowa.dataRozpoczecia</td>
+				<td>$umowa.dataZakonczenia</td>
+				<td>tak</td>
                 <td>
-					<a href="$link">Szczegóły</a>
-					<a href="$link.view('pracownicy.EditPracownik').set('id', $pracownik.id)">Edytuj</a>
-					<a href="$link.action('pracownicy.DeletePracownik').set('id', $pracownik.id)">Usuń</a>
+					<a href="$link.view('umowy.Rachunki').set('nrUmowy', $umowa.nrUmowy)">Pokaż rachunki</a>
+				</td>
+                <td>
+					<a href="$link.view('umowy.EditUmowa').set('nrUmowy', $umowa.nrUmowy)">Edytuj</a>
+					<a href="$link.action('umowy.DeleteUmowa').set('nrUmowy', $umowa.nrUmowy)">Usuń</a>
 				</td>
 			 </tr> 
 		#end
