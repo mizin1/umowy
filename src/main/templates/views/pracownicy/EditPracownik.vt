@@ -120,7 +120,7 @@
 				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="$field.Key" value="M"/> <label for="M">Mężczyzna</label> <br />
     		</td>
     	</tr>
-		#tr_edit_date($pracownikGroup.DataUrodzenia)
+		#tr_edit_date($pracownikGroup.DataUrodzenia "yyyy-MM-dd")
 		#tr_edit_textline($pracownikGroup.MiejsceUrodzenia)
 		#@tr_select($pracownikGroup.Obywatelstwo)
 			#foreach ($panstwo in $panstwa)
@@ -131,7 +131,7 @@
 		<tr>
     		<td>Urzad skarbowy</td>
             <td>
-    			<input id="urzadSkarbowy" type="text" name="$field.Key" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
+    			<input id="urzadSkarbowy" type="text" name="$field.Key" value="$!field" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
 				<button dojoType="dijit.form.Button">
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
@@ -156,8 +156,8 @@
 		<tr>
     		<td>Status</td>
             <td>
-				<input id="status" name="$field.Key" type="text" dojoType="dijit.form.ValidationTextBox" readOnly required />
-				<button dojoType="dijit.form.Button">
+				<input id="status" name="$field.Key" type="text" value="$!field" dojoType="dijit.form.ValidationTextBox" readOnly required />
+				<button dojoType="dijit.form.Button"> 
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
                 		alert('mocked');
@@ -279,7 +279,7 @@
 			<th colspan="2">
 				<div align="center">
 					<button dojoType="dijit.form.Button" onclick="dodajUrzadSkarbowyRequest()">
-						Dodaj
+						Wprowadź
 					</button>
 				</div>
 			</th>

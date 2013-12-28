@@ -37,11 +37,11 @@
 			class="pl.waw.mizinski.umowy.model.UrzadSkarbowy">
 			<column name="urzad_skarbowy" />
 		</many-to-one>
-		<property name="pesel" type="java.math.BigDecimal">
-			<column name="pesel" sql-type="big_decimal" />
+		<property name="pesel" type="java.lang.String">
+			<column name="pesel" sql-type="varchar" />
 		</property>
-		<property name="nip" type="java.math.BigDecimal">
-			<column name="nip" sql-type="big_decimal" />
+		<property name="nip" type="java.lang.String">
+			<column name="nip" sql-type="varchar" />
 		</property>
 		<property name="nrDokumentuTozsamosci" type="java.lang.String">
 			<column name="nr_dok_tozsamosci" sql-type="varchar" />

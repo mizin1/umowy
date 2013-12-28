@@ -1,7 +1,3 @@
-#macro (exapleMacro)
-	<h1>This is example macro</h1>
-#end
-
 #macro (label $_field)
 $_field.DisplayName
 #end
@@ -17,7 +13,7 @@ $_field.DisplayName
 #macro(edit_textline $_field)
 #intake_message($_field)
 <input name="$_field.Key" value="$!_field" type="text" trim 
-dojoType="dijit.form.ValidationTextBox" />##if($_field.isRequired()) required #end>
+dojoType="dijit.form.TextBox" />##if($_field.isRequired()) required #end>
 #end
 
 #macro (td_edit_textline $_field)
@@ -70,20 +66,21 @@ dojoType="dijit.form.ValidationTextBox" />##if($_field.isRequired()) required #e
 </tr>
 #end
 
-#macro(edit_date $_field)
+#macro(edit_date $_field $_pattern)
 #intake_message($_field)
-<input name="$_field.Key" value="$!_field" type="text" trim 
-dojoType="dijit.form.DateTextBox" #if($_field.isRequired()) required #end>
+<input name="$_field.Key" dojoType="dijit.form.DateTextBox" #if($_pattern) constraints="{datePattern:'$_pattern'}" promptMessage="$_pattern" #end trim="true" value="$!_field" type="text" required="$_field.Required">
+##<input name="$_field.Key" value="$!_field" type="text" trim 
+##dojoType="dijit.form.DateTextBox"/> ##if($_field.isRequired()) required #end>
 #end
 
-#macro (td_edit_date $_field)
-<td>#edit_date($_field)</td>
+#macro (td_edit_date $_field $_pattern)
+<td>#edit_date($_field $_pattern)</td>
 #end
 
 
-#macro (tr_edit_date $_field)
+#macro (tr_edit_date $_field $_pattern)
 <tr>
 	#td_label($_field)
-	#td_edit_date($_field)
+	#td_edit_date($_field $_pattern)
 </tr>
 #end

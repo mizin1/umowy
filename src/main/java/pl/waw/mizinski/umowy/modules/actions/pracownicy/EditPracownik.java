@@ -5,12 +5,10 @@ import org.hibernate.Transaction;
 import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.intake.IntakeContext;
-import org.objectledge.intake.IntakeException;
 import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
-import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
@@ -63,9 +61,4 @@ public class EditPracownik implements Valve {
 			MVCContext.getMVCContext(context).setView("pracownicy.EditPracownik");
 		}
 	}
-
-//	private boolean isNew(Group pracownikGroup) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 }

@@ -29,5 +29,6 @@
 	</paths>
 	<properties>
 		<property name="velocimacro.library" value="templates/common/intakeMacros.vt" />
+		<property name="velocimacro.library" value="templates/common/macros.vt" />
 	</properties>
 </config>

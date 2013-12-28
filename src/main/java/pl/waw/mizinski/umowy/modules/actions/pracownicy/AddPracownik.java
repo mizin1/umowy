@@ -148,8 +148,8 @@ public class AddPracownik implements Valve {
 		pracownik.setMiejsceUrodzenia(miejsceUrodzenia);
 		pracownik.setObywatelstwo(obywatelstwo);
 		pracownik.setUrzadSkarbowy(urzadSkarbowy);
-		pracownik.setPesel(pesel);
-		pracownik.setNip(nip);
+//		pracownik.setPesel(pesel);
+//		pracownik.setNip(nip);
 		pracownik.setNrDokumentuTozsamosci(nrDokumentuTozsamosci);
 		pracownik.setTypDokumentuTozsamosci(typDokumentuTozsamosci);
 		pracownik.setNrKonta(nrKonta);

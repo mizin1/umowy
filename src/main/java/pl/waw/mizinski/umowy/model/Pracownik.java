@@ -1,6 +1,5 @@
 package pl.waw.mizinski.umowy.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class Pracownik {
 	private String miejsceUrodzenia;
 	private Panstwo obywatelstwo;
 	private UrzadSkarbowy urzadSkarbowy;
-	private BigDecimal pesel;
-	private BigDecimal nip;
+	private String pesel;
+	private String nip;
 	private String nrDokumentuTozsamosci;
 	private TypDokumentuTozsamosci typDokumentuTozsamosci;
 	private String nrKonta;
@@ -99,19 +98,19 @@ public class Pracownik {
 		this.urzadSkarbowy = urzadSkarbowy;
 	}
 
-	public BigDecimal getPesel() {
+	public String getPesel() {
 		return pesel;
 	}
 
-	public void setPesel(BigDecimal pesel) {
+	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}
 
-	public BigDecimal getNip() {
+	public String getNip() {
 		return nip;
 	}
 
-	public void setNip(BigDecimal nip) {
+	public void setNip(String nip) {
 		this.nip = nip;
 	}
 

@@ -1,9 +1,7 @@
 package pl.waw.mizinski.umowy.intake;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-import pl.waw.mizinski.umowy.model.Panstwo;
 import pl.waw.mizinski.umowy.model.enums.Plec;
 import pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci;
 
@@ -19,8 +17,8 @@ public class PracownikIntake {
 	private String miejsceUrodzenia;
 	private String obywatelstwo;
 	private String urzadSkarbowy;
-	private BigDecimal pesel;
-	private BigDecimal nip;
+	private String pesel;
+	private String nip;
 	private String nrDokumentuTozsamosci;
 	private TypDokumentuTozsamosci typDokumentuTozsamosci;
 	private String nrKonta;
@@ -119,19 +117,19 @@ public class PracownikIntake {
 		this.urzadSkarbowy = urzadSkarbowy;
 	}
 
-	public BigDecimal getPesel() {
+	public String getPesel() {
 		return pesel;
 	}
 
-	public void setPesel(BigDecimal pesel) {
+	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}
 
-	public BigDecimal getNip() {
+	public String getNip() {
 		return nip;
 	}
 
-	public void setNip(BigDecimal nip) {
+	public void setNip(String nip) {
 		this.nip = nip;
 	}
 
