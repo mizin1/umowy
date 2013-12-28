@@ -35,7 +35,6 @@ public class EditPracownik implements Valve {
 
 		final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		final IntakeTool intake = IntakeContext.getIntakeContext(context).getIntakeTool();
-//		final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		Transaction transaction = null;
 
 		if (intake.isAllValid()) {
@@ -46,8 +45,13 @@ public class EditPracownik implements Valve {
 				Pracownik pracownik = pracownikAssembler.asPracownikEntity(pracownikIntake);
 
 				transaction = session.beginTransaction();
-				adresDao.remove(adresDao.getAdresByPracownik(pracownik));
+				if (pracownik.getId() !=null) {
+					//TODO rozwiąż to jakoś
+					//remove prevoiusly addresses
+					adresDao.remove(adresDao.getAdresByPracownik(pracownik));
+				}
 				pracownikDao.saveOrUpdate(pracownik);
+				intake.removeAll();
 				transaction.commit();
 
 			} catch (final Exception e) {

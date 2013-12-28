@@ -15,11 +15,9 @@ import pl.waw.mizinski.umowy.model.Pracownik;
 public class DeletePracownik implements Valve {
 
 	private final PracownikDao pracownikDao;
-	private final AdresDao adresDao;
 
 	public DeletePracownik(final PracownikDao pracownikDao, final AdresDao adresDao) {
 		this.pracownikDao = pracownikDao;
-		this.adresDao = adresDao;
 	}
 
 	@Override
@@ -31,7 +29,6 @@ public class DeletePracownik implements Valve {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			adresDao.remove(adresDao.getAdresByPracownik(pracownik));
 			pracownikDao.remove(pracownik);
 			transaction.commit();
 		} catch (Exception e) {

@@ -1,7 +1,7 @@
 $pageTool.insertTitlePrefix(' - przeglad')##
 
-$pageTool.addStyleLink('../dojox/grid/resources/Grid.css')##
-$pageTool.addStyleLink('../dojox/grid/resources/soriaGrid.css')##
+##$pageTool.addStyleLink('../dojox/grid/resources/Grid.css')##
+##$pageTool.addStyleLink('../dojox/grid/resources/soriaGrid.css')##
 
 $pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
 
@@ -14,16 +14,21 @@ $pageTool.addScriptLink('../dojo/dojo/dojo.js')
 	dojo.require("org.objectledge.widget.SorTable");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
-	dojo.require("dojox.grid.DataGrid");
-	
 </script>
 
 <h2 align="center">Pracownicy</h2>
 
 $pageTool.addStyleLink('style/skins/default/table-grey.css')
 
-
-
+<div align="center" >
+	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.ValidationTextBox" required/>
+		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
+	</form>
+	<form action="$link.view('pracownicy.EditPracownik')" style=" display: inline-block;">
+        <button dojoType="dijit.form.Button" type="submit" >Dodaj nowego pracownika</button>
+    </form>
+</div>
 <table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
 	style="margin: 2em auto;"> 
     <!-- 
@@ -59,7 +64,7 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 				<td>$pracownik.nazwisko</td>
                 <td>$pracownik.pierwszeImie</td>
                 <td>
-					<a href="umowy.Welcome">Szczegóły</a>
+					<a href="$link">Szczegóły</a>
 					<a href="$link.view('pracownicy.EditPracownik').set('id', $pracownik.id)">Edytuj</a>
 					<a href="$link.action('pracownicy.DeletePracownik').set('id', $pracownik.id)">Usuń</a>
 				</td>

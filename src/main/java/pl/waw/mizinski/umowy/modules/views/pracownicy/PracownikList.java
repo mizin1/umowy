@@ -1,6 +1,5 @@
 package pl.waw.mizinski.umowy.modules.views.pracownicy;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.objectledge.context.Context;
@@ -12,13 +11,12 @@ import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.model.Pracownik;
-import pl.waw.mizinski.umowy.pojo.PracownikImieNazwiskoPOJO;
 
-public class PrzegladPracownikow extends AbstractBuilder {
+public class PracownikList extends AbstractBuilder {
 
 	private final PracownikDao pracownikDao;
 	
-	public PrzegladPracownikow(Context context, PracownikDao pracownikDao) {
+	public PracownikList(Context context, PracownikDao pracownikDao) {
 		super(context);
 		this.pracownikDao = pracownikDao;
 	}

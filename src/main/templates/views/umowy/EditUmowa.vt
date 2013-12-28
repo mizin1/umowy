@@ -1,0 +1,74 @@
+<script type="text/javascript">
+##	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
+	
+	dojo.require("dojo.parser");
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.DateTextBox");
+	dojo.require("dijit.form.Form");
+	dojo.require("dijit.form.Button");
+	dojo.require("dijit.form.Select");
+	dojo.require("dijit.form.MultiSelect");
+	dojo.require("dijit.form.TextBox");
+	dojo.require("dijit.form.RadioButton");
+	dojo.require("dijit.form.CheckBox");
+	dojo.require("dijit.form.ValidationTextBox");
+
+##	dojo.require("org.objectledge.ajax.AjaxRequest");
+##   dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
+	
+</script>
+
+#set($umowaGroup = $intake.UmowaIntake.Default)
+<h2 align="center">Wprowadź dane umowy</h2>
+	
+<div align="center">
+    <form  dojoType="dijit.form.Form" method="post" action="$link.action('umowy.EditUmowa')">
+        <input type="hidden" name="$umowaGroup.NrUmowy.Key" value="$!umowaGroup.NrUmowy.Value">
+		<table  width="500px" class="border">
+		#@tr_select($umowaGroup.TypUmowy)
+			#foreach ($typ in $typyUmowy)
+				#option($umowaGroup.TypUmowy $typ.nazwa $typ.nazwa) 
+			#end	
+		#end
+		#@tr_select($umowaGroup.Pracownik)
+			#foreach ($pracownik in $pracownicy)
+				#set ($pracownikName =  "${pracownik.nazwisko} $pracownik.pierwszeImie")
+				#option($umowaGroup.Pracownik $pracownik.id $pracownikName) 
+			#end	
+		#end
+		##TODO potem mozesz to przerobic zeby najpieew wrybierac jednostke potem typ zadania a na koncu dopiero zadania
+		#@tr_select($umowaGroup.Zadanie)
+			#foreach ($zadanie in $zadania)
+				#option($umowaGroup.Zadanie $zadanie.id $zadanie.nazwa) 
+			#end	
+		#end
+		#@tr_select($umowaGroup.Platnosc)
+			#foreach ($ptatnosc in $platnosci)
+				#option($umowaGroup.Platnosc $ptatnosc.nazwa $ptatnosc.nazwa) 
+			#end	
+		#end
+		#tr_edit_date($umowaGroup.DataZawarcia "yyyy-MM-dd")
+		#tr_edit_date($umowaGroup.DataRozpoczecia "yyyy-MM-dd")
+		#tr_edit_date($umowaGroup.DataZakonczenia "yyyy-MM-dd")
+		#tr_edit_textline($umowaGroup.Wynagrodzenie)
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					#set( $field = $umowaGroup.WykonywanaUZleceniodawcy)
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="wykonywanaUZleceniodawcy" name="$field.Key" value="true" #if($field == true) checked #end/>
+					<label for="wykonywanaUZleceniodawcy">Wykonywania u zlecenidawcy</label>
+				</div>
+			</th>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Wprowadź</button>
+				</div>
+			</th>
+		</tr>
+    	</table>
+		$intake.declareGroups()	
+    </form>
+</div>

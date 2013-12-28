@@ -72,10 +72,10 @@
 
 #set($pracownikGroup = $intake.PracownikIntake.Default)
 
-<h2 align="center">Wprowadź dane nowego pracownika</h2>
+<h2 align="center">Wprowadź dane pracownika</h2>
 
 <div align="center">
-    <form  dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.PrzegladPracownikow').action('pracownicy.EditPracownik')">
+    <form  dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.PracownikList').action('pracownicy.EditPracownik')">
         <input type="hidden" name="$pracownikGroup.Id.Key" value="$!pracownikGroup.Id.Value">
 		<table  width="500px" class="border">
 		#tr_edit_textline($pracownikGroup.Nazwisko)
@@ -96,7 +96,7 @@
 			<th colspan="2">
 				<div align="center">
 					#set( $field = $pracownikGroup.AdresKorespondencyjny)
-					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresKorespondencyjny" name="$field.Key" value="$!_field" onchange="wprowadzAdresKorespondencyjny();">
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresKorespondencyjny" name="$field.Key" value="true" onchange="wprowadzAdresKorespondencyjny();" #if($field == true) checked #end>
 					<label for="adresKorespondencyjny">Dodaj adres korespondencyjny</label>
 				</div>
 			</th>
@@ -116,8 +116,8 @@
 		<tr>
     		<td>Plec</td>
             <td>
-    			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="$field.Key" value="K" checked/> <label for="K">Kobieta</label> <br />
-				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="$field.Key" value="M"/> <label for="M">Mężczyzna</label> <br />
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="$field.Key" value="K" #if($field == 'K') checked #end/> <label for="K">Kobieta</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="$field.Key" value="M" #if($field == 'M') checked #end/> <label for="M">Mężczyzna</label> <br />
     		</td>
     	</tr>
 		#tr_edit_date($pracownikGroup.DataUrodzenia "yyyy-MM-dd")
@@ -147,8 +147,8 @@
 		<tr>
     		<td>Typ dokumentu tozsamosci</td>
 			<td>
-    			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="$field.Key" value="dowod_osobisty" checked/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
-				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="$field.Key" value="paszport"/> <label for="paszport">Paszport</label> <br />
+    			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="$field.Key" value="dowod_osobisty" #if($field == 'dowod_osobisty') checked #end/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
+				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="$field.Key" value="paszport" #if($field == 'paszport') checked #end/> <label for="paszport">Paszport</label> <br />
     		</td>
     	</tr>
 		#tr_edit_textline($pracownikGroup.NrKonta)
@@ -169,7 +169,8 @@
 		<tr>
 			<th colspan="2">
 				<div align="center">
-					<input type="checkbox" dojoType="dijit.form.CheckBox" name="dobrowolneUbezpieczenieChorobowe" value="true" />
+					#set( $field = $pracownikGroup.DobrowolneUbezpieczenieChorobowe)
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="dobrowolneUbezpieczenieChorobowe" name="$field.Key" value="true" #if($field == true) checked #end/>
 					<label for="dobrowolneUbezpieczenieChorobowe">Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</label>
 				</div>
 			</th>
@@ -178,7 +179,7 @@
 		<tr>
 			<th colspan="2">
 				<div align="center">
-					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Dodaj</button>
+					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Wprowadź</button>
 				</div>
 			</th>
 		</tr>
@@ -279,7 +280,7 @@
 			<th colspan="2">
 				<div align="center">
 					<button dojoType="dijit.form.Button" onclick="dodajUrzadSkarbowyRequest()">
-						Wprowadź
+						Dodaj
 					</button>
 				</div>
 			</th>

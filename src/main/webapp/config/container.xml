@@ -18,6 +18,14 @@
 		<parameter />
 		<parameter />
 	</component>
+	
+	<component class="pl.waw.mizinski.umowy.assembler.UmowaAssembler">
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+		<parameter />
+	</component>
 
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
