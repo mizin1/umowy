@@ -9,6 +9,14 @@ public class TypZadaniaPK implements Serializable {
 	private String nazwa;
 	private JednostkaOrganizacyjna jednostkaOrganizacyjna;
 	
+	public TypZadaniaPK() {
+	}
+	
+	public TypZadaniaPK(String nazwa, JednostkaOrganizacyjna jednostkaOrganizacyjna) {
+		this.nazwa = nazwa;
+		this.jednostkaOrganizacyjna = jednostkaOrganizacyjna;
+	}
+	
 	public String getNazwa() {
 		return nazwa;
 	}
@@ -24,4 +32,6 @@ public class TypZadaniaPK implements Serializable {
 	public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
 		this.jednostkaOrganizacyjna = jednostkaOrganizacyjna;
 	}
+
+	
 }

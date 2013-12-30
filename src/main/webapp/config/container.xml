@@ -2,6 +2,7 @@
 <container>
 
 	<component class="pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao" />
+	<component class="pl.waw.mizinski.umowy.dao.TypZadaniaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.ZadanieDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PanstwoDao" />
 	<component class="pl.waw.mizinski.umowy.dao.StatusPracownikaDao" />
@@ -24,6 +25,10 @@
 		<parameter />
 		<parameter />
 		<parameter />
+		<parameter />
+	</component>
+	
+	<component class="pl.waw.mizinski.umowy.assembler.ZadanieAssembler">
 		<parameter />
 	</component>
 

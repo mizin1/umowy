@@ -133,11 +133,11 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="format" value="yyyy-MM-dd">Proszę podać datę w formacie dd-MM-yyyy</rule>
 	</field>
 	<field name="Platnosc" key="platnosc" type="String" displayName="Płatność">
-		<rule name="required" value="true">To pole jest wymagane</rule>
-		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
+		<rule name="required" value="true">To pole jest wymagane</rule>	
 	</field>
 	<field name="Wynagrodzenie" key="wynagrodzenie" type="BigDecimal" displayName="Wynagrodznie" formatterStyle="money">
 		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>
 	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
 </group>
@@ -150,9 +150,23 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="TypZadania" key="typZadania" type="String" displayName="Typ Zadania">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
-	<field name="TypZadania" key="typZadania" type="String" displayName="Typ Zadania">
+	<field name="JednostkaOrganizacyjna" key="jednostkaOrganizacyjna" type="String" displayName="Jednostka organizacyjna">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
+	<field name="Opis" key="opis" type="String" />
+	<field name="Budzet" key="budzet" type="BigDecimal" displayName="Bidżet" formatterStyle="money">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
+	</field>
+	<field name="DataRozpoczecia" key="dataRozpoczecia" type="DateString" displayName="Data rozpoczęcia">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="format" value="yyyy-MM-dd">Proszę podać datę w formacie dd-MM-yyyy</rule>
+	</field>
+	<field name="DataZakonczenia" key="dataZakonczenia" type="DateString" displayName="Data zakończenia">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="format" value="yyyy-MM-dd">Proszę podać datę w formacie dd-MM-yyyy</rule>
+	</field>
+	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
 </group>
 
 

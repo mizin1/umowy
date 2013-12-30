@@ -3,8 +3,6 @@ package pl.waw.mizinski.umowy.assembler;
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.opensagres.xdocreport.document.ProcessState;
-
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
