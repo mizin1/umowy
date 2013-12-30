@@ -13,11 +13,9 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 
 <h2 align="center">Umowy</h2>
 
-
-
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.ValidationTextBox" required/>
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	<form action="$link.view('umowy.EditUmowa')" style="display: inline-block;">
@@ -68,15 +66,15 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 			 <tr> 
 				<td>$umowa.nrUmowy</td>
 				<td>$umowa.typUmowy.nazwa</td>
-				<td>$umowa.pracownik.nazwisko</td>
-				<td>Jednostka organizacyjna</td>
+				<td>$umowa.pracownik.nazwisko $umowa.pracownik.pierwszeImie $!umowa.pracownik.imionaPozostale</td>
+				<td>$umowa.getJednostkaOrganizacyjna()</td>
 				<td>$umowa.zadanie.nazwa</td>
 				<td>$umowa.platnosc.nazwa</td>
 				<td>$umowa.wynagrodzenie</td>
 				<td>$umowa.dataZawarcia</td>
 				<td>$umowa.dataRozpoczecia</td>
 				<td>$umowa.dataZakonczenia</td>
-				<td>tak</td>
+				<td>#if($umowa.wykonywanaUZleceniodawcy) tak #else nie #end</td>
                 <td>
 					<a href="$link.view('umowy.Rachunki').set('nrUmowy', $umowa.nrUmowy)">Pokaż rachunki</a>
 				</td>

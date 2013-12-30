@@ -96,6 +96,10 @@ public class Umowa {
 		this.wykonywanaUZleceniodawcy = wykonywanaUZleceniodawcy;
 	}
 	
+	public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
+		return zadanie.getJednostaOrganizacyjna();
+	}
+	
 	@Override
 	public String toString() {
 		return "umowa nr " + nrUmowy;

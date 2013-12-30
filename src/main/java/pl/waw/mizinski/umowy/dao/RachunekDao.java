@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.objectledge.context.Context;
+import org.objectledge.hibernate.HibernateUtils;
 
 import pl.waw.mizinski.umowy.model.Rachunek;
 import pl.waw.mizinski.umowy.model.RachunekPK;
@@ -17,6 +18,7 @@ public class RachunekDao extends AbstractDao<RachunekPK, Rachunek> {
 
 	public List<Rachunek> findByUmowa(Umowa umowa) {
 		Query query = session().createQuery("from Rachunek r where r.rachunekPK.umowa=?");
-		return query.setParameter(0, umowa).list();
+		query.setParameter(0, umowa);
+		return HibernateUtils.queryResult(session(), query);
 	}
 }

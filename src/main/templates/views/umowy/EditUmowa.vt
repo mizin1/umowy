@@ -23,7 +23,7 @@
 <h2 align="center">Wprowadź dane umowy</h2>
 	
 <div align="center">
-    <form  dojoType="dijit.form.Form" method="post" action="$link.action('umowy.EditUmowa')">
+    <form  dojoType="dijit.form.Form" method="post" action="$link.view('umowy.UmowaList').action('umowy.EditUmowa')">
         <input type="hidden" name="$umowaGroup.NrUmowy.Key" value="$!umowaGroup.NrUmowy.Value">
 		<table  width="500px" class="border">
 		#@tr_select($umowaGroup.TypUmowy)

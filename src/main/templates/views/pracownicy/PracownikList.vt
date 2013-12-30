@@ -17,7 +17,7 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.ValidationTextBox" required/>
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	<form action="$link.view('pracownicy.EditPracownik')" style=" display: inline-block;">

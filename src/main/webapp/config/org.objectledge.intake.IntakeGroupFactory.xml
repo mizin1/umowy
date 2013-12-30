@@ -142,6 +142,20 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
 </group>
 
+<group name="ZadanieIntake" key="zadanieIntake" mapToObject="intake.ZadanieIntake">
+	<field name="Id" key="id" type="long" />
+	<field name="Nazwa" key="nazwa" type="String" displayName="Nazwa">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="TypZadania" key="typZadania" type="String" displayName="Typ Zadania">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="TypZadania" key="typZadania" type="String" displayName="Typ Zadania">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+</group>
+
+
 <!-- example: -->
 <group name="Osoba" key="osoba">
 	<field name="Nazwisko" key="nazwisko" type="String" displayName="nazwisko">
