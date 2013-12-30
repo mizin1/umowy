@@ -154,7 +154,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
 	<field name="Opis" key="opis" type="String" />
-	<field name="Budzet" key="budzet" type="BigDecimal" displayName="Bidżet" formatterStyle="money">
+	<field name="Budzet" key="budzet" type="BigDecimal" displayName="Budżet" formatterStyle="money">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>
@@ -166,7 +166,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="format" value="yyyy-MM-dd">Proszę podać datę w formacie dd-MM-yyyy</rule>
 	</field>
-	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
+	<field name="Rozliczone" key="rozlicznone" type="boolean" displayName="Oznacz zadanie jako rozliczone"/>
 </group>
 
 

@@ -38,8 +38,8 @@ public class Zadanie {
 		this.typZadania = typZadania;
 	}
 
-	public JednostkaOrganizacyjna getJednostaOrganizacyjna() {
-		return typZadania.getJednostaOrganizacyjna();
+	public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
+		return typZadania.getJednostkaOrganizacyjna();
 	}
 
 	public String getOpis() {
@@ -73,15 +73,15 @@ public class Zadanie {
 	public void setDataZakonczenia(Date dataZakonczenia) {
 		this.dataZakonczenia = dataZakonczenia;
 	}
-
-	public boolean isRozliczone() {
+	
+	public Boolean getRozliczone() {
 		return rozliczone;
 	}
 
-	public void setRozliczone(boolean rozliczone) {
+	public void setRozliczone(Boolean rozliczone) {
 		this.rozliczone = rozliczone;
 	}
-	
+
 	@Override
 	public String toString() {
 		return nazwa + " typu " + typZadania;

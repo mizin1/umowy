@@ -22,16 +22,16 @@ public class TypZadania {
 		typZadaniaPK.setNazwa(nazwa);
 	}
 
-	public JednostkaOrganizacyjna getJednostaOrganizacyjna() {
+	public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
 		return typZadaniaPK.getJednostkaOrganizacyjna();
 	}
 
-	public void setJednostaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
+	public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
 		typZadaniaPK.setJednostkaOrganizacyjna(jednostkaOrganizacyjna);
 	}
 	
 	@Override
 	public String toString() {
-		return getNazwa() + " dla " + getJednostaOrganizacyjna();
+		return getNazwa() + " dla " + getJednostkaOrganizacyjna();
 	}
 }

@@ -97,7 +97,7 @@ public class Umowa {
 	}
 	
 	public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
-		return zadanie.getJednostaOrganizacyjna();
+		return zadanie.getJednostkaOrganizacyjna();
 	}
 	
 	@Override

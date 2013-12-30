@@ -18,7 +18,8 @@ public class ZadanieAssembler {
 		zadanieIntake.setId(zadanie.getId());
 		zadanieIntake.setNazwa(zadanie.getNazwa());
 		zadanieIntake.setTypZadania(zadanie.getTypZadania().getNazwa());
-		zadanieIntake.setJednostkaOrganizacyjna(zadanie.getJednostaOrganizacyjna().getNazwa());
+		zadanieIntake.setJednostkaOrganizacyjna(zadanie.getJednostkaOrganizacyjna().getNazwa());
+		zadanieIntake.setOpis(zadanie.getOpis());
 		zadanieIntake.setBudzet(zadanie.getBudzet());
 		zadanieIntake.setDataRozpoczecia(zadanie.getDataRozpoczecia());
 		zadanieIntake.setDataZakonczenia(zadanie.getDataZakonczenia());
@@ -32,6 +33,7 @@ public class ZadanieAssembler {
 		TypZadania typZadania = typZadaniaDao.getTypZadania(zadanieIntake.getTypZadania(),
 				zadanieIntake.getJednostkaOrganizacyjna());
 		zadanie.setTypZadania(typZadania);
+		zadanie.setOpis(zadanieIntake.getOpis());
 		zadanie.setBudzet(zadanieIntake.getBudzet());
 		zadanie.setDataRozpoczecia(zadanieIntake.getDataRozpoczecia());
 		zadanie.setDataZakonczenia(zadanieIntake.getDataZakonczenia());

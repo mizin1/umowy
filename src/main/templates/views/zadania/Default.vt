@@ -1,0 +1,3 @@
+$pageTool.insertTitlePrefix(' - zadania')
+$viewEnclosureTool.override('MenuPage')
+$!embeddedPlaceholder

@@ -5,7 +5,7 @@
 
 	<class name="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna"
 		table="jednostka_organizacyjna" lazy="true">
-		<id name="Nazwa" type="java.lang.String">
+		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
 		<many-to-one name="typJednostki"

@@ -84,3 +84,21 @@ dojoType="dijit.form.TextBox" />##if($_field.isRequired()) required #end>
 	#td_edit_date($_field $_pattern)
 </tr>
 #end
+
+#macro(edit_textarea $_field)
+#intake_message($_field)
+<input name="$_field.Key" value="$!_field" type="text" trim 
+dojoType="dijit.form.Textarea" />##if($_field.isRequired()) required #end>
+#end
+
+#macro (td_edit_textarea $_field)
+<td>#edit_textarea($_field)</td>
+#end
+
+
+#macro (tr_edit_textarea $_field)
+<tr>
+	#td_label($_field)
+	#td_edit_textarea($_field)
+</tr>
+#end
