@@ -1,9 +1,7 @@
 
 ## menu creation
 <div id="secure-menu"></div>
-## TODO jak dopracujesz kontekst security zrob menu
-##$component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
+$component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
 
-<h2>flaszka na sniadanie dzisiaj bedzie</h2>	##mokc Menu
 $!embeddedPlaceholder
 

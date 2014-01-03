@@ -22,10 +22,10 @@
 		<property name="budzet" type="java.math.BigDecimal">
 			<column name="budzet" sql-type="big_decimal" precision="10" scale="2"/>
 		</property>
-		<property name="dataRozpoczecia" type="java.util.Date">
+		<property name="dataRozpoczecia" type="java.sql.Date">
 			<column name="data_rozpoczecia" sql-type="date"/>
 		</property>
-		<property name="dataZakonczenia" type="java.util.Date">
+		<property name="dataZakonczenia" type="java.sql.Date">
 			<column name="data_zakonczenia" sql-type="date"/>
 		</property>
 		<property name="rozliczone" type="java.lang.Boolean">

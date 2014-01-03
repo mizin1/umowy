@@ -7,36 +7,17 @@
 
 <config>
 	<menuSet name="default">	
-		<menu label="Features">
-		  <menuItem label="Reload" view="demo.Reload"/>
-		  <menuItem label="Hibernate Demo" view="demo.HibernateDemo"/>
-		  <menuItem label="Intake Demo" view="demo.IntakeDemo"/>
-		  <menuItem label="Locale &amp; encoding" view="demo.LocaleEncoding"/>
-		  <menuItem label="ParametersTool Demo" view="demo.ParametersToolDemo">    
-		    <parameter name="my-param">my-param-value</parameter>
-		  </menuItem>
-          <menu label="Security System">
-            <menuItem label="Intro" view="demo.security.SecurityIntro"/>   
-            <menuItem label="Link Control" view="demo.security.SecurityLinkControl"/>   
-            <menuItem label="Ajax Control" view="demo.security.SecurityAjaxControl"/>  
-            <menuItem label="Menu Control" view="demo.security.SecurePopupControl"/>  
-            <menuItem label="Security Policy" view="demo.security.SecurityPolicyOnly"/>   
-            <menuItem label="Security Annotation" view="demo.security.SecurityAnnotation"/>   
-            <menuItem label="Security Details" view="demo.security.SecurityDetails"/>   
-            <menuItem label="Security Universal" view="demo.security.SecurityUniversal"/>   
-		  </menu>
-		  <menuItem label="JVM Memory Monitor" view="demo.JVMMemoryMonitor"/>
-		  <menu label="Dojo Toolkit">
-		      <menuItem label="Simple Example" view="demo.DOJOsimple"/>
-		      <menuItem label="Extended Example" view="demo.DOJO"/>
-		      <menuItem label="Sorted Table" view="demo.DOJOsortedTable"/>
-		  </menu>
-		  <menuItem label="AJAX" view="demo.AJAX"/>
-		  <menuItem label="Pdf" view="demo.Pdf"/>
-		  <menuItem label="GuiVisibleException" view="demo.ThrowGUIVisibleException"/>
-		  <menuItem label="EnumTool" view="demo.EnumToolDemo"/>
+		<menu label="Pracownicy">
+		  <menuItem label="Przegląd" view="pracownicy.PracownikList"/>
+		  <menuItem label="Dodaj" view="pracownicy.EditPracownik"/>
+		</menu>
+		<menu label="Umowy">
+		  <menuItem label="Przegląd" view="umowy.UmowaList"/>
+		  <menuItem label="Dodaj" view="umowy.EditUmowa"/>
+		</menu>
+		<menu label="Zadania">
+		  <menuItem label="Przegląd" view="zadania.ZadanieList"/>
+		  <menuItem label="Dodaj" view="zadania.EditZadanie"/>
 		</menu>
 	</menuSet> 
-	 
-
 </config>
