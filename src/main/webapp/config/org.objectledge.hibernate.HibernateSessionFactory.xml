@@ -1,47 +1,60 @@
 <?xml version='1.0' encoding='utf-8'?>
 <hibernate-configuration>
-    <session-factory>
-        <!-- Database connection settings -->
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost/inz</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">postgres</property>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.url">jdbc:postgresql://localhost/inz</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">postgres</property>
 
 		<property name="jena.db">PostgreSQL</property>
 
-        <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
 
-        <!-- Hibernate autocommit -->
-        <property name="connection.autocommit">false</property>
+		<!-- Hibernate autocommit -->
+		<property name="connection.autocommit">false</property>
 
-        <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-        <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">false</property>
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">false</property>
 
-        <!-- Create the database schema on startup (if needed) -->
-        <!--  <property name="hbm2ddl.auto">update</property>
-         <property name="hbm2ddl.auto">create</property> -->
-           <property name="hbm2ddl.auto">validate</property>
+		<!-- Create the database schema on startup (if needed) -->
+		<!-- <property name="hbm2ddl.auto">update</property> <property name="hbm2ddl.auto">create</property> -->
+		<property name="hbm2ddl.auto">validate</property>
 
-		<!-- Example mapping  -->
-		<mapping class="pl.waw.mizinski.umowy.model.TypJednostki"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Reprezentant"/>
-		<mapping class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna"/>
-		<mapping class="pl.waw.mizinski.umowy.model.TypZadania"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Zadanie"/>
-		<mapping class="pl.waw.mizinski.umowy.model.UrzadSkarbowy"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Panstwo"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Skladka"/>
-		<mapping class="pl.waw.mizinski.umowy.model.StatusPracownika"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Pracownik"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Adres"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Platnosc"/>
-		<mapping class="pl.waw.mizinski.umowy.model.TypUmowy"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Umowa"/>
-		<mapping class="pl.waw.mizinski.umowy.model.Rachunek"/>
+		<!-- Hibernate Security Service -->
+		<mapping
+			class="org.objectledge.security.object.hibernate.HibernatePermission"
+			resource="org/objectledge/security/object/hibernate/HibernatePermission.hbm.xml" />
+		<mapping
+			class="org.objectledge.security.object.hibernate.HibernateResourceGroup"
+			resource="org/objectledge/security/object/hibernate/HibernateResourceGroup.hbm.xml" />
+		<mapping class="org.objectledge.security.object.hibernate.HibernateRole"
+			resource="org/objectledge/security/object/hibernate/HibernateRole.hbm.xml" />
+		<mapping class="org.objectledge.security.object.hibernate.HibernateUser"
+			resource="org/objectledge/security/object/hibernate/HibernateUser.hbm.xml" />
+		<mapping
+			class="org.objectledge.security.object.hibernate.HibernateUserResourceGroupRole"
+			resource="org/objectledge/security/object/hibernate/HibernateUserResourceGroupRole.hbm.xml" />
 
-    </session-factory>
+		<mapping class="pl.waw.mizinski.umowy.model.TypJednostki" />
+		<mapping class="pl.waw.mizinski.umowy.model.Reprezentant" />
+		<mapping class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna" />
+		<mapping class="pl.waw.mizinski.umowy.model.TypZadania" />
+		<mapping class="pl.waw.mizinski.umowy.model.Zadanie" />
+		<mapping class="pl.waw.mizinski.umowy.model.UrzadSkarbowy" />
+		<mapping class="pl.waw.mizinski.umowy.model.Panstwo" />
+		<mapping class="pl.waw.mizinski.umowy.model.Skladka" />
+		<mapping class="pl.waw.mizinski.umowy.model.StatusPracownika" />
+		<mapping class="pl.waw.mizinski.umowy.model.Pracownik" />
+		<mapping class="pl.waw.mizinski.umowy.model.Adres" />
+		<mapping class="pl.waw.mizinski.umowy.model.Platnosc" />
+		<mapping class="pl.waw.mizinski.umowy.model.TypUmowy" />
+		<mapping class="pl.waw.mizinski.umowy.model.Umowa" />
+		<mapping class="pl.waw.mizinski.umowy.model.Rachunek" />
+
+	</session-factory>
 </hibernate-configuration>

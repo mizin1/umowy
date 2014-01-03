@@ -1,0 +1,11 @@
+<h1>Login Form</h1>
+
+<form action="$link" method="post">
+	User
+	<input class="text" type="text" name="login">
+	<br>
+	Password
+	<input class="password" type="password" name="login">
+	<br>
+	<input type="submit" value="Confirm">
+</form>
