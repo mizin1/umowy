@@ -9,6 +9,15 @@ public class RachunekPK implements Serializable{
 	private Umowa umowa;
 	private Integer nrRachunku;
 	
+	public RachunekPK() {
+		super();
+	}
+	
+	public RachunekPK(Umowa umowa, Integer nrRachunku) {
+		this.umowa = umowa;
+		this.nrRachunku = nrRachunku;
+	}
+	
 	public Umowa getUmowa() {
 		return umowa;
 	}
@@ -24,7 +33,6 @@ public class RachunekPK implements Serializable{
 	public void setNrRachunku(Integer nrRachunku) {
 		this.nrRachunku = nrRachunku;
 	}
-	
-	
+
 }
 

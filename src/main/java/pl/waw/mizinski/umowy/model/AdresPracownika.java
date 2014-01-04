@@ -2,12 +2,9 @@ package pl.waw.mizinski.umowy.model;
 
 import pl.waw.mizinski.umowy.model.enums.TypAdresu;
 
-public class Adres {
+public class AdresPracownika {
 	
-	private Long id;
-	private TypAdresu typAdresu;
-	private Pracownik pracownik;
-	private UrzadSkarbowy urzadSkarbowy;
+	private AdresPracownikaPK adresPracownikaPK = new AdresPracownikaPK();
 	private String miejscowosc;
 	private String ulica;
 	private String nrDomu;
@@ -16,36 +13,28 @@ public class Adres {
 	private String poczta;
 	private Panstwo panstwo; 
 	
-	public Long getId() {
-		return id;
+	public AdresPracownikaPK getAdresPracownikaPK() {
+		return adresPracownikaPK;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	
+	public void setAdresPracownikaPK(AdresPracownikaPK adresPracownikaPK) {
+		this.adresPracownikaPK = adresPracownikaPK;
 	}
 
 	public TypAdresu getTypAdresu() {
-		return typAdresu;
+		return adresPracownikaPK.getTypAdresu();
 	}
 	
 	public void setTypAdresu(TypAdresu typAdresu) {
-		this.typAdresu = typAdresu;
+		adresPracownikaPK.setTypAdresu(typAdresu);
 	}
 	
 	public Pracownik getPracownik() {
-		return pracownik;
+		return adresPracownikaPK.getPracownik();
 	}
 
 	public void setPracownik(Pracownik pracownik) {
-		this.pracownik = pracownik;
-	}
-
-	public UrzadSkarbowy getUrzadSkarbowy() {
-		return urzadSkarbowy;
-	}
-
-	public void setUrzadSkarbowy(UrzadSkarbowy urzadSkarbowy) {
-		this.urzadSkarbowy = urzadSkarbowy;
+		adresPracownikaPK.setPracownik(pracownik);
 	}
 
 	public String getMiejscowosc() {
@@ -107,7 +96,7 @@ public class Adres {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(typAdresu == TypAdresu.urzedu_skarbowego ? urzadSkarbowy : pracownik).append(", ")
+		stringBuilder.append(getPracownik()).append(", ")
 			.append(miejscowosc).append(" ");
 		if (ulica != null) {
 			stringBuilder.append(ulica).append(" ");

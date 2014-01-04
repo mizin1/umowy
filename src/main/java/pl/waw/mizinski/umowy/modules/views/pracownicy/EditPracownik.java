@@ -13,7 +13,7 @@ import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
-import pl.waw.mizinski.umowy.dao.AdresDao;
+import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
@@ -29,7 +29,7 @@ public class EditPracownik extends AbstractBuilder {
 	private final PracownikAssembler pracownikAssembler;
 	
 	public EditPracownik(final Context context, final PanstwoDao panstwoDao, final UrzadSkarbowyDao urzadSkarbowyDao,
-			final PracownikDao pracownikDao, final AdresDao adresDao, final PracownikAssembler pracownikAssembler) {
+			final PracownikDao pracownikDao, final AdresPracownikaDao adresDao, final PracownikAssembler pracownikAssembler) {
 		super(context);
 		this.panstwoDao = panstwoDao;
 		this.urzadSkarbowyDao = urzadSkarbowyDao;

@@ -7,7 +7,7 @@ import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
 import pl.waw.mizinski.umowy.intake.PracownikIntake;
-import pl.waw.mizinski.umowy.model.Adres;
+import pl.waw.mizinski.umowy.model.AdresPracownika;
 import pl.waw.mizinski.umowy.model.Panstwo;
 import pl.waw.mizinski.umowy.model.Pracownik;
 import pl.waw.mizinski.umowy.model.StatusPracownika;
@@ -29,8 +29,8 @@ public class PracownikAssembler {
 	}
 
 	public PracownikIntake asPracownikIntake(final Pracownik pracownik) {
-		final Adres adres = findAdresByTyp(pracownik.getAdresy(), TypAdresu.w_celach_podatkowych);
-		final Adres adresKorespondencyjny = findAdresByTyp(pracownik.getAdresy(), TypAdresu.korespondencyjny);
+		final AdresPracownika adres = pracownik.getAdresWCelachPodatkowych();
+		final AdresPracownika adresKorespondencyjny = pracownik.getAdresKorespondencyjny();
 		PracownikIntake pracownikIntake = new PracownikIntake();
 		pracownikIntake.setId(pracownik.getId());
 		pracownikIntake.setNazwisko(pracownik.getNazwisko());
@@ -74,15 +74,6 @@ public class PracownikAssembler {
 		return pracownikIntake;
 	}
 
-	private Adres findAdresByTyp(List<Adres> adresList, TypAdresu typAdresu) {
-		for (Adres adres : adresList) {
-			if (adres.getTypAdresu() == typAdresu) {
-				return adres;
-			}
-		}
-		return null;
-	}
-
 	public Pracownik asPracownikEntity(PracownikIntake pracownikIntake) {
 		return asPracownikEntity(pracownikIntake, null);
 	}
@@ -110,10 +101,10 @@ public class PracownikAssembler {
 		StatusPracownika statusPracownika = statusPracownikaDao.getById(pracownikIntake.getStatus());
 		pracownik.setStatus(statusPracownika);
 		pracownik.setDobrowolneUbezpieczenieChorobowe(pracownikIntake.getDobrowolneUbezpieczenieChorobowe());
-		List<Adres> adresy = new LinkedList<Adres>();
-		Adres adres = createAdres(pracownikIntake, pracownik);
+		List<AdresPracownika> adresy = new LinkedList<AdresPracownika>();
+		AdresPracownika adres = createAdres(pracownikIntake, pracownik);
 		adresy.add(adres);
-		Adres adresKorespondencyjny = createAdresKorespondencyjny(pracownikIntake, pracownik);
+		AdresPracownika adresKorespondencyjny = createAdresKorespondencyjny(pracownikIntake, pracownik);
 		if (adresKorespondencyjny != null) {
 			adresy.add(adresKorespondencyjny);
 		}
@@ -121,8 +112,8 @@ public class PracownikAssembler {
 		return pracownik;
 	}
 
-	private Adres createAdres(PracownikIntake pracownikIntake, Pracownik pracownik) {
-		Adres adres = new Adres();
+	private AdresPracownika createAdres(PracownikIntake pracownikIntake, Pracownik pracownik) {
+		AdresPracownika adres = new AdresPracownika();
 		adres.setPracownik(pracownik);
 		adres.setTypAdresu(TypAdresu.w_celach_podatkowych);
 		adres.setMiejscowosc(pracownikIntake.getMiejscowosc());
@@ -136,9 +127,9 @@ public class PracownikAssembler {
 		return adres;
 	}
 
-	private Adres createAdresKorespondencyjny(PracownikIntake pracownikIntake, Pracownik pracownik) {
+	private AdresPracownika createAdresKorespondencyjny(PracownikIntake pracownikIntake, Pracownik pracownik) {
 		if (pracownikIntake.isAdresKorespondencyjny()) {
-			Adres adres = new Adres();
+			AdresPracownika adres = new AdresPracownika();
 			adres.setPracownik(pracownik);
 			adres.setTypAdresu(TypAdresu.korespondencyjny);
 			adres.setMiejscowosc(pracownikIntake.getAkMiejscowosc());

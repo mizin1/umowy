@@ -1,0 +1,62 @@
+#macro (dispalyAddress $adres) 
+	#if ($adres.ulica)
+		#if($adres.miejscowosc == $adres.poczta)
+			#set($displayMiescowosc = false)
+		#else
+			#set($displayMiescowosc = true)
+		#end
+	#else
+		#set($displayMiescowosc = true)
+	#end
+	#if ($displayMiescowosc) $adres.miejscowosc #end
+	$!adres.ulica $adres.nrDomu #if($adres.nrMieszkania) m. $adres.nrMieszkania #end
+	<br>
+	$adres.kodPocztowy $adres.poczta, $adres.panstwo.nazwa
+#end
+
+#macro (tr $name $value)
+    #if ($value)
+        <tr>
+        	<td>$name:</td>
+        	<td>$value</td>
+        </tr>
+    #elseif ($bodyContent)
+		 <tr>
+        	<td>$name:</td>
+        	<td>$bodyContent</td>
+        </tr>
+	#end
+#end
+
+<h2 align="center">$pracownik.nazwisko $pracownik.pierwszeImie $!pracownik.imionaPozostale</h2>
+
+<div align="center">
+<table  width="500px" class="border">
+#@tr ('Adres')
+	#dispalyAddress($pracownik.getAdresWCelachPodatkowych())
+#end
+#@tr ('Adres korespondencyjny')  
+	#dispalyAddress($pracownik.getAdresKorespondencyjny())
+#end
+#tr ('Płeć' $pracownik.plec.nazwa)
+#@tr ('Data i miejsce urodzenia')
+	'${pracownik.dataUrodzenia}, $pracownik.miejsceUrodzenia
+#end
+#tr ('Obywatelstwo' $pracownik.obywatelstwo.obywatelstwo)
+#@tr ('Urząd skarbowy')
+	$pracownik.urzadSkarbowy
+	<br> 
+	#dispalyAddress ($pracownik.urzadSkarbowy)
+#end
+#tr ('Pesel' $pracownik.pesel)
+#tr ('Nip' $pracownik.nip)
+#if ($pracownik.nrDokumentuTozsamosci)
+    #@tr ('Numer dokumentu tożsamości')
+    	$pracownik.nrDokumentuTozsamosci 
+		#if ($pracownik.typDokumentuTozsamosci == 'dowod_osobisty') (dowód osobisty)
+		#elseif ($pracownik.typDokumentuTozsamosci == 'paszport' ) (paszport) #end
+    #end
+#end
+#tr ('Number konta' $pracownik.nrKonta)
+</table>
+</div>

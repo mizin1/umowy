@@ -12,7 +12,7 @@ import org.objectledge.pipeline.Valve;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
-import pl.waw.mizinski.umowy.dao.AdresDao;
+import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.intake.PracownikIntake;
 import pl.waw.mizinski.umowy.model.Pracownik;
@@ -21,13 +21,14 @@ public class EditPracownik implements Valve {
 
 	private final PracownikAssembler pracownikAssembler;
 	private final PracownikDao pracownikDao;
-	private final AdresDao adresDao;
+	private final AdresPracownikaDao adresPracownikaDao;
 
-	public EditPracownik(final PracownikAssembler pracownikAssembler, final PracownikDao pracownikDao, final AdresDao adresDao) {
+	public EditPracownik(final PracownikAssembler pracownikAssembler, final PracownikDao pracownikDao,
+			final AdresPracownikaDao adresPracownikaDao) {
 		super();
 		this.pracownikAssembler = pracownikAssembler;
 		this.pracownikDao = pracownikDao;
-		this.adresDao = adresDao;
+		this.adresPracownikaDao = adresPracownikaDao;
 	}
 
 	@Override
@@ -43,12 +44,9 @@ public class EditPracownik implements Valve {
 				PracownikIntake pracownikIntake = new PracownikIntake();
 				pracownikGroup.setProperties(pracownikIntake);
 				Pracownik pracownik = pracownikAssembler.asPracownikEntity(pracownikIntake);
-
 				transaction = session.beginTransaction();
-				if (pracownik.getId() !=null) {
-					//TODO rozwiąż to jakoś
-					//remove prevoiusly addresses
-					adresDao.remove(adresDao.getAdresByPracownik(pracownik));
+				if (!pracownik.hasAdresKorespondencyjny() && adresPracownikaDao.getAdresKorespondencyjny(pracownik) != null) {
+					adresPracownikaDao.remove(adresPracownikaDao.getAdresKorespondencyjny(pracownik));
 				}
 				pracownikDao.saveOrUpdate(pracownik);
 				intake.removeAll();

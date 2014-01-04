@@ -7,7 +7,7 @@
 	<component class="pl.waw.mizinski.umowy.dao.PanstwoDao" />
 	<component class="pl.waw.mizinski.umowy.dao.StatusPracownikaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PracownikDao" />
-	<component class="pl.waw.mizinski.umowy.dao.AdresDao" />
+	<component class="pl.waw.mizinski.umowy.dao.AdresPracownikaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao" />
 	<component class="pl.waw.mizinski.umowy.dao.TypUmowyDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PlatnoscDao" />

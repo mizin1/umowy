@@ -2,6 +2,8 @@
 -- author: Marcin Gołębski
 -- date: 11.09.2008
 -- version $Id: create-schema-postgresql.sql,v 1.4 2011-11-24 20:43:07 mgolebsk Exp $
+-- 03.01.2014 updated to use in umowy-app kmizinski
+ 
 drop table SECURITY_USER_RESOURCE_GROUP_ROLE;
 drop table SECURITY_USER;
 drop table SECURITY_ROLE_PERMISSION;

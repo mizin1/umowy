@@ -7,7 +7,7 @@ import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
-import pl.waw.mizinski.umowy.dao.AdresDao;
+import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
@@ -16,7 +16,7 @@ import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
 import pl.waw.mizinski.umowy.dao.UmowaDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
-import pl.waw.mizinski.umowy.model.Adres;
+import pl.waw.mizinski.umowy.model.AdresPracownika;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.Panstwo;
 import pl.waw.mizinski.umowy.model.Pracownik;
@@ -34,13 +34,13 @@ public class Welcome extends AbstractBuilder {
 	private final StatusPracownikaDao statusPracownikaDao;
 	private final PracownikDao pracownikDao;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
-	private final AdresDao adresDao;
+	private final AdresPracownikaDao adresDao;
 	private final UmowaDao umowaDao;
 	private final RachunekDao rachunekDao;
 
 	public Welcome(Context context, JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, ZadanieDao zadanieDao,
 			PanstwoDao panstwoDao, StatusPracownikaDao statusPracownikaDao, PracownikDao pracownikDao,
-			UrzadSkarbowyDao urzadSkarbowyDao, AdresDao adresDao, UmowaDao umowaDao, RachunekDao rachunekDao) {
+			UrzadSkarbowyDao urzadSkarbowyDao, AdresPracownikaDao adresDao, UmowaDao umowaDao, RachunekDao rachunekDao) {
 		super(context);
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 		this.zadanieDao = zadanieDao;
@@ -60,7 +60,7 @@ public class Welcome extends AbstractBuilder {
 		StatusPracownika statusPracownika = statusPracownikaDao.getById("student");
 		Pracownik pracownik = pracownikDao.getById(1L);
 		UrzadSkarbowy urzadSkarbowy = urzadSkarbowyDao.getAll().get(0);
-		Adres adres = adresDao.getById(1L);
+//		AdresPracownika adres = adresDao.getById();
 		Umowa umowa = umowaDao.getAll().get(0);
 		Rachunek rachunek = rachunekDao.findByUmowa(umowa).get(0);
 		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
@@ -70,7 +70,7 @@ public class Welcome extends AbstractBuilder {
 		templatingContext.put("status", statusPracownika);
 		templatingContext.put("pracownik", pracownik);
 		templatingContext.put("urzadSkarbowy", urzadSkarbowy);
-		templatingContext.put("adres", adres);
+//		templatingContext.put("adres", adres);
 		templatingContext.put("umowa", umowa);
 		templatingContext.put("rachunek", rachunek);
 		return super.build(template, embeddedBuildResults);

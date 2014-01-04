@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import pl.waw.mizinski.umowy.model.enums.Plec;
+import pl.waw.mizinski.umowy.model.enums.TypAdresu;
 import pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci;
 
 public class Pracownik {
@@ -24,7 +25,7 @@ public class Pracownik {
 	private String nrKonta;
 	private StatusPracownika status;
 	private Boolean dobrowolneUbezpieczenieChorobowe;
-	private List<Adres> adresy;
+	private List<AdresPracownika> adresy;
 
 	public Long getId() {
 		return id;
@@ -154,14 +155,35 @@ public class Pracownik {
 		this.dobrowolneUbezpieczenieChorobowe = dobrowolneUbezpieczenieChorobowe;
 	}
 
-	public List<Adres> getAdresy() {
+	public List<AdresPracownika> getAdresy() {
 		return adresy;
 	}
 	
-	public void setAdresy(List<Adres> adresy) {
+	public void setAdresy(List<AdresPracownika> adresy) {
 		this.adresy = adresy;
 	}
 	
+	public AdresPracownika getAdresKorespondencyjny(){
+		return findAdresByTyp(TypAdresu.korespondencyjny);
+	}
+	
+	public AdresPracownika getAdresWCelachPodatkowych(){
+		return findAdresByTyp(TypAdresu.w_celach_podatkowych);
+	}
+	
+	public boolean hasAdresKorespondencyjny() {
+		return getAdresKorespondencyjny() != null;
+	}
+	
+	private AdresPracownika findAdresByTyp(TypAdresu typAdresu) {
+		for (AdresPracownika adres : adresy) {
+			if (adres.getTypAdresu() == typAdresu) {
+				return adres;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return nazwisko + " " + pierwszeImie;

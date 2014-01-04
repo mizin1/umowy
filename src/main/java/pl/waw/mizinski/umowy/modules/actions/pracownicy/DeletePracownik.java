@@ -8,7 +8,7 @@ import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 
-import pl.waw.mizinski.umowy.dao.AdresDao;
+import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
@@ -16,7 +16,7 @@ public class DeletePracownik implements Valve {
 
 	private final PracownikDao pracownikDao;
 
-	public DeletePracownik(final PracownikDao pracownikDao, final AdresDao adresDao) {
+	public DeletePracownik(final PracownikDao pracownikDao, final AdresPracownikaDao adresDao) {
 		this.pracownikDao = pracownikDao;
 	}
 

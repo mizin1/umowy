@@ -8,5 +8,26 @@
 		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
+		<property name="miejscowosc" type="java.lang.String">
+			<column name="miejscowosc" sql-type="varchar" />
+		</property>
+		<property name="ulica" type="java.lang.String">
+			<column name="ulica" sql-type="varchar" />
+		</property>
+		<property name="nrDomu" type="java.lang.String">
+			<column name="nr_domu" sql-type="varchar" />
+		</property>
+		<property name="nrMieszkania" type="java.lang.String">
+			<column name="nr_mieszkania" sql-type="varchar" />
+		</property>
+		<property name="kodPocztowy" type="java.lang.String">
+			<column name="kod_pocztowy" sql-type="varchar" />
+		</property>
+		<property name="poczta" type="java.lang.String">
+			<column name="poczta" sql-type="varchar" />
+		</property>
+		<many-to-one name="panstwo" class="pl.waw.mizinski.umowy.model.Panstwo">
+			<column name="panstwo" />
+		</many-to-one>
 	</class>
 </hibernate-mapping>

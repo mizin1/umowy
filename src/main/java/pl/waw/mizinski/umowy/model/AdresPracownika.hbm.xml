@@ -3,24 +3,19 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="pl.waw.mizinski.umowy.model.Adres" table="adres"
+	<class name="pl.waw.mizinski.umowy.model.AdresPracownika" table="adres_pracownika"
 		lazy="true">
-		<id name="id" type="java.lang.Long">
-			<column name="id" sql-type="int4" />
-			<generator class="increment" />
-		</id>
-		<property name="typAdresu" column="typ_adresu">
-			<type name="org.hibernate.type.EnumType">
-				<param name="enumClass">pl.waw.mizinski.umowy.model.enums.TypAdresu</param>
-				<param name="type">12</param>
-			</type>
-		</property>
-		<many-to-one name="pracownik" class="pl.waw.mizinski.umowy.model.Pracownik">
-			<column name="pracownik" sql-type="int4"/>
-		</many-to-one>
-		<many-to-one name="urzadSkarbowy" class="pl.waw.mizinski.umowy.model.UrzadSkarbowy">
-			<column name="urzad_skarbowy" />
-		</many-to-one>
+		<composite-id name="adresPracownikaPK" class="pl.waw.mizinski.umowy.model.AdresPracownikaPK">
+			<key-many-to-one name="pracownik" class="pl.waw.mizinski.umowy.model.Pracownik">
+				<column name="pracownik" sql-type="int4"/>
+			</key-many-to-one>
+			<key-property name="typAdresu" column="typ_adresu">
+				<type name="org.hibernate.type.EnumType">
+					<param name="enumClass">pl.waw.mizinski.umowy.model.enums.TypAdresu</param>
+					<param name="type">12</param>
+				</type>
+			</key-property>
+		</composite-id>
 		<property name="miejscowosc" type="java.lang.String">
 			<column name="miejscowosc" sql-type="varchar" />
 		</property>

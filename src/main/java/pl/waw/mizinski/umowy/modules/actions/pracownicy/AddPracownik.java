@@ -11,12 +11,12 @@ import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 
-import pl.waw.mizinski.umowy.dao.AdresDao;
+import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
-import pl.waw.mizinski.umowy.model.Adres;
+import pl.waw.mizinski.umowy.model.AdresPracownika;
 import pl.waw.mizinski.umowy.model.Panstwo;
 import pl.waw.mizinski.umowy.model.Pracownik;
 import pl.waw.mizinski.umowy.model.StatusPracownika;
@@ -32,11 +32,11 @@ public class AddPracownik implements Valve {
 	private final PanstwoDao panstwoDao;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
 	private final StatusPracownikaDao statusPracownikaDao;
-	private final AdresDao adresDao;
+	private final AdresPracownikaDao adresDao;
 	
 	public AddPracownik(final PracownikDao pracownikDao, final PanstwoDao panstwoDao,
 			final UrzadSkarbowyDao urzadSkarbowyDao, final StatusPracownikaDao statusPracownikaDao,
-			final AdresDao adresDao) {
+			final AdresPracownikaDao adresDao) {
 		this.pracownikDao = pracownikDao;
 		this.panstwoDao = panstwoDao;
 		this.urzadSkarbowyDao = urzadSkarbowyDao;
@@ -48,12 +48,12 @@ public class AddPracownik implements Valve {
 	public void process(Context context) throws ProcessingException {
 		RequestParameters parameters = RequestParameters.getRequestParameters(context);
 		Pracownik pracownik = createPracownik(parameters);
-		Adres adres = createAdres(parameters, pracownik);
-		Adres adresKorespondencyjny = createAdresKorespondencyjny(parameters, pracownik);
+		AdresPracownika adres = createAdres(parameters, pracownik);
+		AdresPracownika adresKorespondencyjny = createAdresKorespondencyjny(parameters, pracownik);
 		save(pracownik, adres, adresKorespondencyjny, context);
 	}
 	
-	private void save(Pracownik pracownik, Adres adres, Adres adresKorespondencyjny, Context context) throws ProcessingException {
+	private void save(Pracownik pracownik, AdresPracownika adres, AdresPracownika adresKorespondencyjny, Context context) throws ProcessingException {
 		final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		Transaction transaction = null;
 		try {
@@ -73,7 +73,7 @@ public class AddPracownik implements Valve {
 		
 	}
 
-	private Adres createAdresKorespondencyjny(RequestParameters parameters, Pracownik pracownik) {
+	private AdresPracownika createAdresKorespondencyjny(RequestParameters parameters, Pracownik pracownik) {
 		boolean adresKorespondencyjny = parameters.getBoolean("adresKorespondencyjny", false);
 		if (!adresKorespondencyjny) {
 			return null;
@@ -86,7 +86,7 @@ public class AddPracownik implements Valve {
 		String kodPocztowy = wrapper.get("akKodPocztowy");
 		String poczta = wrapper.get("akPoczta");
 		Panstwo panstwo = panstwoDao.getById(wrapper.get("akPanstwo"));
-		Adres adres = new Adres();
+		AdresPracownika adres = new AdresPracownika();
 		adres.setPracownik(pracownik);
 		adres.setMiejscowosc(miejscowosc);
 		adres.setUlica(ulica);
@@ -98,7 +98,7 @@ public class AddPracownik implements Valve {
 		return adres;
 	}
 
-	private Adres createAdres(RequestParameters parameters, Pracownik pracownik) {
+	private AdresPracownika createAdres(RequestParameters parameters, Pracownik pracownik) {
 		RequestParametersWrapper wrapper = new RequestParametersWrapper(parameters);
 		String miejscowosc = wrapper.get("miejscowosc");
 		String ulica = wrapper.get("ulica");
@@ -107,7 +107,7 @@ public class AddPracownik implements Valve {
 		String kodPocztowy = wrapper.get("kodPocztowy");
 		String poczta = wrapper.get("poczta");
 		Panstwo panstwo = panstwoDao.getById(wrapper.get("panstwo"));
-		Adres adres = new Adres();
+		AdresPracownika adres = new AdresPracownika();
 		adres.setPracownik(pracownik);
 		adres.setMiejscowosc(miejscowosc);
 		adres.setUlica(ulica);

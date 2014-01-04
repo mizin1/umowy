@@ -63,11 +63,11 @@
 			<column name="dobrowolne_ub_chorobowe" sql-type="boolean" />
 		</property>
 
-		<bag name="adresy" table="adres" cascade="all" inverse="true" >
+		<bag name="adresy" table="adres" cascade="delete,save-update,delete-orphan" inverse="true" >
          	<key>
                 <column name="pracownik" />
             </key>
-            <one-to-many class="pl.waw.mizinski.umowy.model.Adres" />
+            <one-to-many class="pl.waw.mizinski.umowy.model.AdresPracownika" />
         </bag>
 	</class>
 </hibernate-mapping>
