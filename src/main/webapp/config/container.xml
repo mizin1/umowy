@@ -310,4 +310,58 @@
 	</component>
 	
 	
+	<component class="org.objectledge.threads.ThreadPool">
+		<parameter key="nothing-to-do" />
+		<parameter />
+		<parameter />
+		<parameter class-key="org.jcontainer.dna.Logger" />
+	</component>
+	
+	 <component key="nothing-to-do" class="org.objectledge.pipeline.SimplePipeline">
+	    <sequence>
+	    </sequence>      
+	  </component>
+
+	<component class="pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve" >
+		<parameter />
+		<parameter />
+	</component>
+
+	<component key="generate-rachunki-ErrorHandlingPipeline"
+		class="org.objectledge.pipeline.ErrorHandlingPipeline">
+		<parameter class-key="org.jcontainer.dna.Logger" />
+		<sequence>
+			<parameter class-key="org.objectledge.hibernate.HibernateSessionValve" />
+			<parameter class-key="pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve" />
+		</sequence>
+		<sequence>
+			<!--Exception section left empty -->
+		</sequence>
+		<sequence>
+			<parameter class-key="org.objectledge.hibernate.HibernateSessionFinallyValve" />
+		</sequence>
+	</component>
+
+	<component class="pl.waw.mizinski.umowy.scheduler.ValveJob" >
+		<parameter />
+		<parameter key="generate-rachunki-ErrorHandlingPipeline" />
+	</component>
+
+	<component class="org.objectledge.scheduler.CronScheduleFactory" >
+		<parameter />
+	</component>
+	
+	<container key="scheduldeContainer" />
+	<component class="org.objectledge.scheduler.TransientScheduler">
+		<parameter key="scheduldeContainer" />
+		<parameter />
+		<parameter class-key="org.jcontainer.dna.Logger" />
+		<parameter />
+		<sequence>
+			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
+		</sequence>
+	</component>
+	
+	
+	
 </container>

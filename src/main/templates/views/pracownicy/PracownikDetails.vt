@@ -40,7 +40,7 @@
 #end
 #tr ('Płeć' $pracownik.plec.nazwa)
 #@tr ('Data i miejsce urodzenia')
-	'${pracownik.dataUrodzenia}, $pracownik.miejsceUrodzenia
+	${pracownik.dataUrodzenia}, $pracownik.miejsceUrodzenia
 #end
 #tr ('Obywatelstwo' $pracownik.obywatelstwo.obywatelstwo)
 #@tr ('Urząd skarbowy')
@@ -58,5 +58,14 @@
     #end
 #end
 #tr ('Number konta' $pracownik.nrKonta)
+#tr ($pracownik.status.nazwa $pracownik.status.opis)
+#@tr ('Odprowadza składki')
+<ul>
+	#foreach ($skladka in $pracownik.status.skladki)
+        <li>$skladka.nazwa</li>
+	#end
+	#if ($pracownik.dobrowolneUbezpieczenieChorobowe) <li>Chce podlegać dobrowolenemu ubezpieczeniu chorobowemu</li> #end
+</ul>
+#end
 </table>
 </div>
