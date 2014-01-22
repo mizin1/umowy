@@ -1,10 +1,13 @@
 package pl.waw.mizinski.umowy.model;
 
+import java.util.List;
+
 
 
 public class TypZadania {
 	
 	private TypZadaniaPK typZadaniaPK;
+	private List<Zadanie> zadania;
 
 	public TypZadaniaPK getTypZadaniaPK() {
 		return typZadaniaPK;
@@ -28,6 +31,14 @@ public class TypZadania {
 
 	public void setJednostkaOrganizacyjna(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
 		typZadaniaPK.setJednostkaOrganizacyjna(jednostkaOrganizacyjna);
+	}
+	
+	public List<Zadanie> getZadania() {
+		return zadania;
+	}
+	
+	public void setZadania(List<Zadanie> zadania) {
+		this.zadania = zadania;
 	}
 	
 	@Override

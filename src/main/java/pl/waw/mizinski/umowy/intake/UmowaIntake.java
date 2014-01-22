@@ -9,11 +9,13 @@ public class UmowaIntake {
 	private String typUmowy;
 	private Long pracownik;
 	private Long zadanie;
+	private String przedmiotUmowy;
 	private String platnosc;
 	private Date dataZawarcia;
 	private Date dataRozpoczecia;
 	private Date dataZakonczenia;
 	private BigDecimal wynagrodzenie;
+	private Boolean ubezpieczeniaDobrowolne;
 	private Boolean wykonywanaUZleceniodawcy;
 
 	public String getNrUmowy() {
@@ -48,6 +50,14 @@ public class UmowaIntake {
 		this.zadanie = zadanie;
 	}
 
+	public String getPrzedmiotUmowy() {
+		return przedmiotUmowy;
+	}
+	
+	public void setPrzedmiotUmowy(String przedmiotUmowy) {
+		this.przedmiotUmowy = przedmiotUmowy;
+	}
+	
 	public String getPlatnosc() {
 		return platnosc;
 	}
@@ -88,6 +98,14 @@ public class UmowaIntake {
 		this.wynagrodzenie = wynagrodzenie;
 	}
 
+	public Boolean getUbezpieczeniaDobrowolne() {
+		return ubezpieczeniaDobrowolne;
+	}
+	
+	public void setUbezpieczeniaDobrowolne(Boolean ubezpieczeniaDobrowolne) {
+		this.ubezpieczeniaDobrowolne = ubezpieczeniaDobrowolne;
+	}
+	
 	public Boolean getWykonywanaUZleceniodawcy() {
 		return wykonywanaUZleceniodawcy;
 	}
@@ -95,6 +113,5 @@ public class UmowaIntake {
 	public void setWykonywanaUZleceniodawcy(Boolean wykonywanaUZleceniodawcy) {
 		this.wykonywanaUZleceniodawcy = wykonywanaUZleceniodawcy;
 	}
-	
 	
 }

@@ -16,7 +16,7 @@ public class RachunekDao extends AbstractDao<RachunekPK, Rachunek> {
 		super(context);
 	}
 
-	public List<Rachunek> findByUmowa(Umowa umowa) {
+	public List<Rachunek> getRachunekListByUmowa(Umowa umowa) {
 		Query query = session().createQuery("from Rachunek r where r.rachunekPK.umowa=?");
 		query.setParameter(0, umowa);
 		return HibernateUtils.queryResult(session(), query);

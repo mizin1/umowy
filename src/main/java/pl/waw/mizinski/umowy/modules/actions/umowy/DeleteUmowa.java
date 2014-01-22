@@ -25,11 +25,11 @@ public class DeleteUmowa implements Valve{
 		Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		String nrUmowy = requestParameters.get("nrUmowy");
-		Umowa umowa = umowaDao.getById(nrUmowy);
+//		Umowa umowa = umowaDao.getById(nrUmowy);
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			umowaDao.remove(umowa);
+			umowaDao.remove(nrUmowy);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {

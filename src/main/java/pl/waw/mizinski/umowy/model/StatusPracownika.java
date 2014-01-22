@@ -1,12 +1,13 @@
 package pl.waw.mizinski.umowy.model;
 
-import java.util.Set;
+import java.util.List;
+
 
 public class StatusPracownika {
 	
 	private String nazwa;
 	private String opis;
-	private Set<Skladka> skladki;
+	private List<SkladkaPracownika> skladki;
 	
 	public String getNazwa() {
 		return nazwa;
@@ -24,14 +25,14 @@ public class StatusPracownika {
 		this.opis = opis;
 	}
 
-	public Set<Skladka> getSkladki() {
+	public List<SkladkaPracownika> getSkladki() {
 		return skladki;
 	}
 
-	public void setSkladki(Set<Skladka> skladki) {
+	public void setSkladki(List<SkladkaPracownika> skladki) {
 		this.skladki = skladki;
 	}
-
+	
 	@Override
 	public String toString() {
 		return nazwa + "(odprowadza skladki" + skladki + ")";

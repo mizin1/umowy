@@ -18,23 +18,22 @@
 	dojo.require("org.objectledge.ajax.AjaxRequest");
     dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
 	
-	function onXFail(response) {
+	function onUSFail(response) {
 		alert('Nie udalo sie dodac Urzedu skarbowego');
 	}
 	
 	var dodajUrzadSkarbowyOptions = {
 		url: "$link.view('AJAX')", 
-		paramNames: ["nazwa", "miejscowosc", "ulica", "nrDomu", "nrMieszkania", "kodPocztowy", "poczta", "kodPanstwa"], 
+		paramNames: ["nazwa", "miejscowosc", "ulica", "nrDomu", "nrMieszkania", "kodPocztowy", "poczta"], 
 		serviceName: "UrzadSkarbowyService", 
 		methodName: "dodajUrzadSkarbowy",
-		onFail: onXFail
+		onFail: onUSFail
 	};
 
 	var dodajUrzadSkarbowy = null;
 	
 	dojo.addOnLoad(function() {
 		dodajUrzadSkarbowy = new org.objectledge.ajax.AjaxRequest(dodajUrzadSkarbowyOptions);
-		
     });
 	
 	function dodajUrzadSkarbowyRequest() {
@@ -45,8 +44,7 @@
 		var nrMieszkania = dojo.byId('usNrMieszkania').value;
 		var kodPocztowy = dojo.byId('usKodPocztowy').value;
 		var poczta = dojo.byId('usPoczta').value;
-		var kodPanstwa = dijit.byId('usPanstwo').value;
-		dodajUrzadSkarbowy.sendRequest([nazwa, miejscowosc, ulica, nrDomu, nrMieszkania, kodPocztowy, poczta, kodPanstwa], dodajUrzadSkarbowyResponse);
+		dodajUrzadSkarbowy.sendRequest([nazwa, miejscowosc, ulica, nrDomu, nrMieszkania, kodPocztowy, poczta], dodajUrzadSkarbowyResponse);
 	}
 	
 	function dodajUrzadSkarbowyResponse(response) {
@@ -169,16 +167,6 @@
 		<tr>
 			<th colspan="2">
 				<div align="center">
-					#set( $field = $pracownikGroup.DobrowolneUbezpieczenieChorobowe)
-					<input type="checkbox" dojoType="dijit.form.CheckBox" id="dobrowolneUbezpieczenieChorobowe" name="$field.Key" value="true" #if($field == true) checked #end/>
-					<label for="dobrowolneUbezpieczenieChorobowe">Chce podlegać dobrowolnemu ubezpieczniu chorobowemu</label>
-				</div>
-			</th>
-		</tr>
-		
-		<tr>
-			<th colspan="2">
-				<div align="center">
 					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Wprowadź</button>
 				</div>
 			</th>
@@ -193,9 +181,7 @@
 	<br/>
 		<select id="listaUrzedow" dojoType="dijit.form.MultiSelect" class="multi" >
 			#foreach ($urzadSkarbowy in $urzedySkarobowe)
-				<option>
-					$urzadSkarbowy.nazwa
-				</option>
+                <option #if($urzadSkarbowy.nazwa == $pracownikGroup.UrzadSkarbowy.stringValue) selected #else selected="false" #end>$urzadSkarbowy.nazwa</option>
 			#end
 		</select>
 	<br/>
@@ -223,59 +209,45 @@
 		<tr>
 			<td>Nazwa</td>
 			<td>
-				<input id="usNazwa" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usNazwa" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Miejscowość</td>
 			<td>
-				<input id="usMiejscowosc" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usMiejscowosc" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Ulica</td>
 			<td>
-				<input id="usUlica" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usUlica" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Numer Domu</td>
 			<td>
-				<input id="usNrDomu" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usNrDomu" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Numer mieszkania</td>
 			<td>
-				<input id="usNrMieszkania" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usNrMieszkania" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Kod pocztowy</td>
 			<td>
-				<input id="usKodPocztowy" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usKodPocztowy" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
 		<tr>
 			<td>Poczta</td>
 			<td>
-				<input id="usPoczta" type="text" dojoType="dijit.form.TextBox"/>
+				<input id="usPoczta" type="text" dojoType="dijit.form.TextBox" trim/>
 			</td>
 		</tr>
-		<tr>
-    		<td>Panstwo</td>
-            <td>
-    			<select id="usPanstwo" dojoType="dijit.form.Select">
-					#foreach ($panstwo in $panstwa)
-						#if ($panstwo.kod == "PL")
-							<option value="$panstwo.kod" selected>$panstwo.nazwa</option>
-						#else
-							<option value="$panstwo.kod">$panstwo.nazwa</option>
-						#end
-					#end
-				</select>
-    		</td>
-    	</tr>
 		<tr>
 			<th colspan="2">
 				<div align="center">

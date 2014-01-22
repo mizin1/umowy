@@ -31,13 +31,11 @@ CREATE TABLE TYP_JEDNOSTKI
 (
 	nazwa 		VARCHAR(50) NOT NULL,
 	typ_nadrzedny 	VARCHAR(50),
-	PRIMARY KEY(nazwa)
+	PRIMARY KEY(nazwa),
+	FOREIGN KEY(typ_nadrzedny) REFERENCES TYP_JEDNOSTKI(nazwa)
 )
 ;
 
-ALTER TABLE TYP_JEDNOSTKI
-ADD FOREIGN KEY(typ_nadrzedny) REFERENCES TYP_JEDNOSTKI(nazwa)
-;
 
 CREATE TABLE REPREZENTANT
 (
@@ -107,16 +105,25 @@ CREATE TABLE URZAD_SKARBOWY
 	nr_mieszkania	VARCHAR(6),
 	kod_pocztowy	VARCHAR(10) NOT NULL,
 	poczta	VARCHAR(50) NOT NULL,
-	panstwo	VARCHAR(2) NOT NULL,
-	PRIMARY KEY(nazwa),
-	FOREIGN KEY(panstwo) REFERENCES PANSTWO(kod)
+	PRIMARY KEY(nazwa)
 	
+)
+;
+
+CREATE TABLE TYP_UMOWY
+(
+	nazwa	VARCHAR(50) NOT NULL,
+	tytuł	VARCHAR(50) NOT NULL,
+	koszt_uzystkania_przychodu INTEGER NOT NULL,
+	PRIMARY KEY(nazwa)
 )
 ;
 
 CREATE TABLE SKLADKA 
 (
 	nazwa	VARCHAR(50) NOT NULL,
+	limit_wieku_mezczyzna INTEGER,
+	limit_wieku_kobieta INTEGER,
 	PRIMARY KEY(nazwa)
 )
 ;
@@ -125,9 +132,12 @@ CREATE TABLE SKLADKA_PRACOWNIKA
 (
 	status_pracownika	VARCHAR(50) NOT NULL,
 	nazwa_skladki	VARCHAR(50) NOT NULL,
-	PRIMARY KEY(status_pracownika, nazwa_skladki),
+	typ_umowy VARCHAR(50) NOT NULL,
+	dobrowolna BOOLEAN NOT NULl,
+	PRIMARY KEY(status_pracownika, nazwa_skladki, typ_umowy),
 	FOREIGN KEY(status_pracownika) REFERENCES STATUS_PRACOWNIKA(nazwa),
 	FOREIGN KEY(nazwa_skladki) REFERENCES SKLADKA(nazwa)
+	FOREIGN KEY(typ_umowy) REFERENCES TYP_UMOWY(nazwa)
 )
 ;
 
@@ -157,7 +167,6 @@ CREATE TABLE PRACOWNIK
 	typ_dok_tozsamosci	VARCHAR(20) NOT NULL,
 	nr_konta	VARCHAR(50),
 	status		VARCHAR(50) NOT NULL,
-	dobrowolne_ub_chorobowe BOOLEAN,
 	PRIMARY KEY(id),
 	FOREIGN KEY(obywatelstwo) REFERENCES PANSTWO(kod),
 	FOREIGN KEY(urzad_skarbowy) REFERENCES URZAD_SKARBOWY(nazwa),
@@ -185,13 +194,6 @@ CREATE TABLE ADRES_PRACOWNIKA
 )
 ;
 
-CREATE TABLE TYP_UMOWY
-(
-	nazwa	VARCHAR(50) NOT NULL,
-	PRIMARY KEY(nazwa)
-)
-;
-
 CREATE TABLE PLATNOSC
 (
 	nazwa VARCHAR(50) NOT NULL,
@@ -208,11 +210,14 @@ CREATE TABLE UMOWA
 	pracownik	INTEGER	NOT NULL,
 	zadanie	INTEGER NOT NULL,
 	platnosc VARCHAR(50) NOT NULL,
+	przedmiot_umowy VARCHAR(50) NOT NULL,
 	data_zawarcia	DATE NOT NULL,
 	data_rozpoczecia	DATE NOT NULL,
 	data_zakonczenia	DATE NOT NULL,
 	wynagrodzenie	DECIMAL(10,2),
+	ubezpieczenia_dobrowolne	BOOLEAN,
 	wykonywana_u_zleceniodawcy	BOOLEAN,
+	wygenerowano_rachunki BOOLEAN DEFAULT FALSE,
 	PRIMARY KEY(nr_umowy),
 	FOREIGN KEY(pracownik) REFERENCES PRACOWNIK(id),
 	FOREIGN KEY(zadanie) REFERENCES ZADANIE(id),
@@ -231,3 +236,9 @@ CREATE TABLE RACHUNEK
 	FOREIGN KEY(nr_umowy) REFERENCES UMOWA(nr_umowy)
 )
 ;
+
+drop sequence pracownik_sequence;
+create sequence zadanie_sequence;
+
+drop sequence zadanie_sequence;
+create sequence zadanie_sequence;

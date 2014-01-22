@@ -24,7 +24,6 @@ public class Pracownik {
 	private TypDokumentuTozsamosci typDokumentuTozsamosci;
 	private String nrKonta;
 	private StatusPracownika status;
-	private Boolean dobrowolneUbezpieczenieChorobowe;
 	private List<AdresPracownika> adresy;
 
 	public Long getId() {
@@ -145,14 +144,6 @@ public class Pracownik {
 
 	public void setStatus(StatusPracownika status) {
 		this.status = status;
-	}
-
-	public Boolean getDobrowolneUbezpieczenieChorobowe() {
-		return dobrowolneUbezpieczenieChorobowe;
-	}
-
-	public void setDobrowolneUbezpieczenieChorobowe(Boolean dobrowolneUbezpieczenieChorobowe) {
-		this.dobrowolneUbezpieczenieChorobowe = dobrowolneUbezpieczenieChorobowe;
 	}
 
 	public List<AdresPracownika> getAdresy() {

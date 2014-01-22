@@ -5,29 +5,26 @@
 
 	<class name="pl.waw.mizinski.umowy.model.UrzadSkarbowy" table="urzad_skarbowy"
 		lazy="true">
-		<id name="nazwa" type="java.lang.String">
-			<column name="nazwa" sql-type="varchar" />
+		<id name="nazwa" type="java.lang.String" >
+			<column name="nazwa" sql-type="varchar(50)"/>
 		</id>
 		<property name="miejscowosc" type="java.lang.String">
-			<column name="miejscowosc" sql-type="varchar" />
+			<column name="miejscowosc" sql-type="varchar(50)" />
 		</property>
 		<property name="ulica" type="java.lang.String">
-			<column name="ulica" sql-type="varchar" />
+			<column name="ulica" sql-type="varchar(50)" />
 		</property>
 		<property name="nrDomu" type="java.lang.String">
-			<column name="nr_domu" sql-type="varchar" />
+			<column name="nr_domu" sql-type="varchar(6)" />
 		</property>
 		<property name="nrMieszkania" type="java.lang.String">
-			<column name="nr_mieszkania" sql-type="varchar" />
+			<column name="nr_mieszkania" sql-type="varchar(6)" />
 		</property>
 		<property name="kodPocztowy" type="java.lang.String">
-			<column name="kod_pocztowy" sql-type="varchar" />
+			<column name="kod_pocztowy" sql-type="varchar(10)" />
 		</property>
 		<property name="poczta" type="java.lang.String">
-			<column name="poczta" sql-type="varchar" />
+			<column name="poczta" sql-type="varchar(50)" />
 		</property>
-		<many-to-one name="panstwo" class="pl.waw.mizinski.umowy.model.Panstwo">
-			<column name="panstwo" />
-		</many-to-one>
 	</class>
 </hibernate-mapping>

@@ -16,18 +16,14 @@ public class UrzadSkarbowyService {
 
 	private final Context context;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
-	private final PanstwoDao panstwoDao;
 
-	public UrzadSkarbowyService(final Context context, final UrzadSkarbowyDao urzadSkarbowyDao,
-			final PanstwoDao panstwoDao) {
+	public UrzadSkarbowyService(final Context context, final UrzadSkarbowyDao urzadSkarbowyDao) {
 		this.context = context;
 		this.urzadSkarbowyDao = urzadSkarbowyDao;
-		this.panstwoDao = panstwoDao;
 	}
 
 	public void dodajUrzadSkarbowy(final String nazwa, final String miejscowosc, final String ulica,
-			final String nrDomu, final String nrMieszkania, final String kodPocztowy, final String poczta,
-			final String kodPanstwa) throws ProcessingException {
+			final String nrDomu, final String nrMieszkania, final String kodPocztowy, final String poczta) throws ProcessingException {
 		UrzadSkarbowy urzadSkarbowy = new UrzadSkarbowy();
 		urzadSkarbowy.setNazwa(nazwa);
 		urzadSkarbowy.setMiejscowosc(miejscowosc);
@@ -36,8 +32,6 @@ public class UrzadSkarbowyService {
 		urzadSkarbowy.setNrMieszkania(Utils.trim(nrMieszkania));
 		urzadSkarbowy.setKodPocztowy(kodPocztowy);
 		urzadSkarbowy.setPoczta(poczta);
-		Panstwo panstwo = panstwoDao.getById(kodPanstwa);
-		urzadSkarbowy.setPanstwo(panstwo);
 		Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		Transaction transaction = null;
 		try {

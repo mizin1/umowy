@@ -49,7 +49,6 @@ public class PracownikAssembler {
 		pracownikIntake.setTypDokumentuTozsamosci(pracownik.getTypDokumentuTozsamosci());
 		pracownikIntake.setNrKonta(pracownik.getNrKonta());
 		pracownikIntake.setStatus(pracownik.getStatus().getNazwa());
-		pracownikIntake.setDobrowolneUbezpieczenieChorobowe(pracownik.getDobrowolneUbezpieczenieChorobowe());
 		if (adres != null) {
 			pracownikIntake.setMiejscowosc(adres.getMiejscowosc());
 			pracownikIntake.setUlica(adres.getUlica());
@@ -100,7 +99,6 @@ public class PracownikAssembler {
 		pracownik.setNrKonta(pracownikIntake.getNrKonta());
 		StatusPracownika statusPracownika = statusPracownikaDao.getById(pracownikIntake.getStatus());
 		pracownik.setStatus(statusPracownika);
-		pracownik.setDobrowolneUbezpieczenieChorobowe(pracownikIntake.getDobrowolneUbezpieczenieChorobowe());
 		List<AdresPracownika> adresy = new LinkedList<AdresPracownika>();
 		AdresPracownika adres = createAdres(pracownikIntake, pracownik);
 		adresy.add(adres);

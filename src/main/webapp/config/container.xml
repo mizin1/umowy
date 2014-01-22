@@ -129,6 +129,7 @@
 	<!-- AJAX services -->
 	<component class="pl.waw.mizinski.umowy.ajax.ExampleService" />
 	<component class="pl.waw.mizinski.umowy.ajax.UrzadSkarbowyService" />
+	<component class="pl.waw.mizinski.umowy.ajax.UmowaService" />
 
 	<!-- intake components -->
 	<component class="org.objectledge.intake.IntakeGroupFactory" />
@@ -310,7 +311,7 @@
 	</component>
 	
 	
-	<component class="org.objectledge.threads.ThreadPool">
+<!--	<component class="org.objectledge.threads.ThreadPool">
 		<parameter key="nothing-to-do" />
 		<parameter />
 		<parameter />
@@ -335,7 +336,7 @@
 			<parameter class-key="pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve" />
 		</sequence>
 		<sequence>
-			<!--Exception section left empty -->
+			
 		</sequence>
 		<sequence>
 			<parameter class-key="org.objectledge.hibernate.HibernateSessionFinallyValve" />
@@ -352,7 +353,7 @@
 	</component>
 	
 	<container key="scheduldeContainer" />
-	<component class="org.objectledge.scheduler.TransientScheduler">
+	 <component class="org.objectledge.scheduler.TransientScheduler">
 		<parameter key="scheduldeContainer" />
 		<parameter />
 		<parameter class-key="org.jcontainer.dna.Logger" />
@@ -360,7 +361,7 @@
 		<sequence>
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
-	</component>
+	</component> -->
 	
 	
 	

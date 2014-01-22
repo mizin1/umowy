@@ -1,9 +1,12 @@
 package pl.waw.mizinski.umowy.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateUtils;
 
+import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypZadania;
 import pl.waw.mizinski.umowy.model.TypZadaniaPK;
 
@@ -19,4 +22,9 @@ public class TypZadaniaDao extends AbstractDao<TypZadaniaPK, TypZadania> {
 		return HibernateUtils.queryUniqueResult(session(), query, TypZadania.class);
 	}
 	
+	public List<TypZadania> getTypyZadaniaByJednostka(JednostkaOrganizacyjna jednostkaOrganizacyjna) {
+		Query query = session().createQuery("from TypZadania t where t.typZadaniaPK.jednostkaOrganizacyjna=?");
+		query.setParameter(0, jednostkaOrganizacyjna);
+		return HibernateUtils.queryResult(session(), query);
+	}
 }

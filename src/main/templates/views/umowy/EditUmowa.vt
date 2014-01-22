@@ -1,5 +1,9 @@
+
+#macro (selectedTyp $typ) #if ($typ == $zadanieUmowy.getTypZadania().getNazwa()) selected: true #else selected: false #end #end
+#macro (selectedZadanie $zad) #if ($zad == $zadanieUmowy.getNazwa()) selected: true #else selected: false #end #end
+
 <script type="text/javascript">
-##	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
+	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
 	
 	dojo.require("dojo.parser");
 	dojo.require("dijit.dijit");
@@ -14,10 +18,89 @@
 	dojo.require("dijit.form.CheckBox");
 	dojo.require("dijit.form.ValidationTextBox");
 
-##	dojo.require("org.objectledge.ajax.AjaxRequest");
-##   dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
+	dojo.require("org.objectledge.ajax.AjaxRequest");
+	dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
+	
+	function onJednostkaChange() {
+		var nazwa = dijit.byId('jednostka').value;
+		#foreach($entry in $zadaniaJednostek.entrySet())	     
+			if(nazwa == "$entry.getKey()") {
+				var options = [
+					#set ($comma = false)
+					#foreach ($typZadania in $entry.getValue())
+						#if ($comma) , #end 
+						#set ($comma = true)
+						{ label: "$typZadania.nazwa", value: "$typZadania.nazwa", #selectedTyp($typZadania.nazwa) }
+					#end
+				]
+				var select = dijit.byId('typZadania');
+				select.options = options;
+				select.startup();
+				onTypZadaniaChange();
+			}
+		#end
+	}
+	
+	function onTypZadaniaChange() {
+		var jednostka = dijit.byId('jednostka').value;
+		var typZadania = dijit.byId('typZadania').value;
+		#foreach($entry in $zadaniaJednostek.entrySet())
+				if(jednostka == "$entry.getKey()") {
+					#foreach ($typZadania in $entry.getValue())
+					if(typZadania == "$typZadania.nazwa") {
+						var options = [
+        					#set ($comma = false)
+        					#foreach ($zadanie in $typZadania.zadania)
+        						#if ($comma) , #end 
+        						#set ($comma = true)
+        						{ label: "$zadanie.nazwa", value: "$zadanie.id", #selectedZadanie($zadanie.nazwa) }
+        					#end
+        				]
+						var select = dijit.byId('zadanie');
+        				select.options = options;
+        				select.startup();
+					}
+				#end
+				}
+		#end
+	}
+	
+	var sprawdzUbezpieczeniaOptions = {
+		url: "$link.view('AJAX')", 
+		paramNames: ["typUmowy", "idPracownika"], 
+		serviceName: "UmowaService", 
+		methodName: "isUbezpieczenieDobrowolneActive"
+	};
+
+	var sprawdzUbezpieczenia = null;
+	
+	function sprawdzUbezpieczeniaRequest() {
+		var typUmowy = dijit.byId('typUmowy').value;
+		var idPracownika = dijit.byId('pracownik').value;
+		sprawdzUbezpieczenia.sendRequest([typUmowy, idPracownika], sprawdzUbezpieczeniaResponse);
+	}
+	
+	function sprawdzUbezpieczeniaResponse(response) {
+		if(response.returnedValue == true) {
+			document.getElementById('ubezpieczeniaDobrowolne').style.display = 'table-row';
+		} else {
+			document.getElementById('ubezpieczeniaDobrowolne').style.display = 'none';
+		}
+	}
+	
+	
+dojo.addOnLoad(onJednostkaChange);
+dojo.addOnLoad(function() {
+	sprawdzUbezpieczenia = new org.objectledge.ajax.AjaxRequest(sprawdzUbezpieczeniaOptions);
+	##wykonujemy od razu na starcie
+	sprawdzUbezpieczeniaRequest();
+});
 	
 </script>
+
+
+
+
 
 #set($umowaGroup = $intake.UmowaIntake.Default)
 <h2 align="center">Wprowadź dane umowy</h2>
@@ -26,23 +109,58 @@
     <form  dojoType="dijit.form.Form" method="post" action="$link.view('umowy.UmowaList').action('umowy.EditUmowa')">
         <input type="hidden" name="$umowaGroup.NrUmowy.Key" value="$!umowaGroup.NrUmowy.Value">
 		<table  width="500px" class="border">
-		#@tr_select($umowaGroup.TypUmowy)
-			#foreach ($typ in $typyUmowy)
-				#option($umowaGroup.TypUmowy $typ.nazwa $typ.nazwa) 
-			#end	
-		#end
-		#@tr_select($umowaGroup.Pracownik)
-			#foreach ($pracownik in $pracownicy)
-				#set ($pracownikName =  "${pracownik.nazwisko} $pracownik.pierwszeImie")
-				#option($umowaGroup.Pracownik $pracownik.id $pracownikName) 
-			#end	
-		#end
-		##TODO potem mozesz to przerobic zeby najpieew wrybierac jednostke potem typ zadania a na koncu dopiero zadania
-		#@tr_select($umowaGroup.Zadanie)
-			#foreach ($zadanie in $zadania)
-				#option($umowaGroup.Zadanie $zadanie.id $zadanie.nazwa) 
-			#end	
-		#end
+		#set( $field = $umowaGroup.TypUmowy)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "typUmowy" name="$field.Key" dojoType="dijit.form.Select"  onchange="sprawdzUbezpieczeniaRequest();">
+				#foreach ($typ in $typyUmowy)
+    				#option($umowaGroup.TypUmowy $typ.nazwa $typ.nazwa) 
+    			#end
+				</select>
+            </td>
+		</tr>
+		
+		#set( $field = $umowaGroup.Pracownik)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "pracownik" name="$field.Key" dojoType="dijit.form.Select" onchange="sprawdzUbezpieczeniaRequest();">
+				#foreach ($pracownik in $pracownicy)
+    				#set ($pracownikName =  "${pracownik.nazwisko} $pracownik.pierwszeImie")
+    				#option($umowaGroup.Pracownik $pracownik.id $pracownikName) 
+    			#end
+				</select>
+            </td>
+		</tr>
+		#tr_edit_textline($umowaGroup.PrzedmiotUmowy)
+        <tr>
+			<td>Jednostka organizacyjna</td>
+			<td>
+				<select id= "jednostka" name="unUsed" dojoType="dijit.form.Select" onchange="onJednostkaChange();">
+        			#foreach($entry in $zadaniaJednostek.entrySet())	     
+        				<option value="$entry.getKey()" #if($entry.getKey()==$zadanieUmowy.getJednostkaOrganizacyjna().nazwa) selected="true" #end>$entry.getKey()</option >
+        			#end
+				</select>
+            </td>
+		</tr>
+		<tr>
+			<td>Typ Zadania</td>
+			<td>
+				<select id= "typZadania" name="unUsed2" dojoType="dijit.form.Select"  onchange="onTypZadaniaChange();" ></select>
+            </td>
+		</tr>
+		
+		#set( $field = $umowaGroup.Zadanie)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "zadanie" name="$field.Key" dojoType="dijit.form.Select" ></select>
+            </td>
+		</tr>
 		#@tr_select($umowaGroup.Platnosc)
 			#foreach ($ptatnosc in $platnosci)
 				#option($umowaGroup.Platnosc $ptatnosc.nazwa $ptatnosc.nazwa) 
@@ -52,15 +170,9 @@
 		#tr_edit_date($umowaGroup.DataRozpoczecia "yyyy-MM-dd")
 		#tr_edit_date($umowaGroup.DataZakonczenia "yyyy-MM-dd")
 		#tr_edit_textline($umowaGroup.Wynagrodzenie)
-		<tr>
-			<th colspan="2">
-				<div align="center">
-					#set( $field = $umowaGroup.WykonywanaUZleceniodawcy)
-					<input type="checkbox" dojoType="dijit.form.CheckBox" id="wykonywanaUZleceniodawcy" name="$field.Key" value="true" #if($field == true) checked #end/>
-					<label for="wykonywanaUZleceniodawcy">Wykonywania u zlecenidawcy</label>
-				</div>
-			</th>
-		</tr>
+		#tr_edit_checkbox_with_id($umowaGroup.UbezpieczeniaDobrowolne 'ubezpieczeniaDobrowolne')
+		#tr_edit_checkbox($umowaGroup.WykonywanaUZleceniodawcy)
+
 		<tr>
 			<th colspan="2">
 				<div align="center">

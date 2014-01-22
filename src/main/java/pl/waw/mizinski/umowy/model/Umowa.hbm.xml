@@ -17,6 +17,9 @@
 		<many-to-one name="zadanie" class="pl.waw.mizinski.umowy.model.Zadanie">
 			<column name="zadanie" sql-type="int4"/>
 		</many-to-one>
+		<property name="przedmiotUmowy" type="java.lang.String">
+			<column name="przedmiot_umowy" sql-type="varchar" />
+		</property>
 		<many-to-one name="platnosc" class="pl.waw.mizinski.umowy.model.Platnosc">
 			<column name="platnosc" />
 		</many-to-one>
@@ -32,8 +35,14 @@
 		<property name="wynagrodzenie" type="java.math.BigDecimal">
 			<column name="wynagrodzenie" sql-type="big_decimal" />
 		</property>
+		<property name="ubezpieczeniaDobrowolne" type="java.lang.Boolean">
+			<column name="ubezpieczenia_dobrowolne" sql-type="boolean" />
+		</property>
 		<property name="wykonywanaUZleceniodawcy" type="java.lang.Boolean">
 			<column name="wykonywana_u_zleceniodawcy" sql-type="boolean" />
+		</property>
+		<property name="wygenerowanoRachunki" type="java.lang.Boolean">
+			<column name="wygenerowano_rachunki" sql-type="boolean" />
 		</property>
 	</class>
 </hibernate-mapping>

@@ -27,6 +27,7 @@ public class RachunekGeneratorValve implements Valve{
 	public void process(final Context context) throws ProcessingException {
 		final Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		List<Umowa> umowy = umowaDao.getAll();
+		
 	}
 	
 }

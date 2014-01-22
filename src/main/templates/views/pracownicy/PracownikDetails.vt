@@ -1,4 +1,4 @@
-#macro (dispalyAddress $adres) 
+#macro (displayAddress $adres) 
 	#if ($adres.ulica)
 		#if($adres.miejscowosc == $adres.poczta)
 			#set($displayMiescowosc = false)
@@ -11,7 +11,7 @@
 	#if ($displayMiescowosc) $adres.miejscowosc #end
 	$!adres.ulica $adres.nrDomu #if($adres.nrMieszkania) m. $adres.nrMieszkania #end
 	<br>
-	$adres.kodPocztowy $adres.poczta, $adres.panstwo.nazwa
+	$adres.kodPocztowy $adres.poczta, $!adres.panstwo.nazwa
 #end
 
 #macro (tr $name $value)
@@ -33,10 +33,10 @@
 <div align="center">
 <table  width="500px" class="border">
 #@tr ('Adres')
-	#dispalyAddress($pracownik.getAdresWCelachPodatkowych())
+	#displayAddress($pracownik.getAdresWCelachPodatkowych())
 #end
 #@tr ('Adres korespondencyjny')  
-	#dispalyAddress($pracownik.getAdresKorespondencyjny())
+	#displayAddress($pracownik.getAdresKorespondencyjny())
 #end
 #tr ('Płeć' $pracownik.plec.nazwa)
 #@tr ('Data i miejsce urodzenia')
@@ -46,7 +46,7 @@
 #@tr ('Urząd skarbowy')
 	$pracownik.urzadSkarbowy
 	<br> 
-	#dispalyAddress ($pracownik.urzadSkarbowy)
+	#displayAddress ($pracownik.urzadSkarbowy)
 #end
 #tr ('Pesel' $pracownik.pesel)
 #tr ('Nip' $pracownik.nip)
@@ -59,13 +59,22 @@
 #end
 #tr ('Number konta' $pracownik.nrKonta)
 #tr ($pracownik.status.nazwa $pracownik.status.opis)
-#@tr ('Odprowadza składki')
-<ul>
-	#foreach ($skladka in $pracownik.status.skladki)
-        <li>$skladka.nazwa</li>
-	#end
-	#if ($pracownik.dobrowolneUbezpieczenieChorobowe) <li>Chce podlegać dobrowolenemu ubezpieczeniu chorobowemu</li> #end
-</ul>
-#end
+##na potrzby screenów
+<tr>
+			<th colspan="2">
+				<div align="center">
+					Nie odpowadza żadnych składek
+				</div>
+			</th>
+		</tr>
+###@tr ('Odprowadza składki')
+##<ul>
+##	#foreach ($skladkaPracownika in $pracownik.status.skladki)
+##        <li>
+##			$skladkaPracownika.getSkladka()($skladkaPracownika.getTypUmowy()#if ($skladkaPracownika.dobrowolna), dobrowolnie) #end )
+##		</li>
+##	#end
+##</ul>
+###end
 </table>
 </div>

@@ -55,6 +55,6 @@
 		<mapping class="pl.waw.mizinski.umowy.model.TypUmowy" />
 		<mapping class="pl.waw.mizinski.umowy.model.Umowa" />
 		<mapping class="pl.waw.mizinski.umowy.model.Rachunek" />
-
+		<mapping class="pl.waw.mizinski.umowy.model.SkladkaPracownika" />
 	</session-factory>
 </hibernate-configuration>

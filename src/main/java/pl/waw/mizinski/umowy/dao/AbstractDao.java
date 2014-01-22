@@ -9,20 +9,24 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateSessionContext;
+import org.objectledge.hibernate.HibernateUtils;
 
-public class AbstractDao<K extends Serializable, E> {
+public abstract class AbstractDao<K extends Serializable, E> {
 
 	protected final Context context;
 	private final Class<E> entityClass;
 
 	public AbstractDao(Context context) {
 		this.context = context;
-		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
+		ParameterizedType genericSuperclass = (ParameterizedType) getClass()
+				.getGenericSuperclass();
+		this.entityClass = 
+				(Class<E>) genericSuperclass.getActualTypeArguments()[1];
 	}
 
 	protected Session session() {
-		return HibernateSessionContext.getHibernateSessionContext(context).getSession();
+		return HibernateSessionContext.getHibernateSessionContext(context)
+				.getSession();
 	}
 
 	public Class<E> getEntityClass() {
@@ -35,7 +39,7 @@ public class AbstractDao<K extends Serializable, E> {
 
 	public List<E> getAll() {
 		Query query = session().createQuery("from " + getEntityClass().getName());
-		return query.list();
+		return HibernateUtils.queryResult(session(), query);
 	}
 
 	public void add(E entity) {
@@ -45,15 +49,15 @@ public class AbstractDao<K extends Serializable, E> {
 	public K save(E entity) {
 		return (K) session().save(entity);
 	}
-	
+
 	public void saveOrUpdate(E entity) {
 		session().saveOrUpdate(entity);
 	}
-	
+
 	public E merge(E entity) {
 		return (E) session().merge(entity);
 	}
-	
+
 	public void remove(E entity) {
 		session().delete(entity);
 	}

@@ -2,6 +2,7 @@ package pl.waw.mizinski.umowy.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Umowa {
 	
@@ -9,12 +10,16 @@ public class Umowa {
 	private TypUmowy typUmowy;
 	private Pracownik pracownik;
 	private Zadanie zadanie;
+	private String przedmiotUmowy;
 	private Platnosc platnosc;
 	private Date dataZawarcia;
 	private Date dataRozpoczecia;
 	private Date dataZakonczenia;
 	private BigDecimal wynagrodzenie;
+	private Boolean ubezpieczeniaDobrowolne;
 	private Boolean wykonywanaUZleceniodawcy;
+	private Boolean wygenerowanoRachunki;
+	private List<Rachunek> rachunki;
 
 	public String getNrUmowy() {
 		return nrUmowy;
@@ -48,6 +53,14 @@ public class Umowa {
 		this.zadanie = zadanie;
 	}
 
+	public String getPrzedmiotUmowy() {
+		return przedmiotUmowy;
+	}
+	
+	public void setPrzedmiotUmowy(String przedmiotUmowy) {
+		this.przedmiotUmowy = przedmiotUmowy;
+	}
+	
 	public Platnosc getPlatnosc() {
 		return platnosc;
 	}
@@ -88,16 +101,40 @@ public class Umowa {
 		this.wynagrodzenie = wynagrodzenie;
 	}
 
+	public Boolean getUbezpieczeniaDobrowolne() {
+		return ubezpieczeniaDobrowolne;
+	}
+	
+	public void setUbezpieczeniaDobrowolne(Boolean ubezpieczeniaDobrowolne) {
+		this.ubezpieczeniaDobrowolne = ubezpieczeniaDobrowolne;
+	}
+	
 	public Boolean getWykonywanaUZleceniodawcy() {
 		return wykonywanaUZleceniodawcy;
 	}
-
+	
 	public void setWykonywanaUZleceniodawcy(Boolean wykonywanaUZleceniodawcy) {
 		this.wykonywanaUZleceniodawcy = wykonywanaUZleceniodawcy;
 	}
 	
 	public JednostkaOrganizacyjna getJednostkaOrganizacyjna() {
 		return zadanie.getJednostkaOrganizacyjna();
+	}
+	
+	public Boolean getWygenerowanoRachunki() {
+		return wygenerowanoRachunki;
+	}
+	
+	public void setWygenerowanoRachunki(Boolean wygenerowanoRachunkil) {
+		this.wygenerowanoRachunki = wygenerowanoRachunkil;
+	}
+	
+	public List<Rachunek> getRachunki() {
+		return rachunki;
+	}
+	
+	public void setRachunki(List<Rachunek> rachunki) {
+		this.rachunki = rachunki;
 	}
 	
 	@Override

@@ -44,7 +44,7 @@ dojoType="dijit.form.TextBox" />##if($_field.isRequired()) required #end>
 #end
 
 #macro (option $_field $value $name )
-#if($value == $_field) <option value="$value" selected>$name</option>
+#if($value == $_field) <option value="$value" selected="true">$name</option>
 #else <option value="$value">$name</option>#end
 #end
 
@@ -100,5 +100,30 @@ dojoType="dijit.form.Textarea" />##if($_field.isRequired()) required #end>
 <tr>
 	#td_label($_field)
 	#td_edit_textarea($_field)
+</tr>
+#end
+
+#macro (edit_checkbox $_field)
+<input type="checkbox" dojoType="dijit.form.CheckBox" id="$_field.Key" name="$_field.Key" value="true" #if($_field == true) checked #end/>
+<label for="wykonywanaUZleceniodawcy">$_field.DisplayName</label>
+#end
+
+#macro (tr_edit_checkbox $_field)
+<tr>
+	<th colspan="2">
+		<div align="center">
+			#edit_checkbox($_field)
+		</div>
+	</th>
+</tr>
+#end
+
+#macro (tr_edit_checkbox_with_id $_field $_id)
+<tr id="$_id">
+	<th colspan="2">
+		<div align="center">
+			#edit_checkbox($_field)
+		</div>
+	</th>
 </tr>
 #end

@@ -19,5 +19,6 @@
 		  <menuItem label="Przegląd" view="zadania.ZadanieList"/>
 		  <menuItem label="Dodaj" view="zadania.EditZadanie"/>
 		</menu>
+		 <menu label="Wyloguj" view="pracownicy.PracownikList"/>
 	</menuSet> 
 </config>

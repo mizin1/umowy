@@ -47,6 +47,7 @@ public class UmowaAssembler {
 		umowa.setPracownik(pracownik);
 		final Zadanie zadanie = zadanieDao.getById(umowaIntake.getZadanie());
 		umowa.setZadanie(zadanie);
+		umowa.setPrzedmiotUmowy(umowaIntake.getPrzedmiotUmowy());
 		final Platnosc platnosc = platnoscDao.getById(umowaIntake.getPlatnosc());
 		umowa.setPlatnosc(platnosc);
 		umowa.setDataZawarcia(umowaIntake.getDataZawarcia());
@@ -63,6 +64,7 @@ public class UmowaAssembler {
 		umowaIntake.setTypUmowy(umowa.getTypUmowy().getNazwa());
 		umowaIntake.setPracownik(umowa.getPracownik().getId());
 		umowaIntake.setZadanie(umowa.getZadanie().getId());
+		umowaIntake.setPrzedmiotUmowy(umowa.getPrzedmiotUmowy());
 		umowaIntake.setPlatnosc(umowa.getPlatnosc().getNazwa());
 		umowaIntake.setDataZawarcia(umowa.getDataZawarcia());
 		umowaIntake.setDataRozpoczecia(umowa.getDataZakonczenia());

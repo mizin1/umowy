@@ -7,7 +7,9 @@
 		lazy="true">
 		<id name="id" type="java.lang.Long">
 			<column name="id" sql-type="int4" />
-			<generator class="increment" />
+			<generator class="sequence">
+                <param name="sequence">pracownik_sequence</param>
+            </generator>
 		</id>
 		<property name="nazwisko" type="java.lang.String">
 			<column name="nazwisko" sql-type="varchar" />
@@ -59,11 +61,8 @@
 			class="pl.waw.mizinski.umowy.model.StatusPracownika">
 			<column name="status" />
 		</many-to-one>
-		<property name="dobrowolneUbezpieczenieChorobowe" type="java.lang.Boolean">
-			<column name="dobrowolne_ub_chorobowe" sql-type="boolean" />
-		</property>
 
-		<bag name="adresy" table="adres" cascade="delete,save-update,delete-orphan" inverse="true" >
+		<bag name="adresy" table="adres" cascade="all" inverse="true" >
          	<key>
                 <column name="pracownik" />
             </key>

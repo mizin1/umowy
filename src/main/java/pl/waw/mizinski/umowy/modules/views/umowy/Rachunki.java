@@ -30,7 +30,7 @@ public class Rachunki extends AbstractBuilder {
 		if (requestParameters.isDefined("nrUmowy")) {
 			String nrUmowy = requestParameters.get("nrUmowy");
 			Umowa umowa = umowaDao.getById(nrUmowy);
-			templatingContext.put("rachunki", rachunekDao.findByUmowa(umowa));
+			templatingContext.put("rachunki", rachunekDao.getRachunekListByUmowa(umowa));
 			templatingContext.put("nrUmowy", nrUmowy);
 			return super.build(template, embeddedBuildResults);
 		} else {

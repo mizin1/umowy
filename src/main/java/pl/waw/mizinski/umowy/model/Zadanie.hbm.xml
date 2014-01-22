@@ -7,7 +7,9 @@
 		lazy="true">
 		<id name="id" type="java.lang.Long">
 			<column name="id" sql-type="int4" />
-			<generator class="increment" />
+			<generator class="sequence">
+                <param name="sequence">zadanie_sequence</param>
+            </generator>
 		</id>
 		<property name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />

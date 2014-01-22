@@ -31,7 +31,16 @@
 					<param name="nrMieszkania" type="String" />
 					<param name="kodPocztowy" type="String" />
 					<param name="poczta" type="String" />
-					<param name="kodPanstwa" type="String" />
+				</src>
+				<policy ssl="false" auth="false" />
+			</method>
+		</service>
+			<service name="UmowaService">
+			<method name="isUbezpieczenieDobrowolneActive">
+				<src class="pl.waw.mizinski.umowy.ajax.UmowaService"
+					method="isUbezpieczenieDobrowolneActive">
+					<param name="typUmowy" type="String" />
+					<param name="idPracownika" type="Long" />
 				</src>
 				<policy ssl="false" auth="false" />
 			</method>

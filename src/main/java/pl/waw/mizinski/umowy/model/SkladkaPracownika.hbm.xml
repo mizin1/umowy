@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="pl.waw.mizinski.umowy.model.SkladkaPracownika"
+		table="skladka_pracownika" lazy="true">
+		<composite-id name="skladkaPracownikaPK"
+			class="pl.waw.mizinski.umowy.model.SkladkaPracownikaPK">
+			<key-many-to-one name="statusPracownika"
+				class="pl.waw.mizinski.umowy.model.StatusPracownika">
+				<column name="status_pracownika" />
+			</key-many-to-one>
+			<key-many-to-one name="typUmowy"
+				class="pl.waw.mizinski.umowy.model.TypUmowy">
+				<column name="typ_umowy" />
+			</key-many-to-one>
+			<key-many-to-one name="skladka"
+				class="pl.waw.mizinski.umowy.model.Skladka">
+				<column name="nazwa_skladki" />
+			</key-many-to-one>
+		</composite-id>
+		<property name="dobrowolna" type="java.lang.Boolean">
+			<column name="dobrowolna" sql-type="boolean" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -57,7 +57,7 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 		#foreach ($pracownik in $pracownicy)
 			 <tr> 
 				<td>$pracownik.nazwisko</td>
-                <td>$pracownik.pierwszeImie</td>
+                <td>$pracownik.imie</td>
                 <td>
 					<a href="$link.view('pracownicy.PracownikDetails').set('id', $pracownik.id)"">Szczegóły</a>
 					<a href="$link.view('pracownicy.EditPracownik').set('id', $pracownik.id)">Edytuj</a>

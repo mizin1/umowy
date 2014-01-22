@@ -62,7 +62,7 @@ public class Welcome extends AbstractBuilder {
 		UrzadSkarbowy urzadSkarbowy = urzadSkarbowyDao.getAll().get(0);
 //		AdresPracownika adres = adresDao.getById();
 		Umowa umowa = umowaDao.getAll().get(0);
-		Rachunek rachunek = rachunekDao.findByUmowa(umowa).get(0);
+		Rachunek rachunek = rachunekDao.getRachunekListByUmowa(umowa).get(0);
 		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		templatingContext.put("jednostka", jednostka);
 		templatingContext.put("zadanie", zadanie);

@@ -59,11 +59,10 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
 	<field name="Pesel" key="pesel" type="String" displayName="Pesel">
-		<rule name="mask" value="\d{11}">Niepoprawby forma numeru pesel</rule>
+		<rule name="mask" value="(^$)|(\d{11})">Niepoprawny format numeru pesel</rule>
 	</field>
 	<field name="Nip" key="nip" type="String" displayName="nip">
-		<rule name=""></rule>
-		<rule name="mask" value="\d{10}">Niepoprawny forma numeru NIP</rule>
+		<rule name="mask" value="(^$)|(\d{10})">Niepoprawny forma numeru NIP</rule>
 	</field>
 	<field name="NrDokumentuTozsamosci" key="nrDokumentuTozsamosci" type="String" displayName="Numer Dokumentu toższamości">
 		<rule name="required" value="true">To pole jest wymagane</rule>
@@ -75,7 +74,6 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="Status" key="status" type="String" displayName="status">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
-	<field name="DobrowolneUbezpieczenieChorobowe" key="dobrowolneUbezpieczenieChorobowe" type="boolean" displayName="Chce podlegać dobrowolnemu ubezpieczniu chorobowemu"/>
 	<field name="Miejscowosc" key="miejscowosc" type="String" displayName="Miejscowość">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
@@ -117,6 +115,9 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="Zadanie" key="zadanie" type="long" displayName="Zadanie">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
+	<field name="PrzedmiotUmowy" key="przedmiotUmowy" type="String" displayName="Przedmiot umowy">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
 	<field name="Platnosc" key="platnosc" type="String" displayName="Płatność">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>	
@@ -139,6 +140,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>
+	<field name="UbezpieczeniaDobrowolne" key="ubezpieczeniaDobrowolne" type="boolean" displayName="Zleceniodawca/Wykonawca chce przystąpić do dobrowolnyc ubezpieczeń społecznych"/>
 	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
 </group>
 
@@ -155,7 +157,6 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	</field>
 	<field name="Opis" key="opis" type="String" />
 	<field name="Budzet" key="budzet" type="BigDecimal" displayName="Budżet" formatterStyle="money">
-		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>
 	<field name="DataRozpoczecia" key="dataRozpoczecia" type="DateString" displayName="Data rozpoczęcia">

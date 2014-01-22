@@ -11,7 +11,13 @@
 		<property name="opis" type="java.lang.String">
 			<column name="opis" sql-type="varchar" />
 		</property>
-		<set name="skladki" table="skladka_pracownika" 
+		<bag name="skladki" table="skladka_prac" cascade="all" inverse="true" >
+         	<key>
+                <column name="status_pracownika" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.SkladkaPracownika" />
+        </bag>
+		<!--<set name="skladki" table="skladka_pracownika" 
         	inverse="false" lazy="true" fetch="select" cascade="all" >
             <key>
                 <column name="status_pracownika" not-null="true" />
@@ -19,6 +25,6 @@
             <many-to-many entity-name="pl.waw.mizinski.umowy.model.Skladka">
                 <column name="nazwa_skladki" not-null="true" />
             </many-to-many>
-        </set>
+        </set> -->
 	</class>
 </hibernate-mapping>

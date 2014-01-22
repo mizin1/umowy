@@ -8,5 +8,11 @@
 		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
+		<property name="tytul" type="java.lang.String">
+			<column name="tytul" sql-type="varchar" />
+		</property>
+		<property name="kosztUzyskaniaPrzychodu" type="java.lang.Integer">
+			<column name="koszt_uzystkania_przychodu" sql-type="int4" />
+		</property>
 	</class>
 </hibernate-mapping>

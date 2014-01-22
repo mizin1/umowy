@@ -11,9 +11,6 @@ public class ExampleService {
 	}
 	
 	public PracownikImieNazwiskoPOJO getPracownik(String imie) {
-		PracownikImieNazwiskoPOJO pojo = new PracownikImieNazwiskoPOJO();
-		pojo.setImie(imie);
-		pojo.setNazwisko(imie + "owski");
-		return pojo;
+		return  new PracownikImieNazwiskoPOJO(null, imie, imie + "owski");
 	}
 }

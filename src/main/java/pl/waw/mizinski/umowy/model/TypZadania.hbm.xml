@@ -9,9 +9,17 @@
 			<key-property name="nazwa" type="java.lang.String">
 				<column name="nazwa" />
 			</key-property>
-            <key-many-to-one name="jednostkaOrganizacyjna" class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna">
+            		<key-many-to-one name="jednostkaOrganizacyjna" class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna">
 				<column name="jednostka_organizacyjna" />
 			</key-many-to-one>
 		</composite-id>
+	<bag name="zadania" table="zadanie" cascade="all" inverse="true" >
+         	
+         	<key>
+                <column name="typ_zadania" />
+                <column name="jednostka_organizacyjna"/>
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.Zadanie" />
+        </bag>
 	</class>
 </hibernate-mapping>

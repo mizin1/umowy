@@ -9,7 +9,6 @@ public class UrzadSkarbowy {
 	private String nrMieszkania;
 	private String kodPocztowy;
 	private String poczta;
-	private Panstwo panstwo; 
 	
 	public String getNazwa() {
 		return nazwa;
@@ -65,14 +64,6 @@ public class UrzadSkarbowy {
 
 	public void setPoczta(String poczta) {
 		this.poczta = poczta;
-	}
-
-	public Panstwo getPanstwo() {
-		return panstwo;
-	}
-
-	public void setPanstwo(Panstwo panstwo) {
-		this.panstwo = panstwo;
 	}
 
 	@Override
