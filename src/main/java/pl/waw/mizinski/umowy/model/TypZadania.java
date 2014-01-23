@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TypZadania {
 	
-	private TypZadaniaPK typZadaniaPK;
+	private TypZadaniaPK typZadaniaPK = new TypZadaniaPK();
 	private List<Zadanie> zadania;
 
 	public TypZadaniaPK getTypZadaniaPK() {

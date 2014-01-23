@@ -11,7 +11,7 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 	dojo.require("dijit.dijit-all");
 </script>
 
-<h2 align="center">Rachunki do umowy nr $nrUmowy</h2>
+<h1 align="center">Rachunki do umowy nr $nrUmowy</h1>
 
 <table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
 	style="margin: 2em auto;"> 

@@ -6,31 +6,6 @@
 Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,String,StringKey,boolean,char,double,float,int,long,short,byte,Enum
  -->
 
-
-<!-- 
-<group name="AttributeValue" key="attv" 
-            mapToObject="om.AttributeValue">
-    <field name="Value" key="val" type="String">
-        <rule name="maxLength" value="255">Value length cannot be &gt; 255</rule>
-        <required-message>This module requires data for this 
-                          attribute.
-        </required-message>
-    </field>
-    <field name="Url" key="url" type="String" mapToProperty="Value">
-        <rule name="maxLength" value="255">Url length cannot be &gt; 255</rule>
-        <rule name="mask" value="^$|http.+">Please enter an url starting with "http"</rule>
-        <required-message>This module requires a valid url.</required-message>
-    </field>
-    <field name="OptionId" key="optionid" type="NumberKey">
-        <rule name="mask" value="^$|[0-9]+">Please select a valid choice</rule>
-        <required-message>This module requires that you select an option 
-                          for this attribute.
-        </required-message>
-    </field>
-</group>
-
--->
-
 <group name="PracownikIntake" key="pracownikIntake" mapToObject="intake.PracownikIntake">
 	<field name="Id" key="id" type="long" />
 	<field name="Nazwisko" key="nazwisko" type="String" displayName="Nazwisko">
@@ -140,7 +115,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>
-	<field name="UbezpieczeniaDobrowolne" key="ubezpieczeniaDobrowolne" type="boolean" displayName="Zleceniodawca/Wykonawca chce przystąpić do dobrowolnyc ubezpieczeń społecznych"/>
+	<field name="UbezpieczeniaDobrowolne" key="ubezpieczeniaDobrowolne" type="boolean" displayName="Dobrowolne ubezpieczenia społeczne"/>
 	<field name="WykonywanaUZleceniodawcy" key="wykonywanaUZleceniodawcy" type="boolean" displayName="Wykonywana u zleceniodawcy"/>
 </group>
 
@@ -167,7 +142,31 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<!-- <rule name="required" value="true">To pole jest wymagane</rule> -->
 		<rule name="format" value="yyyy-MM-dd">Proszę podać datę w formacie dd-MM-yyyy</rule>
 	</field>
-	<field name="Rozliczone" key="rozlicznone" type="boolean" displayName="Oznacz zadanie jako rozliczone"/>
+	<field name="Rozliczone" key="rozliczone" type="boolean" displayName="Oznacz zadanie jako rozliczone"/>
+</group>
+
+<group name="TypZadania" key="typZadania" mapToObject="intake.TypZadaniaIntake">
+	<field name="Nazwa" key="nazwa" type="String" displayName="Nazwa">
+        <rule name="required" value="true">To pole jest wymagane</rule>
+    </field>
+    <field name="JednostkaOrganizacyjna" key="jednostkaOrganizacyjna" type="String" displayName="Jednostka organizacyjna">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+</group>
+
+<group name="Platnosc" key="platnosc" mapToObject="model.Platnosc">
+	<field name="Nazwa" key="nazwa" type="String" displayName="Nazwa">
+        <rule name="required" value="true">To pole jest wymagane</rule>
+    </field>
+    <field name="Okres" key="okres" type="int" displayName="Okres Platnosci">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
+		<rule name="minValue" value="1">Wprowadzona wartość jest niepoprawna</rule>
+	</field>
+   <field name="JednostkaOkresu" key="jednostkaOkresu" type="Enum" displayName="Jednostka Okresu">
+		<rule name="format" value="pl.waw.mizinski.umowy.model.enums.JednostkaOkresu"/>
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
 </group>
 
 
@@ -189,41 +188,6 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="LoginService" key="loginservice" type="Enum">
  		<rule name="format" value="org.objectledge.Login$Service">The value should be of enum value.</rule>
 	</field>	
-</group>
-
-<group name="Person" key="person" mapToObject="or.Person">
-	<field name="PersonId" key="personid" type="long"/>
-	<field name="Name" key="name" type="String" displayName="First name">
-		<rule name="maxLength" value="50">person.name.size50_exided</rule>
-        <rule name="required" value="true">person.name.required</rule>
-		<rule name="mask" value="[^ ]+">person.name.no_space</rule>        
-		<rule name="mask" value="[^,]+">person.name.no_comma</rule>        
-    </field>
-	<field name="Surname" key="surname" type="String" displayName="Last name">
-		<rule name="maxLength" value="50">person.surname.size50_exided</rule>
-        <rule name="required" value="true">person.surname.required</rule>
-    </field>
-	<field name="Sex" key="sex" type="char">
-        <rule name="mask" value="^$|M|F">person.plec.invalid_format</rule>
-    </field>
-    <field name="Telephone" key="telephone" type="String" displayName="Telephone number">
-  		<rule name="maxLength" value="20">person.telephone.size20_exided</rule>
-		<rule name="mask" value="^$|\+{0,1}[ 0-9]{10,19}">person.telephone.invalid_format</rule>  		
-    </field>
- 	<field name="BirthDate" key="birthdate" type="DateString" displayName="Date of Birh">
- 		<rule name="format" value="dd.MM.yyyy">person.birth.date.invalid_format</rule>
-        <rule name="required" value="true">person.birth.date.required</rule>
- 	</field>
-	<field name="Email" key="email" type="String" displayName="e-m@il">
-        <rule name="mask" value="^$|^[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[a-z]{2}|com|org|net|gov|biz|info|name|aero|biz|info|jobs|museum)$">person.email.invalid_format</rule>
-        <rule name="maxLength" value="50">person.email.size50_exided</rule>
-    </field>
-	<field name="Student" key="student" type="boolean" displayName="Is student?"/>
-	<field name="Priority" key="priority" type="short" displayName="Importance">
-        <rule name="maxValue" value="100">person.priority.maxvalue100_exided</rule>
-        <rule name="minValue" value="0">person.priority.minvalue0_exided</rule>
-        <rule name="invalidNumber" value="">person.priority.invalid_format</rule>
-    </field>
 </group>
 -->
 </input-data>

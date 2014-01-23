@@ -6,19 +6,24 @@
  -->
 
 <config>
-	<menuSet name="default">	
+	<menuSet name="default">
 		<menu label="Pracownicy">
-		  <menuItem label="Przegląd" view="pracownicy.PracownikList"/>
-		  <menuItem label="Dodaj" view="pracownicy.EditPracownik"/>
+			<menuItem label="Przegląd" view="pracownicy.PracownikList" />
+			<menuItem label="Dodaj" view="pracownicy.EditPracownik" />
 		</menu>
 		<menu label="Umowy">
-		  <menuItem label="Przegląd" view="umowy.UmowaList"/>
-		  <menuItem label="Dodaj" view="umowy.EditUmowa"/>
+			<menuItem label="Przegląd" view="umowy.UmowaList" />
+			<menuItem label="Dodaj" view="umowy.EditUmowa" />
 		</menu>
-		<menu label="Zadania">
-		  <menuItem label="Przegląd" view="zadania.ZadanieList"/>
-		  <menuItem label="Dodaj" view="zadania.EditZadanie"/>
+		<menu label="Zadania" view="zadania.ZadanieList">
+			<menuItem label="Przegląd" view="zadania.ZadanieList" />
+			<menuItem label="Dodaj" view="zadania.EditZadanie" />
+			<menuItem label="Typy zadań" view="zadania.TypyZadan" />
 		</menu>
-		 <menu label="Wyloguj" view="pracownicy.PracownikList"/>
-	</menuSet> 
+		<menu label="Administracja">
+			<menuItem label="Płatnosci" view="admin.Platnosci" />
+			<menuItem label="Struktura organizacyjna" view="admin.Jednostki" />
+		</menu>
+		<menu label="Wyloguj" view="pracownicy.PracownikList" />
+	</menuSet>
 </config>

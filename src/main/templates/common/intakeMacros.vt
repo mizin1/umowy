@@ -127,3 +127,8 @@ dojoType="dijit.form.Textarea" />##if($_field.isRequired()) required #end>
 	</th>
 </tr>
 #end
+
+#macro(edit_number $_field)
+#intake_message($_field)
+<input name="$_field.Key" dojoType="dijit.form.NumberSpinner" trim="true" value="$!_field" type="number" constraints="{min:1,max:100,places:0}" required="$_field.Required">
+#end

@@ -66,11 +66,14 @@
 	
 	dojo.addOnLoad(wprowadzAdresKorespondencyjny);
 	
+	
+	
+	
 </script>
 
 #set($pracownikGroup = $intake.PracownikIntake.Default)
 
-<h2 align="center">Wprowadź dane pracownika</h2>
+<h1 align="center">Wprowadź dane pracownika</h1>
 
 <div align="center">
     <form  dojoType="dijit.form.Form" method="post" action="$link.view('pracownicy.PracownikList').action('pracownicy.EditPracownik')">
@@ -259,4 +262,3 @@
 		</tr>
    </table>
 </div>
-

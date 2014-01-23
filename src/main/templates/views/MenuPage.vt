@@ -2,6 +2,7 @@
 ## menu creation
 <div id="secure-menu"></div>
 $component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
-
+<br>
+<div>
 $!embeddedPlaceholder
-
+</div>

@@ -6,6 +6,7 @@
 	<component class="pl.waw.mizinski.umowy.dao.ZadanieDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PanstwoDao" />
 	<component class="pl.waw.mizinski.umowy.dao.StatusPracownikaDao" />
+	<component class="pl.waw.mizinski.umowy.dao.SkladkaPracownikaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PracownikDao" />
 	<component class="pl.waw.mizinski.umowy.dao.AdresPracownikaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao" />
@@ -14,23 +15,10 @@
 	<component class="pl.waw.mizinski.umowy.dao.UmowaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.RachunekDao" />
 
-	<component class="pl.waw.mizinski.umowy.assembler.PracownikAssembler">
-		<parameter />
-		<parameter />
-		<parameter />
-	</component>
-	
-	<component class="pl.waw.mizinski.umowy.assembler.UmowaAssembler">
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-	</component>
-	
-	<component class="pl.waw.mizinski.umowy.assembler.ZadanieAssembler">
-		<parameter />
-	</component>
+	<component class="pl.waw.mizinski.umowy.assembler.PracownikAssembler" />
+	<component class="pl.waw.mizinski.umowy.assembler.UmowaAssembler" />
+	<component class="pl.waw.mizinski.umowy.assembler.ZadanieAssembler" />
+	<component class="pl.waw.mizinski.umowy.assembler.TypZadaniaAssembler" />
 
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
@@ -91,6 +79,7 @@
 	<component class="org.objectledge.web.mvc.tools.PageToolFactory" />
 	<component class="org.objectledge.web.mvc.components.ComponentToolFactory" />
 	<component class="org.objectledge.i18n.WebI18nToolFactory" />
+	<component class="org.objectledge.web.mvc.tools.ParametersToolFactory"/>
 	<!-- <component class="org.objectledge.templating.tools.ContextTools"> <sequence> 
 		<parameter class-key="org.objectledge.i18n.WebI18nToolFactory"/> <parameter 
 		class-key="org.objectledge.web.mvc.tools.LinkToolFactory"/> <parameter class-key="org.objectledge.web.mvc.builders.ViewEnclosureManager"/> 
@@ -112,6 +101,7 @@
 			<parameter class-key="org.objectledge.web.mvc.tools.PageToolFactory" />
 			<parameter class-key="org.objectledge.web.mvc.builders.ViewEnclosureManager" />
 			<parameter class-key="org.objectledge.i18n.WebI18nToolFactory"/>
+			<parameter class-key="org.objectledge.web.mvc.tools.ParametersToolFactory"/>
 		</sequence>
 	</component>
 

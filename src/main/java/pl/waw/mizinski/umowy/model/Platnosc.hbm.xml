@@ -8,11 +8,14 @@
 		<id name="nazwa" type="java.lang.String">
 			<column name="nazwa" sql-type="varchar" />
 		</id>
-		<property name="dni" type="java.lang.Integer">
-			<column name="dni" sql-type="int4" />
+		<property name="okres" type="java.lang.Integer">
+			<column name="okres" sql-type="int4" />
 		</property>
-		<property name="miesiace" type="java.lang.Integer">
-			<column name="miesiace" sql-type="int4" />
+		<property name="jednostkaOkresu" column="jednostka">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">pl.waw.mizinski.umowy.model.enums.JednostkaOkresu</param>
+				<param name="type">12</param>
+			</type>
 		</property>
 	</class>
 </hibernate-mapping>

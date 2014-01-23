@@ -1,0 +1,76 @@
+#actionUtils
+
+<script type="text/javascript">
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.Select");
+</script>
+
+<h1 align="center">Płatności</h1>
+<br>
+
+<div align="center" >
+	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
+	</form>
+	
+	<div dojoType="dijit.form.DropDownButton"> 
+		<span>Dodaj nowy typ płatności</span>
+		<div dojoType="dijit.TooltipDialog" class="typ-zadania-tooltip">
+			<form  dojoType="dijit.form.Form" method="post" action="$link.action('admin.AddPlatnosc')">
+				#set($platnoscGroup = $intake.Platnosc.Default)
+				#label($platnoscGroup.Nazwa)
+				<br>
+				#edit_textline($platnoscGroup.Nazwa)
+				<br>
+				#label($platnoscGroup.Okres)
+				<br>
+    			<table><tr>
+					<td>
+						#edit_number($platnoscGroup.Okres)
+    				</td>
+        			<td>
+    					#set($field = $platnoscGroup.JednostkaOkresu)
+        				<input type="radio" dojoType="dijit.form.RadioButton" id="dni" name="$field.Key" value="dni" #if($field == 'dni') checked #end/> <label for="dni">dni</label> <br />
+            			<input type="radio" dojoType="dijit.form.RadioButton" id="miesiace" name="$field.Key" value="miesiace" #if($field == 'miesiace') checked #end/> <label for="miesiace">miesięcy</label> <br />
+    				</td>
+                </tr></table>
+				
+				<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Dodaj</button>
+				$intake.declareGroups()	
+			</form>
+		</div>
+	</div>  
+</div>
+
+#@sortedTable()
+    <thead> 
+    <tr>
+        <th class="sortable">Nazwa</th> 
+		<th class="sortable">Okres</th>
+		<th class="sortable">Jednostka</th>
+        <th></th>
+    </tr> 
+    </thead> 
+    <tbody> 
+		#foreach ($platnosc in $platnosci)
+			 <tr> 
+				<td>$platnosc.nazwa</td>
+				<td>$!platnosc.okres</td>
+				<td>
+    				#if($platnosc.jednostkaOkresu == 'dni' ) dni #elseif($platnosc.jednostkaOkresu == 'miesiace' ) miesięcy #end
+				</td>
+                <td>
+					<div dojoType="dijit.form.ComboButton">
+                        <span>Akcje</span>
+						<div dojoType="dijit.Menu">
+							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end onClick="deleteObject('$link.action('admin.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
+							
+                        </div>
+					</div>
+				</td>
+			 </tr> 
+		#end
+    </tbody> 
+#end

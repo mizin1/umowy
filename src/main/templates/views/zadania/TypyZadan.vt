@@ -1,0 +1,67 @@
+#actionUtils
+
+<script type="text/javascript">;
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.Select");
+</script>
+
+<h1 align="center">Typy zadań</h1>
+
+<div align="center" >
+	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
+	</form>
+	
+	<div dojoType="dijit.form.DropDownButton"> 
+		<span>Dodaj nowy typ zadania</span>
+		<div dojoType="dijit.TooltipDialog" class="typ-zadania-tooltip">
+			<form  dojoType="dijit.form.Form" method="post" action="$link.action('zadania.AddTypZadania')">
+				#set($typZadaniaGroup = $intake.TypZadania.Default)
+				#label($typZadaniaGroup.Nazwa)
+				<br>
+				#edit_textline($typZadaniaGroup.Nazwa)
+				<br>
+				#label($typZadaniaGroup.JednostkaOrganizacyjna)
+				<br>
+				#@select($typZadaniaGroup.JednostkaOrganizacyjna)
+					#foreach($jednostka in $jednostki)
+						#option($typZadaniaGroup.Nazwa $jednostka.nazwa $jednostka.nazwa)
+					#end
+				#end
+				<br>
+				<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Dodaj</button>
+				$intake.declareGroups()	
+			</form>
+		</div>
+	</div>
+</div>
+
+#@sortedTable()
+    <thead> 
+    <tr> 
+        <th class="sortable">Nazwa typu</th> 
+		<th class="sortable">Jednostka organizacyjna</th>
+		
+        <th></th>
+    </tr> 
+    </thead> 
+    <tbody> 
+		#foreach ($typ in $typy)
+			 <tr> 
+				<td>$typ.nazwa</td>
+				<td>$typ.getJednostkaOrganizacyjna().nazwa</td>
+                <td>
+					<div dojoType="dijit.form.ComboButton">
+                        <span>Akcje</span>
+							<div dojoType="dijit.Menu">
+								<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('zadania.DeleteTypZadania').set('nazwa', $typ.nazwa).set('jednostka', $typ.getJednostkaOrganizacyjna().nazwa)');">Usuń</div>
+                        </div>
+					</div>
+				</td>
+			 </tr> 
+		#end
+    </tbody> 
+#end
+

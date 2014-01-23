@@ -197,9 +197,10 @@ CREATE TABLE ADRES_PRACOWNIKA
 CREATE TABLE PLATNOSC
 (
 	nazwa VARCHAR(50) NOT NULL,
-	dni	INTEGER,
-	miesiace	INTEGER,
-	PRIMARY KEY(nazwa)
+	okres	INTEGER,
+	jednostka	VARCHAR(20),
+	PRIMARY KEY(nazwa),
+	CHECK (jednostka in ('miesiace', 'dni'))
 )
 ;
 

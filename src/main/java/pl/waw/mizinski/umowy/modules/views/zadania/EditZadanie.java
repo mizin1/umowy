@@ -1,5 +1,9 @@
 package pl.waw.mizinski.umowy.modules.views.zadania;
 
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.objectledge.context.Context;
 import org.objectledge.intake.IntakeContext;
 import org.objectledge.intake.IntakeException;
@@ -17,7 +21,10 @@ import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.intake.ZadanieIntake;
+import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
+import pl.waw.mizinski.umowy.model.TypZadania;
 import pl.waw.mizinski.umowy.model.Zadanie;
+import pl.waw.mizinski.umowy.util.JednostkaOrganizacyjnaComprarator;
 
 public class EditZadanie extends AbstractBuilder {
 
@@ -53,8 +60,14 @@ public class EditZadanie extends AbstractBuilder {
 				throw new ProcessingException(e);
 			}
 		}
-		templatingContext.put("typyZadania", typZadaniaDao.getAll());
-		templatingContext.put("jednostki", jednostkaOrganizacyjnaDao.getAll());
+		Map<JednostkaOrganizacyjna, List<TypZadania>> zadaniaJednostek = new TreeMap<>(new JednostkaOrganizacyjnaComprarator());
+		for (JednostkaOrganizacyjna jednostka : jednostkaOrganizacyjnaDao.getAll()) {
+			List<TypZadania> typyZadan = typZadaniaDao.getTypyZadaniaByJednostka(jednostka);
+			if (!typyZadan.isEmpty()) {
+				zadaniaJednostek.put(jednostka, typyZadan);
+			}
+		}
+		templatingContext.put("zadaniaJednostek", zadaniaJednostek);
 		return super.build(template, embeddedBuildResults);
 	}
 }

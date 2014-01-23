@@ -17,3 +17,14 @@ select.multi {
 div.intake-message {
 	color: red;
 }
+
+
+div.typ-zadania-tooltip {
+	width: 300px;
+}
+
+input.number-spinner {
+	width: 50px;
+}
+
+

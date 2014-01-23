@@ -1,10 +1,12 @@
 package pl.waw.mizinski.umowy.model;
 
+import pl.waw.mizinski.umowy.model.enums.JednostkaOkresu;
+
 public class Platnosc {
 	
 	private String nazwa;
-	private Integer dni;
-	private Integer miesiace;
+	private Integer okres;
+	private JednostkaOkresu jednostkaOkresu;
 
 	public String getNazwa() {
 		return nazwa;
@@ -13,23 +15,23 @@ public class Platnosc {
 	public void setNazwa(String nazwa) {
 		this.nazwa = nazwa;
 	}
-
-	public Integer getDni() {
-		return dni;
-	}
-
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
-
-	public Integer getMiesiace() {
-		return miesiace;
-	}
-
-	public void setMiesiace(Integer miesiace) {
-		this.miesiace = miesiace;
-	}
 	
+	public Integer getOkres() {
+		return okres;
+	}
+
+	public void setOkres(Integer okres) {
+		this.okres = okres;
+	}
+
+	public JednostkaOkresu getJednostkaOkresu() {
+		return jednostkaOkresu;
+	}
+
+	public void setJednostkaOkresu(JednostkaOkresu jednostkaOkresu) {
+		this.jednostkaOkresu = jednostkaOkresu;
+	}
+
 	@Override
 	public String toString() {
 		return nazwa;

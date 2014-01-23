@@ -29,3 +29,84 @@ $i18n.get($errorResult)
 #end
 #end
 #end
+
+
+#macro (tr $name $value)
+    #if ($value)
+        <tr>
+        	<td>$name:</td>
+        	<td>$value</td>
+        </tr>
+    #elseif ($bodyContent)
+		 <tr>
+        	<td>$name:</td>
+        	<td>$bodyContent</td>
+        </tr>
+	#end
+#end
+
+
+#macro (actionUtils)
+    <script type="text/javascript">
+        dojo.require("dijit.dijit");
+    	dojo.require("dijit.Dialog");
+    	dojo.require("dijit.form.Button");
+    	
+    	function toURL(url) {
+        		window.location = url;
+        	}
+        	
+        	var deleteUrl;
+        	function deleteObject(url) {
+        		deleteUrl = url;
+        		dijit.byId('askDelete').show();
+        	}
+    </script>
+    <div dojoType="dijit.Dialog" id="askDelete" title="Potwierdź usunięcie">
+        <h3 align="center">Czy jesteś pewnin, że chcesz usunąć wybrany element?</h3>
+    	<br/>
+    	<button dojoType="dijit.form.Button" onclick="toURL(deleteUrl);">
+    		Tak
+    	</button>
+    	<button dojoType="dijit.form.Button" onclick="dijit.byId('askDelete').hide();">
+    		Nie
+    	</button>		
+    </div>
+#end
+
+#macro (sortedTable)
+$pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
+$pageTool.addStyleLink('style/skins/default/table-grey.css')
+
+<script type="text/javascript">
+	dojo.registerModulePath("org.objectledge", "../../content/script/org/objectledge");
+	dojo.require("dojo.parser");
+	dojo.require("org.objectledge.widget.SorTable");
+</script>
+
+<table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
+	style="margin: 2em auto;"> 
+    <!-- 
+      Here we have function which generates a key for sorting. This
+      implementation simple takes hostname.
+    -->
+    <script type="dojo/method" event="hostName" args="str">
+    	var matcher = str.match(/^https{0,1}:\/\/(.+)$/);
+    	return matcher[1];
+    </script>	
+    <!--
+      Here is the function which compares two columns using 
+      thier own way of comparision. In this case, the last part
+      of e-mail adress is taken into account.
+    -->
+    <script type="dojo/method" event="compare_email" args="array1, array2">
+    	var matcher1 = array1[0].match(/^.+@(.+)$/);
+    	var matcher2 = array2[0].match(/^.+@(.+)$/);
+    	if (matcher1[1]==matcher2[1]) return 0;
+    	if (matcher1[1]<matcher2[1]) return -1;
+    	return 1;
+    </script>
+	$!bodyContent	
+</table> 
+#end
+			

@@ -1,0 +1,41 @@
+<h1 align="center">$umowa.typUmowy.tytul nr $umowa.nrUmowy</h1>
+	
+<div align="center">
+<table  width="500px" class="border">
+	#tr ('Typ umowy' $umowa.typUmowy.nazwa)
+	#tr ('Koszt uzyskania przychodu' "$umowa.typUmowy.kosztUzyskaniaPrzychodu%")
+	#tr ('Pracownik' "$umowa.pracownik.nazwisko $umowa.pracownik.pierwszeImie $!umowa.pracownik.imionaPozostale")
+	#tr ('Zadanie' "$umowa.zadanie.nazwa ($umowa.zadanie.typZadania.nazwa, $umowa.zadanie.typZadania.jednostkaOrganizacyjna)" )
+	#tr ('Przedmiot Umowy' $umowa.przedmiotUmowy )
+	#tr ('Wynagrodzenie' $umowa.wynagrodzenie )
+	#tr ('Platnosc' "$umowa.platnosc.nazwa" ) ##TO dopisac co ile dni np w nawiasie
+	#tr ('Data zawarcia' $umowa.dataZawarcia )
+	#tr ('Data rozpoczęcia' $umowa.dataRozpoczecia )
+	#tr ('Data zakonczenia' $umowa.dataZakonczenia )
+	#tr ('Wykonywana u zleceniodawcy' "#if($umowa.wykonywanaUZleceniodawcy) tak #else nie #end" )
+	
+	#@tr ('Rachunki')
+    	#if (!$umowa.rachunki || $umowa.rachunki.isEmpty())
+			brak
+		#else
+    		$umowa.rachunki.size()<a href="$link.view('umowy.Rachunki').set('nrUmowy', $umowa.nrUmowy)">(pokaż)</a>
+		#end
+	#end		
+			
+	#@tr ('Odprowadzane skladki')
+    	#if ($skladki.isEmpty())
+			brak
+		#else
+    		<ul>
+            	#foreach ($skladka in $skladki)
+                    <li>
+            			$skladka.getSkladka() #if($skladka.dobrowolna == true)  (dobrowolnie) #end
+            		</li>
+            	#end
+        	</ul>
+		#end
+	#end
+	
+	
+</table>
+</div>

@@ -1,18 +1,11 @@
-$pageTool.insertTitlePrefix(' - przeglad')##
-$pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
-$pageTool.addStyleLink('style/skins/default/table-grey.css')
+#actionUtils
 
 <script type="text/javascript">
-	dojo.registerModulePath("org.objectledge", "../../content/script/org/objectledge");
-
-	dojo.require("dojo.parser");
-	dojo.require("org.objectledge.widget.SorTable");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
-	dojo.require("dijit.Tooltip");
 </script>
 
-<h2 align="center">Zadania</h2>
+<h1 align="center">Zadania</h1>
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
@@ -23,28 +16,8 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
         <button dojoType="dijit.form.Button" type="submit" >Dodaj nowe zadanie</button>
     </form>
 </div>
-<table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
-	style="margin: 2em auto;"> 
-    <!-- 
-      Here we have function which generates a key for sorting. This
-      implementation simple takes hostname.
-    -->
-    <script type="dojo/method" event="hostName" args="str">
-    	var matcher = str.match(/^https{0,1}:\/\/(.+)$/);
-    	return matcher[1];
-    </script>	
-    <!--
-      Here is the function which compares two columns using 
-      thier own way of comparision. In this case, the last part
-      of e-mail adress is taken into account.
-    -->
-    <script type="dojo/method" event="compare_email" args="array1, array2">
-    	var matcher1 = array1[0].match(/^.+@(.+)$/);
-    	var matcher2 = array2[0].match(/^.+@(.+)$/);
-    	if (matcher1[1]==matcher2[1]) return 0;
-    	if (matcher1[1]<matcher2[1]) return -1;
-    	return 1;
-    </script>
+
+#@sortedTable()
     <thead> 
     <tr> 
         <th class="sortable">Nazwa zadania</th> 
@@ -68,18 +41,24 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 				<td>$!zadanie.dataZakonczenia</td>
 				<td>#if($zadanie.rozliczone) tak #else nie #end</td>
                 <td>
-					<a href="$link.view('zadania.EditZadanie').set('id', $zadanie.id)">Edytuj</a>
-					<a href="$link.action('zadania.DeleteZadanie').set('id', $zadanie.id)">Usuń</a>
+					<div dojoType="dijit.form.ComboButton">
+                        <span>Akcje</span>
+							<div dojoType="dijit.Menu">
+								<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('zadania.EditZadanie').set('id', $zadanie.id)');">Edytuj</div>
+								<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('zadania.DeleteZadanie').set('id', $zadanie.id)');">Usuń</div>
+                        </div>
+					</div>
 				</td>
 			 </tr> 
 		#end
 		
 		
     </tbody> 
-</table> 
+#end
+
 #foreach ($zadanie in $zadania)
 	 #if ($zadanie.opis)
-    	 <div dojoType="dijit.Tooltip" connectId="$zadanie.id" position="above">
+    	 <div dojoType="dijit.Tooltip" connectId="$zadanie.id" position="below">
     		$zadanie.opis.replaceAll('\n', "<br>")
          </div>
 	#end

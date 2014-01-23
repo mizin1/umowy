@@ -1,6 +1,5 @@
-
-#macro (selectedTyp $typ) #if ($typ == $zadanieUmowy.getTypZadania().getNazwa()) selected: true #else selected: false #end #end
-#macro (selectedZadanie $zad) #if ($zad == $zadanieUmowy.getNazwa()) selected: true #else selected: false #end #end
+#macro (selectedTyp $typ) #if ($typ.nazwa == $zadanieUmowy.getTypZadania().getNazwa()) selected: true #else selected: false #end #end
+#macro (selectedZadanie $zad) #if ($zad.id == $zadanieUmowy.id) selected: true #else selected: false #end #end
 
 <script type="text/javascript">
 	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
@@ -30,7 +29,7 @@
 					#foreach ($typZadania in $entry.getValue())
 						#if ($comma) , #end 
 						#set ($comma = true)
-						{ label: "$typZadania.nazwa", value: "$typZadania.nazwa", #selectedTyp($typZadania.nazwa) }
+						{ label: "$typZadania.nazwa", value: "$typZadania.nazwa", #selectedTyp($typZadania) }
 					#end
 				]
 				var select = dijit.byId('typZadania');
@@ -53,7 +52,7 @@
         					#foreach ($zadanie in $typZadania.zadania)
         						#if ($comma) , #end 
         						#set ($comma = true)
-        						{ label: "$zadanie.nazwa", value: "$zadanie.id", #selectedZadanie($zadanie.nazwa) }
+        						{ label: "$zadanie.nazwa", value: "$zadanie.id", #selectedZadanie($zadanie.id) }
         					#end
         				]
 						var select = dijit.byId('zadanie');
@@ -103,7 +102,7 @@ dojo.addOnLoad(function() {
 
 
 #set($umowaGroup = $intake.UmowaIntake.Default)
-<h2 align="center">Wprowadź dane umowy</h2>
+<h1 align="center">Wprowadź dane umowy</h2>
 	
 <div align="center">
     <form  dojoType="dijit.form.Form" method="post" action="$link.view('umowy.UmowaList').action('umowy.EditUmowa')">

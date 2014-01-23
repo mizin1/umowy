@@ -23,6 +23,7 @@ public class ZadanieAssembler {
 		zadanieIntake.setBudzet(zadanie.getBudzet());
 		zadanieIntake.setDataRozpoczecia(zadanie.getDataRozpoczecia());
 		zadanieIntake.setDataZakonczenia(zadanie.getDataZakonczenia());
+		zadanieIntake.setRozliczone(zadanie.getRozliczone());
 		return zadanieIntake;
 	}
 
@@ -37,6 +38,7 @@ public class ZadanieAssembler {
 		zadanie.setBudzet(zadanieIntake.getBudzet());
 		zadanie.setDataRozpoczecia(zadanieIntake.getDataRozpoczecia());
 		zadanie.setDataZakonczenia(zadanieIntake.getDataZakonczenia());
+		zadanie.setRozliczone(zadanieIntake.getRozliczone());
 		return zadanie;
 	}
 

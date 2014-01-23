@@ -1,0 +1,3 @@
+$pageTool.insertTitlePrefix(' - administacja')
+$viewEnclosureTool.override('MenuPage')
+$!embeddedPlaceholder

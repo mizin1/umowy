@@ -1,58 +1,69 @@
+#macro (selectedTyp $typ) #if ($typ == $intake.ZadanieIntake.Default.TypZadania.Value) selected: true #else selected: false #end #end
+
 <script type="text/javascript">
 ##	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
 	
 	dojo.require("dojo.parser");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
-	dojo.require("dijit.form.DateTextBox");
-	dojo.require("dijit.form.Form");
-	dojo.require("dijit.form.Button");
 	dojo.require("dijit.form.Select");
-	dojo.require("dijit.form.MultiSelect");
-	dojo.require("dijit.form.TextBox");
-	dojo.require("dijit.form.Textarea");
-	dojo.require("dijit.form.RadioButton");
-	dojo.require("dijit.form.CheckBox");
-	dojo.require("dijit.form.ValidationTextBox");
 
-##	dojo.require("org.objectledge.ajax.AjaxRequest");
-##   dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
-	
+	function onJednostkaChange() {
+		var nazwa = dijit.byId('jednostka').value;
+		#foreach($entry in $zadaniaJednostek.entrySet())	     
+			if(nazwa == "$entry.getKey()") {
+				var options = [
+					#set ($comma = false)
+					#foreach ($typZadania in $entry.getValue())
+						#if ($comma) , #end 
+						#set ($comma = true)
+						{ label: "$typZadania.nazwa", value: "$typZadania.nazwa", #selectedTyp($typZadania.nazwa) }
+					#end
+				]
+				var select = dijit.byId('typZadania');
+				select.options = options;
+				select.startup();
+				onTypZadaniaChange();
+			}
+		#end
+	}
+	dojo.addOnLoad(onJednostkaChange);
 </script>
 
 #set($zadanieGroup = $intake.ZadanieIntake.Default)
-<h2 align="center">Wprowadź dane zadania</h2>
+<h1 align="center">Wprowadź dane zadania</h1>
 	
 <div align="center">
     <form  dojoType="dijit.form.Form" method="post" action="$link.view('zadania.ZadanieList').action('zadania.EditZadanie')">
-        <input type="hidden" name="$umowaGroup.NrUmowy.Key" value="$!zadanieGroup.Id.Value">
+        <input type="hidden" name="$zadanieGroup.Id.Key" value="$!zadanieGroup.Id.Value">
 		<table  width="500px" class="border">
 		
 		#tr_edit_textline($zadanieGroup.Nazwa)
-		#@tr_select($zadanieGroup.JednostkaOrganizacyjna)
-			#foreach ($jednostka in $jednostki)
-				#option($zadanieGroup.JednostkaOrganizacyjna $jednostka.nazwa $jednostka.nazwa) 
-			#end	
-		#end
-
-		#@tr_select($zadanieGroup.TypZadania)
-			#foreach ($typ in $typyZadania)
-				#option($zadanieGroup.TypZadania $typ.nazwa $typ.nazwa) 
-			#end	
-		#end
+		#set( $field = $zadanieGroup.JednostkaOrganizacyjna)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "jednostka" name="$field.Key" dojoType="dijit.form.Select" onchange="onJednostkaChange();">
+    				#foreach($entry in $zadaniaJednostek.entrySet())	   
+						#option($zadanieGroup.JednostkaOrganizacyjna $entry.getKey() $entry.getKey()) 
+        			#end
+				</select>
+            </td>
+		</tr>
+		#set( $field = $zadanieGroup.TypZadania)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "typZadania" name="$field.Key" dojoType="dijit.form.Select" ></select>
+            </td>
+		</tr>
 		#tr_edit_textarea($zadanieGroup.Opis)
 		#tr_edit_textline($zadanieGroup.Budzet)
 		#tr_edit_date($zadanieGroup.DataRozpoczecia "yyyy-MM-dd")
 		#tr_edit_date($zadanieGroup.DataZakonczenia "yyyy-MM-dd")
-		<tr>
-			<th colspan="2">
-				<div align="center">
-					#set( $field = $umowaGroup.Rozliczone)
-					<input type="checkbox" dojoType="dijit.form.CheckBox" id="rozliczone" name="$field.Key" value="true" #if($field == true) checked #end/>
-					<label for="rozliczone">Oznacz zadanie jako rozliczone</label>
-				</div>
-			</th>
-		</tr>
+		#tr_edit_checkbox($zadanieGroup.Rozliczone)
 		<tr>
 			<th colspan="2">
 				<div align="center">

@@ -14,21 +14,7 @@
 	$adres.kodPocztowy $adres.poczta, $!adres.panstwo.nazwa
 #end
 
-#macro (tr $name $value)
-    #if ($value)
-        <tr>
-        	<td>$name:</td>
-        	<td>$value</td>
-        </tr>
-    #elseif ($bodyContent)
-		 <tr>
-        	<td>$name:</td>
-        	<td>$bodyContent</td>
-        </tr>
-	#end
-#end
-
-<h2 align="center">$pracownik.nazwisko $pracownik.pierwszeImie $!pracownik.imionaPozostale</h2>
+<h1 align="center">$pracownik.nazwisko $pracownik.pierwszeImie $!pracownik.imionaPozostale</h1>
 
 <div align="center">
 <table  width="500px" class="border">
