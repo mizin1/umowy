@@ -1,4 +1,4 @@
-package pl.waw.mizinski.umowy.modules.actions.pracownicy;
+package pl.waw.mizinski.umowy.modules.actions.jednostki;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,27 +8,25 @@ import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 
-import pl.waw.mizinski.umowy.dao.PracownikDao;
-import pl.waw.mizinski.umowy.model.Pracownik;
+import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 
-public class DeletePracownik implements Valve {
+public class DeleteJednostka implements Valve {
 
-	private final PracownikDao pracownikDao;
+	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;
 
-	public DeletePracownik(final PracownikDao pracownikDao) {
-		this.pracownikDao = pracownikDao;
+	public DeleteJednostka(final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao) {
+		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 	}
 
 	@Override
 	public void process(Context context) throws ProcessingException {
 		Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
-		Long id = requestParameters.getLong("id");
-		Pracownik pracownik = pracownikDao.getById(id);
+		String nazwa = requestParameters.get("nazwa");
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			pracownikDao.remove(pracownik);
+			jednostkaOrganizacyjnaDao.remove(nazwa);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {

@@ -1,0 +1,5 @@
+<configuration>
+	<xsl-paths>
+  		<xsl-path>/fop/xsl/</xsl-path>
+  	</xsl-paths>
+</configuration>

@@ -1,0 +1,92 @@
+#macro(jednostkaSelected $jednostka) #if ($jednostka == $intake.JednostkaOrganizacyjnaIntake.Default.JednostkaNadrzedna.Value) selected: true #else selected: false #end #end
+
+<script type="text/javascript">
+	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
+	
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.Select");
+	
+	function onTypJednostkiChange() {
+		var nazwa = dijit.byId('typJednostki').value;
+		#foreach ($entry in $typyJednostki.entrySet())
+			if (nazwa == "$entry.getKey().nazwa") {
+				var options = [
+					#set ($comma = false)
+					#foreach ($typNadrzedny in $entry.getValue())
+						#foreach($jednostka in $typNadrzedny.jednostki)
+    						#if ( $jednostka != $intake.JednostkaOrganizacyjna.Default.oldNazwa.Value )
+        						#if ($comma) , #end 
+        						#set ($comma = true)
+        						{ label: "$jednostka.nazwa", value: "$jednostka.nazwa", #jednostkaSelected($jednostka.nazwa) }
+    						#end
+						#end
+					#end
+				]
+				var select = dijit.byId('jednostkaNadrzedna');
+				select.options = options;
+				select.startup();
+			}
+		#end
+	}
+	
+	dojo.addOnLoad(onTypJednostkiChange);
+	
+</script>
+
+#set($jednostkaGroup = $intake.JednostkaOrganizacyjnaIntake.Default)
+<h1 align="center">Wprowadź dane jednostki</h1>
+	
+<div align="center">
+    <form  dojoType="dijit.form.Form" method="post" action="$link.view('jednostki.JednostkaList').action('jednostki.EditJednostka')">
+		<table  width="500px" class="border">
+		#set( $field = $jednostkaGroup.Nazwa)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+				<input name="$field.Key" value="$!field" type="text" trim dojoType="dijit.form.TextBox" #if($field.Value && $intake.JednostkaOrganizacyjnaIntake.isForceValid) readOnly #end />
+            </td>
+		</tr>
+		#set( $field = $jednostkaGroup.TypJednostki)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "typJednostki" name="$field.Key" dojoType="dijit.form.Select" onchange="onTypJednostkiChange();">
+    				#foreach ($entry in $typyJednostki.entrySet())
+        				#option($jednostkaGroup.TypJednostki $entry.getKey().nazwa $entry.getKey().nazwa) 
+        			#end	
+				</select>
+            </td>
+		</tr>
+		#set( $field = $jednostkaGroup.JednostkaNadrzedna)
+		<tr>
+			<td>$field.DisplayName</td>
+			<td>
+				#intake_message($field)
+                <select id= "jednostkaNadrzedna" name="$field.Key" dojoType="dijit.form.Select" ></select>
+            </td>
+		</tr>
+		#@tr_select($jednostkaGroup.Reprezentant)
+			#foreach ($reprezentant in $reprezentanci)
+				#option($jednostkaGroup.Reprezentant $reprezentant.nazwa $reprezentant.nazwa) 
+			#end	
+		#end	
+		#tr_edit_textline($jednostkaGroup.Miejscowosc)
+    	#tr_edit_textline($jednostkaGroup.Ulica)
+		#tr_edit_textline($jednostkaGroup.NrDomu)
+		#tr_edit_textline($jednostkaGroup.NrMieszkania)
+		#tr_edit_textline($jednostkaGroup.KodPocztowy)
+		#tr_edit_textline($jednostkaGroup.Poczta)
+		<tr>
+    		<th colspan="2">
+    			<div align="center">
+    				<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Wprowadź</button>
+    			</div>
+    		</th>
+		</tr>
+		</table>
+		$intake.declareGroups()	
+    </form>
+</div>

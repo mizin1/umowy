@@ -22,7 +22,10 @@
 		</menu>
 		<menu label="Administracja">
 			<menuItem label="Płatnosci" view="admin.Platnosci" />
-			<menuItem label="Struktura organizacyjna" view="admin.Jednostki" />
+			<menu label="Jednostki organizacyjne">
+				<menuItem label="Przegląd" view="jednostki.JednostkaList" />
+				<menuItem label="Dodaj" view="jednostki.EditJednostka" />
+			</menu>
 		</menu>
 		<menu label="Wyloguj" view="pracownicy.PracownikList" />
 	</menuSet>

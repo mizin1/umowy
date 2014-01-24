@@ -18,7 +18,7 @@
 		<span>Dodaj nowy typ zadania</span>
 		<div dojoType="dijit.TooltipDialog" class="typ-zadania-tooltip">
 			<form  dojoType="dijit.form.Form" method="post" action="$link.action('zadania.AddTypZadania')">
-				#set($typZadaniaGroup = $intake.TypZadania.Default)
+				#set($typZadaniaGroup = $intake.TypZadaniaIntake.Default)
 				#label($typZadaniaGroup.Nazwa)
 				<br>
 				#edit_textline($typZadaniaGroup.Nazwa)

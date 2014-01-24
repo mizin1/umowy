@@ -20,5 +20,23 @@
 			class="pl.waw.mizinski.umowy.model.Reprezentant">
 			<column name="reprezentant" />
 		</many-to-one>
+		<property name="miejscowosc" type="java.lang.String">
+			<column name="miejscowosc" sql-type="varchar" />
+		</property>
+		<property name="ulica" type="java.lang.String">
+			<column name="ulica" sql-type="varchar" />
+		</property>
+		<property name="nrDomu" type="java.lang.String">
+			<column name="nr_domu" sql-type="varchar" />
+		</property>
+		<property name="nrMieszkania" type="java.lang.String">
+			<column name="nr_mieszkania" sql-type="varchar" />
+		</property>
+		<property name="kodPocztowy" type="java.lang.String">
+			<column name="kod_pocztowy" sql-type="varchar" />
+		</property>
+		<property name="poczta" type="java.lang.String">
+			<column name="poczta" sql-type="varchar" />
+		</property>
 	</class>
 </hibernate-mapping>

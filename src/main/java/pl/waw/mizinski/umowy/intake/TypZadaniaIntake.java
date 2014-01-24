@@ -1,6 +1,5 @@
 package pl.waw.mizinski.umowy.intake;
 
-import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 
 public class TypZadaniaIntake {
 

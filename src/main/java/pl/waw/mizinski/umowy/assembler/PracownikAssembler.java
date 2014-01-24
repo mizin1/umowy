@@ -72,15 +72,9 @@ public class PracownikAssembler {
 		}
 		return pracownikIntake;
 	}
-
-	public Pracownik asPracownikEntity(PracownikIntake pracownikIntake) {
-		return asPracownikEntity(pracownikIntake, null);
-	}
 	
-	public Pracownik asPracownikEntity(PracownikIntake pracownikIntake, Pracownik pracownik) {
-		if (pracownik == null) {
-			pracownik = new Pracownik();
-		}
+	public Pracownik asPracownikEntity(PracownikIntake pracownikIntake) {
+		Pracownik pracownik = new Pracownik();
 		pracownik.setId(pracownikIntake.getId());
 		pracownik.setNazwisko(pracownikIntake.getNazwisko());
 		pracownik.setPierwszeImie(pracownikIntake.getPierwszeImie());

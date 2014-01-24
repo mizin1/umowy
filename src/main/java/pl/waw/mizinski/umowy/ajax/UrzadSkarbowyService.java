@@ -25,13 +25,13 @@ public class UrzadSkarbowyService {
 	public void dodajUrzadSkarbowy(final String nazwa, final String miejscowosc, final String ulica,
 			final String nrDomu, final String nrMieszkania, final String kodPocztowy, final String poczta) throws ProcessingException {
 		UrzadSkarbowy urzadSkarbowy = new UrzadSkarbowy();
-		urzadSkarbowy.setNazwa(nazwa);
-		urzadSkarbowy.setMiejscowosc(miejscowosc);
+		urzadSkarbowy.setNazwa(Utils.trim(nazwa));
+		urzadSkarbowy.setMiejscowosc(Utils.trim(miejscowosc));
 		urzadSkarbowy.setUlica(Utils.trim(ulica));
-		urzadSkarbowy.setNrDomu(nrDomu);
+		urzadSkarbowy.setNrDomu(Utils.trim(nrDomu));
 		urzadSkarbowy.setNrMieszkania(Utils.trim(nrMieszkania));
-		urzadSkarbowy.setKodPocztowy(kodPocztowy);
-		urzadSkarbowy.setPoczta(poczta);
+		urzadSkarbowy.setKodPocztowy(Utils.trim(kodPocztowy));
+		urzadSkarbowy.setPoczta(Utils.trim(poczta));
 		Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		Transaction transaction = null;
 		try {

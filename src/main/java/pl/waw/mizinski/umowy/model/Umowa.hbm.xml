@@ -44,5 +44,11 @@
 		<property name="wygenerowanoRachunki" type="java.lang.Boolean">
 			<column name="wygenerowano_rachunki" sql-type="boolean" />
 		</property>
+		<bag name="rachunki" table="rachunek" cascade="all" inverse="true" >
+         	<key>
+                <column name="nr_umowy" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.Rachunek" />
+        </bag>
 	</class>
 </hibernate-mapping>

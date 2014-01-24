@@ -1,40 +1,13 @@
-$pageTool.insertTitlePrefix(' - przeglad')##
-$pageTool.addStyleLink('style/org/objectledge/widget/SorTable.css')
-$pageTool.addStyleLink('style/skins/default/table-grey.css')
+#actionUtils
 
 <script type="text/javascript">
-	dojo.registerModulePath("org.objectledge", "../../content/script/org/objectledge");
-
-	dojo.require("dojo.parser");
-	dojo.require("org.objectledge.widget.SorTable");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
 </script>
 
 <h1 align="center">Rachunki do umowy nr $nrUmowy</h1>
 
-<table class="grey highlight" dojoType="org.objectledge.widget.SorTable" markRow="false"
-	style="margin: 2em auto;"> 
-    <!-- 
-      Here we have function which generates a key for sorting. This
-      implementation simple takes hostname.
-    -->
-    <script type="dojo/method" event="hostName" args="str">
-    	var matcher = str.match(/^https{0,1}:\/\/(.+)$/);
-    	return matcher[1];
-    </script>	
-    <!--
-      Here is the function which compares two columns using 
-      thier own way of comparision. In this case, the last part
-      of e-mail adress is taken into account.
-    -->
-    <script type="dojo/method" event="compare_email" args="array1, array2">
-    	var matcher1 = array1[0].match(/^.+@(.+)$/);
-    	var matcher2 = array2[0].match(/^.+@(.+)$/);
-    	if (matcher1[1]==matcher2[1]) return 0;
-    	if (matcher1[1]<matcher2[1]) return -1;
-    	return 1;
-    </script>
+#@sortedTable()
     <thead> 
     <tr> 
         <th class="sortable">Nr</th> 
@@ -50,10 +23,15 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 				<td>$rachunek.kwota</td>
 				<td>$rachunek.dataWystawienia</td>
                 <td>
-					<a href="$link">Drukuj</a>
+					<div dojoType="dijit.form.ComboButton">
+                        <span>Akcje</span>
+						<div dojoType="dijit.Menu">
+							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('pdf.RachunekPdf').set('nrUmowy', $nrUmowy).set('nrRachunku', $rachunek.getNrRachunku())');">Drukuj</div>
+                        </div>
+					</div>
 				</td>
 			 </tr> 
 		#end
     </tbody> 
-</table> 
+#end
 

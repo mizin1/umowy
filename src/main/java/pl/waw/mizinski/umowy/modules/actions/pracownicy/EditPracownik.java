@@ -45,13 +45,12 @@ public class EditPracownik implements Valve {
 				pracownikGroup.setProperties(pracownikIntake);
 				Pracownik pracownik = pracownikAssembler.asPracownikEntity(pracownikIntake);
 				transaction = session.beginTransaction();
-				if (!pracownik.hasAdresKorespondencyjny() && adresPracownikaDao.getAdresKorespondencyjny(pracownik) != null) {
+				if (pracownik.getId()!= null && !pracownik.hasAdresKorespondencyjny() && adresPracownikaDao.getAdresKorespondencyjny(pracownik) != null) {
 					adresPracownikaDao.remove(adresPracownikaDao.getAdresKorespondencyjny(pracownik));
 				}
 				pracownikDao.saveOrUpdate(pracownik);
 				intake.removeAll();
 				transaction.commit();
-
 			} catch (final Exception e) {
 				if (transaction != null) {
 					transaction.rollback();

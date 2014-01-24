@@ -1,0 +1,73 @@
+#actionUtils
+
+#macro (displayAddress $adres) 
+	#if ($adres.ulica)
+		#if($adres.miejscowosc == $adres.poczta)
+			#set($displayMiescowosc = false)
+		#else
+			#set($displayMiescowosc = true)
+		#end
+	#else
+		#set($displayMiescowosc = true)
+	#end
+	#if ($displayMiescowosc) $adres.miejscowosc, #end
+	$!adres.ulica $adres.nrDomu #if($adres.nrMieszkania) m. $adres.nrMieszkania #end
+	<br>
+	$adres.kodPocztowy $adres.poczta#if($adres.panstwo), $!adres.panstwo.nazwa #end
+#end
+
+<script type="text/javascript">;
+	dojo.require("dijit.dijit");
+	dojo.require("dijit.dijit-all");
+	dojo.require("dijit.form.Select");
+</script>
+
+<h1 align="center">Jednostki Organizacyjne</h1>
+
+<div align="center" >
+	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
+		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
+	</form>
+	
+	<form action="$link" style="display: inline-block;">
+        <button dojoType="dijit.form.Button" type="submit">Dodaj nową jednostkę</button>
+    </form>
+</div>
+
+#@sortedTable()
+    <thead> 
+    <tr> 
+        <th class="sortable">Nazwa</th> 
+		<th class="sortable">Typ</th>
+		<th class="sortable">Jednostka nadrzędna</th>
+		<th class="sortable">Reprezentant</th>
+        <th></th>
+    </tr> 
+    </thead> 
+    <tbody> 
+		#foreach ($jednostka in $jednostki)
+			 <tr id="$jednostka.nazwa"> 
+				<td>$jednostka.nazwa</td>
+				<td>$jednostka.typJednostki.nazwa</td>
+				<td>$!jednostka.jednostkaNadrzedna.nazwa</td>
+				<td>$jednostka.reprezentant.nazwa</td>
+                <td>
+					<div dojoType="dijit.form.ComboButton">
+                        <span>Akcje</span>
+						<div dojoType="dijit.Menu">
+							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('jednostki.EditJednostka').set('nazwa', $jednostka.nazwa)');">Edytuj</div>
+							<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('jednostki.DeleteJednostka').set('nazwa', $jednostka.nazwa)');">Usuń</div>
+                        </div>
+					</div>
+				</td>
+			 </tr> 
+		#end
+    </tbody> 
+#end
+
+#foreach ($jednostka in $jednostki)
+    <div dojoType="dijit.Tooltip" connectId="$jednostka.nazwa" position="below">
+    	#displayAddress($jednostka)
+    </div>
+#end

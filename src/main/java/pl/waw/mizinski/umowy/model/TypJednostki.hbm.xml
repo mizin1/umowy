@@ -12,5 +12,11 @@
 			class="pl.waw.mizinski.umowy.model.TypJednostki">
 			<column name="typ_nadrzedny" sql-type="varchar"/>
 		</many-to-one>
+		<bag name="jednostki" table="jednostka_organizacyjna" cascade="all" inverse="true" >
+         	<key>
+                <column name="typ_jednostki" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna" />
+        </bag>
 	</class>
 </hibernate-mapping>

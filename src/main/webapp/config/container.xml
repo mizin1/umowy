@@ -14,12 +14,15 @@
 	<component class="pl.waw.mizinski.umowy.dao.PlatnoscDao" />
 	<component class="pl.waw.mizinski.umowy.dao.UmowaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.RachunekDao" />
+	<component class="pl.waw.mizinski.umowy.dao.TypJednostkiDao" />
+	<component class="pl.waw.mizinski.umowy.dao.ReprezentantDao" />
 
 	<component class="pl.waw.mizinski.umowy.assembler.PracownikAssembler" />
 	<component class="pl.waw.mizinski.umowy.assembler.UmowaAssembler" />
 	<component class="pl.waw.mizinski.umowy.assembler.ZadanieAssembler" />
 	<component class="pl.waw.mizinski.umowy.assembler.TypZadaniaAssembler" />
-
+	<component class="pl.waw.mizinski.umowy.assembler.JednostkaOrganizacyjnaAssembler" />
+	
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
 		<parameter key="hibernateContainer" />
@@ -352,7 +355,12 @@
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
 	</component> -->
-	
-	
+	 <component class-key="org.objectledge.fop.LedgeUriResolver"
+  		class="org.objectledge.xsl.URIResolverImpl"/>
+  <component class-key="org.objectledge.fop.requestjail.RequestJail"
+  		class="org.objectledge.fop.requestjail.RequestJailEmptyImpl"/>
+  		
+	<component class="org.objectledge.fop.FopService"/>  
+ 	<component class="org.objectledge.fop.PdfGenerator"/>   
 	
 </container>

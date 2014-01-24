@@ -23,7 +23,6 @@
 				var select = dijit.byId('typZadania');
 				select.options = options;
 				select.startup();
-				onTypZadaniaChange();
 			}
 		#end
 	}

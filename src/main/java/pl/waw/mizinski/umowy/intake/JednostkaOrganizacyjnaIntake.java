@@ -1,21 +1,19 @@
-package pl.waw.mizinski.umowy.model;
+package pl.waw.mizinski.umowy.intake;
 
-import java.io.Serializable;
 
-public class JednostkaOrganizacyjna implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class JednostkaOrganizacyjnaIntake {
 
 	private String nazwa;
-	private TypJednostki typJednostki;
-	private JednostkaOrganizacyjna jednostkaNadrzedna;
-	private Reprezentant reprezentant;
+	private String typJednostki;
+	private String jednostkaNadrzedna;
+	private String reprezentant;
 	private String miejscowosc;
 	private String ulica;
 	private String nrDomu;
 	private String nrMieszkania;
 	private String kodPocztowy;
 	private String poczta;
-
+	
 	public String getNazwa() {
 		return nazwa;
 	}
@@ -24,27 +22,27 @@ public class JednostkaOrganizacyjna implements Serializable{
 		this.nazwa = nazwa;
 	}
 
-	public TypJednostki getTypJednostki() {
+	public String getTypJednostki() {
 		return typJednostki;
 	}
 
-	public void setTypJednostki(TypJednostki typJednostki) {
+	public void setTypJednostki(String typJednostki) {
 		this.typJednostki = typJednostki;
 	}
 
-	public JednostkaOrganizacyjna getJednostkaNadrzedna() {
+	public String getJednostkaNadrzedna() {
 		return jednostkaNadrzedna;
 	}
 
-	public void setJednostkaNadrzedna(JednostkaOrganizacyjna jednostkaNadrzedna) {
+	public void setJednostkaNadrzedna(String jednostkaNadrzedna) {
 		this.jednostkaNadrzedna = jednostkaNadrzedna;
 	}
 
-	public Reprezentant getReprezentant() {
+	public String getReprezentant() {
 		return reprezentant;
 	}
 
-	public void setReprezentant(Reprezentant reprezentant) {
+	public void setReprezentant(String reprezentant) {
 		this.reprezentant = reprezentant;
 	}
 
@@ -95,10 +93,4 @@ public class JednostkaOrganizacyjna implements Serializable{
 	public void setPoczta(String poczta) {
 		this.poczta = poczta;
 	}
-	
-	@Override
-	public String toString() {
-		return nazwa;
-	}
-	
 }

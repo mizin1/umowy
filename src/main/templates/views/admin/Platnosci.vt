@@ -24,11 +24,13 @@
 				<br>
 				#edit_textline($platnoscGroup.Nazwa)
 				<br>
-				#label($platnoscGroup.Okres)
-				<br>
+				
     			<table><tr>
 					<td>
+						#label($platnoscGroup.Okres)
+						<br>
 						#edit_number($platnoscGroup.Okres)
+						<br><br>
     				</td>
         			<td>
     					#set($field = $platnoscGroup.JednostkaOkresu)
@@ -36,7 +38,6 @@
             			<input type="radio" dojoType="dijit.form.RadioButton" id="miesiace" name="$field.Key" value="miesiace" #if($field == 'miesiace') checked #end/> <label for="miesiace">miesięcy</label> <br />
     				</td>
                 </tr></table>
-				
 				<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Dodaj</button>
 				$intake.declareGroups()	
 			</form>

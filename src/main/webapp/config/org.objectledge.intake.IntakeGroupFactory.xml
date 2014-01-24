@@ -145,7 +145,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="Rozliczone" key="rozliczone" type="boolean" displayName="Oznacz zadanie jako rozliczone"/>
 </group>
 
-<group name="TypZadania" key="typZadania" mapToObject="intake.TypZadaniaIntake">
+<group name="TypZadaniaIntake" key="typZadania" mapToObject="intake.TypZadaniaIntake">
 	<field name="Nazwa" key="nazwa" type="String" displayName="Nazwa">
         <rule name="required" value="true">To pole jest wymagane</rule>
     </field>
@@ -169,6 +169,33 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	</field>
 </group>
 
+<group name="JednostkaOrganizacyjnaIntake" key="jednostkaOrganizacyjna" mapToObject="intake.JednostkaOrganizacyjnaIntake">
+	<field name="Nazwa" key="nazwa" type="String" displayName="Nazwa">
+        <rule name="required" value="true">To pole jest wymagane</rule>
+    </field>
+    <field name="TypJednostki" key="typJednostki" type="String" displayName="Typ jednostki">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="JednostkaNadrzedna" key="jednostkaNadrzedna" type="String" displayName="Jednostka nadrzędna" />
+	<field name="Reprezentant" key="reprezentant" type="String" displayName="Reprezentant">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Miejscowosc" key="miejscowosc" type="String" displayName="Miejscowość">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="Ulica" key="ulica" type="String" displayName="Ulica"/>
+	<field name="NrDomu" key="nrDomu" type="String" displayName="Numer domu">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+	<field name="NrMieszkania" key="nrMieszkania" type="String" displayName="Numer mieszkania"/>
+	<field name="KodPocztowy" key="kodPocztowy" type="String" displayName="Kod Pocztowy">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+		<rule name="mask" value="\d{2}\-\d{3}">Niepoprawny format kodu pocztowego</rule>
+	</field>
+	<field name="Poczta" key="poczta" type="String" displayName="Poczta">
+		<rule name="required" value="true">To pole jest wymagane</rule>
+	</field>
+</group>
 
 <!-- example: -->
 <group name="Osoba" key="osoba">

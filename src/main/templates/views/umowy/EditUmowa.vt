@@ -7,15 +7,7 @@
 	dojo.require("dojo.parser");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
-	dojo.require("dijit.form.DateTextBox");
-	dojo.require("dijit.form.Form");
-	dojo.require("dijit.form.Button");
 	dojo.require("dijit.form.Select");
-	dojo.require("dijit.form.MultiSelect");
-	dojo.require("dijit.form.TextBox");
-	dojo.require("dijit.form.RadioButton");
-	dojo.require("dijit.form.CheckBox");
-	dojo.require("dijit.form.ValidationTextBox");
 
 	dojo.require("org.objectledge.ajax.AjaxRequest");
 	dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
@@ -102,7 +94,7 @@ dojo.addOnLoad(function() {
 
 
 #set($umowaGroup = $intake.UmowaIntake.Default)
-<h1 align="center">Wprowadź dane umowy</h2>
+<h1 align="center">Wprowadź dane umowy</h1>
 	
 <div align="center">
     <form  dojoType="dijit.form.Form" method="post" action="$link.view('umowy.UmowaList').action('umowy.EditUmowa')">

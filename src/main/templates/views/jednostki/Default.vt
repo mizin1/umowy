@@ -1,0 +1,3 @@
+$pageTool.insertTitlePrefix(' - jednostki')
+$viewEnclosureTool.override('MenuPage')
+$!embeddedPlaceholder
