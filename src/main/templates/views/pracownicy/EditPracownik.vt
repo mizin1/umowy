@@ -1,20 +1,10 @@
 
 <script type="text/javascript">
 	dojo.registerModulePath("org.objectledge.ajax", "../../content/script/org/objectledge/ajax");
-	
 	dojo.require("dojo.parser");
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
-	dojo.require("dijit.form.DateTextBox");
-	dojo.require("dijit.form.Form");
-	dojo.require("dijit.form.Button");
 	dojo.require("dijit.form.Select");
-	dojo.require("dijit.form.MultiSelect");
-	dojo.require("dijit.form.TextBox");
-	dojo.require("dijit.form.RadioButton");
-	dojo.require("dijit.form.CheckBox");
-	dojo.require("dijit.form.ValidationTextBox");
-
 	dojo.require("org.objectledge.ajax.AjaxRequest");
     dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
 	
@@ -48,7 +38,14 @@
 	}
 	
 	function dodajUrzadSkarbowyResponse(response) {
-		dojo.byId('urzadSkarbowy').value = dojo.byId('usNazwa').value;
+		var urzadSkarbowy = dojo.byId('usNazwa').value;
+		dojo.byId('urzadSkarbowy').value = urzadSkarbowy;
+		
+		var c = dojo.doc.createElement('option');
+		c.innerHTML = urzadSkarbowy;
+		c.value = urzadSkarbowy;
+		dijit.byId('listaUrzedow').containerNode.appendChild(c);
+		
 		dijit.byId('dodajUrzadSkarbowy').hide();
 	}
 	
@@ -184,7 +181,7 @@
 	<br/>
 		<select id="listaUrzedow" dojoType="dijit.form.MultiSelect" class="multi" >
 			#foreach ($urzadSkarbowy in $urzedySkarobowe)
-                <option #if($urzadSkarbowy.nazwa == $pracownikGroup.UrzadSkarbowy.stringValue) selected #else selected="false" #end>$urzadSkarbowy.nazwa</option>
+                <option selected="false" >$urzadSkarbowy.nazwa</option>
 			#end
 		</select>
 	<br/>

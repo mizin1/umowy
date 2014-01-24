@@ -123,6 +123,7 @@
 	<component class="pl.waw.mizinski.umowy.ajax.ExampleService" />
 	<component class="pl.waw.mizinski.umowy.ajax.UrzadSkarbowyService" />
 	<component class="pl.waw.mizinski.umowy.ajax.UmowaService" />
+	<component class="pl.waw.mizinski.umowy.ajax.ReprezentantService" />
 
 	<!-- intake components -->
 	<component class="org.objectledge.intake.IntakeGroupFactory" />

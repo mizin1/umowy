@@ -6,6 +6,8 @@
 	dojo.require("dijit.dijit");
 	dojo.require("dijit.dijit-all");
 	dojo.require("dijit.form.Select");
+	dojo.require("org.objectledge.ajax.AjaxRequest");
+    dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
 	
 	function onTypJednostkiChange() {
 		var nazwa = dijit.byId('typJednostki').value;
@@ -32,6 +34,41 @@
 	
 	dojo.addOnLoad(onTypJednostkiChange);
 	
+	function onReprezentantFail(response) {
+		alert('Nie udalo sie dodac reprezentanta');
+	}
+	
+	var dodajReprezentantaOptions = {
+		url: "$link.view('AJAX')", 
+		paramNames: ["nazwa", "biernik"], 
+		serviceName: "ReprezentantService", 
+		methodName: "addReprezentant",
+		onFail: onReprezentantFail
+	};
+
+	var dodajReprezentanta = null;
+	
+	dojo.addOnLoad(function() {
+		dodajReprezentanta = new org.objectledge.ajax.AjaxRequest(dodajReprezentantaOptions);
+    });
+	
+	function dodajReprezentantaRequest() {
+		var nazwa = dojo.byId('reprezentantNazwa').value;
+		var biernik = dojo.byId('reprezentantBiernik').value;
+		dodajReprezentanta.sendRequest([nazwa, biernik], dodajReprezentantaResponse);
+	}
+	
+	function dodajReprezentantaResponse(response) {
+		var reprezentant = dojo.byId('reprezentantNazwa').value;
+		dojo.byId('reprezentant').value = reprezentant;
+		
+		var c = dojo.doc.createElement('option');
+		c.innerHTML = reprezentant;
+		c.value = reprezentant;
+		dijit.byId('listaReprezentantow').containerNode.appendChild(c);
+		
+		dijit.byId('dodajReprezentanta').hide();
+	}
 </script>
 
 #set($jednostkaGroup = $intake.JednostkaOrganizacyjnaIntake.Default)
@@ -45,7 +82,7 @@
 			<td>$field.DisplayName</td>
 			<td>
 				#intake_message($field)
-				<input name="$field.Key" value="$!field" type="text" trim dojoType="dijit.form.TextBox" #if($field.Value && $intake.JednostkaOrganizacyjnaIntake.isForceValid) readOnly #end />
+				<input name="$field.Key" value="$!field" type="text" trim dojoType="dijit.form.TextBox" #if($field.Value && !$intake.JednostkaOrganizacyjnaIntake.isForceValid) readOnly #end />
             </td>
 		</tr>
 		#set( $field = $jednostkaGroup.TypJednostki)
@@ -67,12 +104,20 @@
 				#intake_message($field)
                 <select id= "jednostkaNadrzedna" name="$field.Key" dojoType="dijit.form.Select" ></select>
             </td>
-		</tr>
-		#@tr_select($jednostkaGroup.Reprezentant)
-			#foreach ($reprezentant in $reprezentanci)
-				#option($jednostkaGroup.Reprezentant $reprezentant.nazwa $reprezentant.nazwa) 
-			#end	
-		#end	
+		</tr>		
+		#set($field = $jednostkaGroup.Reprezentant)
+		<tr>
+    		<td>$field.DisplayName</td>
+            <td>
+    			<input id="reprezentant" type="text" name="$field.Key" value="$!field" trim="true" dojoType="dijit.form.ValidationTextBox" readOnly required/>
+				<button dojoType="dijit.form.Button">
+                	Wybierz
+                	<script type="dojo/method" event="onClick">
+                		dijit.byId('wybierzReprezentanta').show();
+                	</script>
+                </button>
+    		</td>
+    	</tr>
 		#tr_edit_textline($jednostkaGroup.Miejscowosc)
     	#tr_edit_textline($jednostkaGroup.Ulica)
 		#tr_edit_textline($jednostkaGroup.NrDomu)
@@ -89,4 +134,60 @@
 		</table>
 		$intake.declareGroups()	
     </form>
+</div>
+	
+<div dojoType="dijit.Dialog" id="wybierzReprezentanta" title="Reprezentant">
+	<h3 align="center">Wybierz reprezentanta z listy lub dodaj nowego</h3>
+	<br/>
+		<select id="listaReprezentantow" dojoType="dijit.form.MultiSelect" class="multi" >
+			#foreach ($reprezentant in $reprezentanci)
+				<option value="$reprezentant.nazwa" selected="false">$reprezentant.nazwa</option>
+			#end	
+		</select>
+	<br/>
+	<div align="center">
+		<button dojoType="dijit.form.Button">
+			Wybierz
+			<script type="dojo/method" event="onClick">
+                dojo.byId('reprezentant').value = dojo.byId('listaReprezentantow').value;
+				dijit.byId('wybierzReprezentanta').hide();
+            </script>
+		</button>
+		<button dojoType="dijit.form.Button">
+			Dodaj Nowego
+			<script type="dojo/method" event="onClick">
+				dijit.byId('wybierzReprezentanta').hide();
+                dijit.byId('dodajReprezentanta').show();
+            </script>
+		</button>
+	</div>
+</div>	
+
+<div dojoType="dijit.Dialog" id="dodajReprezentanta" title="Dodaj reprezentanta">
+	<h3 align="center">Wprowadź dane nowego reprezentanta</h3>
+	
+	
+	<table width="400px" class="border">
+		<tr>
+			<td>Imię i nazwisko:</td>
+			<td>
+				<input id="reprezentantNazwa" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr>
+			<td>Proszę dokończyć zdanie:<br/>Jednostka reprezentowana przez ... (kogo?).</td>
+			<td>
+				<input id="reprezentantBiernik" type="text" dojoType="dijit.form.TextBox" trim/>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<button dojoType="dijit.form.Button" onclick="dodajReprezentantaRequest()">
+						Dodaj
+					</button>
+				</div>
+			</th>
+		</tr>
+    </table>
 </div>

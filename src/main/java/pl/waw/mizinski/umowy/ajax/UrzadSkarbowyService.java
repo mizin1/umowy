@@ -6,9 +6,7 @@ import org.objectledge.context.Context;
 import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.pipeline.ProcessingException;
 
-import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
-import pl.waw.mizinski.umowy.model.Panstwo;
 import pl.waw.mizinski.umowy.model.UrzadSkarbowy;
 import pl.waw.mizinski.umowy.util.Utils;
 

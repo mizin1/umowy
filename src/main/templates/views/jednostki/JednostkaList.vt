@@ -30,7 +30,7 @@
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	
-	<form action="$link" style="display: inline-block;">
+	<form action="$link.view('jednostki.EditJednostka')" style="display: inline-block;">
         <button dojoType="dijit.form.Button" type="submit">Dodaj nową jednostkę</button>
     </form>
 </div>

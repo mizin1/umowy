@@ -35,12 +35,21 @@
 				<policy ssl="false" auth="false" />
 			</method>
 		</service>
-			<service name="UmowaService">
+		<service name="UmowaService">
 			<method name="isUbezpieczenieDobrowolneActive">
-				<src class="pl.waw.mizinski.umowy.ajax.UmowaService"
-					method="isUbezpieczenieDobrowolneActive">
+				<src class="pl.waw.mizinski.umowy.ajax.UmowaService" method="isUbezpieczenieDobrowolneActive">
 					<param name="typUmowy" type="String" />
 					<param name="idPracownika" type="Long" />
+				</src>
+				<policy ssl="false" auth="false" />
+			</method>
+		</service>
+
+		<service name="ReprezentantService">
+			<method name="addReprezentant">
+				<src class="pl.waw.mizinski.umowy.ajax.ReprezentantService" method="addReprezentant">
+					<param name="nazwa" type="String" />
+					<param name="biernik" type="String" />
 				</src>
 				<policy ssl="false" auth="false" />
 			</method>
