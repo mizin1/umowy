@@ -13,7 +13,6 @@ import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
-import org.objectledge.web.mvc.pipeline.DetailSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
 import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;

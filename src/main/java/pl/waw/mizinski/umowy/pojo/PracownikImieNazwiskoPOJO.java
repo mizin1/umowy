@@ -1,6 +1,6 @@
 package pl.waw.mizinski.umowy.pojo;
 
-
+//nieuzywane(ale pojawia sie jeszcze w tekscie pracy)
 public class PracownikImieNazwiskoPOJO {
 	
 	private Long id;

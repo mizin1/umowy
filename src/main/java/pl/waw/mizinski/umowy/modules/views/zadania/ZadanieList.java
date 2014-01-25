@@ -1,6 +1,9 @@
 package pl.waw.mizinski.umowy.modules.views.zadania;
 
+import java.util.List;
+
 import org.objectledge.context.Context;
+import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
@@ -10,6 +13,8 @@ import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
+import pl.waw.mizinski.umowy.filter.ZadanieFilter;
+import pl.waw.mizinski.umowy.pojo.ZadaniePOJO;
 
 @AccessConditions({
 	 @AccessCondition(permissions = {"ZADANIE_R"})
@@ -18,15 +23,24 @@ public class ZadanieList extends AbstractBuilder {
 
 	private final ZadanieDao zadanieDao;
 
-	public ZadanieList(Context context, ZadanieDao zadanieDao) {
+	public ZadanieList(final Context context, final ZadanieDao zadanieDao) {
 		super(context);
 		this.zadanieDao = zadanieDao;
 	}
 	
 	@Override
-	public String build(Template template, String embeddedBuildResults) throws BuildException, ProcessingException {
-		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
-		templatingContext.put("zadania",zadanieDao.getAll());
+	public String build(final Template template, final String embeddedBuildResults) throws BuildException, ProcessingException {
+		final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
+		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		List<ZadaniePOJO> zadania = zadanieDao.getAllZadaniePOJOs();
+		
+		if (requestParameters.isDefined("filter")) {
+			final String filterString = requestParameters.get("filter");
+			final ZadanieFilter filter = new ZadanieFilter(filterString);
+			zadania = filter.applyFilter(zadania);
+		}
+		
+		templatingContext.put("zadania", zadania);
 		return super.build(template, embeddedBuildResults);
 	}
 	

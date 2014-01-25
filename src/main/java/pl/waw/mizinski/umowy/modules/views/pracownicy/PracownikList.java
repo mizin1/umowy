@@ -13,9 +13,8 @@ import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.PracownikDao;
-import pl.waw.mizinski.umowy.filter.Filter;
 import pl.waw.mizinski.umowy.filter.PracownikFilter;
-import pl.waw.mizinski.umowy.pojo.PracownikImieNazwiskoPOJO;
+import pl.waw.mizinski.umowy.pojo.PracownikLiczbaUmowPOJO;
 
 @AccessConditions({
     @AccessCondition(auth = true, permissions = {"PRACOWNIK_R"})
@@ -30,14 +29,14 @@ public class PracownikList extends AbstractBuilder {
 	}
 
 	@Override
-	public String build(Template template, String embeddedBuildResults) throws BuildException, ProcessingException {
-		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
-		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
-		List<PracownikImieNazwiskoPOJO> pracownicy = pracownikDao.getAllPracownikImieNazwiskoPOJOs();
+	public String build(final Template template, final String embeddedBuildResults) throws BuildException, ProcessingException {
+		final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
+		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		List<PracownikLiczbaUmowPOJO> pracownicy = pracownikDao.getAllPracownikLiczbaUmowPOJOs();
 		
 		if (requestParameters.isDefined("filter")) {
-			String filterString = requestParameters.get("filter");
-			Filter<PracownikImieNazwiskoPOJO> filter = new PracownikFilter(filterString);
+			final String filterString = requestParameters.get("filter");
+			final PracownikFilter filter = new PracownikFilter(filterString);
 			pracownicy = filter.applyFilter(pracownicy);
 		}
 		

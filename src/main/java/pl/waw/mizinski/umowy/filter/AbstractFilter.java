@@ -7,7 +7,7 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 
 	private List<String> expressions = new LinkedList<String>();
 	
-	public AbstractFilter (final String filterString){
+	protected AbstractFilter (final String filterString){
 		for (String expression : filterString.trim().split("\\s") ){
 			if (!expression.isEmpty()) {
 				expressions.add(expression);
@@ -17,7 +17,7 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 	
 	protected abstract boolean matches(E e, String expression);
 	
-	public List<E> applyFilter (List<E> list) {
+	public final List<E> applyFilter (List<E> list) {
 		for(String expression : expressions) {
 			list = applyExpression(list, expression);
 		}
@@ -38,8 +38,20 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 	}
 	
 	protected static boolean matches(String string, String expression){
+		if (string == null) {
+			return false;
+		}
 		string = string.toLowerCase();
 		expression = expression.toLowerCase().trim();
 		return string.contains(expression);
+	}
+	
+	protected static boolean matches(String expression, String ...strings) {
+		for (String string : strings){
+			if(matches(string, expression)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

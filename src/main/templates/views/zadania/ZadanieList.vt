@@ -9,11 +9,11 @@
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<input type="text" name="filter" value="$!parametersTool.get('filter', null)" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	<form action="$link.view('zadania.EditZadanie')" style="display: inline-block;">
-        <button dojoType="dijit.form.Button" type="submit" >Dodaj nowe zadanie</button>
+        <button dojoType="dijit.form.Button">Dodaj nowe zadanie</button>
     </form>
 </div>
 
@@ -30,12 +30,12 @@
         <th></th>
     </tr> 
     </thead> 
-    <tbody> 
+    <tbody>
 		#foreach ($zadanie in $zadania)
 			 <tr id="$zadanie.id"> 
 				<td>$zadanie.nazwa</td>
-				<td>$zadanie.typZadania.nazwa</td>
-				<td>$zadanie.getJednostkaOrganizacyjna().nazwa</td>
+				<td>$zadanie.typZadania</td>
+				<td>$zadanie.jednostkaOrganizacyjna</td>
 				<td>$!zadanie.budzet</td>
 				<td>$!zadanie.dataRozpoczecia</td>
 				<td>$!zadanie.dataZakonczenia</td>
@@ -45,7 +45,7 @@
                         <span>Akcje</span>
 							<div dojoType="dijit.Menu">
 								<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('zadania.EditZadanie').set('id', $zadanie.id)');">Edytuj</div>
-								<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('zadania.DeleteZadanie').set('id', $zadanie.id)');">Usuń</div>
+								<div dojoType="dijit.MenuItem" #if ($zadanie.liczbaUmow > 0) disabled="true" #end onClick="deleteObject('$link.action('zadania.DeleteZadanie').set('id', $zadanie.id)');">Usuń</div>
                         </div>
 					</div>
 				</td>
