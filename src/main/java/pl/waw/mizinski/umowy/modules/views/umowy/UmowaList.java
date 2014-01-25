@@ -5,6 +5,8 @@ import java.util.List;
 import org.objectledge.context.Context;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
@@ -14,6 +16,9 @@ import pl.waw.mizinski.umowy.dao.UmowaDao;
 import pl.waw.mizinski.umowy.filter.UmowaFilter;
 import pl.waw.mizinski.umowy.pojo.SimpleUmowaPOJO;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"UMOWA_R"})
+})
 public class UmowaList extends AbstractBuilder{
 
 	private final UmowaDao umowaDao;

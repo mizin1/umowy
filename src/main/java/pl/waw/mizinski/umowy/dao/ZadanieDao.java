@@ -20,7 +20,7 @@ public class ZadanieDao extends AbstractDao<Long, Zadanie>{
 	public ZadanieDao(Context context) {
 		super(context);
 	}
-
+	
 	public List<ZadaniePOJO> getAllZadaniePOJOs() {
 		Query query = session().createQuery(
 				"select new " + ZADANIE_POJO 

@@ -42,9 +42,11 @@
 						var options = [
         					#set ($comma = false)
         					#foreach ($zadanie in $typZadania.zadania)
-        						#if ($comma) , #end 
-        						#set ($comma = true)
-        						{ label: "$zadanie.nazwa", value: "$zadanie.id", #selectedZadanie($zadanie.id) }
+        						#if($zadanie.rozliczone != true)
+    								#if ($comma) , #end 
+            						#set ($comma = true)
+            						{ label: "$zadanie.nazwa", value: "$zadanie.id", #selectedZadanie($zadanie.id) }
+								#end
         					#end
         				]
 						var select = dijit.byId('zadanie');
