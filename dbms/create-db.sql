@@ -51,6 +51,12 @@ CREATE TABLE JEDNOSTKA_ORGANIZACYJNA
 	typ_jednostki	VARCHAR(50) NOT NULL,
 	jednostka_nadrzedna	VARCHAR(50),
 	reprezentant	VARCHAR(100) NOT NULL,
+	miejscowosc	VARCHAR(50) NOT NULL,
+	ulica	VARCHAR(50),
+	nr_domu	VARCHAR(6) NOT NULL,
+	nr_mieszkania	VARCHAR(6),
+	kod_pocztowy	VARCHAR(10) NOT NULL,
+	poczta	VARCHAR(50) NOT NULL,
 	PRIMARY KEY(nazwa),
 	FOREIGN KEY(reprezentant) REFERENCES REPREZENTANT(nazwa),
 	FOREIGN KEY(typ_jednostki) REFERENCES TYP_JEDNOSTKI(nazwa)

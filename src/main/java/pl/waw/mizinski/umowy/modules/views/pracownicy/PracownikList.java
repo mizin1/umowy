@@ -5,6 +5,8 @@ import java.util.List;
 import org.objectledge.context.Context;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
@@ -15,6 +17,9 @@ import pl.waw.mizinski.umowy.filter.Filter;
 import pl.waw.mizinski.umowy.filter.PracownikFilter;
 import pl.waw.mizinski.umowy.pojo.PracownikImieNazwiskoPOJO;
 
+@AccessConditions({
+    @AccessCondition(auth = true, permissions = {"PRACOWNIK_R"})
+})
 public class PracownikList extends AbstractBuilder {
 
 	private final PracownikDao pracownikDao;

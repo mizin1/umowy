@@ -1,0 +1,8 @@
+##this page is required to proper serve security control pages
+$viewEnclosureTool.override('MenuPage')##
+	
+##<div style="margin-left: auto; margin-right: auto; width: 90%;">	
+	<center>
+		$embeddedPlaceholder
+	</center>
+##</div>

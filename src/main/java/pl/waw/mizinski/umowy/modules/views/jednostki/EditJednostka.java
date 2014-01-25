@@ -12,6 +12,8 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
@@ -22,12 +24,13 @@ import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.dao.ReprezentantDao;
 import pl.waw.mizinski.umowy.dao.TypJednostkiDao;
 import pl.waw.mizinski.umowy.intake.JednostkaOrganizacyjnaIntake;
-import pl.waw.mizinski.umowy.intake.UmowaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypJednostki;
-import pl.waw.mizinski.umowy.model.Umowa;
 import pl.waw.mizinski.umowy.util.TypJednostkiComparator;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+})
 public class EditJednostka extends AbstractBuilder{
 
 	private final TypJednostkiDao typJednostkiDao;

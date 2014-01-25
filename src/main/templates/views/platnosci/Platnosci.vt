@@ -18,7 +18,7 @@
 	<div dojoType="dijit.form.DropDownButton"> 
 		<span>Dodaj nowy typ płatności</span>
 		<div dojoType="dijit.TooltipDialog" class="typ-zadania-tooltip">
-			<form  dojoType="dijit.form.Form" method="post" action="$link.action('admin.AddPlatnosc')">
+			<form  dojoType="dijit.form.Form" method="post" action="$link.action('platnosci.AddPlatnosc')">
 				#set($platnoscGroup = $intake.Platnosc.Default)
 				#label($platnoscGroup.Nazwa)
 				<br>
@@ -66,7 +66,7 @@
 					<div dojoType="dijit.form.ComboButton">
                         <span>Akcje</span>
 						<div dojoType="dijit.Menu">
-							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end onClick="deleteObject('$link.action('admin.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
+							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end onClick="deleteObject('$link.action('platnosci.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
 							
                         </div>
 					</div>

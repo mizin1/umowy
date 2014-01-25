@@ -2,7 +2,6 @@ package pl.waw.mizinski.umowy.util;
 
 import java.util.Comparator;
 
-import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypJednostki;
 
 public class TypJednostkiComparator implements Comparator<TypJednostki>{

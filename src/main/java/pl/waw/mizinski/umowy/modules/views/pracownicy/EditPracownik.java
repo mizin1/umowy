@@ -7,34 +7,44 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
+import org.objectledge.web.mvc.pipeline.DetailSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
 import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
+import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
 import pl.waw.mizinski.umowy.intake.PracownikIntake;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"PRACOWNIK_W"})
+})
 public class EditPracownik extends AbstractBuilder {
 
 	private final PanstwoDao panstwoDao;
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
 	private final PracownikDao pracownikDao;
+	private final StatusPracownikaDao statusPracownikaDao;
 
 	private final PracownikAssembler pracownikAssembler;
 	
 	public EditPracownik(final Context context, final PanstwoDao panstwoDao, final UrzadSkarbowyDao urzadSkarbowyDao,
-			final PracownikDao pracownikDao, final AdresPracownikaDao adresDao, final PracownikAssembler pracownikAssembler) {
+			final PracownikDao pracownikDao, final AdresPracownikaDao adresDao, final PracownikAssembler pracownikAssembler, 
+			final StatusPracownikaDao statusPracownikaDao) {
 		super(context);
 		this.panstwoDao = panstwoDao;
 		this.urzadSkarbowyDao = urzadSkarbowyDao;
 		this.pracownikDao = pracownikDao;
 		this.pracownikAssembler = pracownikAssembler;
+		this.statusPracownikaDao = statusPracownikaDao;
 	}
 
 	@Override
@@ -54,9 +64,10 @@ public class EditPracownik extends AbstractBuilder {
 				throw new ProcessingException(e);
 			}
 		}
-
+		
 		templatingContext.put("panstwa", panstwoDao.getAll());
 		templatingContext.put("urzedySkarobowe", urzadSkarbowyDao.getAll());
+		templatingContext.put("statusy", statusPracownikaDao.getAll());
 		return super.build(template, embeddedBuildResults);
 	}
 }

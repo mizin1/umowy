@@ -9,6 +9,8 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
@@ -17,6 +19,9 @@ import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.intake.PracownikIntake;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
+@AccessConditions({
+    @AccessCondition(permissions = {"PRACOWNIK_W"})
+})
 public class EditPracownik implements Valve {
 
 	private final PracownikAssembler pracownikAssembler;

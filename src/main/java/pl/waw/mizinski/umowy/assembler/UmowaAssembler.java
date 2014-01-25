@@ -51,7 +51,7 @@ public class UmowaAssembler {
 		final Platnosc platnosc = platnoscDao.getById(umowaIntake.getPlatnosc());
 		umowa.setPlatnosc(platnosc);
 		umowa.setDataZawarcia(umowaIntake.getDataZawarcia());
-		umowa.setDataRozpoczecia(umowaIntake.getDataZakonczenia());
+		umowa.setDataRozpoczecia(umowaIntake.getDataRozpoczecia());
 		umowa.setDataZakonczenia(umowaIntake.getDataZakonczenia());
 		umowa.setWynagrodzenie(umowaIntake.getWynagrodzenie());
 		umowa.setWykonywanaUZleceniodawcy(umowaIntake.getWykonywanaUZleceniodawcy());
@@ -67,7 +67,7 @@ public class UmowaAssembler {
 		umowaIntake.setPrzedmiotUmowy(umowa.getPrzedmiotUmowy());
 		umowaIntake.setPlatnosc(umowa.getPlatnosc().getNazwa());
 		umowaIntake.setDataZawarcia(umowa.getDataZawarcia());
-		umowaIntake.setDataRozpoczecia(umowa.getDataZakonczenia());
+		umowaIntake.setDataRozpoczecia(umowa.getDataRozpoczecia());
 		umowaIntake.setDataZakonczenia(umowa.getDataZakonczenia());
 		umowaIntake.setWynagrodzenie(umowa.getWynagrodzenie());
 		umowaIntake.setWykonywanaUZleceniodawcy(umowa.getWykonywanaUZleceniodawcy());

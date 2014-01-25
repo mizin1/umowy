@@ -3,6 +3,8 @@
 <div id="secure-menu"></div>
 $component.embed("security.menu.SecureMenu",[['cparam', $cparam]])
 <br>
-<div>
+	
+#result
+<div class="main">
 $!embeddedPlaceholder
 </div>

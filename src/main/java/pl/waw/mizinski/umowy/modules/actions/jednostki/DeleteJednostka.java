@@ -7,9 +7,14 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+})
 public class DeleteJednostka implements Valve {
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;

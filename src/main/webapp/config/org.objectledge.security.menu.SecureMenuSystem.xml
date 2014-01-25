@@ -7,6 +7,31 @@
 
 <config>
 	<menuSet name="default">
+		  <menu label="security.menu-name">
+		  	<menuItem label="security.user.list" view="security.UserList"/>
+		  	<menuItem label="security.role.list" view="security.RoleList"/>
+		  	<menuItem label="security.permission.list" view="security.PermissionList"/>
+		  	<menuItem label="security.resource_group.list" view="security.ResourceGroupList"/>
+		  	<menuItem label="security.user.change_password" view="security.ChangePassword">
+		  		<parameter name="UserId" valueName="userid"/>
+		  	</menuItem>
+		  	<menuItem label="security.logged_in.list" view="security.LoggedInUsers"/>
+		  	<menuItem label="security.permission.required_list" view="security.RequiredPermissions"/>
+		  	<menu label="security.reload">
+			  	<menuItem label="security.reload.security" action="security.Reload"/>
+		  		<menuItem label="security.reload.i18n" action="i18n.Reload"/>
+			  	<menuItem label="security.reload.securemenu" action="securemenu.Reload"/>
+			  	<menuItem label="security.reload.templating" action="templating.Restart"/>
+		  		<menuItem label="security.reload.intake" action="intake.Reload"/>
+		  	</menu>
+		</menu>
+		<menu label="Administracja">
+			<menuItem label="Płatnosci" view="platnosci.Platnosci" />
+			<menu label="Jednostki organizacyjne">
+				<menuItem label="Przegląd" view="jednostki.JednostkaList" />
+				<menuItem label="Dodaj" view="jednostki.EditJednostka" />
+			</menu>
+		</menu>
 		<menu label="Pracownicy">
 			<menuItem label="Przegląd" view="pracownicy.PracownikList" />
 			<menuItem label="Dodaj" view="pracownicy.EditPracownik" />
@@ -20,13 +45,8 @@
 			<menuItem label="Dodaj" view="zadania.EditZadanie" />
 			<menuItem label="Typy zadań" view="zadania.TypyZadan" />
 		</menu>
-		<menu label="Administracja">
-			<menuItem label="Płatnosci" view="admin.Platnosci" />
-			<menu label="Jednostki organizacyjne">
-				<menuItem label="Przegląd" view="jednostki.JednostkaList" />
-				<menuItem label="Dodaj" view="jednostki.EditJednostka" />
-			</menu>
-		</menu>
-		<menu label="Wyloguj" view="pracownicy.PracownikList" />
+		
+		<menu label="security.login" view="Login" mode="guestOnly"/>
+        <menu label="security.logout" view="MenuPage" action="security.authentication.Logout"/>
 	</menuSet>
 </config>

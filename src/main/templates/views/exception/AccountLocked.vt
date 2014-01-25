@@ -1,0 +1,19 @@
+#**
+ * Default 'account locked' screen for whole system
+ *
+ * @author <a href="maito:mgolebsk@elka.pw.edu.pl">Marcin Golebski</a>
+ * @version $Id: AccountLocked.vt,v 1.1 2009-03-26 15:34:53 mgolebsk Exp $
+*###
+$viewEnclosureTool.override('exception.ExceptionRedirector')##
+##
+<h1>Account locked.</h1>
+#if($exception.LockReason)
+  <h2>Additional info:</h2>
+  <h3>$exception.LockReason</h3>
+#end
+#if($originalView)
+<p>
+<a href="javascript: history.go(-1);">$i18n.get('go_back')</a>
+</p>
+#end
+

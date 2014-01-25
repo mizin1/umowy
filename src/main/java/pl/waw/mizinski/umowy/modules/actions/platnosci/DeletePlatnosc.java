@@ -1,4 +1,4 @@
-package pl.waw.mizinski.umowy.modules.actions.admin;
+package pl.waw.mizinski.umowy.modules.actions.platnosci;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -7,9 +7,14 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.dao.PlatnoscDao;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"PLATNOSC_W"})
+})
 public class DeletePlatnosc implements Valve {
 
 	private final PlatnoscDao platnoscDao;

@@ -1,0 +1,17 @@
+#**
+ * Default 'access denied' screen for whole system
+ *
+ * @author <a href="mailto:gajda@ii.pw.edu.pl">Damian Gajda</a>
+ * @version $Id: AccessDenied.vt,v 1.1 2009-03-26 15:34:53 mgolebsk Exp $
+*###
+$viewEnclosureTool.override('exception.ExceptionRedirector')##
+##
+<h1>You are not authorized to view or modify this resource</h1>
+#if($exception.DenyPolicies)
+	<hr/>
+#end
+#if($originalView)
+<p>
+<a href="javascript: history.go(-1);">$i18n.get('go_back')</a>
+</p>
+#end

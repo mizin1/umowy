@@ -30,5 +30,11 @@
 	<properties>
 		<property name="velocimacro.library" value="templates/common/intakeMacros.vt" />
 		<property name="velocimacro.library" value="templates/common/macros.vt" />
+		<property name="file.resource.loader.cache" value="false"/>
+	    <property name="velocimacro.permissions.allow.inline" value="true"/>
+	    <property name="velocimacro.permissions.allow.inline.to.replace.global" value="false"/>
+	    <property name="velocimacro.permissions.allow.inline.local.scope" value="true"/>
+	    <property name="velocimacro.context.localscope" value="false"/>
+	    <property name="velocimacro.library.autoreload" value="false"/>
 	</properties>
 </config>

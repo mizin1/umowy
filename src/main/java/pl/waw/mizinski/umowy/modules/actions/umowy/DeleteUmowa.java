@@ -7,10 +7,13 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.dao.UmowaDao;
-import pl.waw.mizinski.umowy.model.Umowa;
-
+@AccessConditions({
+	 @AccessCondition(permissions = {"UMOWA_W"})
+})
 public class DeleteUmowa implements Valve{
 
 	private final UmowaDao umowaDao;

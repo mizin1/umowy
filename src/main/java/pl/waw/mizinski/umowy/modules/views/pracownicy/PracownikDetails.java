@@ -3,6 +3,8 @@ package pl.waw.mizinski.umowy.modules.views.pracownicy;
 import org.objectledge.context.Context;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
@@ -10,6 +12,10 @@ import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.PracownikDao;
 
+
+@AccessConditions({
+    @AccessCondition(auth = true, permissions = {"PRACOWNIK_R"})
+})
 public class PracownikDetails extends AbstractBuilder {
 
 	private final PracownikDao pracownikDao;

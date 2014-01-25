@@ -11,11 +11,16 @@ import org.objectledge.fop.PdfGenerator;
 import org.objectledge.fop.FopService.OutputType;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"UMOWA_R"})
+})
 public class UmowaPdf extends AbstractBuilder {
 
 	private final PdfGenerator pdfGenerator;

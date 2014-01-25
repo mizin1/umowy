@@ -47,22 +47,26 @@
 #end
 #tr ('Number konta' $pracownik.nrKonta)
 #tr ($pracownik.status.nazwa $pracownik.status.opis)
-##na potrzby screenów
-##<tr>
-##			<th colspan="2">
-##				<div align="center">
-##					Nie odpowadza żadnych składek
-##				</div>
-##			</th>
-##		</tr>
-#@tr ('Odprowadza składki')
-<ul>
-	#foreach ($skladkaPracownika in $pracownik.status.skladki)
-        <li>
-			$skladkaPracownika.getSkladka()($skladkaPracownika.getTypUmowy()#if ($skladkaPracownika.dobrowolna), dobrowolnie) #end )
-		</li>
+
+#if($pracownik.status.skladki.isEmpty())
+    <tr>
+    	<th colspan="2">
+    		<div align="center">
+    			Nie odpowadza żadnych składek
+    		</div>
+    	</th>
+    </tr>
+#else
+    #@tr ('Odprowadza składki')
+    <ul>
+    	#foreach ($skladkaPracownika in $pracownik.status.skladki)
+            <li>
+    			$skladkaPracownika.getSkladka()($skladkaPracownika.getTypUmowy()#if ($skladkaPracownika.dobrowolna), dobrowolnie) #end )
+    		</li>
+    	#end
+    </ul>
 	#end
-</ul>
 #end
+
 </table>
 </div>

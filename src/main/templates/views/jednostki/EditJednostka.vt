@@ -165,9 +165,7 @@
 
 <div dojoType="dijit.Dialog" id="dodajReprezentanta" title="Dodaj reprezentanta">
 	<h3 align="center">Wprowadź dane nowego reprezentanta</h3>
-	
-	
-	<table width="400px" class="border">
+	<table class="border-dialog">
 		<tr>
 			<td>Imię i nazwisko:</td>
 			<td>

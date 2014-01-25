@@ -7,10 +7,16 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
+
+@AccessConditions({
+	 @AccessCondition(permissions = {"ZADANIE_W"})
+})
 public class DeleteZadanie implements Valve {
 
 	private final ZadanieDao zadanieDao;

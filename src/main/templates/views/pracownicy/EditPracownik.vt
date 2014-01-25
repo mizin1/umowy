@@ -64,7 +64,21 @@
 	dojo.addOnLoad(wprowadzAdresKorespondencyjny);
 	
 	
+	function onStatusChange(opis) {
+		document.getElementById('opisStatusu').innerHTML = opis;
+	}
 	
+	function setStatus() {
+		var radios = document.getElementsByName('statusRadio');
+
+		for (var i = 0, length = radios.length; i < length; i++) {
+   			 if (radios[i].checked) {
+       		 	var status = (radios[i].value);
+				dojo.byId('status').value = status;
+            	dijit.byId('wybierzStatus').hide();
+            }
+        }
+	}
 	
 </script>
 
@@ -114,6 +128,7 @@
 		<tr>
     		<td>Plec</td>
             <td>
+				#intake_message($field)
     			<input type="radio" dojoType="dijit.form.RadioButton" id="K" name="$field.Key" value="K" #if($field == 'K') checked #end/> <label for="K">Kobieta</label> <br />
 				<input type="radio" dojoType="dijit.form.RadioButton" id="M" name="$field.Key" value="M" #if($field == 'M') checked #end/> <label for="M">Mężczyzna</label> <br />
     		</td>
@@ -145,6 +160,7 @@
 		<tr>
     		<td>Typ dokumentu tozsamosci</td>
 			<td>
+				#intake_message($field)
     			<input type="radio" dojoType="dijit.form.RadioButton" id="dowod_osobisty" name="$field.Key" value="dowod_osobisty" #if($field == 'dowod_osobisty') checked #end/> <label for="dowod_osobisty">Dowód osobisty</label> <br />
 				<input type="radio" dojoType="dijit.form.RadioButton" id="paszport" name="$field.Key" value="paszport" #if($field == 'paszport') checked #end/> <label for="paszport">Paszport</label> <br />
     		</td>
@@ -158,8 +174,7 @@
 				<button dojoType="dijit.form.Button"> 
                 	Wybierz
                 	<script type="dojo/method" event="onClick">
-                		alert('mocked');
-						dojo.byId('status').value = 'student';
+						dijit.byId('wybierzStatus').show();
                 	</script>
                 </button>
     		</td>
@@ -205,7 +220,7 @@
 <div dojoType="dijit.Dialog" id="dodajUrzadSkarbowy" title="Dodaj urząd skarbowy">
     <h3 align="center">	Wprowadź dane urzędu skarbowego</h3>
 	<br/>
-	<table width="400px" class="border">
+	<table width="400px" class="border-dialog">
 		<tr>
 			<td>Nazwa</td>
 			<td>
@@ -258,4 +273,31 @@
 			</th>
 		</tr>
    </table>
+</div>
+
+<div dojoType="dijit.Dialog" id="wybierzStatus" title="Wybierz status">
+	
+	<table width="400px" class="border-dialog">
+		<tr>
+			<td>
+    			#foreach($status in $statusy)
+            		<input type="radio" dojoType="dijit.form.RadioButton" id="$status.nazwa" name="statusRadio" value="$status.nazwa" onclick="onStatusChange('$!status.opis');" /> 
+					<label for="$status.nazwa">$status.nazwa</label><br>
+            	#end
+            </td>
+			<td id="opisStatusu">
+            </td>
+        </tr>
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					<button dojoType="dijit.form.Button" onclick="setStatus()">
+						Wybierz
+					</button>
+				</div>
+			</th>
+		</tr>
+    </table>
+	
+
 </div>

@@ -19,6 +19,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		displayName="Imiona pozostałe" />
 	<field name="Plec" key="plec" type="Enum" displayName="Pierwsze imię">
 		<rule name="format" value="pl.waw.mizinski.umowy.model.enums.Plec"/>
+		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
 	<field name="DataUrodzenia" key="dataUrodzenia" type="DateString" displayName="Data urodzenia">
 		<rule name="required" value="true">To pole jest wymagane</rule>
@@ -44,6 +45,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	</field>
 	<field name="TypDokumentuTozsamosci" key="typDokumentuTozsamosci" type="Enum" displayName="Typ Dokumentu Tożsamości">
 		<rule name="format" value="pl.waw.mizinski.umowy.model.enums.TypDokumentuTozsamosci"/>
+		<rule name="required" value="true">To pole jest wymagane</rule>
 	</field>
 	<field name="NrKonta" key="nrKonta" type="String" displayName="Numer Konta"/>
 	<field name="Status" key="status" type="String" displayName="status">

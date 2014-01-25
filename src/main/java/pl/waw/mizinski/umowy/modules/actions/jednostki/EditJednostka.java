@@ -9,6 +9,8 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.JednostkaOrganizacyjnaAssembler;
@@ -16,6 +18,9 @@ import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.intake.JednostkaOrganizacyjnaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+})
 public class EditJednostka implements Valve{
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;

@@ -1,4 +1,4 @@
-package pl.waw.mizinski.umowy.modules.actions.admin;
+package pl.waw.mizinski.umowy.modules.actions.platnosci;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,10 +9,15 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.dao.PlatnoscDao;
 import pl.waw.mizinski.umowy.model.Platnosc;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"PLATNOSC_W"})
+})
 public class AddPlatnosc implements Valve {
 
 	private final PlatnoscDao platnoscDao;

@@ -11,6 +11,8 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
@@ -26,6 +28,9 @@ import pl.waw.mizinski.umowy.model.TypZadania;
 import pl.waw.mizinski.umowy.model.Zadanie;
 import pl.waw.mizinski.umowy.util.JednostkaOrganizacyjnaComprarator;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"ZADANIE_W"})
+})
 public class EditZadanie extends AbstractBuilder {
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;

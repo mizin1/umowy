@@ -9,6 +9,8 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.ZadanieAssembler;
@@ -16,6 +18,9 @@ import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.intake.ZadanieIntake;
 import pl.waw.mizinski.umowy.model.Zadanie;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"ZADANIE_W"})
+})
 public class EditZadanie implements Valve {
 
 	private final ZadanieDao zadanieDao;

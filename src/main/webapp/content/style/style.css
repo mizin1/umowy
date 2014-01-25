@@ -1,3 +1,38 @@
+/**
+ * Login form styles.
+ */
+
+.login-form input.text {
+  width: 200px; 
+  border: 1px solid #aaaaaa;
+  background-color:white;
+  margin: 0;
+}
+
+.login-form td {
+  background-color: #DDEEAA;
+  padding: 0px 4px;
+}
+
+.login-form td.text {
+  background-color: #DDEEAA;
+}
+
+.login-form .login-header {
+	font-weight: bold;
+	text-align: center;
+	height: 3em;
+}
+
+.login-form table {
+  border: 1px solid #aaaaaa;	
+//  background-color: white;
+}
+
+div.main {
+	margin-top: 25px;
+}
+
 table.border {
 	margin-left: auto;
 	margin-right: auto;
@@ -7,7 +42,29 @@ table.border {
 table.border td, table.border th {
 	border: 1px solid LightGray;
 	padding: 0.5em;
+	width: 40%;
 }
+
+table.border td + td, table.border th + th {
+	border: 1px solid LightGray;
+	padding: 0.5em;
+	width: 60%;
+}
+
+table.border-dialog {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid LightGray;
+	border-collapse: collapse;
+	width: 400px;
+}
+
+table.border-dialog td, table.border-dialog th {
+	border: 1px solid LightGray;
+	padding: 0.5em;
+	width: 50%;
+}
+
 
 select.multi {
 	width: 300px;
@@ -23,8 +80,25 @@ div.typ-zadania-tooltip {
 	width: 300px;
 }
 
-input.number-spinner {
-	width: 50px;
+div.action-error-result {
+	width: 60%;
+	color:  red;
+	margin-left: auto; margin-right: auto;
+	margin-top: 25px;
+	text-align: center;
 }
 
+div.action-error-result-data {
+	color:  red;
+	margin-left: auto; margin-right: auto;
+	text-align: center;	
+	text-decoration: none;
+}
 
+div.action-result {
+	width: 60%;
+	color:  green;
+	margin-left: auto; margin-right: auto;
+	margin-top: 25px;
+	text-align: center;
+}

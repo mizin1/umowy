@@ -9,12 +9,17 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.anotation.AccessCondition;
+import org.objectledge.security.anotation.AccessConditions;
 
 import pl.waw.mizinski.umowy.assembler.TypZadaniaAssembler;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
 import pl.waw.mizinski.umowy.intake.TypZadaniaIntake;
 import pl.waw.mizinski.umowy.model.TypZadania;
 
+@AccessConditions({
+	 @AccessCondition(permissions = {"ZADANIE_W"})
+})
 public class AddTypZadania implements Valve{
 	
 	private final TypZadaniaDao typZadaniaDao;

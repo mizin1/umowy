@@ -1,0 +1,9 @@
+/**
+ * Exception page style.
+ */
+
+.exception-redirect-message {
+	background-color: #ffaaaa;
+	border: black 1px dashed;
+	padding: 0.5cm;
+}

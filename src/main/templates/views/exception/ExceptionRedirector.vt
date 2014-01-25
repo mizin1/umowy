@@ -1,0 +1,19 @@
+#**
+ * Default 'account locked' screen for whole system
+ *
+ * @author <a href="maito:mgolebsk@elka.pw.edu.pl">Marcin Golebski</a>
+ * @version $Id: ExceptionRedirector.vt,v 1.1 2009-03-26 15:34:53 mgolebsk Exp $
+*###
+$viewEnclosureTool.override('MenuPage')##
+$pageTool.appendTitleSuffix(' :: ERROR')##
+##
+$pageTool.addStyleLink('style/style.css')
+$pageTool.addStyleLink('style/exception.css')
+##
+<div  style="display: table; height: 100%;  _position: relative; overflow: hidden; margin-left: auto; margin-right: auto; width: 500px;">
+	<div style=" _position: absolute;  _top: 50%;display: table-cell; vertical-align: middle;">
+		<div class="exception-redirect-message" class="greenBorder" style=" _position: relative; _top: -50%">
+			$!embeddedPlaceholder
+		</div>
+	</div>
+</div>
