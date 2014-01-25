@@ -9,7 +9,7 @@
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<input type="text" name="filter" value="$!parametersTool.get('filter', null)" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	<form action="$link.view('umowy.EditUmowa')" style="display: inline-block;">
@@ -34,16 +34,16 @@
 		#foreach ($umowa in $umowy)
 			 <tr> 
 				<td>$umowa.nrUmowy</td>
-				<td>$umowa.typUmowy.nazwa</td>
-				<td>$umowa.pracownik.nazwisko $umowa.pracownik.pierwszeImie $!umowa.pracownik.imionaPozostale</td>
-				<td>$umowa.getJednostkaOrganizacyjna()</td>
-				<td>$umowa.zadanie.nazwa</td>
+				<td>$umowa.typUmowy</td>
+				<td>$umowa.pracownikNazwisko $umowa.pracownikPierwszeImie $!umowa.pracownikImionaPozostale</td>
+				<td>$umowa.jednostkaOrganizacyjna</td>
+				<td>$umowa.zadanie</td>
 				<td>$umowa.wynagrodzenie</td>
                 <td>
-					#if (!$umowa.rachunki || $umowa.rachunki.isEmpty())
+					#if ($umowa.liczbaRachunkow == 0)
             			brak
             		#else
-                		$umowa.rachunki.size()<a href="$link.view('umowy.Rachunki').set('nrUmowy', $umowa.nrUmowy)">(pokaż)</a>
+                		$umowa.liczbaRachunkow<a href="$link.view('umowy.Rachunki').set('nrUmowy', $umowa.nrUmowy)">(pokaż)</a>
             		#end
 				</td>
                 <td>

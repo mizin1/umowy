@@ -37,7 +37,7 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 		return ret;
 	}
 	
-	protected static boolean matches(String string, String expression){
+	protected static boolean matches(String expression, String string){
 		if (string == null) {
 			return false;
 		}
@@ -48,7 +48,7 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 	
 	protected static boolean matches(String expression, String ...strings) {
 		for (String string : strings){
-			if(matches(string, expression)) {
+			if(matches(expression, string)) {
 				return true;
 			}
 		}

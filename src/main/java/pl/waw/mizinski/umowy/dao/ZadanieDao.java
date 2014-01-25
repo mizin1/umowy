@@ -14,7 +14,7 @@ public class ZadanieDao extends AbstractDao<Long, Zadanie>{
 	private static final String ZADANIE_POJO = "pl.waw.mizinski.umowy.pojo.ZadaniePOJO" +
 			"(z.id, z.nazwa, z.typZadania.typZadaniaPK.nazwa,  z.typZadania.typZadaniaPK.jednostkaOrganizacyjna.nazwa, " +
 			"z.opis, z.budzet, z.dataRozpoczecia, z.dataZakonczenia, z.rozliczone, " +
-			"count(u.nrUmowy))";
+			"count(u))";
 			
 	
 	public ZadanieDao(Context context) {

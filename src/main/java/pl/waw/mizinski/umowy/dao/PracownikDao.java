@@ -18,7 +18,7 @@ public class PracownikDao extends AbstractDao<Long, Pracownik> {
 	
 	private final static String PRACOWNIK_LICZBA_UMOW_POJO = 
 			"pl.waw.mizinski.umowy.pojo"
-			+ ".PracownikLiczbaUmowPOJO(p.id, p.pierwszeImie,  p.imionaPozostale, p.nazwisko, count(u.nrUmowy))";
+			+ ".PracownikLiczbaUmowPOJO(p.id, p.pierwszeImie,  p.imionaPozostale, p.nazwisko, count(u))";
 
 	public PracownikDao(Context context) {
 		super(context);

@@ -13,7 +13,7 @@
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	<form action="$link.view('zadania.EditZadanie')" style="display: inline-block;">
-        <button dojoType="dijit.form.Button">Dodaj nowe zadanie</button>
+        <button dojoType="dijit.form.Button" type="submit">Dodaj nowe zadanie</button>
     </form>
 </div>
 
