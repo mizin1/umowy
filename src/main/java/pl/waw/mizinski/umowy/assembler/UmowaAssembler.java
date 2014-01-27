@@ -78,12 +78,13 @@ public class UmowaAssembler {
 		final List<Umowa> umowy = umowaDao.getUmowyByDataZawarcia(dataZawarcia);
 		final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/");
 		final String dateString = dateFormat.format(dataZawarcia);
-		final int no = umowy.size() + 1;
+		int no = umowy.size() + 1;
 		do {
 			final String nrUmowy = dateString + no;
 			if (!containsNrUmowy(umowy, nrUmowy)) {
 				return nrUmowy;
 			}
+			no--;
 		} while(no > 0);
 		throw new IllegalStateException("Should never happen!");
 	}

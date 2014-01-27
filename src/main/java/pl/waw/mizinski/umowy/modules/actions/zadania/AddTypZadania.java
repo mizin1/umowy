@@ -39,7 +39,7 @@ public class AddTypZadania implements Valve{
 		
 		if (intake.isAllValid()) {
 			try {
-				final Group typZadaniaGroup = intake.get(TypZadania.class.getSimpleName(), IntakeTool.DEFAULT_KEY);
+				final Group typZadaniaGroup = intake.get(TypZadaniaIntake.class.getSimpleName(), IntakeTool.DEFAULT_KEY);
 				TypZadaniaIntake typZadaniaIntake = new TypZadaniaIntake();
 				typZadaniaGroup.setProperties(typZadaniaIntake);
 				TypZadania typZadania = typZadaniaAssembler.asTypZadaniaEntity(typZadaniaIntake);
