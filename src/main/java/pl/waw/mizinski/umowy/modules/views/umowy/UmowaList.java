@@ -14,6 +14,7 @@ import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.UmowaDao;
 import pl.waw.mizinski.umowy.filter.UmowaFilter;
+import pl.waw.mizinski.umowy.filter.security.UmowaSecurityFilter;
 import pl.waw.mizinski.umowy.pojo.SimpleUmowaPOJO;
 
 @AccessConditions({
@@ -22,10 +23,12 @@ import pl.waw.mizinski.umowy.pojo.SimpleUmowaPOJO;
 public class UmowaList extends AbstractBuilder{
 
 	private final UmowaDao umowaDao;
+	private final UmowaSecurityFilter umowaSecurityFilter;
 
-	public UmowaList(final Context context, final UmowaDao umowaDao) {
+	public UmowaList(final Context context, final UmowaDao umowaDao, final UmowaSecurityFilter umowaSecurityFilter) {
 		super(context);
 		this.umowaDao = umowaDao;
+		this.umowaSecurityFilter = umowaSecurityFilter;
 	}
 	
 	@Override
@@ -33,7 +36,8 @@ public class UmowaList extends AbstractBuilder{
 		final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		List<SimpleUmowaPOJO> umowy = umowaDao.getAllSimpleUmowaPOJOs();
-	
+		umowy = umowaSecurityFilter.applyFilter(umowy);
+		
 		if (requestParameters.isDefined("filter")) {
 			final String filterString = requestParameters.get("filter");
 			final  UmowaFilter filter= new UmowaFilter(filterString);

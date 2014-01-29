@@ -7,28 +7,32 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.dao.UmowaDao;
+import pl.waw.mizinski.umowy.model.Umowa;
 @AccessConditions({
 	 @AccessCondition(permissions = {"UMOWA_W"})
 })
-public class DeleteUmowa implements Valve{
+public class DeleteUmowa implements Valve, GroupSecurityChecking{
 
 	private final UmowaDao umowaDao;
+	private final ResourceGroupRecognizer resourceGroupRecognizer;
 	
-	public DeleteUmowa(UmowaDao umowaDao) {
-		super();
+	public DeleteUmowa(UmowaDao umowaDao, final ResourceGroupRecognizer resourceGroupRecognizer) {
 		this.umowaDao = umowaDao;
+		this.resourceGroupRecognizer = resourceGroupRecognizer;
 	}
 
 	@Override
-	public void process(Context context) throws ProcessingException {
+	public void process(final Context context) throws ProcessingException {
 		Session session = HibernateSessionContext.getHibernateSessionContext(context).getSession();
 		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		String nrUmowy = requestParameters.get("nrUmowy");
-//		Umowa umowa = umowaDao.getById(nrUmowy);
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
@@ -40,6 +44,14 @@ public class DeleteUmowa implements Valve{
 			}
 			throw new ProcessingException(e);
 		}
+	}
+
+	@Override
+	public GroupSet getResourceGroup(final Context context) throws ProcessingException {
+		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		final String nrUmowy = requestParameters.get("nrUmowy");
+		final Umowa umowa = umowaDao.getById(nrUmowy);
+		return resourceGroupRecognizer.resourceGroupByObject(umowa);
 	}
 
 }

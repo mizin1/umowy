@@ -21,7 +21,7 @@ public abstract class AbstractFilter<E> implements Filter<E>{
 		for(String expression : expressions) {
 			list = applyExpression(list, expression);
 		}
-		return list;
+		return (List<E>) list;
 	}
 	
 	private List<E> applyExpression(List<E> list, String expression) {

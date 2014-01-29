@@ -23,6 +23,9 @@
 	<component class="pl.waw.mizinski.umowy.assembler.TypZadaniaAssembler" />
 	<component class="pl.waw.mizinski.umowy.assembler.JednostkaOrganizacyjnaAssembler" />
 	
+	<component class="pl.waw.mizinski.umowy.filter.security.JednostkaSecurityFilter" />
+	<component class="pl.waw.mizinski.umowy.filter.security.UmowaSecurityFilter" />
+
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
 		<parameter key="hibernateContainer" />
@@ -243,13 +246,13 @@
 	<component class="org.objectledge.security.SecurityAuthenticationValve" />
 	<component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingValve"/>
 
-	<component class="pl.waw.mizinski.umowy.security.PersonGroupRecognizer" />
+	<component class="pl.waw.mizinski.umowy.security.JednostkaGroupRecognizer" />
 
 	<component class-key="org.objectledge.security.ResourceRecognizerManager"
 		class="org.objectledge.security.ResourceRecognizerManagerImpl">
 		<parameter />
 		<sequence>
-			<parameter class-key="pl.waw.mizinski.umowy.security.PersonGroupRecognizer" />
+			<parameter class-key="pl.waw.mizinski.umowy.security.JednostkaGroupRecognizer" />
 		</sequence>
 	</component>
 

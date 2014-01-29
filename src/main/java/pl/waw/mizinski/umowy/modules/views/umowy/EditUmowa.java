@@ -25,6 +25,7 @@ import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.dao.TypUmowyDao;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
 import pl.waw.mizinski.umowy.dao.UmowaDao;
+import pl.waw.mizinski.umowy.filter.security.JednostkaSecurityFilter;
 import pl.waw.mizinski.umowy.intake.UmowaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypZadania;
@@ -34,7 +35,7 @@ import pl.waw.mizinski.umowy.util.JednostkaOrganizacyjnaComprarator;
 @AccessConditions({
 	 @AccessCondition(permissions = {"UMOWA_W"})
 })
-public class EditUmowa extends AbstractBuilder {
+public class EditUmowa extends AbstractBuilder{
 
 	private final PracownikDao pracownikDao;
 	private final TypZadaniaDao typZadaniaDao;
@@ -42,12 +43,13 @@ public class EditUmowa extends AbstractBuilder {
 	private final TypUmowyDao typUmowyDao;
 	private final PlatnoscDao platnoscDao;
 	private final UmowaDao umowaDao;
-
 	private final UmowaAssembler umowaAssembler;
+	private final JednostkaSecurityFilter jednostkaSecurityFilter;
 
 	public EditUmowa(final Context context, final PracownikDao pracownikDao, final TypZadaniaDao typZadaniaDao,
 			final TypUmowyDao typUmowyDao, final PlatnoscDao platnoscDao, final UmowaDao umowaDao,
-			final UmowaAssembler umowaAssembler, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao) {
+			final UmowaAssembler umowaAssembler, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao,
+			final JednostkaSecurityFilter jednostkaSecurityFilter) {
 		super(context);
 		this.pracownikDao = pracownikDao;
 		this.typZadaniaDao = typZadaniaDao;
@@ -56,6 +58,7 @@ public class EditUmowa extends AbstractBuilder {
 		this.umowaDao = umowaDao;
 		this.umowaAssembler = umowaAssembler;
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
+		this.jednostkaSecurityFilter = jednostkaSecurityFilter;
 	}
 
 	@Override
@@ -79,10 +82,13 @@ public class EditUmowa extends AbstractBuilder {
 		
 		Map<JednostkaOrganizacyjna, List<TypZadania>> zadaniaJednostek = new TreeMap<>(new JednostkaOrganizacyjnaComprarator());
 		for (JednostkaOrganizacyjna jednostka : jednostkaOrganizacyjnaDao.getAll()) {
-			List<TypZadania> typyZadan = typZadaniaDao.getTypyZadaniaByJednostka(jednostka);
-			if (!typyZadan.isEmpty()) {
-				zadaniaJednostek.put(jednostka, typyZadan);
+			if (jednostkaSecurityFilter.checkSecurity(jednostka)) {
+				List<TypZadania> typyZadan = typZadaniaDao.getTypyZadaniaByJednostka(jednostka);
+				if (!typyZadan.isEmpty()) {
+					zadaniaJednostek.put(jednostka, typyZadan);
+				}
 			}
+			
 		}
 		templatingContext.put("pracownicy", pracownikDao.getAll());
 		templatingContext.put("zadaniaJednostek", zadaniaJednostek);
