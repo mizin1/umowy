@@ -56,7 +56,7 @@
 					<div dojoType="dijit.form.ComboButton">
                         <span>Akcje</span>
 							<div dojoType="dijit.Menu">
-								<div dojoType="dijit.MenuItem"  #if ($typ.liczbaZadan > 0) disabled="true" #end onClick="deleteObject('$link.action('zadania.DeleteTypZadania').set('nazwa', $typ.nazwa).set('jednostka', $typ.getJednostkaOrganizacyjna().nazwa)');">Usuń</div>
+								<div dojoType="dijit.MenuItem"  #if ($typ.liczbaZadan > 0) disabled="true" #end onClick="deleteObject('$link.action('zadania.DeleteTypZadania').set('nazwa', $typ.nazwa).set('jednostka', $typ.jednostkaOrganizacyjna)');">Usuń</div>
                         </div>
 					</div>
 				</td>

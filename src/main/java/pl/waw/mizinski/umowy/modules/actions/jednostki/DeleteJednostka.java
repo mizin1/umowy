@@ -7,6 +7,7 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.SecurityManager;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
 
@@ -18,9 +19,11 @@ import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 public class DeleteJednostka implements Valve {
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;
+	private final SecurityManager securityManager;
 
-	public DeleteJednostka(final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao) {
+	public DeleteJednostka(final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, final SecurityManager securityManager) {
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
+		this.securityManager = securityManager;
 	}
 
 	@Override
@@ -32,6 +35,7 @@ public class DeleteJednostka implements Valve {
 		try {
 			transaction = session.beginTransaction();
 			jednostkaOrganizacyjnaDao.remove(nazwa);
+			securityManager.removeGroup(securityManager.getGroupByName(nazwa));
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {

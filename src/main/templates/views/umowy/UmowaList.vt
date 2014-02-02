@@ -48,7 +48,7 @@
 				</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
 							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('umowy.UmowaDetails').set('nrUmowy', $umowa.nrUmowy)');">Szczegóły</div>
 							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('umowy.EditUmowa').set('nrUmowy', $umowa.nrUmowy)');">Edytuj</div>

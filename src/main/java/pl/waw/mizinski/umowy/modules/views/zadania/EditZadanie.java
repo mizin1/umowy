@@ -22,6 +22,7 @@ import pl.waw.mizinski.umowy.assembler.ZadanieAssembler;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
+import pl.waw.mizinski.umowy.filter.security.JednostkaSecurityFilter;
 import pl.waw.mizinski.umowy.intake.ZadanieIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypZadania;
@@ -37,14 +38,17 @@ public class EditZadanie extends AbstractBuilder {
 	private final TypZadaniaDao typZadaniaDao;
 	private final ZadanieDao zadanieDao;
 	private final ZadanieAssembler zadanieAssembler;
+	private final JednostkaSecurityFilter jednostkaSecurityFilter;
 
 	public EditZadanie(final Context context, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao,
-			final TypZadaniaDao typZadaniaDao, final ZadanieDao zadanieDao, final ZadanieAssembler zadanieAssembler) {
+			final TypZadaniaDao typZadaniaDao, final ZadanieDao zadanieDao, final ZadanieAssembler zadanieAssembler,
+			 final JednostkaSecurityFilter jednostkaSecurityFilter) {
 		super(context);
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 		this.typZadaniaDao = typZadaniaDao;
 		this.zadanieDao = zadanieDao;
 		this.zadanieAssembler = zadanieAssembler;
+		this.jednostkaSecurityFilter = jednostkaSecurityFilter;
 	}
 
 	@Override
@@ -67,9 +71,11 @@ public class EditZadanie extends AbstractBuilder {
 		}
 		Map<JednostkaOrganizacyjna, List<TypZadania>> zadaniaJednostek = new TreeMap<>(new JednostkaOrganizacyjnaComprarator());
 		for (JednostkaOrganizacyjna jednostka : jednostkaOrganizacyjnaDao.getAll()) {
-			List<TypZadania> typyZadan = typZadaniaDao.getTypyZadaniaByJednostka(jednostka);
-			if (!typyZadan.isEmpty()) {
-				zadaniaJednostek.put(jednostka, typyZadan);
+			if(jednostkaSecurityFilter.checkSecurity(jednostka)) {
+				List<TypZadania> typyZadan = typZadaniaDao.getTypyZadaniaByJednostka(jednostka);
+				if (!typyZadan.isEmpty()) {
+					zadaniaJednostek.put(jednostka, typyZadan);
+				}
 			}
 		}
 		templatingContext.put("zadaniaJednostek", zadaniaJednostek);

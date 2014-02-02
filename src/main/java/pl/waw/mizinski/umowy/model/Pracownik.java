@@ -162,6 +162,10 @@ public class Pracownik {
 		return findAdresByTyp(TypAdresu.w_celach_podatkowych);
 	}
 	
+	public AdresPracownika getAdresDoUmowy() {
+		return findAdresByTyp(TypAdresu.w_celach_podatkowych);
+	}
+	
 	public boolean hasAdresKorespondencyjny() {
 		return getAdresKorespondencyjny() != null;
 	}

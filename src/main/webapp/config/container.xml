@@ -25,6 +25,8 @@
 	
 	<component class="pl.waw.mizinski.umowy.filter.security.JednostkaSecurityFilter" />
 	<component class="pl.waw.mizinski.umowy.filter.security.UmowaSecurityFilter" />
+	<component class="pl.waw.mizinski.umowy.filter.security.ZadanieSecurityFilter" />
+	<component class="pl.waw.mizinski.umowy.filter.security.TypZadaniaSecurityFilter" />
 
 	<container key="hibernateContainer" />
 	<component class="org.objectledge.hibernate.NonCachingPicoObjectInstantiator">
@@ -328,7 +330,7 @@
 	</component>
 	
 	
-<!--	<component class="org.objectledge.threads.ThreadPool">
+	<component class="org.objectledge.threads.ThreadPool">
 		<parameter key="nothing-to-do" />
 		<parameter />
 		<parameter />
@@ -378,7 +380,8 @@
 		<sequence>
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
-	</component> -->
+	</component>
+	
 	 <component class-key="org.objectledge.fop.LedgeUriResolver"
   		class="org.objectledge.xsl.URIResolverImpl"/>
   <component class-key="org.objectledge.fop.requestjail.RequestJail"

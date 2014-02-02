@@ -18,16 +18,21 @@ import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
+import pl.waw.mizinski.umowy.dao.UmowaDao;
+
 @AccessConditions({
 	 @AccessCondition(permissions = {"UMOWA_R"})
 })
 public class UmowaPdf extends AbstractBuilder {
 
 	private final PdfGenerator pdfGenerator;
+	private final UmowaDao umowaDao;
 
-	public UmowaPdf(Context context, final PdfGenerator pdfGenerator) {
+	public UmowaPdf(final Context context, final PdfGenerator pdfGenerator,
+			final UmowaDao umowaDao) {
 		super(context);
 		this.pdfGenerator = pdfGenerator;
+		this.umowaDao = umowaDao;
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class UmowaPdf extends AbstractBuilder {
 		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		String nrUmowy = requestParameters.get("nrUmowy");
-		templatingContext.put("nrUmowy", nrUmowy);
+		templatingContext.put("umowa", umowaDao.getById(nrUmowy));
 		try {
 			ByteArrayInputStream xmlData = new ByteArrayInputStream(super.build(template, embeddedBuildResults).getBytes());
 		    pdfGenerator.dumpData(xmlData, "umowa", "umowa.xsl", OutputType.PDF);

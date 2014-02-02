@@ -11,6 +11,8 @@ import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.templating.TemplatingContext;
+import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.TypZadaniaAssembler;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
@@ -20,10 +22,11 @@ import pl.waw.mizinski.umowy.model.TypZadania;
 @AccessConditions({
 	 @AccessCondition(permissions = {"ZADANIE_W"})
 })
-public class AddTypZadania implements Valve{
+public class AddTypZadania implements Valve {
 	
 	private final TypZadaniaDao typZadaniaDao;
 	private final TypZadaniaAssembler typZadaniaAssembler;
+
 	
 	public AddTypZadania(final TypZadaniaDao typZadaniaDao, final TypZadaniaAssembler typZadaniaAssembler) {
 		super();
@@ -40,9 +43,9 @@ public class AddTypZadania implements Valve{
 		if (intake.isAllValid()) {
 			try {
 				final Group typZadaniaGroup = intake.get(TypZadaniaIntake.class.getSimpleName(), IntakeTool.DEFAULT_KEY);
-				TypZadaniaIntake typZadaniaIntake = new TypZadaniaIntake();
+				final TypZadaniaIntake typZadaniaIntake = new TypZadaniaIntake();
 				typZadaniaGroup.setProperties(typZadaniaIntake);
-				TypZadania typZadania = typZadaniaAssembler.asTypZadaniaEntity(typZadaniaIntake);
+				final TypZadania typZadania = typZadaniaAssembler.asTypZadaniaEntity(typZadaniaIntake);
 				transaction = session.beginTransaction();
 				typZadaniaDao.saveOrUpdate(typZadania);
 				intake.removeAll();
@@ -54,10 +57,11 @@ public class AddTypZadania implements Valve{
 				throw new ProcessingException(e);
 			}
 		} else {
-			//FIXME
+			MVCContext.getMVCContext(context).setView("zadania.TypyZadan");
+			final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
+			templatingContext.put("errorResult", "Parametry typu zadania są nieprawidłowe");
 		}
 		
 	}
-	
-	
+
 }

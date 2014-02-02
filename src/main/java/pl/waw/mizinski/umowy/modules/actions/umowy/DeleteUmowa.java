@@ -51,7 +51,7 @@ public class DeleteUmowa implements Valve, GroupSecurityChecking{
 		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		final String nrUmowy = requestParameters.get("nrUmowy");
 		final Umowa umowa = umowaDao.getById(nrUmowy);
-		return resourceGroupRecognizer.resourceGroupByObject(umowa);
+		return resourceGroupRecognizer.resourceGroupByObject(umowa.getJednostkaOrganizacyjna());
 	}
 
 }

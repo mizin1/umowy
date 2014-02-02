@@ -18,26 +18,36 @@ import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
+import pl.waw.mizinski.umowy.dao.RachunekDao;
+import pl.waw.mizinski.umowy.dao.UmowaDao;
+import pl.waw.mizinski.umowy.model.RachunekPK;
+import pl.waw.mizinski.umowy.model.Umowa;
+
 @AccessConditions({
 	 @AccessCondition(permissions = {"UMOWA_R"})
 })
 public class RachunekPdf extends AbstractBuilder {
 
 	private final PdfGenerator pdfGenerator;
+	private final UmowaDao umowaDao;
+	private final RachunekDao rachunekDao;
 
-	public RachunekPdf(Context context, final PdfGenerator pdfGenerator) {
+	public RachunekPdf(final Context context, final PdfGenerator pdfGenerator, final UmowaDao umowaDao, final RachunekDao rachunekDao) {
 		super(context);
 		this.pdfGenerator = pdfGenerator;
+		this.umowaDao = umowaDao;
+		this.rachunekDao = rachunekDao;
 	}
 
 	@Override
 	public String build(Template template, String embeddedBuildResults) throws BuildException, ProcessingException {
 		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
-		String nrRachunku = requestParameters.get("nrRachunku");
+		Integer nrRachunku = requestParameters.getInt("nrRachunku");
 		String nrUmowy = requestParameters.get("nrUmowy");
-		templatingContext.put("nrUmowy", nrUmowy);
-		templatingContext.put("nrRachunku", nrRachunku);
+		Umowa umowa = umowaDao.getById(nrUmowy);
+		templatingContext.put("umowa", umowa);
+		templatingContext.put("rachunek", rachunekDao.getById(new RachunekPK(umowa, nrRachunku)));
 		try {
 			ByteArrayInputStream xmlData = new ByteArrayInputStream(super.build(template, embeddedBuildResults).getBytes());
 		    pdfGenerator.dumpData(xmlData, "rachunek", "rachunek.xsl", OutputType.PDF);

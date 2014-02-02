@@ -12,22 +12,9 @@
   			<value>flate</value>
   		</filterList>
   		<fonts>
-		   <font embed-url="fop/metrics/ubuntur.ttf" kerning="yes">
-		   	<!--embed-url="fop/metrics/ubuntur.ttf">-->
-		      <font-triplet name="ubuntu" style="normal" weight="normal"/>
-		   </font>
-		   <font embed-url="fop/metrics/ubuntub.ttf" kerning="yes">
-		   	<!--embed-url="fop/metrics/ubuntub.ttf">-->
-		      <font-triplet name="ubuntu" style="normal" weight="bold"/>
-		   </font>
-		   <font embed-url="fop/metrics/ubuntui.ttf" kerning="yes">
-		   	<!--embed-url="fop/metrics/ubuntui.ttf">-->
-		      <font-triplet name="ubuntu" style="italic" weight="normal"/>
-		   </font>
-		   <font embed-url="fop/metrics/ubuntubi.ttf" kerning="yes">
-		   	<!--embed-url="fop/metrics/ubuntubi.ttf">-->
-		      <font-triplet name="ubuntu" style="italic" weight="bold"/>
-		   </font>
+		   <font embed-url="fop/fonts/arial.ttf" kerning="yes">
+	      <font-triplet name="ttfarial" style="normal" weight="normal"/>
+	   </font>
 		</fonts>
   	</renderer>
   </renderers>

@@ -28,5 +28,5 @@
 --> 
 
 <config>
- <job name="test" scheduleType="cron" scheduleConfig="* * * * *" jobClassName="pl.waw.mizinski.umowy.scheduler.ValveJob"/>
+ <job name="rachunekGenerator" scheduleType="cron" scheduleConfig="* * * * *" jobClassName="pl.waw.mizinski.umowy.scheduler.ValveJob"/>
 </config>

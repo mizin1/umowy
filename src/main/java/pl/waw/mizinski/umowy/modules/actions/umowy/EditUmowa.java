@@ -20,27 +20,27 @@ import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.UmowaAssembler;
 import pl.waw.mizinski.umowy.dao.UmowaDao;
+import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.intake.UmowaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.Umowa;
+import pl.waw.mizinski.umowy.model.Zadanie;
 import pl.waw.mizinski.umowy.validation.UmowaValidator;
 import pl.waw.mizinski.umowy.validation.ValidationException;
 
 @AccessConditions({
 	 @AccessCondition(permissions = {"UMOWA_W"})
 })
-public class EditUmowa implements Valve, GroupSecurityChecking{
+public class EditUmowa implements Valve{
 
 	private final UmowaDao umowaDao;
 	private final UmowaAssembler umowaAssembler;
 	private final UmowaValidator umowaValidator;
-	private final ResourceGroupRecognizer resourceGroupRecognizer;
 
-	public EditUmowa(final UmowaDao umowaDao, final UmowaAssembler umowaAssembler,  final  ResourceGroupRecognizer resourceGroupRecognizer) {
+	public EditUmowa(final UmowaDao umowaDao, final UmowaAssembler umowaAssembler) {
 		super();
 		this.umowaDao = umowaDao;
 		this.umowaAssembler = umowaAssembler;
-		this.resourceGroupRecognizer = resourceGroupRecognizer;
 		this.umowaValidator = new UmowaValidator();
 	}
 
@@ -62,7 +62,7 @@ public class EditUmowa implements Valve, GroupSecurityChecking{
 				intake.removeAll();
 				transaction.commit();
 			} catch (final ValidationException e) {
-				MVCContext.getMVCContext(context);MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
+				MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
 				final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 				templatingContext.put("errorResult", e.getMessage());
 			} catch (final Exception e) {
@@ -74,21 +74,6 @@ public class EditUmowa implements Valve, GroupSecurityChecking{
 
 		} else {
 			MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
-		}
-	}
-
-	@Override
-	public GroupSet getResourceGroup(Context context) throws ProcessingException {
-		try {
-			final IntakeTool intake = IntakeContext.getIntakeContext(context).getIntakeTool();
-			final Group umowaGroup = intake.get(UmowaIntake.class.getSimpleName(), IntakeTool.DEFAULT_KEY);
-			UmowaIntake umowaIntake = new UmowaIntake();
-			umowaGroup.setProperties(umowaIntake);
-			Umowa umowa = umowaAssembler.asUmowaEntity(umowaIntake);
-			JednostkaOrganizacyjna jednostkaOrganizacyjna = umowa.getJednostkaOrganizacyjna();
-			return resourceGroupRecognizer.resourceGroupByObject(jednostkaOrganizacyjna);
-		} catch (IntakeException e) {
-			throw new ProcessingException(e);
 		}
 	}
 

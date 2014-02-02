@@ -1,4 +1,23 @@
 <rachunek>
-	<nrUmowy>$nrUmowy</nrUmowy>
-	<nrRachunku>$nrRachunku</nrRachunku>
+	<miejscowosc>$umowa.getJednostkaOrganizacyjna().miejscowosc</miejscowosc>
+    <dataWystawienia>$rachunek.dataWystawienia</dataWystawienia>
+	<pracownik>$umowa.pracownik.nazwisko $umowa.pracownik.pierwszeImie $!umowa.pracownik.imionaPozostale</pracownik>
+	#if($umowa.pracownik.pesel)
+		<typNumeru>PESEL</typNumeru>
+        <numer>$umowa.pracownik.pesel</numer>
+	#elseif($umowa.pracownik.nip)
+		<typNumeru>NIP</typNumeru>
+        <numer>$umowa.pracownik.nip</numer>
+	#elseif($umowa.pracownik.typDokumentuTozsamosci == 'dowod_osobisty')
+		<typNumeru>Nr dowodu osobistego</typNumeru>
+        <numer>$umowa.pracownik.nrDokumentuTozsamosci</numer>
+	#else
+		<typNumeru>Nr paszportu</typNumeru>
+        <numer>$umowa.pracownik.nrDokumentuTozsamosci</numer>
+	#end
+    <nrRachunku>$rachunek.getNrRachunku()</nrRachunku>
+	<jednostka>$umowa.getJednostkaOrganizacyjna()</jednostka>
+	<przedmiotUmowy>$umowa.przedmiotUmowy</przedmiotUmowy>
+	<nrUmowy>$umowa.nrUmowy</nrUmowy>
+    <kwota>$rachunek.kwota</kwota>
 </rachunek>

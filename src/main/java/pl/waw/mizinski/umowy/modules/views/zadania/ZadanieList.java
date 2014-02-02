@@ -14,6 +14,7 @@ import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.filter.ZadanieFilter;
+import pl.waw.mizinski.umowy.filter.security.ZadanieSecurityFilter;
 import pl.waw.mizinski.umowy.pojo.ZadaniePOJO;
 
 @AccessConditions({
@@ -22,10 +23,13 @@ import pl.waw.mizinski.umowy.pojo.ZadaniePOJO;
 public class ZadanieList extends AbstractBuilder {
 
 	private final ZadanieDao zadanieDao;
+	private final ZadanieSecurityFilter zadanieSecurityFilter;
 
-	public ZadanieList(final Context context, final ZadanieDao zadanieDao) {
+	public ZadanieList(final Context context, final ZadanieDao zadanieDao,
+			final ZadanieSecurityFilter zadanieSecurityFilter) {
 		super(context);
 		this.zadanieDao = zadanieDao;
+		this.zadanieSecurityFilter = zadanieSecurityFilter;
 	}
 	
 	@Override
@@ -33,6 +37,7 @@ public class ZadanieList extends AbstractBuilder {
 		final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
 		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
 		List<ZadaniePOJO> zadania = zadanieDao.getAllZadaniePOJOs();
+		zadania = zadanieSecurityFilter.applyFilter(zadania);
 		
 		if (requestParameters.isDefined("filter")) {
 			final String filterString = requestParameters.get("filter");

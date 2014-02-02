@@ -11,6 +11,8 @@ import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.templating.TemplatingContext;
+import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.dao.PlatnoscDao;
 import pl.waw.mizinski.umowy.model.Platnosc;
@@ -49,7 +51,9 @@ public class AddPlatnosc implements Valve {
 				throw new ProcessingException(e);
 			}
 		} else {
-			//FIXME
+			MVCContext.getMVCContext(context).setView("platnosci.Platnosci");
+			final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);
+			templatingContext.put("errorResult", "Parametry płatności są nieprawidłowe");
 		}
 		
 	}

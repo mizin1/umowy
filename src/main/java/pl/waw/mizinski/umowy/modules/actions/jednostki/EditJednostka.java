@@ -11,6 +11,7 @@ import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.SecurityManager;
 import org.objectledge.web.mvc.MVCContext;
 
 import pl.waw.mizinski.umowy.assembler.JednostkaOrganizacyjnaAssembler;
@@ -24,13 +25,14 @@ import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 public class EditJednostka implements Valve{
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;
-	private final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler;	
+	private final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler;
+	private final SecurityManager securityManager;
 	
-	public EditJednostka(final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler) {
+	public EditJednostka(final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler, final SecurityManager securityManager) {
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 		this.jednostkaOrganizacyjnaAssembler = jednostkaOrganizacyjnaAssembler;
+		this.securityManager = securityManager;
 	}
-
 
 
 	@Override
@@ -45,7 +47,11 @@ public class EditJednostka implements Valve{
 				jednostkaGroup.setProperties(jednostkaOrganizacyjnaIntake);
 				JednostkaOrganizacyjna jednostkaOrganizacyjna = jednostkaOrganizacyjnaAssembler.asJednostkaOrganizacyjnaEntity(jednostkaOrganizacyjnaIntake);
 				transaction = session.beginTransaction();
-				jednostkaOrganizacyjnaDao.save(jednostkaOrganizacyjna);
+				jednostkaOrganizacyjnaDao.saveOrUpdate(jednostkaOrganizacyjna);
+				org.objectledge.security.object.Group group = securityManager.getGroupByName(jednostkaOrganizacyjna.getNazwa());
+				if (!group.isDefined()){
+					securityManager.saveGroup(group);
+				}
 				intake.removeAll();
 				transaction.commit();
 			} catch (final Exception e) {

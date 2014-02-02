@@ -13,7 +13,10 @@ import org.objectledge.security.util.GroupSet;
 
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
+import pl.waw.mizinski.umowy.model.Zadanie;
 import pl.waw.mizinski.umowy.pojo.SimpleUmowaPOJO;
+import pl.waw.mizinski.umowy.pojo.TypZadaniaPOJO;
+import pl.waw.mizinski.umowy.pojo.ZadaniePOJO;
 
 public class JednostkaGroupRecognizer implements ResourceGroupRecognizer {
 
@@ -27,7 +30,7 @@ public class JednostkaGroupRecognizer implements ResourceGroupRecognizer {
 
 	final protected static List<Class<?>> RECOGNIZED_OBJECTS = Collections
 			.unmodifiableList(Arrays
-					.<Class<?>> asList(JednostkaOrganizacyjna.class, SimpleUmowaPOJO.class) );
+					.<Class<?>> asList(JednostkaOrganizacyjna.class, SimpleUmowaPOJO.class, ZadaniePOJO.class, TypZadaniaPOJO.class) );
 
 	@Override
 	public GroupSet resourceGroupByObject(Object object) throws UnrecognizableResourceGroupException {
@@ -40,7 +43,17 @@ public class JednostkaGroupRecognizer implements ResourceGroupRecognizer {
 				String nazwaJednostki = pojo.getJednostkaOrganizacyjna();
 				JednostkaOrganizacyjna jednostkaOrganizacyjna= jednostkaOrganizacyjnaDao.getById(nazwaJednostki);
 				return recognizeByJednostkaOrganizacyjna(jednostkaOrganizacyjna);
-			}
+			} else if (object instanceof ZadaniePOJO){
+				ZadaniePOJO pojo = (ZadaniePOJO) object;
+				String nazwaJednostki = pojo.getJednostkaOrganizacyjna();
+				JednostkaOrganizacyjna jednostkaOrganizacyjna= jednostkaOrganizacyjnaDao.getById(nazwaJednostki);
+				return recognizeByJednostkaOrganizacyjna(jednostkaOrganizacyjna);
+			} else if (object instanceof TypZadaniaPOJO){
+				TypZadaniaPOJO pojo = (TypZadaniaPOJO) object;
+				String nazwaJednostki = pojo.getJednostkaOrganizacyjna();
+				JednostkaOrganizacyjna jednostkaOrganizacyjna= jednostkaOrganizacyjnaDao.getById(nazwaJednostki);
+				return recognizeByJednostkaOrganizacyjna(jednostkaOrganizacyjna);
+			} 
 		} catch (DataBackendException e) {
 			throw new RuntimeException(e);
 		}

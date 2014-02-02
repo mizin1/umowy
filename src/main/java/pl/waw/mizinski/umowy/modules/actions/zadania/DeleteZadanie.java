@@ -7,23 +7,28 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
-import pl.waw.mizinski.umowy.model.Pracownik;
+import pl.waw.mizinski.umowy.model.Zadanie;
 
 
 @AccessConditions({
 	 @AccessCondition(permissions = {"ZADANIE_W"})
 })
-public class DeleteZadanie implements Valve {
+public class DeleteZadanie implements Valve, GroupSecurityChecking {
 
 	private final ZadanieDao zadanieDao;
+	private final ResourceGroupRecognizer resourceGroupRecognizer;
 	
-	public DeleteZadanie(final ZadanieDao zadanieDao) {
+	public DeleteZadanie(final ZadanieDao zadanieDao, final ResourceGroupRecognizer resourceGroupRecognizer) {
 		super();
 		this.zadanieDao = zadanieDao;
+		this.resourceGroupRecognizer = resourceGroupRecognizer;
 	}
 	
 	@Override
@@ -42,6 +47,14 @@ public class DeleteZadanie implements Valve {
 			}
 			throw new ProcessingException(e);
 		}
+	}
+
+	@Override
+	public GroupSet getResourceGroup(Context context) throws ProcessingException {
+		RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		Long id = requestParameters.getLong("id");
+		Zadanie zadanie = zadanieDao.getById(id);
+		return resourceGroupRecognizer.resourceGroupByObject(zadanie.getJednostkaOrganizacyjna());
 	}
 
 

@@ -12,12 +12,15 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.JednostkaOrganizacyjnaAssembler;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
@@ -31,7 +34,7 @@ import pl.waw.mizinski.umowy.util.TypJednostkiComparator;
 @AccessConditions({
 	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
 })
-public class EditJednostka extends AbstractBuilder{
+public class EditJednostka extends AbstractBuilder {
 
 	private final TypJednostkiDao typJednostkiDao;
 	private final ReprezentantDao reprezentantDao;
@@ -39,7 +42,8 @@ public class EditJednostka extends AbstractBuilder{
 	private final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler;
 	
 	public EditJednostka(final Context context, final TypJednostkiDao typJednostkiDao, final ReprezentantDao reprezentantDao, 
-			final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler) {
+			final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao, final JednostkaOrganizacyjnaAssembler jednostkaOrganizacyjnaAssembler,
+			final ResourceGroupRecognizer resourceGroupRecognizer) {
 		super(context);
 		this.typJednostkiDao = typJednostkiDao;
 		this.reprezentantDao = reprezentantDao;
@@ -80,5 +84,7 @@ public class EditJednostka extends AbstractBuilder{
 		templatingContext.put("jednostki", jednostkaOrganizacyjnaDao.getAll());
 		return super.build(template, embeddedBuildResults);
 	}
+
+	
 	
 }

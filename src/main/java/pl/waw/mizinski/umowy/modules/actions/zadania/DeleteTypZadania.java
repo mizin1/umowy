@@ -7,22 +7,32 @@ import org.objectledge.hibernate.HibernateSessionContext;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
+import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.dao.TypZadaniaDao;
+import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.TypZadania;
 
 @AccessConditions({
 	 @AccessCondition(permissions = {"ZADANIE_W"})
 })
-public class DeleteTypZadania implements Valve {
+public class DeleteTypZadania implements Valve, GroupSecurityChecking {
 
 	private final TypZadaniaDao typZadaniaDao;
+	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;
+	private final ResourceGroupRecognizer resourceGroupRecognizer;
 	
-	public DeleteTypZadania(final TypZadaniaDao typZadaniaDao) {
+	public DeleteTypZadania(final TypZadaniaDao typZadaniaDao, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao,
+			final ResourceGroupRecognizer resourceGroupRecognizer) {
 		super();
 		this.typZadaniaDao = typZadaniaDao;
+		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
+		this.resourceGroupRecognizer = resourceGroupRecognizer;
 	}
 	
 	@Override
@@ -43,5 +53,15 @@ public class DeleteTypZadania implements Valve {
 			}
 			throw new ProcessingException(e);
 		}
+	}
+
+	@Override
+	public GroupSet getResourceGroup(Context context) throws ProcessingException {
+	
+			final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+			final String nazwaJednostki = requestParameters.get("jednostka");
+			JednostkaOrganizacyjna jednostkaOrganizacyjna = jednostkaOrganizacyjnaDao.getById(nazwaJednostki);
+			return resourceGroupRecognizer.resourceGroupByObject(jednostkaOrganizacyjna);
+		
 	}
 }

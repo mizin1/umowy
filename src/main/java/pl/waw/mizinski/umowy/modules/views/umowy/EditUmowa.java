@@ -88,7 +88,6 @@ public class EditUmowa extends AbstractBuilder{
 					zadaniaJednostek.put(jednostka, typyZadan);
 				}
 			}
-			
 		}
 		templatingContext.put("pracownicy", pracownikDao.getAll());
 		templatingContext.put("zadaniaJednostek", zadaniaJednostek);

@@ -1,1 +1,31 @@
-<nrUmowy>$nrUmowy</nrUmowy>
+#macro (displayAddress $adres) 
+	#if ($adres.ulica)
+		#if($adres.miejscowosc == $adres.poczta)
+			#set($displayMiescowosc = false)
+		#else
+			#set($displayMiescowosc = true)
+		#end
+	#else
+		#set($displayMiescowosc = true)
+	#end
+	#if ($displayMiescowosc) $adres.miejscowosc,#end $!adres.ulica $adres.nrDomu #if($adres.nrMieszkania) m. $adres.nrMieszkania#end, $adres.kodPocztowy $adres.poczta#if($adres.panstwo), $!adres.panstwo.nazwa#end
+#end
+
+
+<umowa>
+    <tytul>$umowa.typUmowy.tytul</tytul>
+    <nrUmowy>$umowa.nrUmowy</nrUmowy>
+    <dataZawarcia>$umowa.dataZawarcia</dataZawarcia>
+	<jednostka>$umowa.getJednostkaOrganizacyjna()</jednostka>
+	<adresJednostki>#displayAddress($umowa.getJednostkaOrganizacyjna())</adresJednostki>
+    <reprezentant>$umowa.getJednostkaOrganizacyjna().reprezentant.biernik</reprezentant>
+	<pracownik>$umowa.pracownik.nazwisko $umowa.pracownik.pierwszeImie $!umowa.pracownik.imionaPozostale</pracownik>
+	<adresPracownika>#displayAddress($umowa.pracownik.getAdresDoUmowy())</adresPracownika>
+	<przedmiotUmowy>$umowa.przedmiotUmowy</przedmiotUmowy>
+	<wynagrodzenie>$umowa.wynagrodzenie</wynagrodzenie>
+	#if ($umowa.platnosc.nazwa == "jednorazowa")
+		<platnosc>jednorazowo</platnosc>
+	#else
+		<platnosc>w ratach co $umowa.platnosc.okres $umowa.platnosc.jednostkaOkresu</platnosc>
+	#end
+</umowa>
