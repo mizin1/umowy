@@ -6,6 +6,7 @@
 	<component class="pl.waw.mizinski.umowy.dao.ZadanieDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PanstwoDao" />
 	<component class="pl.waw.mizinski.umowy.dao.StatusPracownikaDao" />
+	<component class="pl.waw.mizinski.umowy.dao.SkladkaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.SkladkaPracownikaDao" />
 	<component class="pl.waw.mizinski.umowy.dao.PracownikDao" />
 	<component class="pl.waw.mizinski.umowy.dao.AdresPracownikaDao" />
@@ -330,7 +331,7 @@
 	</component>
 	
 	
-	<component class="org.objectledge.threads.ThreadPool">
+	<!-- <component class="org.objectledge.threads.ThreadPool">
 		<parameter key="nothing-to-do" />
 		<parameter />
 		<parameter />
@@ -380,7 +381,7 @@
 		<sequence>
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
-	</component>
+	</component> -->
 	
 	 <component class-key="org.objectledge.fop.LedgeUriResolver"
   		class="org.objectledge.xsl.URIResolverImpl"/>

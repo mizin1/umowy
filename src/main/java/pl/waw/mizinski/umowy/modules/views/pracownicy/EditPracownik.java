@@ -18,7 +18,9 @@ import pl.waw.mizinski.umowy.assembler.PracownikAssembler;
 import pl.waw.mizinski.umowy.dao.AdresPracownikaDao;
 import pl.waw.mizinski.umowy.dao.PanstwoDao;
 import pl.waw.mizinski.umowy.dao.PracownikDao;
+import pl.waw.mizinski.umowy.dao.SkladkaDao;
 import pl.waw.mizinski.umowy.dao.StatusPracownikaDao;
+import pl.waw.mizinski.umowy.dao.TypUmowyDao;
 import pl.waw.mizinski.umowy.dao.UrzadSkarbowyDao;
 import pl.waw.mizinski.umowy.intake.PracownikIntake;
 import pl.waw.mizinski.umowy.model.Pracownik;
@@ -32,18 +34,22 @@ public class EditPracownik extends AbstractBuilder {
 	private final UrzadSkarbowyDao urzadSkarbowyDao;
 	private final PracownikDao pracownikDao;
 	private final StatusPracownikaDao statusPracownikaDao;
+	private final SkladkaDao skladkaDao;
+	private final TypUmowyDao typUmowyDao;
 
 	private final PracownikAssembler pracownikAssembler;
 	
 	public EditPracownik(final Context context, final PanstwoDao panstwoDao, final UrzadSkarbowyDao urzadSkarbowyDao,
 			final PracownikDao pracownikDao, final AdresPracownikaDao adresDao, final PracownikAssembler pracownikAssembler, 
-			final StatusPracownikaDao statusPracownikaDao) {
+			final StatusPracownikaDao statusPracownikaDao, final TypUmowyDao typUmowyDao, final SkladkaDao skladkaDao) {
 		super(context);
 		this.panstwoDao = panstwoDao;
 		this.urzadSkarbowyDao = urzadSkarbowyDao;
 		this.pracownikDao = pracownikDao;
 		this.pracownikAssembler = pracownikAssembler;
 		this.statusPracownikaDao = statusPracownikaDao;
+		this.typUmowyDao = typUmowyDao;
+		this.skladkaDao = skladkaDao;
 	}
 
 	@Override
@@ -65,8 +71,10 @@ public class EditPracownik extends AbstractBuilder {
 		}
 		
 		templatingContext.put("panstwa", panstwoDao.getAll());
-		templatingContext.put("urzedySkarobowe", urzadSkarbowyDao.getAll());
+		templatingContext.put("urzedySkarobowe", urzadSkarbowyDao.getAllUrzadSkarbowyNazwaPOJOs());
 		templatingContext.put("statusy", statusPracownikaDao.getAll());
+		templatingContext.put("skladki", skladkaDao.getSkladkaOrderedList());
+		templatingContext.put("typy", typUmowyDao.getAll());
 		return super.build(template, embeddedBuildResults);
-	}
+	} 
 }

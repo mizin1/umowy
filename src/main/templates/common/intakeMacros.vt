@@ -43,6 +43,13 @@ dojoType="dijit.form.TextBox" />##if($_field.isRequired()) required #end>
 </select>
 #end
 
+#macro ( filteringSelect $_field )
+#intake_message($_field)
+<select name="$_field.Key" dojoType="dijit.form.FilteringSelect">
+	$!bodyContent			
+</select>
+#end
+
 #macro (option $_field $value $name )
 #if($value == $_field) <option value="$value" selected="true">$name</option>
 #else <option value="$value">$name</option>#end
@@ -56,6 +63,17 @@ dojoType="dijit.form.TextBox" />##if($_field.isRequired()) required #end>
 <tr>
 #td_label($_field)
 #td_select($_field)
+</tr>
+#end
+
+#macro (td_filteringSelect $_field)
+<td>#filteringSelect($_field)</td>
+#end
+
+#macro (tr_filteringSelect $_field)
+<tr>
+#td_label($_field)
+#td_filteringSelect($_field)
 </tr>
 #end
 

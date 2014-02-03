@@ -158,16 +158,24 @@ public class Pracownik {
 		return findAdresByTyp(TypAdresu.korespondencyjny);
 	}
 	
-	public AdresPracownika getAdresWCelachPodatkowych(){
-		return findAdresByTyp(TypAdresu.w_celach_podatkowych);
+	public AdresPracownika getAdresZamieszkania(){
+		return findAdresByTyp(TypAdresu.zamieszkania);
+	}
+	
+	public AdresPracownika getAdresZameldowania(){
+		return findAdresByTyp(TypAdresu.zameldowania);
 	}
 	
 	public AdresPracownika getAdresDoUmowy() {
-		return findAdresByTyp(TypAdresu.w_celach_podatkowych);
+		return hasAdresZameldowania() ? getAdresZameldowania() : getAdresZamieszkania();
 	}
 	
 	public boolean hasAdresKorespondencyjny() {
 		return getAdresKorespondencyjny() != null;
+	}
+	
+	public boolean hasAdresZameldowania() {
+		return getAdresZameldowania() != null;
 	}
 	
 	private AdresPracownika findAdresByTyp(TypAdresu typAdresu) {

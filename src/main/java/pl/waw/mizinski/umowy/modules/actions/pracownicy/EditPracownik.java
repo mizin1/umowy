@@ -50,9 +50,7 @@ public class EditPracownik implements Valve {
 				pracownikGroup.setProperties(pracownikIntake);
 				Pracownik pracownik = pracownikAssembler.asPracownikEntity(pracownikIntake);
 				transaction = session.beginTransaction();
-				if (pracownik.getId()!= null && !pracownik.hasAdresKorespondencyjny() && adresPracownikaDao.getAdresKorespondencyjny(pracownik) != null) {
-					adresPracownikaDao.remove(adresPracownikaDao.getAdresKorespondencyjny(pracownik));
-				}
+				deleteUnusedAddresses(pracownik);
 				pracownikDao.saveOrUpdate(pracownik);
 				intake.removeAll();
 				transaction.commit();
@@ -62,9 +60,17 @@ public class EditPracownik implements Valve {
 				}
 				throw new ProcessingException(e);
 			}
-
 		} else {
 			MVCContext.getMVCContext(context).setView("pracownicy.EditPracownik");
+		}
+	}
+
+	private void deleteUnusedAddresses(Pracownik pracownik) {
+		if (pracownik.getId()!= null && !pracownik.hasAdresKorespondencyjny() && adresPracownikaDao.getAdresKorespondencyjny(pracownik) != null) {
+			adresPracownikaDao.remove(adresPracownikaDao.getAdresKorespondencyjny(pracownik));
+		}
+		if (pracownik.getId()!= null && !pracownik.hasAdresZameldowania() && adresPracownikaDao.getAdresZameldowania(pracownik) != null) {
+			adresPracownikaDao.remove(adresPracownikaDao.getAdresZameldowania(pracownik));
 		}
 	}
 }

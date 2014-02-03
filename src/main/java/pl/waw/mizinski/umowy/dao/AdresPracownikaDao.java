@@ -31,7 +31,11 @@ public class AdresPracownikaDao extends AbstractDao<AdresPracownikaPK, AdresPrac
 		return getAdresPracownika(pracownik, TypAdresu.korespondencyjny);
 	}
 	
-	public AdresPracownika getAdresWCelachPodatkowych(Pracownik pracownik){
-		return getAdresPracownika(pracownik, TypAdresu.w_celach_podatkowych);
+	public AdresPracownika getAdresZamieszkania(Pracownik pracownik){
+		return getAdresPracownika(pracownik, TypAdresu.zamieszkania);
+	}
+	
+	public AdresPracownika getAdresZameldowania(Pracownik pracownik){
+		return getAdresPracownika(pracownik, TypAdresu.zameldowania);
 	}
 }

@@ -11,6 +11,7 @@ import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
 
 import pl.waw.mizinski.umowy.dao.PracownikDao;
+import pl.waw.mizinski.umowy.dao.SkladkaDao;
 
 
 @AccessConditions({
@@ -19,10 +20,12 @@ import pl.waw.mizinski.umowy.dao.PracownikDao;
 public class PracownikDetails extends AbstractBuilder {
 
 	private final PracownikDao pracownikDao;
+	private final SkladkaDao skladkaDao;
 	
-	public PracownikDetails(final Context context, final PracownikDao pracownikDao) {
+	public PracownikDetails(final Context context, final PracownikDao pracownikDao, final SkladkaDao skladkaDao) {
 		super(context);
 		this.pracownikDao = pracownikDao;
+		this.skladkaDao = skladkaDao;
 	}
 
 	@Override
@@ -32,6 +35,7 @@ public class PracownikDetails extends AbstractBuilder {
 		if (requestParameters.isDefined("id")) {
 			Long id = requestParameters.getLong("id");
 			templatingContext.put("pracownik", pracownikDao.getById(id));
+			templatingContext.put("skladki", skladkaDao.getSkladkaOrderedList());
 			return super.build(template, embeddedBuildResults);
 		} else {
 			throw new ProcessingException("Undefined pracownik id!");

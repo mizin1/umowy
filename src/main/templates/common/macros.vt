@@ -109,4 +109,9 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
 	$!bodyContent	
 </table> 
 #end
-			
+
+#macro (goBack)
+<table class="go-back" align="center"><tr><td>
+            <div align="right"> <a href="javascript: history.go(-1);">powrót</a></div>
+</td></tr></table>
+#end

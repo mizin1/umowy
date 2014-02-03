@@ -79,6 +79,17 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	</field>
 	<field name="AKPoczta" key="akPoczta" type="String" displayName="Poczta" mapToProperty="akPoczta" />
 	<field name="AKPanstwo" key="akPanstwo" type="String" displayName="Państwo" mapToProperty="akPanstwo" />
+	
+	<field name="AdresZameldowania" key="adresZameldowania" type="boolean" displayName="Dodaj adres zameldowania" />
+	<field name="AZMiejscowosc" key="azMiejscowosc" type="String" displayName="Miejscowość" mapToProperty="azMiejscowosc" />
+	<field name="AZUlica" key="azUlica" type="String" displayName="Ulica" mapToProperty="azUlica" />
+	<field name="AZNrDomu" key="azNrDomu" type="String" displayName="Numer domu" mapToProperty="azNrDomu" />
+	<field name="AZNrMieszkania" key="azNrMieszkania" type="String" displayName="Numer mieszkania" mapToProperty="azNrMieszkania" />
+	<field name="AZKodPocztowy" key="azKodPocztowy" type="String" displayName="Kod Pocztowy" mapToProperty="azKodPocztowy" >
+		<rule name="mask" value="(^$)|(\d{2}\-\d{3})">Niepoprawny format kodu pocztowego</rule>
+	</field>
+	<field name="AZPoczta" key="azPoczta" type="String" displayName="Poczta" mapToProperty="azPoczta" />
+	<field name="AZPanstwo" key="azPanstwo" type="String" displayName="Państwo" mapToProperty="azPanstwo" />
 </group>
 
 <group name="UmowaIntake" key="umowaIntake" mapToObject="intake.UmowaIntake">

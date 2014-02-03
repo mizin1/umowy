@@ -1,5 +1,6 @@
 package pl.waw.mizinski.umowy.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -32,6 +33,16 @@ public class StatusPracownika {
 	public void setSkladki(List<SkladkaPracownika> skladki) {
 		this.skladki = skladki;
 	}
+	
+	public List<SkladkaPracownika> getSkladki(Skladka skladka) {
+		List<SkladkaPracownika> ret = new LinkedList<>();
+		for(SkladkaPracownika skladkaPracownika : skladki) {
+			if(skladkaPracownika.getSkladka().equals(skladka)) {
+				ret.add(skladkaPracownika);
+			}
+		}
+		return ret;
+ 	}
 	
 	@Override
 	public String toString() {

@@ -13,20 +13,23 @@
 	<br>
 	$adres.kodPocztowy $adres.poczta#if($adres.panstwo), $!adres.panstwo.nazwa #end
 #end
-<p>
-<a href="javascript: history.go(-1);">powrót</a>
-</p>
 
+#goBack()
 <h1 align="center">$pracownik.nazwisko $pracownik.pierwszeImie $!pracownik.imionaPozostale</h1>
 
 <div align="center">
 <table  width="500px" class="border">
-#@tr ('Adres')
-	#displayAddress($pracownik.getAdresWCelachPodatkowych())
+#@tr ('Adres zamieszkania')
+	#displayAddress($pracownik.getAdresZamieszkania())
 #end
 #if ($pracownik.hasAdresKorespondencyjny())
     #@tr ('Adres korespondencyjny')  
     	#displayAddress($pracownik.getAdresKorespondencyjny())
+	#end
+#end
+#if ($pracownik.hasAdresZameldowania())
+    #@tr ('Adres zameldowania')  
+    	#displayAddress($pracownik.getAdresZameldowania())
 	#end
 #end
 #tr ('Płeć' $pracownik.plec.nazwa)
@@ -51,6 +54,13 @@
 #tr ('Number konta' $pracownik.nrKonta)
 #tr ($pracownik.status.nazwa $pracownik.status.opis)
 
+#macro (comma)#if($comma), #end#set($comma = true)#end
+
+#macro (displaySkladka)
+	#set ($comma = false)
+	$skladka.nazwa (#foreach($s in $skladkiPracnownika)#comma()$s.getTypUmowy()#if($s.dobrowolna)-dobrowolnie#end#end)
+#end
+
 #if($pracownik.status.skladki.isEmpty())
     <tr>
     	<th colspan="2">
@@ -62,10 +72,13 @@
 #else
     #@tr ('Odprowadza składki')
     <ul>
-    	#foreach ($skladkaPracownika in $pracownik.status.skladki)
-            <li>
-    			$skladkaPracownika.getSkladka()($skladkaPracownika.getTypUmowy()#if ($skladkaPracownika.dobrowolna), dobrowolnie) #end )
-    		</li>
+    	#foreach ($skladka in $skladki)
+        #set ($skladkiPracnownika = $pracownik.status.getSkladki($skladka)) 
+			#if(!$skladkiPracnownika.isEmpty())
+				<li>
+					#displaySkladka
+				</li>
+			#end
     	#end
     </ul>
 	#end

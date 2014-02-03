@@ -7,7 +7,7 @@
 	dojo.require("dijit.form.Select");
 	dojo.require("org.objectledge.ajax.AjaxRequest");
     dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
-	
+#*	
 	function onUSFail(response) {
 		alert('Nie udalo sie dodac Urzedu skarbowego');
 	}
@@ -48,6 +48,7 @@
 		
 		dijit.byId('dodajUrzadSkarbowy').hide();
 	}
+	*#
 	
 	function wprowadzAdresKorespondencyjny() {
 		if (dijit.byId('adresKorespondencyjny').checked) { 
@@ -61,11 +62,37 @@
 		}
 	}
 	
+	function wprowadzAdresZameldowania() {
+		if (dijit.byId('adresZameldowania').checked) { 
+			#foreach( $tr in ['az1', 'az2', 'az3', 'az4', 'az5', 'az6', 'az7'] )
+				document.getElementById('$tr').style.display = 'table-row';
+			#end
+		} else {
+			#foreach( $tr in ['az1', 'az2', 'az3', 'az4', 'az5', 'az6', 'az7'] )
+				document.getElementById('$tr').style.display = 'none';
+			#end
+		}
+	}
+	
 	dojo.addOnLoad(wprowadzAdresKorespondencyjny);
+	dojo.addOnLoad(wprowadzAdresZameldowania);
 	
+	#macro (comma)#if($comma), #end#set($comma = true)#end
+
+    #macro (displaySkladka)#set($comma = false)$skladka.nazwa (#foreach($s in $skladkiPracnownika)#comma()$s.getTypUmowy()#if($s.dobrowolna)-dobrowolnie#end#end)#end
 	
-	function onStatusChange(opis) {
+	function onStatusChange(statusPracownika, opis) {
 		document.getElementById('opisStatusu').innerHTML = opis;
+		#foreach($status in $statusy)
+			if (statusPracownika == '$status.nazwa' ){
+				#if ($status.skladki.isEmpty())
+					var skladkaList = 'nie odprowadza żadnych składek';
+				#else
+					var skladkaList ='<ul>#foreach($skladka in $skladki)#set($skladkiPracnownika = $status.getSkladki($skladka))#if(!$skladkiPracnownika.isEmpty())<li>#displaySkladka</li>#end#end</ul>';
+				#end
+				document.getElementById('skladkiStatusu').innerHTML = skladkaList;
+			}
+		#end
 	}
 	
 	function setStatus() {
@@ -93,6 +120,13 @@
 		#tr_edit_textline($pracownikGroup.Nazwisko)
 		#tr_edit_textline($pracownikGroup.PierwszeImie)
 		#tr_edit_textline($pracownikGroup.ImionaPozostale)
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					Adres zamieszkania
+				</div>
+			</th>
+		</tr>
 		#tr_edit_textline($pracownikGroup.Miejscowosc)
     	#tr_edit_textline($pracownikGroup.Ulica)
 		#tr_edit_textline($pracownikGroup.NrDomu)
@@ -124,6 +158,26 @@
 				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.nazwa) 
 			#end	
 		#end
+		<tr>
+			<th colspan="2">
+				<div align="center">
+					#set( $field = $pracownikGroup.AdresZameldowania)
+					<input type="checkbox" dojoType="dijit.form.CheckBox" id="adresZameldowania" name="$field.Key" value="true" onchange="wprowadzAdresZameldowania();" #if($field == true) checked #end>
+					<label for="adresZameldowania">Dodaj adres zameldowania</label>
+				</div>
+			</th>
+		</tr>
+		#tr_edit_textline_with_id($pracownikGroup.AZMiejscowosc "az1")
+    	#tr_edit_textline_with_id($pracownikGroup.AZUlica "az2")
+		#tr_edit_textline_with_id($pracownikGroup.AZNrDomu "az3")
+		#tr_edit_textline_with_id($pracownikGroup.AZNrMieszkania "az4")
+		#tr_edit_textline_with_id($pracownikGroup.AZKodPocztowy "az5")
+		#tr_edit_textline_with_id($pracownikGroup.AZPoczta "az6")
+		#@tr_select_with_id($pracownikGroup.AZPanstwo "az7")
+			#foreach ($panstwo in $panstwa)
+				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.nazwa) 
+			#end	
+		#end
 		#set($field = $pracownikGroup.Plec)
 		<tr>
     		<td>Plec</td>
@@ -140,7 +194,8 @@
 				#option($pracownikGroup.Panstwo $panstwo.kod $panstwo.obywatelstwo) 
 			#end	
 		#end
-		#set($field = $pracownikGroup.UrzadSkarbowy)
+
+		#set($field = $pracownikGroup.UrzadSkarbowy )
 		<tr>
     		<td>Urzad skarbowy</td>
             <td>
@@ -192,7 +247,7 @@
 </div>
 
 <div dojoType="dijit.Dialog" id="wybierzUrzadSkarbowy" title="Urząd skarbowy">
-	<h3 align="center">Wybierz urząd z listy lub dodaj nowy</h3>
+	<h3 align="center">Wybierz urząd skarbowy z listy</h3>
 	<br/>
 		<select id="listaUrzedow" dojoType="dijit.form.MultiSelect" class="multi" >
 			#foreach ($urzadSkarbowy in $urzedySkarobowe)
@@ -208,86 +263,26 @@
 				dijit.byId('wybierzUrzadSkarbowy').hide();
             </script>
 		</button>
-		<button dojoType="dijit.form.Button">
-			Dodaj Nowy
-			<script type="dojo/method" event="onClick">
-				dijit.byId('wybierzUrzadSkarbowy').hide();
-                dijit.byId('dodajUrzadSkarbowy').show();
-            </script>
-		</button>
 	</div>
 </div>	
-<div dojoType="dijit.Dialog" id="dodajUrzadSkarbowy" title="Dodaj urząd skarbowy">
-    <h3 align="center">	Wprowadź dane urzędu skarbowego</h3>
-	<br/>
-	<table width="400px" class="border-dialog">
-		<tr>
-			<td>Nazwa</td>
-			<td>
-				<input id="usNazwa" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Miejscowość</td>
-			<td>
-				<input id="usMiejscowosc" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Ulica</td>
-			<td>
-				<input id="usUlica" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Numer Domu</td>
-			<td>
-				<input id="usNrDomu" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Numer mieszkania</td>
-			<td>
-				<input id="usNrMieszkania" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Kod pocztowy</td>
-			<td>
-				<input id="usKodPocztowy" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<td>Poczta</td>
-			<td>
-				<input id="usPoczta" type="text" dojoType="dijit.form.TextBox" trim/>
-			</td>
-		</tr>
-		<tr>
-			<th colspan="2">
-				<div align="center">
-					<button dojoType="dijit.form.Button" onclick="dodajUrzadSkarbowyRequest()">
-						Dodaj
-					</button>
-				</div>
-			</th>
-		</tr>
-   </table>
-</div>
 
+#*
 <div dojoType="dijit.Dialog" id="wybierzStatus" title="Wybierz status">
 	
 	<table width="400px" class="border-dialog">
 		<tr>
 			<td>
     			#foreach($status in $statusy)
-            		<input type="radio" dojoType="dijit.form.RadioButton" id="$status.nazwa" name="statusRadio" value="$status.nazwa" onclick="onStatusChange('$!status.opis');" /> 
+            		<input type="radio" dojoType="dijit.form.RadioButton" id="$status.nazwa" name="statusRadio" value="$status.nazwa" onclick="onStatusChange('$status.nazwa', '$!status.opis');" /> 
 					<label for="$status.nazwa">$status.nazwa</label><br>
             	#end
             </td>
 			<td id="opisStatusu">
             </td>
-        </tr>
+		</tr>
+			<td colspan="2" id="skladkiStatusu">
+           </td>
+		</tr>
 		<tr>
 			<th colspan="2">
 				<div align="center">
@@ -298,6 +293,5 @@
 			</th>
 		</tr>
     </table>
-	
-
 </div>
+*#

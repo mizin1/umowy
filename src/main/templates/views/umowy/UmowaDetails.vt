@@ -1,5 +1,6 @@
 <h1 align="center">$umowa.typUmowy.tytul nr $umowa.nrUmowy</h1>
-	
+
+#goBack()
 <div align="center">
 <table  width="500px" class="border">
 	#tr ('Typ umowy' $umowa.typUmowy.nazwa)

@@ -23,9 +23,8 @@ public class PracownikIntake {
 	private TypDokumentuTozsamosci typDokumentuTozsamosci;
 	private String nrKonta;
 	private String status;
-	private Boolean dobrowolneUbezpieczenieChorobowe;
 	
-	//Adres
+	//Adres zamieszkania
 	private String miejscowosc;
 	private String ulica;
 	private String nrDomu;
@@ -44,6 +43,17 @@ public class PracownikIntake {
 	private String akKodPocztowy;
 	private String akPoczta;
 	private String akPanstwo;
+	
+	private boolean adresZameldowania;
+	
+	//Adres zameldowania
+	private String azMiejscowosc;
+	private String azUlica;
+	private String azNrDomu;
+	private String azNrMieszkania;
+	private String azKodPocztowy;
+	private String azPoczta;
+	private String azPanstwo;
 
 	public Long getId() {
 		return id;
@@ -165,14 +175,6 @@ public class PracownikIntake {
 		this.status = status;
 	}
 
-	public Boolean getDobrowolneUbezpieczenieChorobowe() {
-		return dobrowolneUbezpieczenieChorobowe;
-	}
-
-	public void setDobrowolneUbezpieczenieChorobowe(Boolean dobrowolneUbezpieczenieChorobowe) {
-		this.dobrowolneUbezpieczenieChorobowe = dobrowolneUbezpieczenieChorobowe;
-	}
-
 	public String getMiejscowosc() {
 		return miejscowosc;
 	}
@@ -291,5 +293,70 @@ public class PracownikIntake {
 
 	public void setAkPanstwo(String akPanstwo) {
 		this.akPanstwo = akPanstwo;
+	}
+
+	public boolean isAdresZameldowania() {
+		return adresZameldowania;
+	}
+	
+	public void setAdresZameldowania(boolean adresZameldowania) {
+		this.adresZameldowania = adresZameldowania;
+	}
+
+	public String getAzMiejscowosc() {
+		return azMiejscowosc;
+	}
+
+	public void setAzMiejscowosc(String azMiejscowosc) {
+		this.azMiejscowosc = azMiejscowosc;
+	}
+
+	public String getAzUlica() {
+		return azUlica;
+	}
+
+	public void setAzUlica(String azUlica) {
+		this.azUlica = azUlica;
+	}
+
+	public String getAzNrDomu() {
+		return azNrDomu;
+	}
+
+	public void setAzNrDomu(String azNrDomu) {
+		this.azNrDomu = azNrDomu;
+	}
+
+	public String getAzNrMieszkania() {
+		return azNrMieszkania;
+	}
+
+	public void setAzNrMieszkania(String azNrMieszkania) {
+		this.azNrMieszkania = azNrMieszkania;
+	}
+
+	public String getAzKodPocztowy() {
+		return azKodPocztowy;
+	}
+
+	public void setAzKodPocztowy(String azKodPocztowy) {
+		this.azKodPocztowy = azKodPocztowy;
+	}
+
+	public String getAzPoczta() {
+		return azPoczta;
+	}
+
+	public void setAzPoczta(String azPoczta) {
+		this.azPoczta = azPoczta;
+	}
+
+	public String getAzPanstwo() {
+		return azPanstwo;
+	}
+
+	public void setAzPanstwo(String azPanstwo) {
+		this.azPanstwo = azPanstwo;
 	} 
+	
 }

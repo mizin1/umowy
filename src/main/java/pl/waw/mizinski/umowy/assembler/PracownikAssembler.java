@@ -29,8 +29,9 @@ public class PracownikAssembler {
 	}
 
 	public PracownikIntake asPracownikIntake(final Pracownik pracownik) {
-		final AdresPracownika adres = pracownik.getAdresWCelachPodatkowych();
+		final AdresPracownika adres = pracownik.getAdresZamieszkania();
 		final AdresPracownika adresKorespondencyjny = pracownik.getAdresKorespondencyjny();
+		final AdresPracownika adresZameldowania = pracownik.getAdresZameldowania();
 		PracownikIntake pracownikIntake = new PracownikIntake();
 		pracownikIntake.setId(pracownik.getId());
 		pracownikIntake.setNazwisko(pracownik.getNazwisko());
@@ -70,6 +71,18 @@ public class PracownikAssembler {
 		} else {
 			pracownikIntake.setAdresKorespondencyjny(false);
 		}
+		if (adresZameldowania != null) {
+			pracownikIntake.setAdresZameldowania(true);
+			pracownikIntake.setAzMiejscowosc(adresZameldowania.getMiejscowosc());
+			pracownikIntake.setAzUlica(adresZameldowania.getUlica());
+			pracownikIntake.setAzNrDomu(adresZameldowania.getNrDomu());
+			pracownikIntake.setAzNrMieszkania(adresZameldowania.getNrMieszkania());
+			pracownikIntake.setAzKodPocztowy(adresZameldowania.getKodPocztowy());
+			pracownikIntake.setAzPoczta(adresZameldowania.getPoczta());
+			pracownikIntake.setAzPanstwo(adresZameldowania.getPanstwo().getKod());
+		} else {
+			pracownikIntake.setAdresZameldowania(false);
+		}
 		return pracownikIntake;
 	}
 	
@@ -100,6 +113,10 @@ public class PracownikAssembler {
 		if (adresKorespondencyjny != null) {
 			adresy.add(adresKorespondencyjny);
 		}
+		AdresPracownika adresZameldownia = createAdresZameldownia(pracownikIntake, pracownik);
+		if (adresZameldownia != null) {
+			adresy.add(adresZameldownia);
+		}
 		pracownik.setAdresy(adresy);
 		return pracownik;
 	}
@@ -107,7 +124,7 @@ public class PracownikAssembler {
 	private AdresPracownika createAdres(PracownikIntake pracownikIntake, Pracownik pracownik) {
 		AdresPracownika adres = new AdresPracownika();
 		adres.setPracownik(pracownik);
-		adres.setTypAdresu(TypAdresu.w_celach_podatkowych);
+		adres.setTypAdresu(TypAdresu.zamieszkania);
 		adres.setMiejscowosc(pracownikIntake.getMiejscowosc());
 		adres.setUlica(pracownikIntake.getUlica());
 		adres.setNrDomu(pracownikIntake.getNrDomu());
@@ -131,6 +148,25 @@ public class PracownikAssembler {
 			adres.setKodPocztowy(pracownikIntake.getAkKodPocztowy());
 			adres.setPoczta(pracownikIntake.getAkPoczta());
 			Panstwo panstwo = panstwoDao.getById(pracownikIntake.getAkPanstwo());
+			adres.setPanstwo(panstwo);
+			return adres;
+		} else {
+			return null;
+		}
+	}
+	
+	private AdresPracownika createAdresZameldownia(PracownikIntake pracownikIntake, Pracownik pracownik) {
+		if (pracownikIntake.isAdresZameldowania()) {
+			AdresPracownika adres = new AdresPracownika();
+			adres.setPracownik(pracownik);
+			adres.setTypAdresu(TypAdresu.zameldowania);
+			adres.setMiejscowosc(pracownikIntake.getAzMiejscowosc());
+			adres.setUlica(pracownikIntake.getAzUlica());
+			adres.setNrDomu(pracownikIntake.getAzNrDomu());
+			adres.setNrMieszkania(pracownikIntake.getAzNrMieszkania());
+			adres.setKodPocztowy(pracownikIntake.getAzKodPocztowy());
+			adres.setPoczta(pracownikIntake.getAzPoczta());
+			Panstwo panstwo = panstwoDao.getById(pracownikIntake.getAzPanstwo());
 			adres.setPanstwo(panstwo);
 			return adres;
 		} else {
