@@ -42,7 +42,7 @@
 			<column name="wykonywana_u_zleceniodawcy" sql-type="boolean" />
 		</property>
 		<property name="wygenerowanoRachunki" type="java.lang.Boolean">
-			<column name="wygenerowano_rachunki" sql-type="boolean" />
+			<column name="wygenerowano_rachunki" sql-type="boolean" default="false"/>
 		</property>
 		<bag name="rachunki" table="rachunek" cascade="all" inverse="true" >
          	<key>

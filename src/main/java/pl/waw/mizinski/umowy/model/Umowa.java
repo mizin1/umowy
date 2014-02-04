@@ -2,6 +2,7 @@ package pl.waw.mizinski.umowy.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Umowa {
@@ -18,8 +19,8 @@ public class Umowa {
 	private BigDecimal wynagrodzenie;
 	private Boolean ubezpieczeniaDobrowolne;
 	private Boolean wykonywanaUZleceniodawcy;
-	private Boolean wygenerowanoRachunki;
-	private List<Rachunek> rachunki;
+	private Boolean wygenerowanoRachunki = false;
+	private List<Rachunek> rachunki = new LinkedList<>();
 
 	public String getNrUmowy() {
 		return nrUmowy;

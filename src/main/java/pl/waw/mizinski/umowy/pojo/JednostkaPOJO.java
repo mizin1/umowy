@@ -1,23 +1,37 @@
-package pl.waw.mizinski.umowy.model;
+package pl.waw.mizinski.umowy.pojo;
 
-import java.io.Serializable;
-import java.util.List;
 
-public class JednostkaOrganizacyjna implements Serializable{
-	private static final long serialVersionUID = 1L;
-
+public class JednostkaPOJO {
+	
 	private String nazwa;
-	private TypJednostki typJednostki;
-	private JednostkaOrganizacyjna jednostkaNadrzedna;
-	private Reprezentant reprezentant;
+	private String typJednostki;
+	private String jednostkaNadrzedna;
+	private String reprezentant;
 	private String miejscowosc;
 	private String ulica;
 	private String nrDomu;
 	private String nrMieszkania;
 	private String kodPocztowy;
 	private String poczta;
-	private List<TypZadania> typyZadan;
-	private List<JednostkaOrganizacyjna> jednostkiPodrzedne;
+	private long liczbaZadan;
+
+	public JednostkaPOJO(String nazwa, String typJednostki,
+			String jednostkaNadrzedna, String reprezentant, String miejscowosc,
+			String ulica, String nrDomu, String nrMieszkania,
+			String kodPocztowy, String poczta, long liczbaZadan) {
+		super();
+		this.nazwa = nazwa;
+		this.typJednostki = typJednostki;
+		this.jednostkaNadrzedna = jednostkaNadrzedna;
+		this.reprezentant = reprezentant;
+		this.miejscowosc = miejscowosc;
+		this.ulica = ulica;
+		this.nrDomu = nrDomu;
+		this.nrMieszkania = nrMieszkania;
+		this.kodPocztowy = kodPocztowy;
+		this.poczta = poczta;
+		this.liczbaZadan = liczbaZadan;
+	}
 
 	public String getNazwa() {
 		return nazwa;
@@ -27,27 +41,27 @@ public class JednostkaOrganizacyjna implements Serializable{
 		this.nazwa = nazwa;
 	}
 
-	public TypJednostki getTypJednostki() {
+	public String getTypJednostki() {
 		return typJednostki;
 	}
 
-	public void setTypJednostki(TypJednostki typJednostki) {
+	public void setTypJednostki(String typJednostki) {
 		this.typJednostki = typJednostki;
 	}
 
-	public JednostkaOrganizacyjna getJednostkaNadrzedna() {
+	public String getJednostkaNadrzedna() {
 		return jednostkaNadrzedna;
 	}
 
-	public void setJednostkaNadrzedna(JednostkaOrganizacyjna jednostkaNadrzedna) {
+	public void setJednostkaNadrzedna(String jednostkaNadrzedna) {
 		this.jednostkaNadrzedna = jednostkaNadrzedna;
 	}
 
-	public Reprezentant getReprezentant() {
+	public String getReprezentant() {
 		return reprezentant;
 	}
 
-	public void setReprezentant(Reprezentant reprezentant) {
+	public void setReprezentant(String reprezentant) {
 		this.reprezentant = reprezentant;
 	}
 
@@ -98,27 +112,12 @@ public class JednostkaOrganizacyjna implements Serializable{
 	public void setPoczta(String poczta) {
 		this.poczta = poczta;
 	}
-	
-	public List<TypZadania> getTypyZadan() {
-		return typyZadan;
+
+	public long getLiczbaZadan() {
+		return liczbaZadan;
 	}
-	
-	public void setTypyZadan(List<TypZadania> typyZadan) {
-		this.typyZadan = typyZadan;
+
+	public void setLiczbaZadan(long liczbaZadan) {
+		this.liczbaZadan = liczbaZadan;
 	}
-	
-	public List<JednostkaOrganizacyjna> getJednostkiPodrzedne() {
-		return jednostkiPodrzedne;
-	}
-	
-	public void setJednostkiPodrzedne(
-			List<JednostkaOrganizacyjna> jednostkiPodrzedne) {
-		this.jednostkiPodrzedne = jednostkiPodrzedne;
-	}
-	
-	@Override
-	public String toString() {
-		return nazwa;
-	}
-	
 }

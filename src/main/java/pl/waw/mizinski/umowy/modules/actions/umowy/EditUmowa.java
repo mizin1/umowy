@@ -19,12 +19,14 @@ import org.objectledge.web.mvc.MVCContext;
 import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.UmowaAssembler;
+import pl.waw.mizinski.umowy.dao.RachunekDao;
 import pl.waw.mizinski.umowy.dao.UmowaDao;
 import pl.waw.mizinski.umowy.dao.ZadanieDao;
 import pl.waw.mizinski.umowy.intake.UmowaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.model.Umowa;
 import pl.waw.mizinski.umowy.model.Zadanie;
+import pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve;
 import pl.waw.mizinski.umowy.validation.UmowaValidator;
 import pl.waw.mizinski.umowy.validation.ValidationException;
 
@@ -34,14 +36,18 @@ import pl.waw.mizinski.umowy.validation.ValidationException;
 public class EditUmowa implements Valve{
 
 	private final UmowaDao umowaDao;
+	private final RachunekDao rachunekDao;
 	private final UmowaAssembler umowaAssembler;
 	private final UmowaValidator umowaValidator;
+	private final RachunekGeneratorValve rachunekGeneratorValve;
 
-	public EditUmowa(final UmowaDao umowaDao, final UmowaAssembler umowaAssembler) {
+	public EditUmowa(final UmowaDao umowaDao, final RachunekDao rachunekDao, final UmowaAssembler umowaAssembler, final RachunekGeneratorValve rachunekGeneratorValve) {
 		super();
 		this.umowaDao = umowaDao;
+		this.rachunekDao = rachunekDao;
 		this.umowaAssembler = umowaAssembler;
 		this.umowaValidator = new UmowaValidator();
+		this.rachunekGeneratorValve = rachunekGeneratorValve;
 	}
 
 	@Override
@@ -59,8 +65,10 @@ public class EditUmowa implements Valve{
 				umowaValidator.validate(umowa);
 				transaction = session.beginTransaction();
 				umowaDao.saveOrUpdate(umowa);
+				rachunekDao.remove(rachunekDao.getRachunekListByUmowa(umowa));
 				intake.removeAll();
 				transaction.commit();
+				rachunekGeneratorValve.processUmowa(umowa, context);
 			} catch (final ValidationException e) {
 				MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
 				final TemplatingContext templatingContext = TemplatingContext.getTemplatingContext(context);

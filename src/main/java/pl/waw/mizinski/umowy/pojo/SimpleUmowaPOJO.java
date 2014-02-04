@@ -2,9 +2,6 @@ package pl.waw.mizinski.umowy.pojo;
 
 import java.math.BigDecimal;
 
-import pl.waw.mizinski.umowy.model.Pracownik;
-import pl.waw.mizinski.umowy.model.Zadanie;
-
 
 public class SimpleUmowaPOJO {
 	

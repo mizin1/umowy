@@ -33,11 +33,18 @@ public class UmowaDao extends AbstractDao<String, Umowa> {
 		return HibernateUtils.queryResult(session(), query);
 	}
 	
+	public List<Umowa> getUmowyToGenerateRachunki() {
+		Query query = session().createQuery("from Umowa u where u.wygenerowanoRachunki=?");
+		query.setBoolean(0, false);
+		return HibernateUtils.queryResult(session(), query);
+	}
+	
 	public List<SimpleUmowaPOJO> getAllSimpleUmowaPOJOs() {
 		Query query = session().createQuery(
 				"select new " + SIMPLE_UMOWA_POJO
 						+ "from Rachunek r right join r.rachunekPK.umowa u left join u.pracownik p left join u.zadanie z group by u.nrUmowy, p.id, z.id");
 		return HibernateUtils.queryResult(session(), query);
 	}
+
 }
 

@@ -11,7 +11,7 @@
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<input type="text" name="filter" value="$!parametersTool.get('filter', null)" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	
@@ -66,8 +66,7 @@
 					<div dojoType="dijit.form.ComboButton">
                         <span>Akcje</span>
 						<div dojoType="dijit.Menu">
-							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end onClick="deleteObject('$link.action('platnosci.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
-							
+							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end #if ($platnosc.liczbaUmow > 0) disabled="true" #end onClick="deleteObject('$link.action('platnosci.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
                         </div>
 					</div>
 				</td>

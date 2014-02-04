@@ -276,21 +276,6 @@
 		</sequence>
 	</component>
 	
-	<!-- Narazie pracujemy na mocku -->
-<!-- 	<component class-key="org.objectledge.security.SecurityManager"
-		class="pl.waw.mizinski.umowy.security.MockSecurityManager">
-		<parameter key="securityContainer" />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<parameter />
-		<sequence>
-		</sequence>
-	</component> -->
 
 	<component class-key="org.objectledge.security.PasswordVerifier"
 		class="org.objectledge.security.PasswordVerifierImpl" />
@@ -331,7 +316,7 @@
 	</component>
 	
 	
-	<!-- <component class="org.objectledge.threads.ThreadPool">
+	<component class="org.objectledge.threads.ThreadPool">
 		<parameter key="nothing-to-do" />
 		<parameter />
 		<parameter />
@@ -346,6 +331,7 @@
 	<component class="pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve" >
 		<parameter />
 		<parameter />
+		<parameter class-key="org.jcontainer.dna.Logger" />
 	</component>
 
 	<component key="generate-rachunki-ErrorHandlingPipeline"
@@ -381,7 +367,7 @@
 		<sequence>
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
-	</component> -->
+	</component>
 	
 	 <component class-key="org.objectledge.fop.LedgeUriResolver"
   		class="org.objectledge.xsl.URIResolverImpl"/>

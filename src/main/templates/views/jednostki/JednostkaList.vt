@@ -26,7 +26,7 @@
 
 <div align="center" >
 	<form dojoType="dijit.form.Form" method="get" action="$link" style=" display: inline-block;">
-		<input type="text" name="filter" trim="true" dojoType="dijit.form.TextBox"/>
+		<input type="text" name="filter" value="$!parametersTool.get('filter', null)" trim="true" dojoType="dijit.form.TextBox"/>
 		<button dojoType="dijit.form.Button" type="submit" >Szukaj</button>
 	</form>
 	
@@ -49,15 +49,15 @@
 		#foreach ($jednostka in $jednostki)
 			 <tr id="$jednostka.nazwa"> 
 				<td>$jednostka.nazwa</td>
-				<td>$jednostka.typJednostki.nazwa</td>
-				<td>$!jednostka.jednostkaNadrzedna.nazwa</td>
-				<td>$jednostka.reprezentant.nazwa</td>
+				<td>$jednostka.typJednostki</td>
+				<td>$!jednostka.jednostkaNadrzedna</td>
+				<td>$jednostka.reprezentant</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
                         <span>Akcje</span>
 						<div dojoType="dijit.Menu">
 							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('jednostki.EditJednostka').set('nazwa', $jednostka.nazwa)');">Edytuj</div>
-							<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('jednostki.DeleteJednostka').set('nazwa', $jednostka.nazwa)');">Usuń</div>
+							<div dojoType="dijit.MenuItem" #if ($jednostka.liczbaZadan > 0 || $jednostkiNadrzedne.contains($jednostka.nazwa)) disabled="true" #end onClick="deleteObject('$link.action('jednostki.DeleteJednostka').set('nazwa', $jednostka.nazwa)');">Usuń</div>
                         </div>
 					</div>
 				</td>

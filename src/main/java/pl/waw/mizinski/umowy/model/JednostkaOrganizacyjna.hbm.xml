@@ -38,5 +38,19 @@
 		<property name="poczta" type="java.lang.String">
 			<column name="poczta" sql-type="varchar" />
 		</property>
+		
+		<bag name="typyZadan" table="typ_zadania" cascade="all" inverse="true" >
+         	<key>
+                <column name="jednostka_organizacyjna" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.TypZadania" />
+        </bag>
+        
+        <bag name="jednostkiPodrzedne" table="jednostka_organizacyjna" inverse="true" >
+         	<key>
+                <column name="jednostka_nadrzedna" />
+            </key>
+            <one-to-many class="pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna" />
+        </bag>
 	</class>
 </hibernate-mapping>
