@@ -19,7 +19,7 @@ public class DeleteUmowaTest extends TestCase{
 		//definicja mocków
 		String nrUmowy = "EXAMPLE";
 		UmowaDao umowaDao = mock(UmowaDao.class);
-		DeleteUmowa deleteUmowa = new DeleteUmowa(umowaDao);
+		DeleteUmowa deleteUmowa = new DeleteUmowa(umowaDao, null);
 		RequestParameters requestParameters = mock(RequestParameters.class);
 		when(requestParameters.get("nrUmowy")).thenReturn(nrUmowy);
 		Context context = mock(Context.class);

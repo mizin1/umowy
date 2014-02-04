@@ -1,7 +1,6 @@
 package pl.waw.mizinski.umowy.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Query;
 import org.objectledge.context.Context;

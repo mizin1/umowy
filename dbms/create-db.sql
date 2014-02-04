@@ -196,7 +196,7 @@ CREATE TABLE ADRES_PRACOWNIKA
 	PRIMARY KEY(pracownik, typ_adresu),
 	FOREIGN KEY(panstwo) REFERENCES PANSTWO(kod),
 	FOREIGN KEY(pracownik) REFERENCES PRACOWNIK(id),
-	CHECK (typ_adresu in ('w_celach_podatkowych', 'korespondencyjny'))
+	CHECK (typ_adresu in ('zamieszkania', 'zameldowania', 'korespondencyjny'))
 )
 ;
 

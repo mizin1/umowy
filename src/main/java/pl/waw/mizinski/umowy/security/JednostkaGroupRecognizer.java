@@ -13,7 +13,6 @@ import org.objectledge.security.util.GroupSet;
 
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
-import pl.waw.mizinski.umowy.model.Zadanie;
 import pl.waw.mizinski.umowy.pojo.SimpleUmowaPOJO;
 import pl.waw.mizinski.umowy.pojo.TypZadaniaPOJO;
 import pl.waw.mizinski.umowy.pojo.ZadaniePOJO;
