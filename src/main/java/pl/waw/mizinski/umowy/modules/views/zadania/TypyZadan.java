@@ -21,7 +21,7 @@ import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 import pl.waw.mizinski.umowy.pojo.TypZadaniaPOJO;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"ZADANIE_R"})
+	 @AccessCondition(permissions = {"TYP_ZADANIA_R"})
 })
 public class TypyZadan extends AbstractBuilder{
 

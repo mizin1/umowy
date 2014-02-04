@@ -16,7 +16,7 @@ import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 import pl.waw.mizinski.umowy.dao.UmowaDao;
 import pl.waw.mizinski.umowy.model.Umowa;
 @AccessConditions({
-	 @AccessCondition(permissions = {"UMOWA_W"})
+	 @AccessCondition(permissions = {"UMOWA_D"})
 })
 public class DeleteUmowa implements Valve, GroupSecurityChecking{
 

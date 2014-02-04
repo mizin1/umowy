@@ -39,69 +39,198 @@
 						<xsl:value-of select="pracownik"/> 
 					</fo:block>
 					<fo:block>
+						<xsl:value-of select="typNumeru" />:<xsl:value-of select="numer" />
+					</fo:block>
+					<fo:block>
 						zamieszkała /y 
 					</fo:block>
 					<fo:block>
 						<xsl:value-of select="adresPracownika"/> 
 					</fo:block>
 					<fo:block>
-						 zwanym dalej „Zleceniobiorcą”.
+						 zwany dalej „Zleceniobiorcą”.
 					</fo:block>
 					<fo:block text-align-last="center">
 						 § 1
 					</fo:block>
-					<fo:block>
-						Zleceniodawca zleca, a Zleceniobiorca zobowiązuje się do wykonania  z dołożeniem należytej staranności:
-					</fo:block>
-					<fo:block>
-						<xsl:value-of select="przedmiotUmowy"/> 
-					</fo:block>
-					<fo:block>
-						Zleceniobiorca z tytułu realizacji umowy otrzyma wynagrodzenie brutto w wysokości
-					</fo:block>
-					<fo:block>
-						<xsl:value-of select="wynagrodzenie"/> zł, płatne
-						<xsl:value-of select="platnosc"/>.
-					</fo:block>
+					<fo:table table-layout="fixed" border-style="none">
+							<fo:table-column column-width="3%" />
+							<fo:table-column column-width="97%" />
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										1.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell border-style="none">
+									<fo:block>
+										Zleceniodawca zleca, a Zleceniobiorca zobowiązuje się do wykonania  z dołożeniem należytej staranności:
+									</fo:block>
+									<fo:block>
+										<xsl:value-of select="przedmiotUmowy"/> 
+									</fo:block>
+									<fo:block>
+										w dniach od <xsl:value-of select="dataRozpoczecia" /> do <xsl:value-of select="dataRozpoczecia" />.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										2.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Zleceniobiorca z tytułu realizacji umowy otrzyma wynagrodzenie brutto w wysokości
+									</fo:block>
+									<fo:block>
+										<xsl:value-of select="wynagrodzenie"/> zł, płatne
+										<xsl:value-of select="platnosc"/>.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
 					<fo:block text-align-last="center">
 						 § 2
 					</fo:block>
-					<fo:block>
-						Zleceniobiorca wystawi Zleceniodawcy rachunek/rachunki, które będą stanowić podstawę do wypłaty wynagrodzenia.
-					</fo:block>
-					<fo:block>
-						Wypłata wynagrodzenia nastąpi nie później niż 18 dnia miesiąca następującego po miesiącu, w którym dostarczono rachunek do Zleceniodawcy.
-					</fo:block>
+					<fo:table table-layout="fixed" border-style="none">
+							<fo:table-column column-width="3%" />
+							<fo:table-column column-width="97%" />
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										1.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Zleceniobiorca wystawi Zleceniodawcy rachunek/rachunki, które będą stanowić podstawę do wypłaty wynagrodzenia.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										2.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Wypłata wynagrodzenia nastąpi nie później niż 18 dnia miesiąca następującego po miesiącu, w którym dostarczono rachunek do Zleceniodawcy.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+					
 					<fo:block text-align-last="center">
 						 § 3
 					</fo:block>
-					<fo:block>
-						W razie zwłoki Zleceniobiorcy w wykonaniu zlecenia Zleceniodawca może umowę rozwiązać w trybie natychmiastowym, bez prawa Zleceniobiorcy do wynagrodzenia. 
-					</fo:block>
-					<fo:block>
-						Na podstawie art. 24 ust. 1 z dnia 29 sierpnia 1997 roku o ochronie danych osobowych (Dz. U. z 2002 r. Nr 101 poz. 926 z późn. zm.) Zleceniodawca informuje Zleceniobiorcę, że administratorem danych, przetwarzającym dane osobowe jest Politechnika Warszawska z siedzibą w Warszawie, Plac Politechniki 1. Dane osobowe są przetwarzane wyłącznie w celu wykonania zadań administratora danych wynikających z tej umowy. Zleceniobiorca ma prawo dostępu do treści swoich danych osobowych przetwarzanych przez Politechnikę Warszawską, a także prawo do ich poprawiania.
-					</fo:block>
+					<fo:table table-layout="fixed" border-style="none">
+							<fo:table-column column-width="3%" />
+							<fo:table-column column-width="97%" />
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										1.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										W razie zwłoki Zleceniobiorcy w wykonaniu zlecenia Zleceniodawca może umowę rozwiązać w trybie natychmiastowym, bez prawa Zleceniobiorcy do wynagrodzenia. 
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										2.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Na podstawie art. 24 ust. 1 z dnia 29 sierpnia 1997 roku o ochronie danych osobowych (Dz. U. z 2002 r. Nr 101 poz. 926 z późn. zm.) Zleceniodawca informuje Zleceniobiorcę, że administratorem danych, przetwarzającym dane osobowe jest Politechnika Warszawska z siedzibą w Warszawie, Plac Politechniki 1. Dane osobowe są przetwarzane wyłącznie w celu wykonania zadań administratora danych wynikających z tej umowy. Zleceniobiorca ma prawo dostępu do treści swoich danych osobowych przetwarzanych przez Politechnikę Warszawską, a także prawo do ich poprawiania.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+					
 					<fo:block text-align-last="center">
 						 § 4
 					</fo:block>
-					<fo:block>
-						Wszelkie zmiany umowy wymagają formy pisemnej pod rygorem nieważności.
-					</fo:block>
-					<fo:block>
-						Do spraw nieuregulowanych niniejszą umową mają zastosowanie przepisy prawa w szczególności Kodeksu cywilnego.
-					</fo:block>
-					<fo:block>
-						Wszelkie spory dotyczące realizacji umowy będą rozstrzygane w pierwszej kolejności na drodze polubownej.
-					</fo:block>
-					<fo:block>
-					Do rozstrzygania sporów nierozstrzygniętych na drodze polubownej właściwym sądem jest sąd powszechny właściwy dla siedziby Zleceniodawcy.
-					</fo:block>
-					<fo:block>
-						Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron.
-					</fo:block>
-					<fo:block>&#160;</fo:block><fo:block>&#160;</fo:block><fo:block>&#160;</fo:block><fo:block>&#160;</fo:block>
-					<fo:block>
-					
+					<fo:table table-layout="fixed" border-style="none">
+							<fo:table-column column-width="3%" />
+							<fo:table-column column-width="97%" />
+						<fo:table-body>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										1.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Wszelkie zmiany umowy wymagają formy pisemnej pod rygorem nieważności.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										2.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Do spraw nieuregulowanych niniejszą umową mają zastosowanie przepisy prawa w szczególności Kodeksu cywilnego.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										3.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Wszelkie spory dotyczące realizacji umowy będą rozstrzygane w pierwszej kolejności na drodze polubownej.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										4.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Do rozstrzygania sporów nierozstrzygniętych na drodze polubownej właściwym sądem jest sąd powszechny właściwy dla siedziby Zleceniodawcy.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										5.
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell>
+									<fo:block>
+										Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron.
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+				<fo:block>&#160;</fo:block><fo:block>&#160;</fo:block><fo:block>&#160;</fo:block>
 					<fo:table table-layout="fixed" border-style="none">
 						<fo:table-body>
 					
@@ -131,7 +260,6 @@
 							</fo:table-row>
 						</fo:table-body>
 					</fo:table>
-				</fo:block>
 				</fo:flow>
 			</fo:page-sequence>
 		</fo:root>

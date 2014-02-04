@@ -20,7 +20,8 @@ import pl.waw.mizinski.umowy.intake.JednostkaOrganizacyjnaIntake;
 import pl.waw.mizinski.umowy.model.JednostkaOrganizacyjna;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+	 @AccessCondition(permissions = {"JEDNOSTKA_C"}),
+	 @AccessCondition(permissions = {"JEDNOSTKA_U"})
 })
 public class EditJednostka implements Valve{
 

@@ -17,8 +17,7 @@ import pl.waw.mizinski.umowy.filter.PracownikFilter;
 import pl.waw.mizinski.umowy.pojo.PracownikLiczbaUmowPOJO;
 
 @AccessConditions({
-    @AccessCondition(auth = true, permissions = {"PRACOWNIK_R"}),
-    @AccessCondition(auth = true, permissions = {"PRACOWNIK_F"})
+    @AccessCondition(auth = true, permissions = {"PRACOWNIK_R"})
 })
 public class PracownikList extends AbstractBuilder {
 

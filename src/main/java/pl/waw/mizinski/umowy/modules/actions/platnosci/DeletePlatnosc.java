@@ -13,7 +13,7 @@ import org.objectledge.security.anotation.AccessConditions;
 import pl.waw.mizinski.umowy.dao.PlatnoscDao;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"PLATNOSC_W"})
+	 @AccessCondition(permissions = {"PLATNOSC_D"})
 })
 public class DeletePlatnosc implements Valve {
 

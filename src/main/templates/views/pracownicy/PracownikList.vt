@@ -32,11 +32,12 @@
                 <td>$pracownik.pierwszeImie $!pracownik.imionaPozostale</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
-							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('pracownicy.PracownikDetails').set('id', $pracownik.id)');">Szczegóły</div>
-							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('pracownicy.EditPracownik').set('id', $pracownik.id)');">Edytuj</div>
-							<div dojoType="dijit.MenuItem" #if ($pracownik.liczbaUmow > 0) disabled="true" #end onClick="deleteObject('$link.action('pracownicy.DeletePracownik').set('id', $pracownik.id)');">Usuń</div>
+							#viewItem('Szczegóły' $link.view('pracownicy.PracownikDetails').set('id', $pracownik.id) )
+							#viewItem('Edytuj' $link.view('pracownicy.EditPracownik').set('id', $pracownik.id) )
+							#if ($pracownik.liczbaUmow>0) #set ($disabled = true) #else #set ($disabled = false) #end
+							#deleteItem($link.action('pracownicy.DeletePracownik').set('id', $pracownik.id),  $disabled)
                         </div>
 					</div>
 				</td>

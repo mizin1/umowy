@@ -11,12 +11,15 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.UmowaAssembler;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
@@ -33,9 +36,10 @@ import pl.waw.mizinski.umowy.model.Umowa;
 import pl.waw.mizinski.umowy.util.JednostkaOrganizacyjnaComprarator;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"UMOWA_W"})
+	 @AccessCondition(permissions = {"UMOWA_C"}),
+	 @AccessCondition(permissions = {"UMOWA_U"})
 })
-public class EditUmowa extends AbstractBuilder{
+public class EditUmowa extends AbstractBuilder implements GroupSecurityChecking{
 
 	private final PracownikDao pracownikDao;
 	private final TypZadaniaDao typZadaniaDao;
@@ -45,11 +49,12 @@ public class EditUmowa extends AbstractBuilder{
 	private final UmowaDao umowaDao;
 	private final UmowaAssembler umowaAssembler;
 	private final JednostkaSecurityFilter jednostkaSecurityFilter;
+	private final ResourceGroupRecognizer resourceGroupRecognizer;
 
 	public EditUmowa(final Context context, final PracownikDao pracownikDao, final TypZadaniaDao typZadaniaDao,
 			final TypUmowyDao typUmowyDao, final PlatnoscDao platnoscDao, final UmowaDao umowaDao,
 			final UmowaAssembler umowaAssembler, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao,
-			final JednostkaSecurityFilter jednostkaSecurityFilter) {
+			final JednostkaSecurityFilter jednostkaSecurityFilter, final ResourceGroupRecognizer resourceGroupRecognizer) {
 		super(context);
 		this.pracownikDao = pracownikDao;
 		this.typZadaniaDao = typZadaniaDao;
@@ -59,6 +64,7 @@ public class EditUmowa extends AbstractBuilder{
 		this.umowaAssembler = umowaAssembler;
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 		this.jednostkaSecurityFilter = jednostkaSecurityFilter;
+		this.resourceGroupRecognizer = resourceGroupRecognizer;
 	}
 
 	@Override
@@ -94,6 +100,17 @@ public class EditUmowa extends AbstractBuilder{
 		templatingContext.put("typyUmowy", typUmowyDao.getAll());
 		templatingContext.put("platnosci", platnoscDao.getAll());
 		return super.build(template, embeddedBuildResults);
+	}
+
+	@Override
+	public GroupSet getResourceGroup(Context context)throws ProcessingException {
+		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		if (requestParameters.isDefined("nrUmowy")) {
+			final String nrUmowy = requestParameters.get("nrUmowy");
+			final Umowa umowa = umowaDao.getById(nrUmowy);
+			return resourceGroupRecognizer.resourceGroupByObject(umowa.getJednostkaOrganizacyjna());
+		}
+		return GroupSet.emptySet();
 	}
 
 }

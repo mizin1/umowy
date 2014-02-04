@@ -48,12 +48,12 @@
 				</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
-							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('umowy.UmowaDetails').set('nrUmowy', $umowa.nrUmowy)');">Szczegóły</div>
-							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('umowy.EditUmowa').set('nrUmowy', $umowa.nrUmowy)');">Edytuj</div>
-							<div dojoType="dijit.MenuItem" onClick="deleteObject('$link.action('umowy.DeleteUmowa').set('nrUmowy', $umowa.nrUmowy)');">Usuń</div>
-							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('pdf.UmowaPdf').set('nrUmowy', $umowa.nrUmowy)');">Drukuj</div>
+							#viewItem ('Szczegóły' $link.view('umowy.UmowaDetails').set('nrUmowy', $umowa.nrUmowy))
+							#viewItem ('Edytuj' $link.view('umowy.EditUmowa').set('nrUmowy', $umowa.nrUmowy))
+							#deleteItem($link.action('umowy.DeleteUmowa').set('nrUmowy', $umowa.nrUmowy))
+							#viewItem ('Drukuj' $link.view('pdf.UmowaPdf').set('nrUmowy', $umowa.nrUmowy))
                         </div>
 					</div>
 				</td>

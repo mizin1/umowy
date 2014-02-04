@@ -26,7 +26,8 @@ import pl.waw.mizinski.umowy.intake.PracownikIntake;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"PRACOWNIK_W"})
+	 @AccessCondition(permissions = {"PRACOWNIK_C"}),
+	 @AccessCondition(permissions = {"PRACOWNIK_U"}),
 })
 public class EditPracownik extends AbstractBuilder {
 

@@ -20,7 +20,7 @@ import pl.waw.mizinski.umowy.intake.TypZadaniaIntake;
 import pl.waw.mizinski.umowy.model.TypZadania;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"ZADANIE_W"})
+	 @AccessCondition(permissions = {"TYP_ZADANIA_C"})
 })
 public class AddTypZadania implements Valve {
 	

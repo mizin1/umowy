@@ -42,11 +42,12 @@
 				<td>#if($zadanie.rozliczone) tak #else nie #end</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
-							<div dojoType="dijit.Menu">
-								<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('zadania.EditZadanie').set('id', $zadanie.id)');">Edytuj</div>
-								<div dojoType="dijit.MenuItem" #if ($zadanie.liczbaUmow > 0) disabled="true" #end onClick="deleteObject('$link.action('zadania.DeleteZadanie').set('id', $zadanie.id)');">Usuń</div>
-                        </div>
+                        <span>Operacje</span>
+						<div dojoType="dijit.Menu">
+							#viewItem('Edytuj' $link.view('zadania.EditZadanie').set('id', $zadanie.id) )
+							#if  ($zadanie.liczbaUmow>0) #set ($disabled = true) #else #set ($disabled = false) #end
+							#deleteItem($link.action('zadania.DeleteZadanie').set('id', $zadanie.id),  $disabled)
+						</div>
 					</div>
 				</td>
 			 </tr> 

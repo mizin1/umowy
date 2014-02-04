@@ -24,7 +24,7 @@
 				<td>$rachunek.dataWystawienia</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
 							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('pdf.RachunekPdf').set('nrUmowy', $nrUmowy).set('nrRachunku', $rachunek.getNrRachunku())');">Drukuj</div>
                         </div>

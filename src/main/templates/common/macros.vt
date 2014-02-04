@@ -115,3 +115,19 @@ $pageTool.addStyleLink('style/skins/default/table-grey.css')
             <div align="right"> <a href="javascript: history.go(-1);">powrót</a></div>
 </td></tr></table>
 #end
+
+#macro (deleteItem $link $_disabled)
+	#if ($_disabled || ($policy.check($link) == false))
+		<div dojoType="dijit.MenuItem" disabled="true">Usuń</div>
+	#else
+		<div dojoType="dijit.MenuItem" onClick="deleteObject('$link');">Usuń</div>
+	#end
+#end
+
+#macro (viewItem $label $link $_disabled)
+	#if ($_disabled || ($policy.check($link) == false))
+		<div dojoType="dijit.MenuItem" disabled="true">$label</div>
+	#else
+		<div dojoType="dijit.MenuItem" onClick="toURL('$link');">$label</div>
+	#end
+#end

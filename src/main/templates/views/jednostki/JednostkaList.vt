@@ -54,7 +54,7 @@
 				<td>$jednostka.reprezentant</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
 							<div dojoType="dijit.MenuItem" onClick="toURL('$link.view('jednostki.EditJednostka').set('nazwa', $jednostka.nazwa)');">Edytuj</div>
 							<div dojoType="dijit.MenuItem" #if ($jednostka.liczbaZadan > 0 || $jednostkiNadrzedne.contains($jednostka.nazwa)) disabled="true" #end onClick="deleteObject('$link.action('jednostki.DeleteJednostka').set('nazwa', $jednostka.nazwa)');">Usuń</div>

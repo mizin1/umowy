@@ -18,7 +18,7 @@ import pl.waw.mizinski.umowy.model.Zadanie;
 
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"ZADANIE_W"})
+	 @AccessCondition(permissions = {"ZADANIE_D"})
 })
 public class DeleteZadanie implements Valve, GroupSecurityChecking {
 
@@ -56,9 +56,4 @@ public class DeleteZadanie implements Valve, GroupSecurityChecking {
 		Zadanie zadanie = zadanieDao.getById(id);
 		return resourceGroupRecognizer.resourceGroupByObject(zadanie.getJednostkaOrganizacyjna());
 	}
-
-
-
-	
-
 }

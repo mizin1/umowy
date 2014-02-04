@@ -64,7 +64,7 @@
 				</td>
                 <td>
 					<div dojoType="dijit.form.ComboButton">
-                        <span>Akcje</span>
+                        <span>Operacje</span>
 						<div dojoType="dijit.Menu">
 							<div dojoType="dijit.MenuItem" #if ($platnosc.nazwa == 'jednorazowa') disabled="true" #end #if ($platnosc.liczbaUmow > 0) disabled="true" #end onClick="deleteObject('$link.action('platnosci.DeletePlatnosc').set('nazwa', $platnosc.nazwa)');">Usuń</div>
                         </div>

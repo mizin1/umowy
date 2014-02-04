@@ -31,9 +31,10 @@ import pl.waw.mizinski.umowy.validation.UmowaValidator;
 import pl.waw.mizinski.umowy.validation.ValidationException;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"UMOWA_W"})
+	 @AccessCondition(permissions = {"UMOWA_C"}),
+	 @AccessCondition(permissions = {"UMOWA_U"})
 })
-public class EditUmowa implements Valve{
+public class EditUmowa implements Valve, GroupSecurityChecking{
 
 	private final UmowaDao umowaDao;
 	private final RachunekDao rachunekDao;
@@ -83,6 +84,13 @@ public class EditUmowa implements Valve{
 		} else {
 			MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
 		}
+	}
+
+	@Override
+	public GroupSet getResourceGroup(Context context)
+			throws ProcessingException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

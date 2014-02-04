@@ -14,7 +14,7 @@ import pl.waw.mizinski.umowy.dao.PracownikDao;
 import pl.waw.mizinski.umowy.model.Pracownik;
 
 @AccessConditions({
-    @AccessCondition(permissions = {"PRACOWNIK_W"})
+    @AccessCondition(permissions = {"PRACOWNIK_D"})
 })
 public class DeletePracownik implements Valve {
 

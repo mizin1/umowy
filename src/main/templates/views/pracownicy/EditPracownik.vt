@@ -7,48 +7,6 @@
 	dojo.require("dijit.form.Select");
 	dojo.require("org.objectledge.ajax.AjaxRequest");
     dojo.require("org.objectledge.ajax.AjaxQueryReadStore");
-#*	
-	function onUSFail(response) {
-		alert('Nie udalo sie dodac Urzedu skarbowego');
-	}
-	
-	var dodajUrzadSkarbowyOptions = {
-		url: "$link.view('AJAX')", 
-		paramNames: ["nazwa", "miejscowosc", "ulica", "nrDomu", "nrMieszkania", "kodPocztowy", "poczta"], 
-		serviceName: "UrzadSkarbowyService", 
-		methodName: "dodajUrzadSkarbowy",
-		onFail: onUSFail
-	};
-
-	var dodajUrzadSkarbowy = null;
-	
-	dojo.addOnLoad(function() {
-		dodajUrzadSkarbowy = new org.objectledge.ajax.AjaxRequest(dodajUrzadSkarbowyOptions);
-    });
-	
-	function dodajUrzadSkarbowyRequest() {
-		var nazwa = dojo.byId('usNazwa').value;
-		var miejscowosc = dojo.byId('usMiejscowosc').value;
-		var ulica = dojo.byId('usUlica').value;
-		var nrDomu = dojo.byId('usNrDomu').value;
-		var nrMieszkania = dojo.byId('usNrMieszkania').value;
-		var kodPocztowy = dojo.byId('usKodPocztowy').value;
-		var poczta = dojo.byId('usPoczta').value;
-		dodajUrzadSkarbowy.sendRequest([nazwa, miejscowosc, ulica, nrDomu, nrMieszkania, kodPocztowy, poczta], dodajUrzadSkarbowyResponse);
-	}
-	
-	function dodajUrzadSkarbowyResponse(response) {
-		var urzadSkarbowy = dojo.byId('usNazwa').value;
-		dojo.byId('urzadSkarbowy').value = urzadSkarbowy;
-		
-		var c = dojo.doc.createElement('option');
-		c.innerHTML = urzadSkarbowy;
-		c.value = urzadSkarbowy;
-		dijit.byId('listaUrzedow').containerNode.appendChild(c);
-		
-		dijit.byId('dodajUrzadSkarbowy').hide();
-	}
-	*#
 	
 	function wprowadzAdresKorespondencyjny() {
 		if (dijit.byId('adresKorespondencyjny').checked) { 
@@ -266,7 +224,7 @@
 	</div>
 </div>	
 
-#*
+
 <div dojoType="dijit.Dialog" id="wybierzStatus" title="Wybierz status">
 	
 	<table width="400px" class="border-dialog">
@@ -294,4 +252,3 @@
 		</tr>
     </table>
 </div>
-*#

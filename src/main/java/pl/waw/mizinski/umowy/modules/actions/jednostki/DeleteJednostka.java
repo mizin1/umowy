@@ -14,7 +14,7 @@ import org.objectledge.security.anotation.AccessConditions;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+	 @AccessCondition(permissions = {"JEDNOSTKA_D"})
 })
 public class DeleteJednostka implements Valve {
 

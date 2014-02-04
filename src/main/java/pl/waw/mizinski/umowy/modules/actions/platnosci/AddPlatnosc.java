@@ -18,7 +18,7 @@ import pl.waw.mizinski.umowy.dao.PlatnoscDao;
 import pl.waw.mizinski.umowy.model.Platnosc;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"PLATNOSC_W"})
+	 @AccessCondition(permissions = {"PLATNOSC_C"})
 })
 public class AddPlatnosc implements Valve {
 

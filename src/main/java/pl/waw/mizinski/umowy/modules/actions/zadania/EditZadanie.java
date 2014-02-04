@@ -19,7 +19,8 @@ import pl.waw.mizinski.umowy.intake.ZadanieIntake;
 import pl.waw.mizinski.umowy.model.Zadanie;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"ZADANIE_W"})
+	 @AccessCondition(permissions = {"ZADANIE_C"}),
+	 @AccessCondition(permissions = {"ZADANIE_U"})
 })
 public class EditZadanie implements Valve {
 

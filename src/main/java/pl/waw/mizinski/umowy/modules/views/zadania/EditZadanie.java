@@ -11,12 +11,15 @@ import org.objectledge.intake.IntakeTool;
 import org.objectledge.intake.model.Group;
 import org.objectledge.parameters.RequestParameters;
 import org.objectledge.pipeline.ProcessingException;
+import org.objectledge.security.ResourceGroupRecognizer;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
+import org.objectledge.security.util.GroupSet;
 import org.objectledge.templating.Template;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.builders.AbstractBuilder;
 import org.objectledge.web.mvc.builders.BuildException;
+import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.ZadanieAssembler;
 import pl.waw.mizinski.umowy.dao.JednostkaOrganizacyjnaDao;
@@ -30,25 +33,28 @@ import pl.waw.mizinski.umowy.model.Zadanie;
 import pl.waw.mizinski.umowy.util.JednostkaOrganizacyjnaComprarator;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"ZADANIE_W"})
+	 @AccessCondition(permissions = {"ZADANIE_C"}),
+	 @AccessCondition(permissions = {"ZADANIE_U"})
 })
-public class EditZadanie extends AbstractBuilder {
+public class EditZadanie extends AbstractBuilder implements GroupSecurityChecking {
 
 	private final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao;
 	private final TypZadaniaDao typZadaniaDao;
 	private final ZadanieDao zadanieDao;
 	private final ZadanieAssembler zadanieAssembler;
 	private final JednostkaSecurityFilter jednostkaSecurityFilter;
+	private final ResourceGroupRecognizer resourceGroupRecognizer;
 
 	public EditZadanie(final Context context, final JednostkaOrganizacyjnaDao jednostkaOrganizacyjnaDao,
 			final TypZadaniaDao typZadaniaDao, final ZadanieDao zadanieDao, final ZadanieAssembler zadanieAssembler,
-			 final JednostkaSecurityFilter jednostkaSecurityFilter) {
+			 final JednostkaSecurityFilter jednostkaSecurityFilter, final ResourceGroupRecognizer resourceGroupRecognizer) {
 		super(context);
 		this.jednostkaOrganizacyjnaDao = jednostkaOrganizacyjnaDao;
 		this.typZadaniaDao = typZadaniaDao;
 		this.zadanieDao = zadanieDao;
 		this.zadanieAssembler = zadanieAssembler;
 		this.jednostkaSecurityFilter = jednostkaSecurityFilter;
+		this.resourceGroupRecognizer = resourceGroupRecognizer;
 	}
 
 	@Override
@@ -80,5 +86,16 @@ public class EditZadanie extends AbstractBuilder {
 		}
 		templatingContext.put("zadaniaJednostek", zadaniaJednostek);
 		return super.build(template, embeddedBuildResults);
+	}
+	
+	@Override
+	public GroupSet getResourceGroup(Context context)throws ProcessingException {
+		final RequestParameters requestParameters = RequestParameters.getRequestParameters(context);
+		if (requestParameters.isDefined("id")) {
+			final long id = requestParameters.getInt("id");
+			final Zadanie zadanie = zadanieDao.getById(id);
+			return resourceGroupRecognizer.resourceGroupByObject(zadanie.getJednostkaOrganizacyjna());
+		}
+		return GroupSet.emptySet();
 	}
 }

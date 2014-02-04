@@ -32,7 +32,8 @@ import pl.waw.mizinski.umowy.model.TypJednostki;
 import pl.waw.mizinski.umowy.util.TypJednostkiComparator;
 
 @AccessConditions({
-	 @AccessCondition(permissions = {"JEDNOSTKA_W"})
+	 @AccessCondition(permissions = {"JEDNOSTKA_C"}),
+	 @AccessCondition(permissions = {"JEDNOSTKA_U"})
 })
 public class EditJednostka extends AbstractBuilder {
 
