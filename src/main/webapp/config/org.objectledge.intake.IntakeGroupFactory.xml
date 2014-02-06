@@ -38,7 +38,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 		<rule name="mask" value="(^$)|(\d{11})">Niepoprawny format numeru pesel</rule>
 	</field>
 	<field name="Nip" key="nip" type="String" displayName="nip">
-		<rule name="mask" value="(^$)|(\d{10})">Niepoprawny forma numeru NIP</rule>
+		<rule name="mask" value="(^$)|(\d{10})">Niepoprawny format numeru NIP</rule>
 	</field>
 	<field name="NrDokumentuTozsamosci" key="nrDokumentuTozsamosci" type="String" displayName="Numer Dokumentu toższamości">
 		<rule name="required" value="true">To pole jest wymagane</rule>

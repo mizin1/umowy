@@ -11,10 +11,8 @@ import org.objectledge.pipeline.ProcessingException;
 import org.objectledge.pipeline.Valve;
 import org.objectledge.security.anotation.AccessCondition;
 import org.objectledge.security.anotation.AccessConditions;
-import org.objectledge.security.util.GroupSet;
 import org.objectledge.templating.TemplatingContext;
 import org.objectledge.web.mvc.MVCContext;
-import org.objectledge.web.mvc.pipeline.GroupSecurityChecking;
 
 import pl.waw.mizinski.umowy.assembler.UmowaAssembler;
 import pl.waw.mizinski.umowy.dao.RachunekDao;
@@ -29,7 +27,7 @@ import pl.waw.mizinski.umowy.validation.ValidationException;
 	 @AccessCondition(permissions = {"UMOWA_C"}),
 	 @AccessCondition(permissions = {"UMOWA_U"})
 })
-public class EditUmowa implements Valve, GroupSecurityChecking{
+public class EditUmowa implements Valve{
 
 	private final UmowaDao umowaDao;
 	private final RachunekDao rachunekDao;
@@ -79,13 +77,6 @@ public class EditUmowa implements Valve, GroupSecurityChecking{
 		} else {
 			MVCContext.getMVCContext(context).setView("umowy.EditUmowa");
 		}
-	}
-
-	@Override
-	public GroupSet getResourceGroup(Context context)
-			throws ProcessingException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
