@@ -124,7 +124,7 @@ Known types: BigDecimal,ComboKey,DateString,TimestampString,FileItem,NumberKey,S
 	<field name="Platnosc" key="platnosc" type="String" displayName="Płatność">
 		<rule name="required" value="true">To pole jest wymagane</rule>	
 	</field>
-	<field name="Wynagrodzenie" key="wynagrodzenie" type="BigDecimal" displayName="Wynagrodznie" formatterStyle="money">
+	<field name="Wynagrodzenie" key="wynagrodzenie" type="BigDecimal" displayName="Wynagrodzenie" formatterStyle="money">
 		<rule name="required" value="true">To pole jest wymagane</rule>
 		<rule name="invalidNumber">Wprowadzona wartość jest niepoprawna</rule>
 	</field>

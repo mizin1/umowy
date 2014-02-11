@@ -6,7 +6,7 @@
 
 <config>
 	<globalLoginRequired>false</globalLoginRequired>
-	<globalSSL>false</globalSSL>
+	<globalSSL>true</globalSSL>
 	<globalAccess>true</globalAccess>
 
 	<!-- system bezpieczenstwa (kolejnosc NIE jest wazna) -->
@@ -15,7 +15,7 @@
 	</policy>
 
 	<!-- zakazanie operacji na systemie bezpieczenstwa -->
-	<policy name="security_polisy" ssl="false" auth="true">
+	<policy name="security_polisy" ssl="true" auth="true">
 		<group name="security" />
 		<view>security.UserList</view>
 		<view>security.RoleList</view>
@@ -43,7 +43,7 @@
 		<action>templating.Restart</action>
 	</policy>
 	
-	<!-- <policy name="Login" ssl="false" auth="false">
+	<policy name="Login" ssl="false" auth="false">
 		<view>Login</view>
-	</policy> -->
+	</policy>
 </config>

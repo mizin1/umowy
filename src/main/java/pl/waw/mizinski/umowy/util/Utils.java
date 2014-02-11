@@ -6,8 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Utils {
+
 	
-	//unused
 	public static Date toDate(String date) {
 		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {

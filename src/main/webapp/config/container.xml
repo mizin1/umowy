@@ -94,26 +94,6 @@
 	<component class="org.objectledge.web.mvc.tools.ParametersToolFactory"/>
 	<component class="org.objectledge.security.WebPolicyCheckerToolFactory"/>
 
-<!-- 	<component class="org.objectledge.templating.tools.ContextTools">
-		<sequence>
-			<parameter class-key="org.objectledge.i18n.WebI18nToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.tools.LinkToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.builders.ViewEnclosureManager" />
-			<parameter class-key="org.objectledge.web.mvc.tools.PageToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.components.ComponentToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.tools.EmailToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.tools.StringToolFactory" />
-			<parameter
-				class-key="org.objectledge.web.mvc.tools.HTMLEntityEncoderToolFactory" />
-			<parameter class-key="org.objectledge.web.mvc.tools.ParametersToolFactory" />
-			<parameter class-key="org.objectledge.i18n.WebDateFormatToolFactory" />
-			<parameter class-key="org.objectledge.i18n.WebNumberFormatToolFactory" />
-			<parameter class-key="org.objectledge.security.WebPolicyCheckerToolFactory" />
-			<parameter class-key="org.objectledge.ajax.web.WebAjaxPolicyCheckerToolFactory" />
-			<parameter class-key="org.objectledge.web.WebEnumToolFactory" />
-		</sequence>
-	</component>  -->
-
 	<component class="org.objectledge.templating.tools.ContextTools">
 		<sequence>
 			<parameter class-key="org.objectledge.web.mvc.components.ComponentToolFactory" />
@@ -138,7 +118,6 @@
 	</component>
 
 	<!-- AJAX services -->
-	<component class="pl.waw.mizinski.umowy.ajax.ExampleService" />
 	<component class="pl.waw.mizinski.umowy.ajax.UrzadSkarbowyService" />
 	<component class="pl.waw.mizinski.umowy.ajax.UmowaService" />
 	<component class="pl.waw.mizinski.umowy.ajax.ReprezentantService" />
@@ -218,11 +197,6 @@
 
 	<!-- // dispatchers ///////////////////////////////////////////////////////////////////// -->
 
-	<!-- <component class="org.objectledge.web.dispatcher.PipelineHttpDispatcher" 
-		key="main"> <parameter key="http-ErrorHandlingPipeline" /> <parameter /> 
-		</component> <component class-key="org.objectledge.web.HttpDispatcher" class="org.objectledge.web.dispatcher.PipelineHttpDispatcher"> 
-		<parameter key="http-ErrorHandlingPipeline" /> <parameter /> </component> -->
-
 	<component key="http-request"
 		class="org.objectledge.web.dispatcher.PipelineHttpDispatcher">
 		<parameter key="http-ErrorHandlingPipeline" />
@@ -244,7 +218,6 @@
 		</sequence>
 	</component>
 
-	<!-- moje proby z security -->
 
 	<component class="org.objectledge.security.SecurityAuthenticationValve" />
 	<component class="org.objectledge.web.mvc.security.SecurityPolicyCheckingValve"/>
@@ -321,7 +294,15 @@
 		<parameter class-key="org.jcontainer.dna.Logger" />
 	</component>
 	
+	<component class-key="org.objectledge.fop.LedgeUriResolver"
+		class="org.objectledge.xsl.URIResolverImpl" />
+	<component class-key="org.objectledge.fop.requestjail.RequestJail"
+		class="org.objectledge.fop.requestjail.RequestJailEmptyImpl" />
+
+	<component class="org.objectledge.fop.FopService" />
+	<component class="org.objectledge.fop.PdfGenerator" />   
 	
+	<!-- Generator rachunkow -->
 	<!-- <component class="org.objectledge.threads.ThreadPool">
 		<parameter key="nothing-to-do" />
 		<parameter />
@@ -342,7 +323,6 @@
 			<parameter class-key="pl.waw.mizinski.umowy.scheduler.RachunekGeneratorValve" />
 		</sequence>
 		<sequence>
-			
 		</sequence>
 		<sequence>
 			<parameter class-key="org.objectledge.hibernate.HibernateSessionFinallyValve" />
@@ -368,13 +348,5 @@
 			<parameter class-key="org.objectledge.scheduler.CronScheduleFactory" />
 		</sequence>
 	</component> -->
-	
-	 <component class-key="org.objectledge.fop.LedgeUriResolver"
-  		class="org.objectledge.xsl.URIResolverImpl"/>
-  <component class-key="org.objectledge.fop.requestjail.RequestJail"
-  		class="org.objectledge.fop.requestjail.RequestJailEmptyImpl"/>
-  		
-	<component class="org.objectledge.fop.FopService"/>  
- 	<component class="org.objectledge.fop.PdfGenerator"/>   
 	
 </container>
